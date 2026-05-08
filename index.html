@@ -1128,7 +1128,7 @@ function renderWeek(dates){
         const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
         const mcalCol=mCalColor(e);
         const catCol=CAT_COLOR[e.category]||'#4a5168';
-        html+=`<div class="event week-event ${ec}" style="height:${hp}px;min-height:${hp}px;background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 4px,${mcalCol} 4px,${mcalCol} 8px,${mcalCol}18 8px);color:${mcalCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+        html+=`<div class="event week-event ${ec}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 4px,${mcalCol} 4px,${mcalCol} 8px,${mcalCol}18 8px);color:${mcalCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
           <div class="ev-tag" style="color:${catCol}">${e.category}</div>
           <div class="ev-title">${displayTitle(e)}</div>
           <div class="ev-time">${fmtTime(e.start)} – ${fmtTime(e.end)}</div>
