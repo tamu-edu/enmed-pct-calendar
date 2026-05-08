@@ -1115,7 +1115,12 @@ function renderWeek(dates){
   HOUR_KEYS.forEach((hk,hi)=>{
     html+=`<div class="cal-row"><div class="cal-time">${HOURS[hi]}</div>`;
     dates.forEach(ds=>{
-      const cellEvs=evs.filter(e=>e.date===ds&&e.start===hk);
+      const rowStartMin = timeToMinutes(hk);
+      const rowEndMin = rowStartMin + 60;
+      const cellEvs = evs.filter(e => {
+        const startMin = timeToMinutes(e.start);
+        return e.date === ds && startMin >= rowStartMin && startMin < rowEndMin;
+});
       html+=`<div class="cal-cell" onclick="handleCellClick(event,'${ds}','${hk}')">`;
       if(isFacultyMode)html+=`<div class="add-slot-btn" onclick="openAddForm('${ds}','${hk}');event.stopPropagation()">+</div>`;
       cellEvs.forEach(e=>{
@@ -1124,6 +1129,7 @@ function renderWeek(dates){
         const durHours = Math.max(1, (endMin - startMin) / 60);
         const hp = durHours * 52 - 6;
         const ec = evClass(e);
+        const topOffset = ((startMin - rowStartMin) / 60) * 52 + 3;
 
         const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
         const mcalCol=mCalColor(e);
