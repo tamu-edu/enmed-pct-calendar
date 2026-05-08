@@ -1,5 +1,22 @@
 [
   {
+    "title": "test class",
+    "date": "05/25/2026",
+    "start": "09:30",
+    "end": "12:30",
+    "category": "Orientation",
+    "block": "Pre-Matriculation Week 1",
+    "weekNum": 1,
+    "week": "Week 1",
+    "desc": "EnMed Program Orientation",
+    "calYear": "2031",
+    "mCal": "M0",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "Auditorium",
+    "_id": "1777342011315_test"
+  },
+  {
     "title": "EnMed Program Orientation",
     "date": "05/26/2026",
     "start": "09:00",
