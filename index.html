@@ -484,7 +484,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <div class="config-num">1</div>
       <div class="config-step-body">
         <label>GitHub Username</label>
-        <input id="cfgUser" type="text" placeholder="e.g. rosssarakay" value="">
+        <input id="cfgUser" type="text" placeholder="e.g. tamu-edu" value="">
         <div class="hint">Your GitHub username — visible in your profile URL: <code>github.com/YOUR-USERNAME</code></div>
       </div>
     </div>
@@ -493,7 +493,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <div class="config-num">2</div>
       <div class="config-step-body">
         <label>Repository Name</label>
-        <input id="cfgRepo" type="text" placeholder="EnMed-Calendar" value="EnMed-Calendar">
+        <input id="cfgRepo" type="text" placeholder="enmed-pct-calendar" value="enmed-pct-calendar">
         <div class="hint">The name of your GitHub repository where the calendar is hosted.</div>
       </div>
     </div>
@@ -817,7 +817,7 @@ function saveConfig(){
 }
 function openConfig(){
   document.getElementById('cfgUser').value=CFG.user||'';
-  document.getElementById('cfgRepo').value=CFG.repo||'EnMed-Calendar';
+  document.getElementById('cfgRepo').value=CFG.repo||'enmed-pct-calendar';
   document.getElementById('cfgToken').value=CFG.token||'';
   document.getElementById('cfgPin').value=CFG.pin||'3255';
   document.getElementById('cfgErr').textContent='';
@@ -2175,8 +2175,8 @@ document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){document.getEleme
 
 // Always load calendar immediately — no setup screen for guests
 loadConfig();
-CFG.user='rosssarakay';
-CFG.repo='EnMed-Calendar';
+CFG.user='tamu-edu';
+CFG.repo='enmed-pct-calendar';
 CFG.readOnly=!CFG.token;
 document.getElementById('configOverlay').style.display='none';
 initApp();
