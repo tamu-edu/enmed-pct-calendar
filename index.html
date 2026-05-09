@@ -917,7 +917,7 @@ function buildWeeks(){
   EVENTS.forEach(e=>{if(e.weekNum > highestWeekNumber){highestWeekNumber = e.weekNum});
   
   // Day 3: Edited buildWeeks() to create weeks continuously from earliest week
-  var allWeeksInYear = []
+  var allWeeksInYear = [];
   for (let i = 1; i < highestWeekNumber + 1; i++) {
     allWeeksInYear.push({num:i,name:"Week " + i,block:"Block " + i});
     
