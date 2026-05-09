@@ -15,3 +15,6 @@ Cohort and category filtering;
 Faculty editing mode;
 Bulk XLSX upload;
 GitHub-backed shared updates
+
+For questions, reach out to the EnMed PreClerkship Team: jvickers2025@tamu.edu
+Not available for use without permission from TAMU EnMed PCT
