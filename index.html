@@ -913,15 +913,16 @@ function setStatus(state,msg){
 
 // ── WEEKS / NAV ───────────────────────────────────────────────
 function buildWeeks(){
-  const map={},seen=new Set();
+  var highestWeekNumber = 32;
+  EVENTS.forEach(e=>{if(e.weekNum > highestWeekNumber){highestWeekNumber = e.weekNum});
   
   // Day 3: Edited buildWeeks() to create weeks continuously from earliest week
   var allWeeksInYear = []
-  for (let i = 1; i < 53; i++) {
+  for (let i = 1; i < highestWeekNumber + 1; i++) {
     allWeeksInYear.push({num:i,name:"Week " + i,block:"Block " + i});
     
   }
-  //EVENTS.forEach(e=>{if(!seen.has(e.weekNum)){seen.add(e.weekNum);map[e.weekNum]={num:e.weekNum,name:e.week,block:e.block};}});
+  //
   return allWeeksInYear;
 }
 function buildWeekDrawer(){
