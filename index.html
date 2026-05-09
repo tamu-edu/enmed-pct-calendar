@@ -1161,6 +1161,7 @@ function renderWeek(dates){
     html+='</div>';
   });
   html+='</div>';
+  //Day 3: Commented line below to allow weeks with no events to display correctly
   //if(!evs.length)html=`<div class="empty-state"><div class="big">📭</div><p>No events match this filter.</p></div>`;
   document.getElementById('calView').innerHTML=html;
 }
