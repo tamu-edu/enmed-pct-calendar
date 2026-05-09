@@ -914,8 +914,15 @@ function setStatus(state,msg){
 // ── WEEKS / NAV ───────────────────────────────────────────────
 function buildWeeks(){
   const map={},seen=new Set();
-  EVENTS.forEach(e=>{if(!seen.has(e.weekNum)){seen.add(e.weekNum);map[e.weekNum]={num:e.weekNum,name:e.week,block:e.block};}});
-  return Object.values(map).sort((a,b)=>a.num-b.num);
+  
+  // Day 3: Edited buildWeeks() to create weeks continuously from earliest week
+  var allWeeksInYear = []
+  for (let i = 1; i < 53; i++) {
+    allWeeksInYear.push({num:i,name:"Week " + i,block:"Block " + i});
+    
+  }
+  //EVENTS.forEach(e=>{if(!seen.has(e.weekNum)){seen.add(e.weekNum);map[e.weekNum]={num:e.weekNum,name:e.week,block:e.block};}});
+  return allWeeksInYear;
 }
 function buildWeekDrawer(){
   document.getElementById('weekDrawer').style.display=currentView==='month'?'none':'';
