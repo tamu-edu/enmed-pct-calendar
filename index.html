@@ -914,7 +914,7 @@ function setStatus(state,msg){
 // ── WEEKS / NAV ───────────────────────────────────────────────
 function buildWeeks(){
   var highestWeekNumber = 32;
-  EVENTS.forEach(e=>{if(e.weekNum > highestWeekNumber){highestWeekNumber = e.weekNum});
+  EVENTS.forEach(e=>{if(e.weekNum > highestWeekNumber){highestWeekNumber = e.weekNum}});
   
   // Day 3: Edited buildWeeks() to create weeks continuously from earliest week
   var allWeeksInYear = [];
