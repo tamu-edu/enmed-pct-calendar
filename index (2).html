@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M1 Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --maroon:#500000;
+  --accent:#500000;
+  --maroon-dk:#3a0000;
+  --maroon-lt:#6a0000;
+  --gray-dk:#474747;
+  --gray-md:#8d8d8d;
+  --white:#ffffff;
+  --black:#000000;
+  --bg:#f5f5f5;
+  --surface:#ffffff;
+  --surface2:#f7f3f3;
+  --surface3:#efe8e8;
+  --border:#d8cccc;
+  --border-dk:#b8a8a8;
+  --text:#000000;
+  --muted:#474747;
+  --muted2:#636363;
+  /* Event/block colors unchanged */
+  --heme:#f05c6e;--resp:#4f8ef7;--renal:#3ecf8e;--gi:#f7a14f;
+  --endo:#b97cf7;--msk:#4fd6f7;--brk:#7a829a;
+  --cat-mandatory:#4f8ef7;--cat-faculty:#3ecf8e;--cat-tbl:#b97cf7;
+  --cat-cbse:#f05c6e;--cat-session:#4a5168;--cat-itde:#4fd6f7;--cat-exam:#f7a14f;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'DM Sans',sans-serif;font-size:14px}
+
+/* CONFIG */
+.config-overlay{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.config-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.config-box h1{font-size:22px;font-weight:700;margin-bottom:6px}
+.config-box .sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.config-step{display:flex;gap:14px;margin-bottom:20px;align-items:flex-start}
+.config-num{width:26px;height:26px;border-radius:50%;background:var(--accent);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.config-step-body{flex:1}
+.config-step-body label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:6px}
+.config-step-body input{width:100%;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:border-color .15s}
+.config-step-body input:focus{border-color:var(--accent)}
+.config-step-body .hint{font-size:11px;color:var(--muted2);margin-top:5px;line-height:1.5}
+.config-step-body .hint code{background:var(--surface3);padding:1px 6px;border-radius:4px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent)}
+.config-btn{width:100%;padding:12px;border-radius:10px;border:none;background:var(--accent);color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:all .15s}
+.config-btn:hover{background:#3a7de8}
+.config-err{font-size:12px;color:#f05c6e;margin-top:10px;min-height:18px;text-align:center;line-height:1.5}
+.security-note{margin-top:16px;padding:12px;background:rgba(62,207,142,.08);border:1px solid rgba(62,207,142,.2);border-radius:8px;font-size:11px;color:#3ecf8e;line-height:1.6}
+
+/* HEADER */
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:14px;height:56px;position:sticky;top:0;z-index:200}
+.logo{font-size:15px;font-weight:600;display:flex;align-items:center;gap:10px}
+.logo-badge{background:var(--accent);color:white;font-family:'DM Mono',monospace;font-size:11px;padding:3px 8px;border-radius:4px}
+.header-center{flex:1;display:flex;justify-content:center}
+.mode-toggle{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface2)}
+.mode-btn{padding:6px 18px;background:transparent;border:none;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .15s}
+.mode-btn.active{background:var(--accent);color:white}
+.mode-btn.faculty-active{background:var(--gray-dk);color:#1a1200}
+.header-right{display:flex;align-items:center;gap:8px}
+.btn-sm{padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .15s}
+.btn-sm:hover{background:var(--surface2);color:var(--text)}
+.btn-sm.gold{background:var(--gray-dk);color:#1a1200;border-color:var(--gray-dk);font-weight:700}
+.btn-sm.outlook{border-color:#0078d433;color:#4f8ef7}
+.faculty-badge{background:var(--gray-dk);color:#1a1200;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* STATUS */
+.status-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:6px 24px;display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted)}
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.status-dot.live{background:#3ecf8e;box-shadow:0 0 6px #3ecf8e88;animation:blink 2s infinite}
+.status-dot.offline{background:var(--muted2)}
+.status-dot.loading{background:var(--gray-dk);animation:blink 1s infinite}
+.status-right{margin-left:auto;font-size:10px;color:var(--muted2)}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 56px)}
+
+/* SIDEBAR */
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;display:flex;flex-direction:column}
+.sb-section{margin-bottom:8px}
+.sb-heading{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted2);padding:8px 20px 5px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:8px 20px;font-size:13px;color:var(--muted);cursor:pointer;transition:all .12s;border-left:3px solid transparent}
+.sb-item:hover{color:var(--text);background:var(--surface2)}
+.sb-item.active{color:var(--text);background:rgba(79,142,247,.09);border-left-color:var(--accent)}
+.sb-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;color:var(--muted2);font-family:'DM Mono',monospace}
+
+/* MAIN */
+.main{flex:1;padding:24px;overflow-x:auto;min-width:0}
+.toolbar{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.toolbar-left{flex:1;min-width:0}
+.toolbar-title{font-size:20px;font-weight:600;letter-spacing:-.5px}
+.toolbar-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.view-toggle{display:flex;border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.vt-btn{padding:6px 14px;background:transparent;border:none;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .12s;font-weight:500}
+.vt-btn.active{background:var(--accent);color:white}
+.vt-btn:not(.active):hover{background:var(--surface2);color:var(--text)}
+.week-drawer{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px}
+.wk-btn{padding:4px 11px;border-radius:20px;border:1px solid var(--border);font-size:11px;cursor:pointer;background:transparent;color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;font-weight:500;white-space:nowrap}
+.wk-btn:hover{color:var(--text);border-color:var(--muted2)}
+.wk-btn.active{color:white;border-color:transparent;font-weight:600}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.filter-label{font-size:10px;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:.8px}
+.filter-chip{padding:4px 12px;border-radius:20px;border:1px solid var(--border);font-size:11px;cursor:pointer;background:transparent;color:var(--muted);transition:all .12s;font-family:'DM Sans',sans-serif;font-weight:500}
+.filter-chip:hover{color:var(--text);border-color:var(--muted2)}
+.filter-chip.active{color:white;background:var(--maroon);border-color:var(--maroon)}
+.week-nav{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.nav-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
+.nav-btn:hover{background:var(--surface2);color:var(--text)}
+.week-label{font-size:14px;font-weight:700;font-family:'DM Mono',monospace}
+.block-pill{font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px}
+.week-dates{font-size:12px;color:var(--muted)}
+
+/* CALENDAR */
+.cal-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:640px}
+.cal-header{display:grid;grid-template-columns:64px repeat(5,1fr);background:var(--surface2);border-bottom:1px solid var(--border)}
+.ch-cell{padding:10px 8px;text-align:center;border-right:1px solid var(--border)}
+.ch-cell:last-child{border-right:none}
+.ch-day{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.ch-num{font-size:20px;font-weight:300;color:var(--text);line-height:1.2;margin-top:2px}
+.ch-cell.today .ch-num{background:var(--accent);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;margin:2px auto 0;font-weight:600;font-size:14px}
+.cal-row{display:grid;grid-template-columns:64px repeat(5,1fr);border-bottom:1px solid var(--border);height:52px;min-height:52px}
+.cal-row:last-child{border-bottom:none}
+.cal-time{padding:0px 6px 0px 6px;font-size:10px;color:var(--muted2);border-right:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace;display:flex;align-items:flex-start;justify-content:flex-end; transform:translateY(-6px)}
+.cal-cell{border-right:1px solid var(--border);padding:3px;position:relative;height:52px;min-height:52px;overflow:visible}
+.cal-cell:last-child{border-right:none}
+.faculty-mode .cal-cell:hover .add-slot-btn{display:flex}
+.add-slot-btn{display:none;position:absolute;inset:3px;border-radius:5px;border:2px dashed var(--gray-dk);background:rgba(247,201,79,.05);color:var(--gray-dk);font-size:18px;cursor:pointer;align-items:center;justify-content:center;z-index:5}
+.add-slot-btn:hover{background:rgba(247,201,79,.12)}
+  
+/* EVENTS */
+.event{
+  border-radius:5px;
+  padding:5px 7px;
+  font-size:11px;
+  font-weight:500;
+  cursor:pointer;
+  transition:transform .1s,box-shadow .15s;
+  line-height:1.3;
+  height:auto;
+  min-height:44px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  border-left:3px solid;
+  animation:fadeIn .2s ease;
+  overflow:hidden;
+}
+.week-event{
+  position:absolute;
+  z-index:20;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+.list-event{
+  position:relative;
+  left:auto;
+  right:auto;
+  top:auto;
+  z-index:auto;
+  overflow:visible;
+}
+.event:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
+.ev-tag{font-size:9px;text-transform:uppercase;letter-spacing:.7px;font-weight:700;opacity:1;margin-bottom:2px}
+.ev-title{font-size:11px;line-height:1.3}
+.ev-time{font-size:9px;margin-top:3px;opacity:.85;font-family:'DM Mono',monospace}
+.ev-controls{display:none;position:absolute;top:3px;right:3px;gap:3px;z-index:10}
+.faculty-mode .event:hover .ev-controls{display:flex}
+.ev-ctrl-btn{width:20px;height:20px;border-radius:4px;border:none;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
+.ev-edit-btn{background:rgba(0,0,0,.4);color:var(--gray-dk)}
+.ev-edit-btn:hover{background:var(--gray-dk);color:#1a1200}
+.ev-del-btn{background:rgba(0,0,0,.4);color:#f05c6e}
+.ev-del-btn:hover{background:#f05c6e;color:white}
+.event.Mandatory{background:rgba(79,142,247,.15);border-color:#4f8ef7;color:#1a3a70}
+.event.Faculty{background:rgba(62,207,142,.15);border-color:#3ecf8e;color:#0a4a28}
+.event.TBL{background:rgba(185,124,247,.15);border-color:#b97cf7;color:#3a1a6a}
+.event.CBSE{background:rgba(240,92,110,.15);border-color:#f05c6e;color:#7a0a18}
+.event.Session{background:rgba(122,130,154,.15);border-color:#4a5168;color:#1a1f30}
+.event.ITDE{background:rgba(79,214,247,.15);border-color:#4fd6f7;color:#003a50}
+.event.ExamReview{background:rgba(247,161,79,.15);border-color:#f7a14f;color:#5a2a00}
+.event.GrandRounds{background:rgba(247,161,79,.15);border-color:#f7a14f;color:#5a2a00}
+
+/* FACULTY PANEL */
+.faculty-panel{display:none;width:340px;flex-shrink:0;background:var(--surface);border-left:2px solid var(--gray-dk);overflow-y:auto;flex-direction:column;position:sticky;top:56px;height:calc(100vh - 56px)}
+.faculty-panel.open{display:flex}
+.fp-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(247,201,79,.1) 0%,transparent 60%)}
+.fp-title{font-size:15px;font-weight:700;color:var(--gray-dk)}
+.fp-sub{font-size:11px;color:var(--muted);margin-top:4px}
+.fp-body{padding:20px;flex:1}
+.fp-section{margin-bottom:24px}
+.fp-section-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted2);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.form-group{margin-bottom:14px}
+.form-label{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;display:block;text-transform:uppercase;letter-spacing:.5px}
+.form-input,.form-select{width:100%;padding:9px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;transition:border-color .15s;outline:none}
+.form-input:focus,.form-select:focus{border-color:var(--gray-dk);box-shadow:0 0 0 3px rgba(247,201,79,.1)}
+.form-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a829a' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.form-select option{background:var(--surface2)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.color-preview{display:flex;align-items:center;gap:8px;margin-top:6px}
+.color-dot{width:12px;height:12px;border-radius:50%}
+.btn-full{width:100%;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;margin-bottom:8px}
+.btn-save{background:var(--gray-dk);color:#1a1200}
+.btn-save:hover{background:#f0bc3a}
+.btn-cancel{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.btn-delete-full{background:rgba(240,92,110,.15);color:#f05c6e;border:1px solid rgba(240,92,110,.3)}
+.change-item{padding:10px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);margin-bottom:8px;font-size:12px}
+.change-item .ch-type{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.change-item .ch-title{color:var(--text);font-weight:500}
+.change-item .ch-meta{color:var(--muted);font-size:11px;margin-top:2px}
+.change-added .ch-type{color:#3ecf8e}
+.change-edited .ch-type{color:var(--gray-dk)}
+.change-deleted .ch-type{color:#f05c6e}
+.fp-footer{padding:16px 20px;border-top:1px solid var(--border);background:var(--surface2)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:modalIn .2s cubic-bezier(.34,1.56,.64,1)}
+@keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px}
+.modal-bar{width:4px;border-radius:4px;flex-shrink:0;align-self:stretch;min-height:40px}
+.modal-title{font-size:16px;font-weight:600;line-height:1.4;flex:1}
+.modal-close{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:var(--surface2);color:var(--text)}
+.modal-body{padding:20px 24px}
+.modal-row{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start}
+.m-icon{font-size:16px;width:22px;flex-shrink:0;margin-top:1px}
+.m-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.m-val{font-size:13px;color:var(--text)}
+.modal-footer{padding:0 24px 20px}
+.modal-week{font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding-top:14px;font-family:'DM Mono',monospace}
+
+/* MISC */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state .big{font-size:40px;margin-bottom:12px}
+.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);color:var(--text);padding:12px 22px;border-radius:30px;font-size:13px;font-weight:500;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:opacity .3s;white-space:nowrap;pointer-events:none}
+.login-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:700;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.login-overlay.open{display:flex}
+.login-box{background:var(--surface);border:1px solid var(--gray-dk);border-radius:14px;padding:32px;max-width:320px;width:90%;text-align:center;animation:modalIn .2s ease}
+.login-box h2{font-size:18px;font-weight:700;color:var(--gray-dk);margin-bottom:6px}
+.login-box p{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.5}
+.login-box input{width:100%;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Mono',monospace;font-size:16px;text-align:center;letter-spacing:4px;outline:none;margin-bottom:14px;transition:border-color .15s}
+.login-box input:focus{border-color:var(--gray-dk)}
+.login-err{font-size:12px;color:#f05c6e;margin-bottom:10px;min-height:18px}
+.login-submit{width:100%;padding:10px;border-radius:8px;border:none;background:var(--gray-dk);color:#1a1200;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
+.confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.confirm-overlay.open{display:flex}
+.confirm-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;max-width:340px;width:90%;text-align:center;animation:modalIn .15s ease}
+.confirm-box h3{font-size:16px;font-weight:600;margin-bottom:8px;color:#f05c6e}
+.confirm-box p{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5}
+.confirm-btns{display:flex;gap:10px;justify-content:center}
+.confirm-btns button{padding:9px 22px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border)}
+#confirmYes{background:#f05c6e;color:white;border-color:#f05c6e}
+#confirmNo{background:var(--surface2);color:var(--muted)}
+@media(max-width:768px){.sidebar{display:none}.main{padding:16px}.cal-wrap{min-width:0}.cal-header,.cal-row{grid-template-columns:44px repeat(5,1fr)}.ev-tag,.ev-time{display:none}.ev-title{font-size:10px}.faculty-panel{width:100%}}
+
+/* TWO-TIER CALENDAR TABS */
+/* Tier 1: M1 / M2 */
+/* YEAR + M1/M2 FILTER SYSTEM */
+.year-checks{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:10px 0 12px;border-bottom:3px solid var(--border);margin-bottom:0}
+.yr-check-label{display:flex;align-items:center;gap:6px;padding:6px 13px;border-radius:8px;border:2px solid var(--border);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;color:var(--muted);background:var(--surface2);transition:all .15s;user-select:none;white-space:nowrap}
+.yr-check-label:hover{border-color:var(--muted2);color:var(--text);background:var(--surface)}
+.yr-check-box{width:15px;height:15px;border-radius:3px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;background:var(--surface)}
+.yr-check-box::after{content:'';width:7px;height:7px;border-radius:1px;display:none}
+.yr-check-label.checked .yr-check-box::after{display:block}
+.yr-check-label[data-yr="All"].checked{border-color:var(--maroon);color:var(--maroon);background:rgba(80,0,0,.07)}
+.yr-check-label[data-yr="All"].checked .yr-check-box{border-color:var(--maroon);background:var(--maroon)}
+.yr-check-label[data-yr="All"].checked .yr-check-box::after{background:white}
+
+.yr-check-label[data-yr="2029"].checked{border-color:#C62828;color:#C62828;background:rgba(198,40,40,.07)}
+.yr-check-label[data-yr="2029"].checked .yr-check-box{border-color:#C62828;background:#C62828}
+.yr-check-label[data-yr="2029"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2030"].checked{border-color:#1565C0;color:#1565C0;background:rgba(21,101,192,.07)}
+.yr-check-label[data-yr="2030"].checked .yr-check-box{border-color:#1565C0;background:#1565C0}
+.yr-check-label[data-yr="2030"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2031"].checked{border-color:#2E7D32;color:#2E7D32;background:rgba(46,125,50,.07)}
+.yr-check-label[data-yr="2031"].checked .yr-check-box{border-color:#2E7D32;background:#2E7D32}
+.yr-check-label[data-yr="2031"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2032"].checked{border-color:#6A1B9A;color:#6A1B9A;background:rgba(106,27,154,.07)}
+.yr-check-label[data-yr="2032"].checked .yr-check-box{border-color:#6A1B9A;background:#6A1B9A}
+.yr-check-label[data-yr="2032"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2033"].checked{border-color:#BF360C;color:#BF360C;background:rgba(191,54,12,.07)}
+.yr-check-label[data-yr="2033"].checked .yr-check-box{border-color:#BF360C;background:#BF360C}
+.yr-check-label[data-yr="2033"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2034"].checked{border-color:#00695C;color:#00695C;background:rgba(0,105,92,.07)}
+.yr-check-label[data-yr="2034"].checked .yr-check-box{border-color:#00695C;background:#00695C}
+.yr-check-label[data-yr="2034"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2035"].checked{border-color:#4527A0;color:#4527A0;background:rgba(69,39,160,.07)}
+.yr-check-label[data-yr="2035"].checked .yr-check-box{border-color:#4527A0;background:#4527A0}
+.yr-check-label[data-yr="2035"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2036"].checked{border-color:#E65100;color:#E65100;background:rgba(230,81,0,.07)}
+.yr-check-label[data-yr="2036"].checked .yr-check-box{border-color:#E65100;background:#E65100}
+.yr-check-label[data-yr="2036"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2037"].checked{border-color:#00838F;color:#00838F;background:rgba(0,131,143,.07)}
+.yr-check-label[data-yr="2037"].checked .yr-check-box{border-color:#00838F;background:#00838F}
+.yr-check-label[data-yr="2037"].checked .yr-check-box::after{background:white}
+.yr-check-label[data-yr="2038"].checked{border-color:#558B2F;color:#558B2F;background:rgba(85,139,47,.07)}
+.yr-check-label[data-yr="2038"].checked .yr-check-box{border-color:#558B2F;background:#558B2F}
+.yr-check-label[data-yr="2038"].checked .yr-check-box::after{background:white}
+.mcal-divider{width:1px;height:26px;background:var(--border);margin:0 2px;flex-shrink:0}
+/* M1/M2 sub-filter */
+.m-sub-row{display:none;gap:6px;padding:8px 0 10px;border-bottom:1px solid var(--border);margin-bottom:10px;align-items:center;flex-wrap:wrap}
+.m-sub-row.visible{display:flex}
+.m-sub-btn{padding:5px 16px;border-radius:20px;border:1px solid var(--border);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;background:transparent;color:var(--muted);transition:all .12s}
+.m-sub-btn:hover{color:var(--text);border-color:var(--muted2)}
+.m-sub-btn.active{color:white;border-color:transparent}
+/* Visibility toggle in faculty panel */
+.vis-toggle{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12px;cursor:pointer;border-bottom:1px solid var(--border)}
+.vis-toggle:last-child{border-bottom:none}
+.vis-switch{width:32px;height:18px;border-radius:9px;background:var(--border);position:relative;flex-shrink:0;transition:background .2s}
+.vis-switch::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:white;top:2px;left:2px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.vis-toggle.on .vis-switch{background:#3ecf8e}
+.vis-toggle.on .vis-switch::after{left:16px}
+.vis-yr-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+/* Tier 2: Year 1 / Year 2 / Year 3 */
+.yr-subtabs{display:none;gap:6px;padding:10px 0 10px;border-bottom:1px solid var(--border);margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.yr-subtabs.visible{display:flex}
+.yr-subtab{padding:5px 14px;border-radius:20px;border:1px solid var(--border);font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .12s;color:var(--muted);background:transparent}
+.yr-subtab:hover{color:var(--text);border-color:var(--muted2)}
+.yr-subtab.active{color:white;border-color:transparent}
+.yr-subtabs[data-parent="M1"] .yr-subtab.active{background:#1565C0;border-color:#1565C0;color:white}
+.yr-subtabs[data-parent="M2"] .yr-subtab.active{background:#2E7D32;border-color:#2E7D32;color:white}
+.yr-subtab.active{background:#888;color:white}
+/* color dots */
+.yr1-dot{background:#1565C0}.yr2-dot{background:#2E7D32}.yr3-dot{background:#6A1B9A;display:none}.yrs-dot{background:#BF360C}
+.m1-dot{background:#1565C0}.m2-dot{background:#2E7D32}.m3-dot{background:#6A1B9A;display:none}
+.ev-yr-badge{font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;margin-left:4px;vertical-align:middle;opacity:.85}
+.ev-yr-badge.yr1{background:#1565C0;color:white}
+.ev-yr-badge.yr2{background:#2E7D32;color:white}
+
+.ev-yr-badge.yrs{background:#BF360C;color:white}
+
+/* MONTH GRID */
+.month-nav{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.month-nav-label{font-size:16px;font-weight:700;font-family:'DM Mono',monospace;flex:1;text-align:center}
+.month-grid{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:0}
+.month-grid-header{display:grid;grid-template-columns:repeat(7,1fr);background:var(--surface2);border-bottom:1px solid var(--border)}
+.mg-dow{padding:8px 4px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.month-grid-body{display:grid;grid-template-columns:repeat(7,1fr)}
+.mg-cell{min-height:100px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:5px;position:relative;vertical-align:top}
+.mg-cell:nth-child(7n){border-right:none}
+.mg-cell.other-month{background:var(--surface2);opacity:.55}
+.mg-cell.today-cell{background:rgba(80,0,0,.06)}
+.mg-date{font-size:11px;font-weight:700;color:var(--muted2);margin-bottom:3px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.mg-cell.today-cell .mg-date{background:var(--accent);color:white}
+.mg-event{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4;border-left:3px solid}
+.mg-event:hover{opacity:.85;transform:translateX(1px)}
+.mg-more{font-size:9px;color:var(--muted2);padding:1px 4px;cursor:pointer;font-weight:600}
+.mg-more:hover{color:var(--accent)}
+.mg-add-btn{display:none;position:absolute;bottom:3px;right:3px;width:18px;height:18px;border-radius:50%;border:none;background:var(--gray-dk);color:#1a1200;font-size:12px;cursor:pointer;align-items:center;justify-content:center;line-height:1}
+.faculty-mode .mg-cell:hover .mg-add-btn{display:flex}
+
+/* SESSION CATALOG */
+.catalog-panel{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.catalog-source{width:100%;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;appearance:none;outline:none;margin-bottom:8px}
+.catalog-list{max-height:160px;overflow-y:auto;border:1px solid var(--border);border-radius:7px;background:var(--surface)}
+.catalog-item{padding:7px 10px;font-size:11px;cursor:pointer;border-bottom:1px solid var(--border);line-height:1.4;transition:background .1s}
+.catalog-item:last-child{border-bottom:none}
+.catalog-item:hover{background:var(--surface2)}
+.catalog-item .ci-loc{font-size:10px;color:var(--muted2);margin-top:1px}
+
+
+/* M-YEAR FILTER & SEARCH */
+.toolbar-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.m-year-select{padding:6px 28px 6px 12px;border-radius:8px;border:2px solid var(--accent);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23500000' fill='none' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;outline:none;min-width:130px}
+.search-wrap{position:relative;flex:1;max-width:280px}
+.search-input{width:100%;padding:6px 12px 6px 30px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;outline:none;transition:border-color .15s}
+.search-input:focus{border-color:var(--accent)}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;opacity:.5}
+.search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:300;max-height:260px;overflow-y:auto;display:none}
+.search-results.open{display:block}
+.sr-item{padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--border);font-size:12px;transition:background .1s}
+.sr-item:last-child{border-bottom:none}
+.sr-item:hover{background:var(--surface2)}
+.sr-title{font-weight:600;color:var(--text)}
+.sr-meta{font-size:10px;color:var(--muted2);margin-top:2px}
+.today-btn{padding:6px 14px;border-radius:8px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+.today-btn:hover{background:var(--accent);color:white}
+
+/* EVENT COUNT BADGES ON TABS */
+.yr-count{font-size:9px;font-weight:600;opacity:.75;margin-left:4px;font-family:'DM Mono',monospace}
+
+/* COLOR LEGEND */
+.legend-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.legend-label{font-size:10px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px;margin-right:4px}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted);white-space:nowrap}
+.legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+
+/* CATEGORY DOT ON EVENTS */
+.ev-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block;margin-right:4px;vertical-align:middle;box-shadow:0 0 0 1px rgba(255,255,255,.4)}
+.mg-event .ev-cat-dot{width:6px;height:6px;margin-right:3px}
+
+
+/* BULK UPLOAD */
+.bulk-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:600;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.bulk-overlay.open{display:flex}
+.bulk-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;max-width:680px;width:95%;max-height:85vh;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:modalIn .2s ease}
+.bulk-title{font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
+.bulk-drop{border:2px dashed var(--border);border-radius:10px;padding:32px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface2)}
+.bulk-drop:hover,.bulk-drop.drag{border-color:var(--accent);background:rgba(80,0,0,.04)}
+.bulk-drop input{display:none}
+.bulk-drop p{font-size:13px;color:var(--muted);margin-top:8px}
+.bulk-preview{flex:1;overflow-y:auto;border:1px solid var(--border);border-radius:8px;font-size:11px}
+.bulk-preview table{width:100%;border-collapse:collapse}
+.bulk-preview th{background:var(--surface2);padding:7px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border);position:sticky;top:0}
+.bulk-preview td{padding:6px 10px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.bulk-preview tr:last-child td{border-bottom:none}
+.bulk-preview tr.err td{background:rgba(240,92,110,.08);color:#f05c6e}
+.bulk-preview tr.ok td{background:rgba(62,207,142,.05)}
+.bulk-stats{font-size:12px;color:var(--muted);display:flex;gap:16px;align-items:center}
+.bulk-stat{font-weight:700;color:var(--text)}
+.bulk-actions{display:flex;gap:10px}
+.bulk-btn{padding:9px 20px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.bulk-btn-primary{background:var(--maroon);color:white}
+.bulk-btn-primary:hover{background:var(--maroon-dk)}
+.bulk-btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.bulk-btn-cancel{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+
+
+/* BLOCK FILTER DROPDOWN */
+.block-filter-select{width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;outline:none;transition:border-color .15s}
+.block-filter-select:focus{border-color:var(--accent)}
+.block-filter-select option{background:var(--surface);color:var(--text)}
+
+
+/* Session name datalist */
+input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+
+
+/* NOTES TEXTAREA */
+.form-input[rows]{font-family:'DM Sans',sans-serif;font-size:12px}
+.m-val[style*="pre-wrap"]{font-size:12px;color:var(--muted);background:var(--surface2);padding:8px 10px;border-radius:6px;border:1px solid var(--border);margin-top:2px}
+
+
+.m-sub-btn[data-m="M0"].active{background:#E65100 !important;border-color:#E65100 !important;color:white !important}
+
+
+/* MCAL FILTER CHECKS */
+.yr-check-label[data-mc="All"].checked{border-color:var(--maroon);color:var(--maroon);background:rgba(80,0,0,.07)}
+.yr-check-label[data-mc="All"].checked .yr-check-box{border-color:var(--maroon);background:var(--maroon)}
+.yr-check-label[data-mc="M0"].checked{border-color:#E65100;color:#E65100;background:rgba(230,81,0,.07)}
+.yr-check-label[data-mc="M0"].checked .yr-check-box{border-color:#E65100;background:#E65100}
+.yr-check-label[data-mc="M1"].checked{border-color:#1565C0;color:#1565C0;background:rgba(21,101,192,.07)}
+.yr-check-label[data-mc="M1"].checked .yr-check-box{border-color:#1565C0;background:#1565C0}
+.yr-check-label[data-mc="M2"].checked{border-color:#2E7D32;color:#2E7D32;background:rgba(46,125,50,.07)}
+.yr-check-label[data-mc="M2"].checked .yr-check-box{border-color:#2E7D32;background:#2E7D32}
+.yr-check-label[data-mc="Student Affairs"].checked{border-color:#6A1B9A;color:#6A1B9A;background:rgba(106,27,154,.07)}
+.yr-check-label[data-mc="Student Affairs"].checked .yr-check-box{border-color:#6A1B9A;background:#6A1B9A}
+.yr-check-label .yr-check-box::after{background:white}
+
+/* BULK SELECT */
+.bulk-bar{display:none;align-items:center;gap:10px;padding:10px 14px;background:rgba(240,92,110,.08);border:1px solid rgba(240,92,110,.3);border-radius:8px;margin-bottom:10px}
+.bulk-bar.on{display:flex}
+.bulk-bar-count{font-size:12px;font-weight:700;color:#f05c6e;flex:1;min-width:120px}
+.bulk-bar-btn{padding:7px 16px;border-radius:7px;border:none;background:#f05c6e;color:white;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
+.bulk-bar-btn:disabled{opacity:.5}
+.bulk-bar-all{padding:7px 16px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+.bulk-bar-cancel{padding:7px 14px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer}
+.ev-sel{outline:2px solid #f05c6e !important;opacity:1 !important}
+.mg-event.ev-sel{outline:2px solid #f05c6e}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<!-- CONFIG SCREEN -->
+<div class="config-overlay" id="configOverlay" style="display:none">
+  <div class="config-box">
+    <h1>📅 EnMed-Calendar Setup</h1>
+    <p class="sub">Connect to your GitHub repository so all edits are live and shared with everyone instantly — no IT needed.</p>
+
+    <div class="config-step">
+      <div class="config-num">1</div>
+      <div class="config-step-body">
+        <label>GitHub Username</label>
+        <input id="cfgUser" type="text" placeholder="e.g. tamu-edu" value="">
+        <div class="hint">Your GitHub username — visible in your profile URL: <code>github.com/YOUR-USERNAME</code></div>
+      </div>
+    </div>
+
+    <div class="config-step">
+      <div class="config-num">2</div>
+      <div class="config-step-body">
+        <label>Repository Name</label>
+        <input id="cfgRepo" type="text" placeholder="enmed-pct-calendar" value="enmed-pct-calendar">
+        <div class="hint">The name of your GitHub repository where the calendar is hosted.</div>
+      </div>
+    </div>
+
+    <div class="config-step">
+      <div class="config-num">3</div>
+      <div class="config-step-body">
+        <label>GitHub Token (Faculty only — students leave blank)</label>
+        <input id="cfgToken" type="password" placeholder="ghp_... (only needed for editing)">
+        <div class="hint">Students leave this blank — they only need to view. Faculty paste their token here to enable editing. Stored only in your browser, never sent anywhere else.</div>
+      </div>
+    </div>
+
+    <div class="config-step">
+      <div class="config-num">4</div>
+      <div class="config-step-body">
+        <label>Faculty PIN</label>
+        <input id="cfgPin" type="password" placeholder="Set a PIN" value="1234">
+        <div class="hint">Faculty enter this PIN to unlock the edit panel.</div>
+      </div>
+    </div>
+
+    <button class="config-btn" onclick="saveConfig()">Connect to GitHub →</button>
+    <div class="config-err" id="cfgErr"></div>
+    <div class="security-note">🔒 Your token is stored only in your browser's local storage. It is never transmitted to any server other than GitHub's official API (api.github.com).</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header" id="appHeader" style="display:none">
+  <div class="logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDgAAADsCAYAAACR8BalAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAABJB0lEQVR4nO3de5Rs6Vnf9+/zvu/eu6q6+5wzM9LogpCQhKQZYRvbiZcIIHHzhdgm4WIwyEa2EMbCFuAYiBPirNjOSkLsENvB2Ms2wY6N7WQlhsQrJnG4BImbMc4CIoxGQgIiCZBGmplz6a6qfXnfJ3+8u7r7jM4Ijc5ouvv076NV2qeru6t21ekjnf07zwVERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERE5DKxsz6Bp/Ka1VXvciEVBwpTgBwKEIheaHI9OoFiheA66vj0jkdN4Cc3h+f2z4CIiIiIiIh87M7txd3ntPu+mibaAlAYouPz2YYCXYEIZMCpL0RHHZ/O8WYT+eFxe27/DIiIiIiIiMjHLp31CTyVyERbMg0ABUohz5eiqUAHBKAHpvmq1XXU8Wkcz3G+JyIiIiIiIk/TuQ04oACFcPxrv+2zAV2eyl0y/82/RkRERERERC6EcxtwZIMcIJf68RhgCvVf30uGlGuLCtTrVAPQUcencQzKN0RERERERO4Z4axP4KkFzMNxlYZj5ADFoIRaz7G7PjUddfw4jiIiIiIiInLvOLcVHKkEWi8kapARHWIx3MBKvUg9CT9EPh6KOkRERERERO4V5zbgOGkfqEUm0Qux1BaV6OAEHCiUszpFERERERERETknzm3AUaxQcCYKTsG8bk+BGnkU7jR6VEREREREREQuo3MbcLjV8CKfui+eSjMUbMjd00+RiIiIiIjIveIcDxkVEREREREREfnYKOAQERERERERkQtPAYeIiIiIiIiIXHgKOERERERERETkwlPAISIiIiIiIiIXngIOEREREREREbnwFHCIiIiIiIiIyIWngENERERERERELjwFHCIiIiIiIiJy4SngEBEREREREZELTwGHiIiIiIiIiFx4CjhERERERERE5MJTwCEiIiJyykMPPeRnfQ4iIiLy9F36gMMJJzd70ucMdndlq7cnf42IPDN0QSEi58Ujjzyi/7cXERG5gC51wOEEejLLgyvcIDO4s2iXOBBSxGI8foOm6IzJKea4OVBvPocel/Z2OiD6OG5y73r4oVc+rcBCFxTPnlc//CqFSSJ3oD8bIiIiF9u5vaD4/HbhV4aMUYDCR/6NY3dxXO7iWQIFI+N0qxXD+ogOyBQmoImRmOtzr1MNM7oJwm0nYzj1jbycx3BX3393v39356hJ/OA4nts/AyIiIiIiIvKxS2d9Amer0Fhi6xP7pV5oLwg4zpgCw5RpqBfiMc9Hh3jbYziFGrdczmO+q+8vc0AkIiIiIiIicjcudcBhQAqFKxk22yMiMFEYgeDOBCwxCoE4F4zEXN80ny/RC4E4X7JfzuNJ4PN0j7t3UERERERERORuXeqAw3G2OdMmIxYnuZHdaYCjXFjtrdgcrQGnP1VmkKlNM7v/cKlvd0dTOEREREREROSZcKkDDqhtErcmZ78NlAyWHZqOw7HnVr+mjQk3GEId1ZAzxAI5BNxsfow4VyNc0qM5waEYT+sYHdriRFcVh4iIiIiIiNydSx1wuEHqAv22cDSVevEN9GPP677oC3l8u6YlkQ3GGDAPtBnMIZvN21Qq8/p4l+tY7mpIaZsLv/CjbyXmZ/E3XURERERERO5JlzrgAOPWtrC/13LraODKakEeMt62/MV/9L2QIhDBDEIAQu1PgfqxlblL43yM+zybI6eOT9OU+X3Xnvvxf7/Ix+ChV73CH3nnL2lbjpw5/SzKs+2hV77KH3nXO/UzJyIil8YlDzhgEYx+M7CKiXGTMQtshgzNApJRA44AOFiEYLX8IAacgjngBXwXeDzLx1xP8bb7yfUY/BP//Hjt23GHdOrHyb0GQzlDjLfftzsykDWEQz7BdEF5cdzrAcC9/NrkfFK4ISIil82lDjhsXvkaPBAJtRjDE2YOpHoRbkZxIDYYVlssHHoAAo1BtN1V+hkcbwsInvz5p7r/mTwWCCeLc91r247NM0sIkZwzOWeapsHMKKVgZhgRR3/3EpFKAYCIiIiI3I3LHXAA0QMBr0UQBAqBlHeVEEAJ3Lhxi9949EM88cQTxLEQFy3bZIx5pPNAPMMOixACpZTjYAGo4cE8APX0/Z8I235N13XH52FmtG0LwDiOjOPIarXiwQcf5IUvfOHc7RMoBcx2rS5yWdzr/0J/3un9FxEREZF72aUOOACMQsBI1HEaGQinKxRi5ODqFR67foNb128wXD9idXWfYa9l029ocyD6xztm85k5upfjrg+b22ncwb0QQvyEPn8Ige1mwN2PAw6AnDPjOLK/v89zn/M8Hnzu8wlWu3nMIE9OUPXGpaOL62fOww+90t/xyLue1vup919ERERE7mWXPuAA8NuGZZb6kZ3cUgp86stfwipG3v+uX+XxW0+wyT3WBjwXip/dkE93AwpmNcioFRuFUsB9no3xCXx+o7agQK3MyFOmlMJqteK5z7mfV77yldz/wH0AHN464sMf/jCf/MmfTIoBpo//90wullc//Cr/xXeoF/yZ9HTDDRERERGRe92lDjgcmHACECiAkaEOvgyFEmAsmWCJxgIv/KQXELcD/buPOJzWdM0egYx5mNemPvtHzwWLkWgBN2rgAqQAhPQJf/5hu8UNumZBbAIMEJvAgw8+yEte+mKuXb0GBh9+9DHe8yvvZhoyL3npi2vthu3CF7nXKdwQEREREZFPtMsdcJiTw67IoWAYmcIYDWJhxCEkMgXDScl43ss/hec8+AAf8i3WNXg/Epz5gv/ZP9aAIxAwshfKlHGDFCKxSccff6KeP4WIG0RLFDJjP1HI3Hf1frpFncXx4cc/xK/8f7/K9ZtPsL86AHNKcUIez/YHQERERERERO4ZlzrgOK2EgpeIW63kqCtQI2We0QFGKZlAIF494HnxgC2ZZt+IgM1zO3YjPXdNHKf/2fp0vcLJnI96z1P98/bpEaEnX1OOP5dLJoSAeWDMA0OubTbLdkk0+MjWktsfe/eY+dR53X4u5fgcbr8/HN/vc2tM3Yxy6iy9sN2ued/73sf7f/19pJSIV+vrnspImyJy7/t4ZkXI5aH2JRERERF5plzqFRbm0GRIBYrNrSkEogfIgRZYEGiJRCIhNpAihNrU0tCQMTKGZ6DU+ycPbAcnE+p9JcxbWQI+32yu+mBukKHU52Saj/P3DH0de+oF+s1w/DgQMAIWmvnXkTZ1/Or7f42f+fmf57HHnqhfN9XzWh9u6se53qYxz1GEUyOKukXGducyzTevw0RtF2eM0/G51ccIBCLREoFYz2m+RUts1z2/9r5fp2sWcytPfS1t6k421cg9TeGGPNlDDz10nN0q3BARERGRZ8qlvsI0IM43n6dw7NpNKNQLck7mjR5/k53+5e4/QHbMIRi0baz3OVAc3HG8zvigbhNxh+wn1RNzynB8c6DtmjodJAS65WJeXhIoOTNNU40efLcS1hjzxM1bR/zGb/wGjz/62Nx/E1jurU5e+DSRmmZ+znpuGWPCKLvnL/PnrL5K373o2JL7sQ5f3T2GiMjT8MgjjyjUEBEREZFn3KUOOJ4Ju3oKMHCnzF0gtwciu/oIn9tZwOZvzFYDjimAJ6ABEnicq0qAw2HDlswEHA7b+j3RsDR3GJX6j6E2hynbzYZf/8CjPPKudzPlCQyK+Um7S1PbVdZjD2Zkq1UoBWOy+twkINbQYwTWPtKXqZ5zE+iBgVPhjMg94nR1gYiIiIiIXBwKOO7CbupG8VIrHVIg2MncjJprlPlWazeMiXhq7kYNQnbracvxr41CoOBM7LVL4vxdHuy4yAMgYrv8BMxomoYQAn3f88SN67z3/e8nl8xYpvr9uZ/P2lk27fHrOH07dlyCAskCOWccCCnRU9go3pB7kKoL5E4UfImIiIicfxoyepcMo0wTMZ68lT5BSHNYcBxuFCgQQwC85hhWaIPjlJOKDw9zpjC3vfRb0nLFZhpoUks7P08k4SVjAcxOUpVkiSZ1hKngxRmmkRAjaX4GSw24Y75b/VIHpHZWTymeblExiMGJBkaEJlKGkdR289QPEZHLQcGXiIiIyPmngOOuBfzUX3tzgRh3lRlTbR8ppW5lca+BB6He50AsmJVTszfCydGgSR1MhWWIlFIIIeJeiBZqO8zpv3KXQpl7ZMzs+HOb7YZm0UIegVjPoVA/tlhDjlB3xtQBovO5hILlCaYJ2gY8EMYCsdAEYygZon6ERERERERE5Ozp6vQZEMJJY0fxTLKIUbj+Gx/gQ4+8my5PYJliMEbAA6kYhhO8UGy3xhViqRtWotdWlCEGHjs85N/6Pb+bsFjUwRylgEEoXvMKK5gHCIZ7XdkKgDtX9g9YtN089yPxsz/4wxy0LRYjw/qI/ZAwN6ZQt7uk+fmhPm7c7zha32JBxHNtnnmi3/I7fu8X0C26Z/NtFhEREREREXlKCjjuQgEmz4Td4I1TA0anbc8H3vt+/ui//++xyHWEp1thCswBRyB6IXqBuUnFbQ44qMdsgdwkNtH4nu/7p3za57523mwyV1nEVOd/sFt2YoQQCLZrHzHWh4d1Lsg4wJT5k3/0DYRtz3a75WC5pNluMSDbLuCoMz3cIJvTM5LzyEFaUqZMWqy45c53//Pv57e89jMhNLdXkYiIiIiIiIicAQUcd8ksArle5AdIMeLupLaB7ZamOIup0JQC5owBIBNLIRWv9wNjqKGCuRMcoheyBXqHsTG6GGprSUw1zciA1fWxvtspCycVHF5X3kYLdX1tSBANO1yzLMayGO2mJ+VMdMhWwEOdwUE9lynUGSEhBpphIJgxrdcsmsRyDlZqqvPUs2rdvYYpBwc0TcM4jkzTRNu2kDWkVERERERERJ4ZCjieAbtL/dsqGeaQos3zrThGobEaHqQCkTr3Yp43SjYIFIIHIoHghVzqx1iZQ5QyL0ypMzpq/cftEUPwk9PZ/RoHMnQZlrlgudAWMJ8AiB6ATJwfKXvBSh1+GszpHIIHApHewZi3w/wmo0b39va4evUqR0dHxBi5//77adsWd8eClviIiIiIiIjIM0NXmM+wcvzfjnkNMtriNBRaCq0XulJoqelSXc3quNWtJsXqVpVAIeCY17Wx2epwzwEYgCnWQCRzsjL2o57VPOA0FafLhY5CM7fHuNX0w+Y1tjABGQ/1nAK7ApW6vhYKxRzCbq3tU+u6jpe//OXs7e0xTdPxENS+7+e+GhEREREREZG7pwqOuxQoTxkw2Lz+1ah1DvVy3ncbWDFORncUmys4nON7a6gwRwtz5cdJpODE3erX08956mR8ftzjL7Ayn1Mh4UScibk1ZvcN86vZPdfuJMOph3GjDkb9GOOxl73sZYQQeM973sN6vQYgxvixJDMiIiIiIiIiHxMFHHchcGoCxe5i/TcpSsjcXvNQG0OMKTjZIHq92S5UcE6qOY4bUurn4qnHuC0s8DCHG5m8CzjmFpddUOJe8Hmw6ekpGvVZnDzPBDn9suz42QI5hONffyxe9KIXAfDYY48B0DQNDOPH9L0iIiIiIiIivxkFHHcpcrom4/aLfb/DLQNuVpehnP6cfWSgEIGE13kdc7YR5mqLNH9/PP0g1DkZO8WgBPAwhxPRyaGQrbbP2EdUn9jJcXeCMH8tREKtGvGAEz/i9d7JboVuSomXvOQl7O/vn3xSQ0ZFRERERETkGaKA4y6c6vw4/kU4dccutCgGeU4Sshk5MA8hrUHFbY85V2808+O3QJsLTQEytLvfsal+ge3KOJ70OGUOS7LVL00ULMAUYIoFK348AiO4ERzqCNHdeRTMaxASC0RsDjgC0QPmp5tWPrpxHEkpYWY85znPqe9DzkQNGRUREREREZFnyKUOOBwjz/UXUKsfis0bQkqpqYTVGg183ssK83pW5vsnKLtJGvP9xcGdpjjYRLZC9pPQAz99YV8bXUKpAzjivCzldNvI6bkaJ0GG3X7fcQ9JuW1Wxu45CoFIOQ5QMrVC5PSkDzhpnwmAu9Whp6cDGgrmhdU4wTjOLzjceZ6GUd8HDKap3lL9kYvTND/7bsip3fE1314X46eadO7wPoiIiIiIiMildbkDDoPRjRjbOgvDCwMjTWh43w/9CM3VfbbjxLxMBCjkAGOEIRbcCnEaOVisuHXjkFW3JMaGYdtjY+a973oXRqaEwoRjbrU6w8GOayVqm0ZToBSrG1WAfneOwBQCfTQI82AMwumppccfO8zVI3PY4mDzylkjQim0OdDmTAZygOyBGCObcWBlieKZJkSm4rRtS7HC4XYitZHNmNn4RLLCD33vP+S+H/1BhnnvbSq72SFhrhwJNRjJmb1uQe5HupjYDhusSZToNGZEn8gBCjVIMa+DViP12ACNRXrPJOoGmUzNSUphDpcUcoiIiIiIiFx2lzrg2FVSGEDOtJZIwRgKfPWXfBkTTkqJ4JDmCoxszhChT3PAMTp7i8iwzoQQa6FHLuwvV/TrI9pgBPe5EsFrO8ipU5ibWjAvx5EH7GKPuc0kcDIstNSvL3PWEf3k608qG05qIYIHzOeSEw+1FcV3s0BgnTNXLNFRgw6fJtydDIz9QA9cXbYMJbN254GDFbdurfnn//h72eTM2BnFoJtCrT7xGmxMIdT2mHFkr12w2axZEEgpMpTM1gohwPLUhpa6tSUcF6OYw0Sh+BwCNYlpnIgBhlzHhCR7UoWLiIiIiIiIXEqXOuAwCl1IlDyScLJPNLklk7nStPTTSBoLsdRZGLs6gQkYArgFUinE3hmLETCa2ODu+OHI0jp8mghzK8aTJ04UzlYs8NymJVrkMPeMU08ksEwLbFzjOHuh4Wgz4MACGNZ93QQzZFYpcbOfakIx5XnFbR1cuhvR0RDpYppbYgrLtKQMW7omQnHiWEjU92JuBgJOBrIu2xXbYU0Gplw4AhYGk0Nq5gEjIiIiIiIiculd6oADoC8jDbBKLdNUyBRGMq1BExO4E+t4jPnNMhJOKBEH2pCYSj5eodrQUbxwxC2W3hyHGrdXbQBzK8pZxxw3x4EDMouwIPvE5M7N8YiEsZdWbKeBhoinWFt6xomr3YowZG5OPYsm4lboLMzVJHWOSZyrToZxJPdbWgwDxm3PRCZ5y3YY2LPuSYNW7Xg4qhscDiMTRowNFiPt2LNYLGC7JREpSjhERERERESESx9wOG2EGIyjcWCkVmk85znP5ec//CGet1owDBPJoPNAYrfatV5WF6AvEccIoWUqhZt5M7dYJJaLJX2/rhUcfvpZT5zl9AgDrtESm5aNF9bZCSHOcy1gM030TCzaPa4PayaDRddxo98SKVxNexyOR/Nr2DXV5Ppa59xh1SR8nFhYQwqRPg901BkfUCsxdkNO56aaOh/E60yUYg1OIuNsh4EFkfXRGgdSLoQ5EBEREREREZHL7VIHHHUIJhSv7SNNDGxL4dGbT/D7f+/nMcbaXGI+z5iYV6a61QqDYgF3x8wIsQUgZycFg2ngxuOP8q5feDvRA9FrmwoObqVOyfD6mGcVcmSDIyZe8IIX80kveSFjhG61JGZnkY0wZvDAkAq3PFMaw4phw0CzKfzcz/wUi5BIpdDC8QyRXU3KFMCKs6aADyxyQ08mkDgaRz75JS/jxS/9VNitqfXTMzxgDDAxEdoGw7E8cV+34Od+4qcYrt9ikRLbactZV8GIiIiIiIjI2bvUAQdAk2Ccav2BeeHQYaDw7f/r90E61VhSbJ7sye27S90hGEwGTTNXPzgMW977kz/JH/mSL6bLdUtK8DpodBdpFCvHQ0LPwhRg6hZ84Zv+KF/6Z94Cex2Ugh9tsHavJjn9CF2ERYJQasmFGbz/w3zx6z6X/jd+jViOR4RSl+9WViDEwMpCreowI3ggdQsO2sAf/zPfwOe/5U/WfpYS6kPsdtsGIDheBizNUzqGCa4f8m1f8yf4ubf9ODdv3WBl8UzfQxERERERETkfnjz38lIxh2mCNtR1pKtuScTYOzionwgGTSQ3HXQLWLawamHZ4V1H7jqmRUtuW/KqxRtjkweIBt2CnFKt8pg3fcTjmxP9bMMNqFnCjX5kXHSwvyLHyLZpydeuQdfVLzrYg6ZhC2ytpW8WrHOGF72Qr/jaNzFapC6mDXdsFdnkQtu2mEUGdwac0YyD+x/g87/ua/EUOLJIHyO5idAmaBM5JfoQ2aSONYENXj939QrXD4/Y9iOLtHj23iwRERERERE51y53wIGxBJoSWJDwTaEhsL3ZQ1qCRwqRAaMnMNHMt8RAYiQxEedbYF0y7Wq/ViQME2Z1LWvKgS5DV2Dh9bZ0aL2c7W+AB5rQkGhhMpxEITEQIDTQ7QEJ0gKLS8b5tVu3B6Pz+rd8E8tr19jihLbjCCdYYqC2++zGf04lUwxoEgPGkCLf8G3fBiFiRBoCLYHocxVHqUFQS6Al0RJY0sAATPBgt08ctqxKOvOQSERERERERM6HSx1wwNwVgZFxAsYiLFk2CxjqYlMjUceLxroe9fh7KiMyMQEBs0jxUttZ2pZh2xNLIJU6n6I+CvMQ0rMdMAq1qqTxgPUFRicRiSQizemvOv7v3bknIoQW2o4//vVvZoiBDw1rVt0ek8MITGWea2L1/dqWzNHY0+1f5crzn8dnfNkXQyngNdyw3Zt66g02h6kfa4iRAWoAUoaRJQso05m/hyIiIiIiInI+XOqAw4ESWwagJ9MzEWIkWAQP4IGS/TjMCNRWlsbnI9ACK1r69YbOEo0FxsMjKLDXLU6GZ86Psbt+n6jX7GdZgBAd4jTRbCfwCBOkcSJmrye5S3QytF5fa0t9/QQgtXzJH/kq0rUrpG7B4/0RGya6ELBUW1di03I4jliIxG7JBw9v8BVv+uNwcABde/vzPHlWqEHXNbh7nXXiDgEeW9+gtMaGrPGiIiIiIiIiAlz2gMNgnQdKE2nTigxsxg2PHT1WB2m6E6zWcERqRQHl9nkaVqBfb7iyWjINEzg0+/tw/frx8xS7vTghA8M8l/SsOywWTUP0CTAohRggRjv5yYgc/3pXdeK7co4I4UUv5Pd+6RezMcgEMkYhEEL9ppxrCBGaBo+JB57/Av7QG76a3G/rjBM4Gdy6u82lIhm4eetmfSyzmhT1G+577n2MyemZauuLiIiIiIiIXHqXOuAoQA6wLQPrvGUks1wsubY8qBtU8ogZGKVedz/pYroUOLp1k8Wyo+5OyfXi34D7r+Ex1HWyoV6sZ+oYiSHAGOvtLC/QixWOxg0bGyBMEDLZJgYKvUHfwZBgiNBbbT2p1S7QB/CmQBv4+m/+s4wxsrh2DULDukz0/UATjJIzB4sl4zhyfX3E13/TN8G1+4kHBwzHQUmpP4kRcqzBzzAHHFcOruDjAF7g6AgWLYebQ3oGaAJuquEQERERERGRSx5wQC0eSE1g2SQMp98ekgy4/gS449stRiYAjt9WbRAC7F3ZZ5pGnrj+BE3bcXh0WB/VYLvd1i89VaZx3goO2girFKCM0G+xqccYWQ+Hc2hT7WaIBMBwHGciQ4zsvexT+EOvfz0fuP44kxc6S4xAirFWfOTMUCY+6ZNexJd89RsAZyIw7B7falXIxO2tOxEo/YBZqne2C8iFtjgME20Tb3tvRURERERE5PK61AFHwNlPRtgW+mHgCoHnLg7YrG/xxa/5DH7L8x4krw/xYYv5iJXdsIiZFco4klLivmv3MYwD+3v7PPbBR3n1J72Ir/xDX04skMo8u4J5jkWBJtf7wxleoEeHZc5813/xX/F59z3Aax58Af/T3/jbtLlwX9uR8paOQuuQJki50OVC55kFuY4iNWAY+dN/5ht54NoDTF5YLBZ0GGUsBCLDONLFjje+8Y1w3zXoFgw4RprfzTL/5/ZAJTrEkOBo4LXPexGvu/o8PufKfXzwF3+J5QRpPWiLioiIiIiIiACXPOAwh2Fwlk1gBQSMm9vrLDEef/RDfM5nv5a0XBDbFsywEDCrb5kzbwppI5iz3hzSNi3u8MBzHuT1X/l6KEZ0SF6rHxqOR1fUSgg/27e/hivO0mExObbewKaHYYI8kUKC7PMGE+bBq9Sem13pBRHaJd3LXs4XfcWXMxg8tjkkNS3DHFukpqO7dsAffNMba9mLFyJGwOcfwHBcLXJ6DEd9jgJNhPWGvQIPLvZ54tEP0gHLlM5dRYyIiIiIiIicjUsdcIDVAoRcaA/2uUUmE1itDujzxJve/HWw6pgIrLd9vcAvULaFCSgh1ofxQtd1AAxDBgLf8h98C8ES0zSyancVC9CQiLHlyB2L5+Ptn0qtxjhYLBg8Q5sgpjltiBDqkhVPQApshhG3RPaAe4TYQC786f/kzzG0iR4Ii5YCbHD6aHzBl30x3H+lpjypLt1t5tkm4zhSCHXrCsDo+DRPcG2merORhkzf9ySrwUY/5TMf0ioiIiIiIiLnw/m4wj5DKUDTNHz41iEFo1vusZ4mXvKKV/A7P+/zyMWZcLrFslYUbDOhCYxjvbTerNdgRpzDjthGiMbivmt81ms/m9Vqj1vDEUsCWyCTGfLAgoBbPLsXzukBp/MQ1dP7cHe/KAWyk60OF91maJcdk4NRt5vkDCw6uP9+PuMLPofu6j6P3rqFA6u9fQ6nkTf9mW+EVQtW2A49CSNhbA+PaJoGOKncaJMRgpHzwAQQHPOC4QQvp07y0v/4ioiIiIiIyOzSXyF6gbEfSUAisO0Hbg5bvubNfxKWS2r7hJ+8UU0Eh5UZLbBcLMGNKU9k6jZTArBo+Zo3fx03h4GewjQ/gsXEBKSU8Cl/5AmdkdtaPU6XRZidrHOlvvwAkEt9rXCyOaZrePNbvoH1MBBTQ4kNt/qer3zDG1i9+MVgAUKkaZc4gWkcWaz2AMh5vP2EHGK8PQAKfv6GtIqIiIiIiMj5cMkDDq+rYoGDxYpCYTTnyn3P4Qtf/3oYJ0JINDSMwwBThlBguz5ZWzqHAaUUAnUE6XrTQwr81t/zBbzgpS+m3TvgkAkHRi91S4iffXPFbsBpDQ0K5nzkVpK6J5dxqi02AdhuNjQxYMyrdnfTQS3wys/7PH7b7/pdTCmQm8QYA9/wLd9aW12sTt3YDFuKF1LT1EfwgudCmp/Sjx/vdMBxyX9URURERERE5KO69FeNjdXb1A8YEVLDv/tlXwLXrkDX4fVeQnGIu0t659Yv/zK/+va3w1ArD9pU2ywK0C27WvXQBP74138dR14Y5rWoR6XOjQgOKZ6feoTAqY0ut4UcPgcc/fHgz1q1UqDUL/Rg88yOABb55j//n3JYnJul8FVv+lp40YugbY/bfWJsCFYHlfpmC8VZtrsZJgW7Q/dJeFL4cnqFrYiIiIiIiMilDzhiNEaH3idiatngfM2f/lMQIsREKXXWREpNvajPEzSJf/zdf5e//Vf/GsQ4X2378QYQh/rO5sy/+1V/uFYypMgYImC0Fghm5Gk825aL+cnD/EvzO6ytnStNFosFAMN2W+dyHN8gJSMDeRohBl722s/mM3/3F8Bqxde85S3QdJCdkFqcSBOb+tT9iLUL1h/6MDbPAWmacLxKJeddC8/5CYJERERERETkfLr0AUfOjgORQA7wWZ//Bew/9CqIgU12YohMQwabGyiiMfz6e/mB7/un/MD3fR8feue7oIBlJ1LbLErJtQWlbeC++/j3//AfpjfwpiU0DSEkKBk/hzUIx1GC79KPwJTL8Q9Kwvnn/8v/XMMNnJxrm8+QMwPUKg6MN//ZP8sf+PKvoPukT4YYySGQgSFPjHkk9wOkCH3P23/255jWW7zk47keeSonMzj8ZH3srp0GCm67gaMiIiIiIiJy2V36gGN02F90jBTW08RbvuVboGSKGWG+wLa5FYNxBAo/9ra3cv3RR7nSLfln//T7YbutFR8OeKEJhpnV+RW58B/8J3+ebYYpBIapsM0DeGZFPFe1CcYdKjg4GQBafCS2ie/8ju+AfoDitMnIDhYjbbeaUwjjVa/9HP70N38zLJds1kfQJEZqVcYiNsSUYMz88Pd/P//vv/7XpCYScEqpb2NsPvqP5vmLhkREREREROQsXfKAw3DgxrYnNks+9dM+jRf8W78d2oa8qxUoENu5eqNtwODbv/3bCaFuAfme7/57lCHPF/x1TMc01kDApxGaFu5/gNf+7i+A1FAcDCMR6trTs3nht/mIOgi//axSqq9/F/S8/5d/mR/6J/+IXRphpf4gDXmsQU+KYHDfy14OIbC8esAETHlir+2gTLXdxwLf/pf+EgfLBYSAl0Kcn7pupz05M/NL/8MqIiIiIiIiH8WlvmZ0g6bpsNTyoXHDm77hLXU4qNXmkX7K+KkxEOPRhp/+v9/KBx97jKN+oDjcPLzFv/iB/6N+Qb0qp0mJPE1Y6mrVR9PwTd/653j/revExYK9xT7D3GZxh3jhWVOo78HtM0VPakqcGtbUVpFCMAcv2Djy33/X36qvdzvQRShTpolN/Z6S54Gj8waW+QnamBj7dY2OpsKP/OPvpb9xg7zpofhxPYv7bjtt4sk/oqc/2p2/iIiIiIiISPrNv+Qe5oGjcaDZ2+PKfffxb3/R74fFog4OBVYp4gO17SJDs79Ht9rjT33jN/Hc2OEZPjSOtIsVNA1MAyzqWxpTqglBiBCMT/nMz+K3vfrTufW+93H91uPsndmLvl2xGhq437nto65yrW9BNIP1IVeXS975//48P/EPvpfP+po3YaXO5jAKmVxDh1jbcwgnbTgGLNsGhgybDd/zN76L4fAIHwbAa7gETO4ks9vad4KfDHA1r+dt5ko4RERE5Mw89NBD/sgjj+gvIyL3IP35vpgudcBRDNyNw37iDW9+A1zZh3mURpkyMUVSAziMnmks8qpXv5rf/um/A0KCscByQd5s5gEW8+OOI6Ht6PstXbeCfoJofN03fSN/4Ru+kQawYFg5y/qNyu142+udGfT9htQ180wRJ+bCA/sH/K2/9tf5rD/2Rkrfk/Y7oJDdsRjn9yMcr3M1mNfM1lW7P/PP/hnv+rmfo21b0rwydjdC1OxklGg9yYB5IFC0HlZERETODV38iNy79Of7YrrULSoA7eIAW674yq/9GmgbxmlgnEYWKVL6qX5RgJgibtCuDmC5gtTCPDsiHuxBydAmcKef6gyO2Ha41Q0jhMDn/4E/wP5z72exf0BfnHKniZ7PIrddm4effHy63GLWtm2dVuI10NncuE5Zr/nAr/wq7/jhHyIs6grduvbWCWZ4KcfFFeOQCUCkzLNKCt/5X/9lDpqGhRmNWX3seeZGsKcqzND/xoiIiIiIiMidXeqAwwnc2m75nN/ze1i97KWQAqntGMe+bkPZXXdTL/zH4sS2rfMlikMKrLebGhAcb/0oLFdL+rFuVtnmTLPX1R6Q5zzAl33VV/L44S1GYHiKtpBnW3nyHI4nsV27yFw+sWoXlJJpcL77b/7N+l5MEzEmggUMYxxHzIxSoGvnNpVphBj54b//P/DL73gHnVkdXFqmeeBH/ihnISIipz300EPn4f9CRERERM6NSx1wACwXK97wNW+qrRhlIgPL5ZLpcA0xYAEyMFHbStwAA19ENrnQ7S8pZvg8UPO4LSMYGWfCyMBR30OAr3zDH2V5bZ+wCIznYITE6ecvT3Eu7o4xpyBHRyxS5FqzZBo2/Msf/zH+n//rX9QKllNbT9quO/5eOPWD1m/5m9/533Hf/grvBygTdoe/ojvMDSkiIufTWQcMKp0VERERud09HnCc/N3zyX8LdINsxssefpiXve51ECIhRNbbLUZD6hZAXV1KyTTUN2u7nRiBEQhNYB6PyZSn42eccibFjoLRxcCUYW9/BQT2PvUVfObrPgcLbT0vBzueNuHM+QmO47tL/N3a1t3Rnrm1qeZ1gGcVyGH3ZgUgMA0jRiSXXO9frfjwjevgzio0sF7zT/7O3zlZCDNlyhx0DNNIisZwtMbmKo23/8iP8Bu/8h76o0O6JhILxNjUp2ubOmv0+D3YvRsn7TQZKGF+o886HRKRS00Bg4iIiMj5cuEDDiNgp16Gm88zJerajToTwtmNu0wp0C4aJnc2ZL76LX9ybi8JxKnhYLFfL6RDggDTVEgWiRTK2LNYBMxqdUGZN4ccDUc0MUFJmDcEW1AIFK+DNb0fT7IWC7zpTV+Pl5ZAIhGIc5yxG8bZxfli3uZbgODhdF5Tg5G7/LdDc2gDWKnPO04TYdFCqO9HyU6KDRQYp/mLPLNaLRnzQCwjB3ng7T/6w/zq295a52vEhFvL0ZiJqQYWy66FsW5O+Qf/3XeyKs6VvVVdQYsRQoAQyVY3z/gacmae2xEhZyacnkJOgSlEYmwwt7t+D0REREREROTecOEDjtNu+wf9ucqhAF2KOPVf//spc7gdKBa473nP5d95/ZdDqitNQzTyPAYiJCjZaVKCfgtjpilgmw2pjCw8sySzIHM1JhgKjIXhw9eJgE3QGUxDYbls5gShB4OX/u7P58qDL6DtDmjjgoY0t2TAItQsIBhs3Slmx1tE8LkN5hn8N0Oro0RoQoMFZxxH8jhAcaJb7c3J0LUdZRrBC8V9nsvh7AfDjtb87f/2O2owMmZyyaSmqZUuw1Dnj5SJ9/3YT/DzP/VT2JA5OlwTg+HuuDt5Guh9ggyhORlpYgAx0i46LAYen0YsBjZ5ZNktnrk3QkRERERERC60C78m1il37lSY/2U/ATk7BdhbLMkFNtPAtmS+9o1vhAjbcUO33KMAm6lnFbu5dcQYH/0g/+Zf/2vu39tj2SQ2mw1Nu+D60S1CShSc/cWSfHPLwdX7yE3kyvoFLF70AjyDewELFDK5hSYGmAp/6tu+lW9789ezYuQqkbZNeJmgQA+sUh3+kcvcLPKkSgUPNWS4mzEVAZimeXSIZWJsWDQtsWnrG2hWv2gcsDZgMUGCmIx+k1mFQAiBcZr46bf9OL/6tp/gUz77M2najp66WrfrEhytIRh/7+/+HbabLQ/ur1gfrkkpkbPRtC2xa+gs7HpT6mEqTN6T8gSeCSGwX2DRNWz6njwOuy8XERERERGRS+7iBxzzbIadwG6uRRUtsSlTnY/ZD2w8Y7GhOzjgS9/wBqAQly0bBhItXdfVshYH8shf+c/+Aj/2Az/A0Yc+RCyZPE20TUsusNxb0U8jyQLbo3UdRpoWPPQZv4u//8M/iAWnaQPumYmJkBIZOLzxBK/7Y6/nyn/+F0kfeoI8DGyHgQnYBw6AUoxSCoFAOP0Cd0NOT314NxaphhyTZzZ9YbNZ10qTtDr5orYlT1viPBxjwus8klLo3FkBnlr++l/+K/zVz/0BzAuYEQygQAq8561v44f+z3/BXmoYNgNNihwOA4XA0XYDQ0/oYh2wMTkejJQCRoJxpB8GyCOLNrE5PKSlhj7auyIiIiIiIiJwwVtUdm0duwqOGm5Y3fgx3wYvFGD/4D7GEJlCA6s9ft+XfCk88BxIASfctu1ju9lAmZg++AG+/x99Lx/+tfdiw4ZrufDCpuOBqfBAcdLN6+xttnB0gxd1K17QrUjThve/651s3vfeeoYlY+YEi/RMTMCV5zwADbz+697EYXE2Fon7ByyWCxzouiXrnPF5zObx3M9TrzvzzFzc+65Qo+lIi5bUzWtwKXV9a57ACjFGKAW8MGHsX7uKx0Dvzl7T4ZuBn/3xf8n6Pb8M6w0NTsIoZYJo/I3v+Gs0boQCngshtZAaSttCiicnZA6NUYs5Sl1BGyOpa0kWKO6UAqsYKD49A++AiIiIiIiI3AsudMABH7lIYxcI1BcWyBhb4LH1IbfyxNg1rAP84a99Iyw6cj8SYB73CcPQs5y3efyTf/gPiHnkhdfu4/mrfRYRyrgh+0DnAw2FpWX2gKG/Se43PGf/KofXn+Av/Kd/fp49cdJA4dgcTgTyZsuXfNUfYVp0POETj/UDG4dskcf7DRlYdasa0+wGip7qxTgu6rjLEo5NhlsOt8aBdSlYiHPgMMcq7nUoiFm9P0X+1a2N3Ri23Mp1y0s/9sSSiePI3//O74LYEr0QfSCa8bM/+EP87E/9FCsLJA8sV/s8ut2wMefmNFLaBG138nrmW/aClwye2eSRjRcOx4w1EQuJ/u5euoiIiIiIiNxDLnyLSuXHrSnh+Iq/7k3JIfKa13wmfQz4akFZtMTlkgd/+2+DxYIYayQy9Vs8wqrpanpwdJP3v/d9fPbrXscj/+qneWJ9yJVQL/sb2C1w5bAUDtpIHpwNAwcHCz7j1b+DD994Yr5Qr7M0LAZaWhwYpy3L5QF7n7TiT3zzN/PuR97Bb3zgvSwDXOkzP/2TP8EqNkzZjzON22dwFE4vl/14FSCY8amf+gpe8IpX8FieuP/5zyePExYSIUWIkXGcCA7RAowTX/8lX+TdpmcvZ37t3/wbPvDrH+Bqu2QaMt//D/8Rf+xP/An2Xv1yUjQYB/7ed/0tFsXZ9GtWJA43G171aQ/z/Je9lE12HvjkF+G5MJnTWJirRAJYwFJDvnnI637vF9L0W6LBz/3Mz9Bfv0WaAyMRETk7D73yVf7Iu96plbkiIiIfhf7/8tlxsQMOO7nE383d2P3EZCBbYDTjz/2F/4wrn/5b4cpeDRyaugK2jBOBuuFk0Z3MnNgeHbLY2+c//o7/FnziL33lV/DWH/gX9F4XrhSDvkAbYZWMx/vMvgWCRV78spfy3/xv3w9NU3edWoSmqYUcBttpy35a1e0kKfDV/+G3gk81NRl7HnvbT/BHvuiLKSFyNG5YcHpTiHO8S5a7L79xYLTIH/xDX87v/4/+XG1JOdiHGLlx44grVw8oDqlLHPYbVl1HXK74m//4n8x7bCe+7Q9+IY8/9iGGfiARODy6wf/43d/Nm/7yfwnm/PJP/kt+9q0/Rnd0yFVb4O700fn27/yrPPia14A10LSQ6swRLOA4m2mgTR0RiFfv49u/53ug62Aa+dYv/vf4xZ/8VzX0cU3hEBE5S/rLmojI5fLQq17hj7zzl/S//XIuXfgWldPBxklrSpUNSgqMTajhxthDG/FoTBYZUgMxzTMnaruLGywO9ucgpIEYePzwFnRGc9AyJbhVgAjeBI5GZ9kZfXCmFJlSrDteQyAXh9QAzAM3YZHqnI3j6o5FA6sGItAmfLng8TwxmrNcHtxeoTC3qVh9+ppz3EUJQzEgtYyhrZNG9/YhGJnA6soBQwEPMFLngjgBJ9agoWkhJXLbMFA4ZGCRIntE/qe/+z3w/70Phszf/q//Mmm94f60Bz4yMpGjscahTdC2ECOZQAwtbpDNaFI3zxkJdf3swRUIEdqWISSOpoF2tTfX7shl9PDDr1IBj4iIiADw8EOv1N8LniUKNz4++geBZ8eFvjqsLSkn7RsnQcc8OBSj98wTm3X9wv09CMaGiYEAITHNocZktahiYp5vsRt8Ycbi4ApDcR67OVCCsVwE3OBwW0iprqEdsuPuZHfYbsAgLrpadOH1MXe345qDAGMpZAt4DBCNMThXr+4xUnh8c+u2IaqnPTO/cYGjYUuzXML+CpKRS22LMTvurqnnAMfzQ5xYP2nGtkxYDFxdrJimkQWRJk98z1/5K1x/64/z9h/7Sa4QKdOGg2aPtllws+/JMdb5JCFQzOZxqk4drVqf14FhXrNLjDWMKpAWS0LT8cTRjWfkXZCL6R3v0P9JiIiISPWOR96lvxeIyAVvUZntZm/sBovu5ADd3opszO0sTj8NxNTV9gwfCVZbVE43OphBCHPycWtNKYWUWhIDyRqG7bzStY0MQ6Zp6uSPEhsOVgfQLsGNqR9JbVfDgvmx6/QM8LgLZAJ5nuiRvHC43TBME9Gdq/sHlKOxftepdhx8fqXPwP+MN3FJnwv0Az0BC2meMTI/bTipGAm7+80g1venbVsO15lFN2FmrH3Dko5/+g+/lw/+yq8Q+i1X2z0eHwZ8vIm3e7TdktgtoGlxi/W1w3H7TZ6frwDJQt304qHeOYCHQEwtnRtM492/CSIiIiIiInLhXegKjtOn/+Rr/V2N2tFmTWhSbXMwo0stCUgUltYQyPgcb9zeDpJrhcFqhVnEp0zIBlMmmbEEyLAIRpwMo2BTYRyGueXFSSkel20EP2mjqY9fN6xYqdftcX4RbRPZ9j0WnLHv4a5HiX50oeQ6mHXZ0rUtbYpQJkKGFkhebzGDZYjFMc/1/N2JGMsGhmEgJKPBWC0WlDLw0297Kw3ONGx4ftonkpi84O4cPnETxvoY5sDkdWZJGQmMGE7EaZg3yOw2ybYt0zQxbHvyNHxC3xsRERERERG5OC54wFG53b5N43QksOwWtDHBMMF2hAxxO8CtNSkXkjsNhW6+tdTwA5+bMo429Ldu0VmkDYk8ZRoLrNoVQ85YcUbPRKBrW6ZhDiWODueTK+AQCnQO7fw8NSSo3xfLfBG/HVnFluRwbe+AaRzq/TtPSnHuNvoIXnAf8H4D/YacBxhGzB3zAl4IXgilwO52KtzAnfH6IVfbBTjcGrek1LDNPRFoQmBlkUMyYxnZMuEEkiXu27sKFrFd5U1xyPU5rBQ6Mh2OjbkmTwX88CZQiKWwiLDfds/ALhkRERERERG5F1zoFpX5uve4deK2ConZjRs3CSVDSPULSoHQkFqDqdSyhFBg10ZiZa668Pq13YK9boHnQpMSPk0MJeNDz5JAEwMNMGRnu14T51kSLFcwjhCbGnLMJxzDfNZ5nuA5THWrixUILSk7Y4bNrZssmpZwpw4MO3m9d8OADuPqcgltQ4y71z1BnmeJ7M3bZXY9PF7qm+xAdp5zcJV3HW1pQsBLYTMNJJt/b3xi8rogZlt6GhJbnL7vSZPDrTVcPZgfK88BSoG0Cy28Dj+1BDFie3uQJxKOTwPNYoUaVERERERERATugQoOtztXMhi1LeTB++8nb/p5UmaAwy2sh7oa5OamBgxDhnGqF9NTrhfbeaohxM0bRC/kPHGr3xKbRBcTExlrErfyxOCZkQwRFvsLuP74HARYfaxd+8U4P884zb8uNXjJNt8y/c1bvOTaAcNY8HHA8DtWceyGft5NyhEcFpbob92oFSdlHina97VSY9HOYcepWynHlRaUQtwOJKCLDQcH+zgQFi17eyv6ebjqXtdSgJ6J9bjmufc9QBwc2tUcJu0ec6rncPz+T3MwZTD09T298QTLWFuEjrbruw55REQuqoc+9eXaGCAiIiJyyrm9Pvz8duFXhjy3IJQ7bEMNtUpgHr4Zfbc6NRxv4RhC4EYZObj/fj74xBPsXb1GHjN5yOwvVuSxBzIlFIoFsoXjsCQ6RJ84aBoOb9zkefsHHB7eojOjiYmjaaSlhgzHBQ2p4SaZsWnITcMwZRbWzGGLUwzcCkYhFQglMFrCYmSctiQfuI8A/VBHhhBwj6xT5Lv/z/+dT3ntZ0FKuCV66m9eC+BOsfpb+e5fehfvfve7KQTcnYde8Upe+fKX1UqVYeQL9h/g2pTJDLRAoGUdjMevRH7i+tr+nedccfqJvBlJbUOZJ5k2cwVHn+p6WfPAapq4ttmwb5EbnjEzpgBTdpbJaCxAzuRSfz+CGTl29MUoqeFWnpj2FkBhb8xEL4yxMIZCCYFCYNpM7O/v88StQw6WHasA0/WbvKhdUIbtPK3j43PUJH5wHM/tn4Hz7KGHHvJHHnlE752IiIiIiJwbF7pF5cktKeXUfwM0Be4LkXL9Bs8PCT+sczGsGBzdOL40dquNLk9ex2pesO3ANYuMR4d0ZpjDNE10cza0+xYDYp7Yt4APE3ms5xGY5sc6ve61HG+h9ZJJFkkpkMeJALQh0JfCSGFNoTlY4V7mCovAxMiEYaT6Htgu3KmhSSh19YlTZ2Z47jEzKAW3QsFZUVtrtgxc9RXpyPk88HBzQ8jOIjthGhiD4VbnhBSDdh6JkYqRimMYWy+k+d1MBZIZliHPrTl1C0vtW4nTyMICPk60ZuR1/T2J87BRt1KrcozjbTHcvMk+BusN0QsxRLZDj91FuCF3R+GGiIiIiIicNxc64ABua9948sXurlKi+s2GUd79sEpzaHfzNj6GxzN261EzNua6MQTwOThIbUtjxq3DNV7maSMZUjLGUxNIjl+317aT3WM7EJJhsYYbjAPedWzHNZFCAVo63J08btgjMboRKNzfLjkaDmmKHa9tzQ5MNQhq86nKlVOvf7fs5PSrvL3DphDn9yjtXsJT+ujvocINERERERER2bnwAcdF5oBZi7szzhfzkUhfJ3pgGbCAFVh6CzlBP2DLPRZ5IHQ1bMjcudeoAGPJTECKATxTVguO+i0ht3QEbpaREBNHGdpVy+GwxXPhIGaMwHT8yHPYYAXjpHqmoKBBREREREREzt6FHzJ6kWULfMAHjvZXbFb7HC1WrJdL1s2SbbNk0y44iom95z2fx7d9rcJoFgCE2IKfatO5Y8oQ8JjIFsACHBzwtkcftXUbuZ4Cj1lmvVhwc9Gw6ToOkxHuu8Li2j4fHjZAPBlmOj9PmKtE1J9w73roVa9QZiUiIiIiIheOKjjOUB8D/8uP/ijP/a2vhqarW1xiAhxSnDtQIr7ZYPsHzJNHGUr9ZZlXsJoXds0hu+0xmQCW67ITi0wUpnHAp63XDSWA765jHWKAcQDPPPIjP8qff+ObWT/xGGlefLuzawkKKOS4Vz3yzl/Sb62IiIiIiFw4CjjO0BTgA/0RD+ytCDGCN7XS4pTsQHvAkDMORAIe5jWxtpvC8VQCIQScwEih6ZZstmuWXVf7XxyILdhu1sUIacHeAw9w/fCIA+twr1tfdu0oIiIiIiIiIueRAo4zZVhqahsJUMwxAmMeibEhk2uVhgUshuNNKcOQ6dr4EVtkbn/kKk+1ycSozxG6JW6GNfU7x+xMJbNMLbQLIHOr75lKxmKDT3eONT56sCIiIiIiIiLy7NI16hlrYkskYHNcYXXSBYFApKEJDTmPWJ5oqC0pe00kOdi0W3PLcaJxenhCcGhCJM6PWoeaNmQC2Y2JgMeWTXYOhwGfZ3W4O4vlHsM03PGcn7xOV0REREREROSsKeA4Q+YQ+wkmCBM0ORBLYRkiyTMthdZhGRq6kGonST65BTOMgs+rWMdpZBhqKJEscP/Va7z0k19MpE7oaADPpVaJjBkjcrhZ88gvvpPDm0c1BvFACJHtekNjJ1Uiu0zDDcruhjaoXFaf9uqH9FsvIiIiIiLnigKOMxTYDe0sJ0mBn7rdpsyzMk4d56kYm36D4zRNQ7tcME0TBwcH/M5P/+10TSA5RK9jNxqrrS6LtqPf9Lzj7e/gsQ8+Rh4yPnejtDHRpDTP34AnT9/wJx3l8vk3v/iI6nhERERERORc0QyOM1SAEkpNOcwh2HGpxDQ3rbidhAsGhFhu215SMNpmgWGMecJi4IWf/CJe9IIXstjragqRHaIRikMyPMNms+EXfuEX+PCjH8Iclm1XKzimkYCRDCZG2nk7S+Wc9MKE4zMQEREREREROWuq4DhL5jUeME5CDj6yQmJXq+HU9a+nulSYpkITaggxDAMHBwe86uGHeO4LHjx5nnkdbCm1UsQcfvU9v8z73/9+2pjo2pZF09ZnmTIlT7g7Nre+3H42J+0q+id8EbnoHnrVy1WMJiIiInKPUAXHuWHz9M6AGUQ3sBohnNRQfGS1REwNeSy4wd5yxWq5Ov7clCdSTDBvTJnyQNssIcKHn3ic/f19SoFx7OmHDSs6CEb2QjFoQqL4RHE/jjfMT2Zy7FbH6upARC6qR975HmW1IiIiIvcIBRxn7HgDisNxQY0HzE/FBsd//a6f99N3O5ALIZ3EID63ksSUOP0NIaW5WgSGPNVBoe5M00TOuaYXTYDgFDL5+JFuZx7mzS+7ZbFqUxEREREREZGzpRaVM+RA3pVDHK963YUcdvvA0dvyjjB/XYAJYkqEUL9+nEYco8z/GfNA8QmskNqIGwwl89wXPsi632IxEJtEbOPxOWSDCWcouZ6GnUQYgbp+1tAPj4iIiIiIiJwfukY9UzZnF5Fic2BxOuw43s16ctxlHcc1E5E6Y2P+eosNBccJOIEQWzyk44/rPA/n4Yc/jb1rV9h6JoeIz3M8mDIBI6SIxZMfj9MZSzHIFHL96BPxxoiIiIiIiMg58PBDr7wwUwkUcJwx90ghMJVwHCJs+0wOMHit8MihVlVkOxku6sDE/LnG5qqLOrbD5+aR3XwM5/bvC6G2rnzu6z6H1f3X2JqTLUCJQMd+XHJ01OOxYTdxo8zfX8zJodDHQh/qrA4RuZgefvjhC/N/ViIiIiJyNt7xyLsuzFWfAo4zFfDsRMByOS7aaJtIpI7D2C1XOd4k+6TLkTt0sJxuYHmKZz353Ge85jU875NeyFhqPQbrLcPRhtX+PgWf54Gc+l6HsNvKcmF+zEXkTt7xjnfoT7GIiIiI3DM0ZPQMmRe6AkzQFGAoEALBCxTD3LFwKqaYL0WeHHJ8vGKAAfi3P/3TaShMmzVp2dIsW24d3uTBboFRg5fjEaZuJNf2FBERERERETlfFHCcMWcEm+ZZGhkItbximiDFet/xlpXZkz/+OJkDeaJJDQuApoX1IYsYubq/Ylz3JE4qPk7/U+9uDsiu7UVERERERETkLCngOEvmTGSwsQ7P2O19NSAaz8YAz4OU8M22DioNBiExbdb0R2uWDlidv7HbmrILOey4yUVDRkVEREREROTsKeA4Q7HAg3t7sN6AhVqxMeV6zBmaRF2NQi2T+Gjd8rvPP52jA5sRa5v6GFOBUrBtz96iZYlRtsNtg0qfXMUhIiIiIiIich4o4DhDbSl86We+jv39a5Qpk9qGYdsTm0TOmYxjxSlW527shnreKevYff7pHs2MnDNtDIzDFiuFvWVH3gysgS4Y2Rz3+ozlSc+pCYUiIiIiIiJyHijgOEOpwIOhg/WWvvR0Q0coA4uyoJRCX0biyXjPY27cttkEavtI+TiOIyNX9q7y+NF19ghcvXKVx27eYD9GLAamaazVG3OScbw5xet5RP/IcxERERERERF5tingOFMFLxMQaEl4yTRE8jQC0BC4UyPILqA47fSMjI/1GIGWRD66xVUiBehv3mQPw0shez55TpVqiIiIiIiIyDmmgONcuPOgzqdalnJ6Tezp3ME+7mN9/l1VB4C514/nL4p3OEW1qIiIiIiIiMh5oYDjzN053PDfJDk4ruK4i/aQ3eDQ3YPc/pz1gzC3oOwqP04+U2lNrIiIiIiIiJwHCjguMTco5scBxengIpyarfHktpbdfYVdQCIiIiIiIiJythRwnLk71z/swoWnquR48gyOu3n22oZit4Uax+fBSbhx+/fdufJERERERERE5Cwo4LjkjJOZHuZzmHGqcmNnl3tMz96piYiIiIiIiHzMFHCcsacatXHcNvIUAy5OV3Z8vIM+zcFOPdA8deO4OmRXo7FrQ6nVHuX4uZ8ciIiIiIiIiIicFQUcF9gzESzs4o2nannxU8diu7kdp75H4YaIiIiIiIicAwo4zph/nPUXp8ONZyJjKHf41enHPd6i4hBPr6m9wAFH0Y5bERERERGRe4YCDgE+tpDkIocZIiIiIiIicm97ppZxiFw4QYGNiIiIiIjIPUMBh4iIiIiIiIhceAo45NJSy42IiIiIiMi9QwGHiIiIiIiIiFx4CjhERERERERE5MJTwCEiIiIiIiIiF54CDrm03M76DEREREREROSZooBDRERERERERC48BRxyaRVVcIiIiIiIiNwzFHCIiIiIiIiIyIWngENERERERERELjwFHCIiIiIiIiJy4SngEBEREREREZELL531CTwVB7JBdDDq7SMV/PirTUcdn+bxo/stqz2POQNQ3Hn70GssqYiIiIiIyDl1bgOOIWS8C+R+IrkTuP2S1CnAScSBjjo+zWPY/fIOPm258F9YH9nnXr3fb924Rc/Iw6Hxd5RRIYeIiIiIiMg5dG5bVHJ2+lxwC/hxDcfuFqmnfjr20FHHp3c0f+qsIs9ByM0bNxgZASMQn/LrRURERERE5GydywqOV4N3tqAJ4GNPmXOYAHPdRpgvPwtGmD86Dy0POl6ko5enDiwe2dR2lD4ayRssRH5h2j51IiIiIiIiIiJn6txesP3OZuWdGZ0FohfMT4pN3KwGHOaYg1HAA5iOOn7sx01j/MT65m/6Z+DVi6X/4nZzbv+siIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIhcNv8/6/LSggoNpkIAAAAASUVORK5CYII=" style="height:40px;display:block" alt="Texas A&M School of Engineering Medicine"></div>
+  <div class="header-center">
+    <div class="mode-toggle">
+      <button class="mode-btn active" onclick="setMode('student')">View</button>
+      <button class="mode-btn" id="facultyModeBtn" onclick="requestFacultyMode()">Edit</button>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="faculty-badge" id="facultyBadge" style="display:none">LIVE EDITING</span>
+    <button class="btn-sm gold" id="addEventBtn" style="display:none" onclick="openAddForm()">+ Add Event</button>
+    <button class="btn-sm" onclick="loadEvents()" title="Refresh">↻</button>
+    <button class="btn-sm" onclick="openConfig()">⚙</button>
+    <button class="btn-sm" onclick="window.print()">Print</button>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar" id="statusBar" style="display:none">
+  <div class="status-dot loading" id="statusDot"></div>
+  <span id="statusMsg">Connecting...</span>
+  <div class="status-right" id="lastSync"></div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout faculty-mode" id="layout" style="display:none">
+  <div class="sidebar" id="sidebarFilters" style="display:none">
+    <div class="sb-section">
+      <div class="sb-heading">By Year</div>
+      <select class="block-filter-select" id="yearFilterSelect" onchange="setYearSidebar(this.value)">
+        <option value="All">— All Years —</option>
+      </select>
+    </div>
+    <div class="sb-section">
+      <div class="sb-heading">By Block / Course</div>
+      <select class="block-filter-select" id="blockFilterSelect" onchange="setBlockFilter(this.value)">
+        <option value="All">— All Blocks —</option>
+      </select>
+    </div>
+    <div class="sb-section">
+      <div class="sb-heading">Event Type</div>
+      <div class="sb-item" onclick="setSidebarCat(this,'Mandatory')"><div class="sb-dot" style="background:var(--cat-mandatory)"></div>Mandatory</div>
+      <div class="sb-item" onclick="setSidebarCat(this,'Faculty Discussion')"><div class="sb-dot" style="background:var(--cat-faculty)"></div>Faculty Discussion</div>
+      <div class="sb-item" onclick="setSidebarCat(this,'TBL')"><div class="sb-dot" style="background:var(--cat-tbl)"></div>TBL</div>
+      <div class="sb-item" onclick="setSidebarCat(this,'CBSE')"><div class="sb-dot" style="background:var(--cat-cbse)"></div>CBSE / Exam</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="toolbar-title" id="toolbarTitle">EnMed Calendar</div>
+        <div class="toolbar-sub" id="toolbarSub">Loading...</div>
+      </div>
+      <div class="view-toggle">
+        <button class="vt-btn active" onclick="setView('month',this)">Month</button><button class="vt-btn" onclick="setView('week',this)">Week</button>
+        <button class="vt-btn" onclick="setView('list',this)">List</button>
+      </div>
+    </div>
+    <div class="week-drawer" id="weekDrawer"></div>
+    <!-- TOOLBAR CONTROLS -->
+    <div class="toolbar-controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="searchInput" placeholder="Search sessions..." oninput="handleSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <button class="today-btn" onclick="goToToday()">Today</button>
+    </div>
+
+    <!-- CALENDAR FILTER: M0 / M1 / M2 / Student Affairs -->
+    <div class="year-checks" id="calFilterRow" style="margin-bottom:10px">
+      <label class="yr-check-label checked" data-mc="All" onclick="toggleMCal('All')">
+        <div class="yr-check-box"></div>All
+      </label>
+      <div class="mcal-divider"></div>
+      <label class="yr-check-label" data-mc="M0" onclick="toggleMCal('M0')">
+        <div class="yr-check-box"></div>M0
+      </label>
+      <label class="yr-check-label" data-mc="M1" onclick="toggleMCal('M1')">
+        <div class="yr-check-box"></div>M1
+      </label>
+      <label class="yr-check-label" data-mc="M2" onclick="toggleMCal('M2')">
+        <div class="yr-check-box"></div>M2
+      </label>
+      <label class="yr-check-label" data-mc="Student Affairs" onclick="toggleMCal('Student Affairs')">
+        <div class="yr-check-box"></div>Student Affairs
+      </label>
+    </div>
+
+    <!-- COLOR LEGEND -->
+    <div class="legend-row" id="colorLegend">
+      <span class="legend-label">Type (left stripe):</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#b97cf7"></span>TBL</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#3ecf8e"></span>CBL</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#4fd6f7"></span>ITDE</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#C62828"></span>OSCE/Exam</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#1565C0"></span>Orientation</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#00838F"></span>Lab</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#F9A825"></span>Workshop</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#424242"></span>Blackout</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#607D8B"></span>Other</span>
+    </div>
+
+    <div class="week-nav">
+      <button class="nav-btn" onclick="prevWeek()">‹</button>
+      <button class="nav-btn" onclick="nextWeek()">›</button>
+      <span class="week-label" id="weekLabel">—</span>
+      <span class="block-pill" id="blockPill"></span>
+      <span class="week-dates" id="weekDates"></span>
+    </div>
+    <div id="calView"><div style="text-align:center;padding:60px 20px"><div class="spinner"></div><p style="color:var(--muted)">Loading events...</p></div></div>
+  </div>
+
+  <!-- FACULTY PANEL -->
+  <div class="faculty-panel" id="facultyPanel">
+    <div class="fp-header">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <div class="fp-title">Edit Editor</div>
+        <div style="display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden">
+          <button style="padding:4px 10px;background:transparent;border:none;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .12s" id="fpWeekBtn" onclick="setView('week',document.querySelectorAll('.vt-btn')[0]);updateFpViewBtns('week')">Week</button>
+          <button style="padding:4px 10px;background:var(--accent);border:none;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;color:white;transition:all .12s" id="fpListBtn" onclick="setView('list',document.querySelectorAll('.vt-btn')[1]);updateFpViewBtns('list')">List</button>
+        </div>
+      </div>
+      <div class="fp-sub" id="fpSub">Click an event to edit · Click a time slot to add</div>
+    </div>
+    <div class="fp-body">
+      <div class="fp-section">
+        <div class="fp-section-title">Add / Edit Event</div>
+        <div id="fpForm"><div style="text-align:center;padding:30px 0;color:var(--muted)"><div style="font-size:28px;margin-bottom:10px">👆</div><div style="font-size:12px;line-height:1.6">Click an event to edit,<br>or click a time slot to add,<br>or press <strong style="color:var(--gold)">+ Add Event</strong> above.</div></div></div>
+      </div>
+      <div class="fp-section">
+        <div class="fp-section-title">Recent Changes <span id="changeCount" style="color:var(--muted2);font-size:9px;font-family:monospace"></span></div>
+        <div id="changeLog"><div style="font-size:11px;color:var(--muted2);padding:8px 0">No changes this session.</div></div>
+      </div>
+    </div>
+    <!-- CALENDAR VISIBILITY SECTION -->
+    <div class="fp-body" style="border-top:1px solid var(--border);padding-top:16px">
+      <div class="fp-section">
+        <div class="fp-section-title">👁 Calendar Visibility <span style="font-size:9px;color:var(--muted2);font-weight:400;text-transform:none;letter-spacing:0">(controls what students see)</span></div>
+        <div id="visibilityToggles" style="margin-top:8px"></div>
+        <button onclick="saveVisibility()" style="margin-top:10px;width:100%;padding:7px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer" id="visBtn">Save Visibility</button>
+      </div>
+    </div>
+    <div class="fp-footer">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Changes save directly to GitHub — everyone sees updates within seconds.</div>
+      <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
+      <button class="btn-full" onclick="enterBulkSelect()" style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">&#9745; Select &amp; Delete Events</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target.id==='modalOverlay')this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-bar" id="modalBar"></div>
+      <div style="flex:1">
+        <div id="modalCat" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;opacity:.75"></div>
+        <div class="modal-title" id="modalTitle"></div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-row"><div class="m-icon">🗓</div><div><div class="m-label">Date &amp; Time</div><div class="m-val" id="modalDate"></div></div></div>
+      <div class="modal-row" id="modalMandRow" style="display:none"><div class="m-icon">⚠️</div><div><div class="m-label">Mandatory Attendance</div><div class="m-val" id="modalMand" style="font-weight:700;color:#C62828"></div></div></div>
+      <div class="modal-row" id="modalGroupRow" style="display:none"><div class="m-icon">👥</div><div><div class="m-label">Group Assigned</div><div class="m-val" id="modalGroup"></div></div></div>
+      <div class="modal-row" id="modalLocationRow" style="display:none"><div class="m-icon">📍</div><div><div class="m-label">Session Location</div><div class="m-val" id="modalLocation"></div></div></div>
+      <div class="modal-row" id="modalPresenterRow" style="display:none"><div class="m-icon">🎓</div><div><div class="m-label">Presenter</div><div class="m-val" id="modalPresenter"></div></div></div>
+      <div class="modal-row" id="modalNotesRow" style="display:none"><div class="m-icon">📌</div><div><div class="m-label">Additional Information</div><div class="m-val" id="modalNotes" style="white-space:pre-wrap;line-height:1.6"></div></div></div>
+      <div class="modal-row" id="modalYearRow" style="display:none"><div class="m-icon">🎓</div><div><div class="m-label">Calendar</div><div class="m-val" id="modalYear"></div></div></div>
+      <div class="modal-row"><div class="m-icon">📚</div><div><div class="m-label">Block</div><div class="m-val" id="modalBlock"></div></div></div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-week" id="modalWeek"></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button id="modalEditBtn" style="display:none;flex:1;padding:8px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer" onclick="modalEdit()">&#9998; Edit</button>
+        <button id="modalDeleteBtn" style="display:none;flex:1;padding:8px;border-radius:7px;border:none;background:rgba(240,92,110,.15);color:#f05c6e;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer" onclick="modalDelete()">&#128465; Delete</button>
+        <button onclick="document.getElementById('modalOverlay').classList.remove('open')" style="flex:1;padding:8px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <h3>Delete Event?</h3>
+    <p id="confirmMsg">This will be permanently removed.</p>
+    <div class="confirm-btns">
+      <button id="confirmNo" onclick="document.getElementById('confirmOverlay').classList.remove('open')">Cancel</button>
+      <button id="confirmYes">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div style="font-size:32px;margin-bottom:10px">🔐</div>
+    <h2>Faculty Access</h2>
+    <p>Enter your PIN to enable live editing.</p>
+    <input type="password" id="pinInput" maxlength="10" onkeydown="if(event.key==='Enter')checkPin()">
+    <div class="login-err" id="pinErr"></div>
+    <button class="login-submit" onclick="checkPin()">Unlock</button>
+    <button style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer" onclick="document.getElementById('loginOverlay').classList.remove('open')">Cancel</button>
+  </div>
+</div>
+
+<script>
+let SESSION_CATALOG = {};
+async function loadCatalog(){
+  if(Object.keys(SESSION_CATALOG).length) return;
+  try{
+    const r = await fetch('session_catalog.json');
+    if(r.ok) SESSION_CATALOG = await r.json();
+  } catch(e){ console.warn('Catalog unavailable'); }
+}const BLOCKS_LIST=["POM I", "POM I Week 1", "POM I Week 2", "POM I Week 3", "POM I Week 4", "POM I Week 5", "POM I Week 6", "POM I Week 7", "POM I Week 8", "POM I Week 9", "POM I Week 10", "POM I Week 11", "POM I Week 12", "POM I Week 13", "POM I Week 14", "POM I Week 15", "POM I Week 16", "POM I Week 17", "POM I Week 19", "POM I Week 20", "POM 2 Full", "POM 2 Week 1", "POM 2 Week 2", "POM 2 Week 3", "POM 2 Week 4", "POM 2 Week 5", "POM 3", "PoM3 Week 1", "PoM3 Week 2", "PoM3 Week 3", "PoM3 Week 4", "PoM3 Week 5", "PoM3 Week 6", "PoM3 Week 7", "PoM3 Week 8", "PoM3 Week 9", "PoM3 Week 10", "PoM3 Week 11", "PoM3 Week 12", "PoM3 Week 13", "PoM3 Week 14", "PoM3 Week 15", "PoM3 Week 16", "PoM3 Week 17", "PoM3 Week 18", "PoM3 Week 19", "PoM3 Week 20", "PoM3 Week 21", "TTC", "MSGR", "Pre-Matriculation Week 1", "Pre-Matriculation Week 2", "Pre-Matriculation Week 3", "Pre-Matriculation Week 4", "Pre-Matriculation Week 5", "Pre-Matriculation Week 6", "Pre-Matriculation Week 7", "ITDE 611 Week 1", "ITDE 611 Week 2", "ITDE 611 Week 3", "ITDE 611 Week 4", "ITDE 611 Week 5", "ITDE 611 Week 6", "ITDE 611 Week 7", "ITDE 611 Week 8", "ITDE 611 Week 9", "ITDE 611 Week 10", "ITDE 611 Week 11", "ITDE 611 Week 12", "ITDE 611 Week 13", "ITDE 611 Week 14", "ITDE 611 Week 15", "ITDE 611 Week 16", "ITDE 611 Week 17", "ITDE 611 Week 18", "ITDE 611 Week 19", "ITDE 611 Week 20", "Semester 1", "Semester 2", "ITDE 612 Week 1", "ITDE 612 Week 2", "ITDE 612 Week 3", "ITDE 612 Week 4", "ITDE 612 Week 5", "ITDE 612 Week 6", "ITDE 612 Week 7", "ITDE 612 Week 8", "ITDE 612 Week 9", "ITDE 612 Week 10", "ITDE 612 Week 11", "ITDE 612 Week 12", "ITDE 612 Week 13", "ITDE 612 Week 14", "ITDE 612 Week 15", "ITDE 612 Week 16", "ITDE 612 Week 17", "ITDE 612 Week 18", "ITDE 612 Week 19", "ITDE 612 Week 20", "ITDE 614 Week 1", "ITDE 614 Week 2", "ITDE 614 Week 3", "ITDE 614 Week 4", "ITDE 614 Week 5", "ITDE 614 Week 6", "ITDE 614 Week 7", "ITDE 614 Week 8", "ITDE 614 Week 9", "ITDE 614 Week 10", "ITDE 614 Week 11", "ITDE 614 Week 12", "ITDE 614 Week 13", "ITDE 614 Week 14", "ITDE 614 Week 15", "ITDE 614 Week 16", "ITDE 614 Week 17", "ITDE 614 Week 18", "ITDE 614 Week 19", "ITDE 614 Week 20", "Semester 3", "MGA Week 0", "MGA Week 1", "MGA Week 2", "MGA Week 3", "MGA Week 4", "MGA Week 5", "MGA Week 6", "MGA Week 7", "MGA Week 8", "MGA Week 9", "MGA Week 10", "MGA Week 11", "MGA Week 12", "MGA Week 13", "MGA Week 14", "MGA Week 15", "FOM I Week 0", "FOM I Week 1", "FOM I Week 3", "FOM I Week 4", "FOM I Week 5", "FOM I Week 6", "FOM I Week 7", "FOM I Week 8", "FOM I Week 9", "FOM I Week 10", "FOM I Week 11", "FOM I Week 12", "FOM I Week 13", "FOM I Week 14", "FOM I Week 15", "FOM 2 Week 0", "FOM 2 Week 1", "FOM 2 Week 2", "FOM 2 Week 3", "FOM 2 Week 4", "FOM 2 Week 5", "Semester 2 Week 1 (Remediation)", "Neuro Week 1", "Neuro Week 2", "Neuro Week 3", "Neuro Week 4", "Neuro Week 5", "Neuro Week 6", "Neuro Week 7", "Neuro Week 8", "ID Week 1", "ID Week 2", "ID Week 3", "ID Week 4", "ID Week 5", "ID Week 6", "ID Week 7", "CV Week 1", "CV Week 2", "CV Week 3", "CV Week 4", "CV Week 5", "Semester 2 Week 22 (Remediation)", "Heme Week 1", "Heme Week 2", "Heme Week 3", "Heme Week 4", "Resp Week 1", "Resp Week 2", "Resp Week 3", "Resp Week 4", "Renal Week 1", "Renal Week 2", "Renal Week 3", "Renal Week 4", "GI Week 1", "GI Week 2", "GI Week 3", "GI Week 4", "Endo Week 1", "Endo Week 2", "Endo Week 3", "Endo Week 4", "Endo Week 5", "MSK Week 1", "MSK Week 2", "MSK Week 3", "EBM Week 1", "EBM Week 2", "ITDE 613 Week 1", "ITDE 613 Week 2", "ITDE 613 Week 3", "ITDE 613 Week 4", "ITDE 613 Week 5", "ITDE 613 Week 6", "ITDE 613 Week 7", "ITDE 613 Week 8", "ITDE 613 Week 9", "ITDE 613 Week 10", "ITDE 613 Week 11", "ITDE 613 Week 12", "ITDE 613 Week 13", "ITDE 613 Week 14", "ITDE 613 Week 15", "ITDE 613 Week 16", "ITDE 613 Week 17", "ITDE 613 Week 18", "ITDE 613 Week 19", "ITDE 613 Week 20", "ITDE 613 Week 21", "ITDE 613 Week 22", "ITDE 613 Week 23", "Heme/Onc", "Respiratory", "Renal", "GI", "Endocrinology", "MSK", "Break"];
+const BLOCK_COLOR=(()=>{
+  const c={};
+  // Color families per course
+  const groups=[
+    {prefix:['POM I','POM 2','POM 3','PoM3'],col:'#E53935'},
+    {prefix:['TTC','MSGR'],col:'#8E24AA'},
+    {prefix:['Pre-Matriculation'],col:'#F4511E'},
+    {prefix:['ITDE 611'],col:'#00897B'},
+    {prefix:['ITDE 612'],col:'#1E88E5'},
+    {prefix:['ITDE 613'],col:'#3949AB'},
+    {prefix:['ITDE 614'],col:'#00ACC1'},
+    {prefix:['Semester'],col:'#43A047'},
+    {prefix:['MGA'],col:'#6D4C41'},
+    {prefix:['FOM I','FOM 2'],col:'#F9A825'},
+    {prefix:['Neuro'],col:'#7B1FA2'},
+    {prefix:['ID '],col:'#C62828'},
+    {prefix:['CV '],col:'#AD1457'},
+    {prefix:['Heme'],col:'#f05c6e'},
+    {prefix:['Resp'],col:'#4f8ef7'},
+    {prefix:['Renal'],col:'#3ecf8e'},
+    {prefix:['GI '],col:'#f7a14f'},
+    {prefix:['Endo'],col:'#b97cf7'},
+    {prefix:['MSK'],col:'#4fd6f7'},
+    {prefix:['EBM'],col:'#26A69A'},
+    {prefix:['Break'],col:'#7a829a'},
+    // legacy keys
+    {prefix:['Heme/Onc'],col:'#f05c6e'},
+    {prefix:['Respiratory'],col:'#4f8ef7'},
+    {prefix:['Endocrinology'],col:'#b97cf7'},
+  ];
+  BLOCKS_LIST.forEach(b=>{
+    const g=groups.find(g=>g.prefix.some(p=>b.startsWith(p)));
+    c[b]=g?g.col:'#7a829a';
+  });
+  return c;
+})();
+const CAT_COLOR={"Abdominal Clinical Application Session": "#4a5168", "Assigned Students Only POM1: OSCE Midpoint Retake": "#C62828", "BLACKOUT": "#424242", "CV Clinical Application Session": "#4a5168", "Cardiovascular: CBL": "#3ecf8e", "Cardiovascular: Cardiac Imaging & Echocardiography Clinic": "#607D8B", "Cardiovascular: Cardiac Physical Exam / Murmur Clinic": "#607D8B", "Cardiovascular: ENGR/MED Blended Session": "#4a5168", "Cardiovascular: Orientation": "#1565C0", "Cardiovascular: TBL": "#b97cf7", "Clinical Cadaver Integration Presentation": "#8E24AA", "Comprehensive Final OSCE": "#C62828", "Comprehensive OSCE Simulation Open Lab": "#C62828", "EBM Librarian Discussion": "#26A69A", "EBM: Problem Session": "#26A69A", "Endo / Repro: TBL": "#b97cf7", "FHP Workshop": "#F9A825", "FOM II: CBL": "#3ecf8e", "FOM II: Introduction to Precision Medicine": "#43A047", "FOM II: Orientation": "#1565C0", "FOM II: TBL": "#b97cf7", "Final OSCE Remediation (If needed)": "#C62828", "First day of POM 3 Orientation": "#1565C0", "FoM I / MGA: Orientation": "#1565C0", "FoM I / MGA: TBL": "#b97cf7", "FoM I: Lab": "#00838F", "Focused Encounter Workshop (BBN related)": "#F9A825", "GI / Nutr: CBL": "#3ecf8e", "GI / Nutr: TBL": "#b97cf7", "Group A  POM1: CV PE": "#1565C0", "Group A POM 1: Intro to an OSCE": "#C62828", "Group A POM 3 FHP OSCE": "#C62828", "Group A POM1: ABD CR": "#1565C0", "Group A POM1: ABD/MSK I PE": "#1565C0", "Group A POM1: CV Application Session": "#1565C0", "Group A POM1: CV CR": "#1565C0", "Group A POM1: Check-off Vital Signs": "#1565C0", "Group A POM1: Final OSCE": "#C62828", "Group A POM1: HEENT CR": "#1565C0", "Group A POM1: HEENT PE": "#1565C0", "Group A POM1: LC Facilitated Open Lab": "#00838F", "Group A POM1: MSK 2/Derm PE": "#1565C0", "Group A POM1: NEURO CR": "#1565C0", "Group A POM1: NEURO/Derm PE": "#1565C0", "Group A POM1: OSCE Practice": "#C62828", "Group A POM1: PETA Session: CV": "#1565C0", "Group A POM1: PULM PE": "#1565C0", "Group A POM1: Pulm CR": "#1565C0", "Group A POM1: w/LC Small Groups": "#1565C0", "Group B POM1: ABD CR": "#2E7D32", "Group B POM1: ABD/MSK I PE": "#2E7D32", "Group B POM1: CV Application Session": "#2E7D32", "Group B POM1: CV CR": "#2E7D32", "Group B POM1: Check-off Vital Signs": "#2E7D32", "Group B POM1: Final OSCE": "#C62828", "Group B POM1: HEENT CR": "#2E7D32", "Group B POM1: HEENT PE": "#2E7D32", "Group B POM1: LC Facilitated Open Lab": "#00838F", "Group B POM1: MSK 2/Derm PE": "#2E7D32", "Group B POM1: NEURO CR": "#2E7D32", "Group B POM1: NEURO/Derm PE": "#2E7D32", "Group B POM1: OSCE Practice": "#C62828", "Group B POM1: PETA Session: CV": "#2E7D32", "Group B POM1: PULM PE": "#2E7D32", "Group B POM1: Pulm CR": "#2E7D32", "Group B POM1: w/LC Small Groups": "#2E7D32", "Group C POM1: ABD CR": "#6A1B9A", "Group C POM1: ABD/MSK I PE": "#6A1B9A", "Group C POM1: CV Application Session": "#6A1B9A", "Group C POM1: CV CR": "#6A1B9A", "Group C POM1: Check-off Vital Signs": "#6A1B9A", "Group C POM1: Final OSCE": "#C62828", "Group C POM1: HEENT CR": "#6A1B9A", "Group C POM1: HEENT PE": "#6A1B9A", "Group C POM1: LC Facilitated Open Lab": "#00838F", "Group C POM1: MSK 2/Derm PE": "#6A1B9A", "Group C POM1: NEURO CR": "#6A1B9A", "Group C POM1: NEURO/Derm PE": "#6A1B9A", "Group C POM1: OSCE Practice": "#C62828", "Group C POM1: PETA Session: CV": "#6A1B9A", "Group C POM1: PULM PE": "#6A1B9A", "Group C POM1: Pulm CR": "#6A1B9A", "Group C POM1: w/LC Small Groups": "#6A1B9A", "Group D POM1: ABD CR": "#BF360C", "Group D POM1: ABD/MSK I PE": "#BF360C", "Group D POM1: CV Application Session": "#BF360C", "Group D POM1: CV CR": "#BF360C", "Group D POM1: Check-off Vital Signs": "#BF360C", "Group D POM1: Final OSCE": "#C62828", "Group D POM1: HEENT CR": "#BF360C", "Group D POM1: HEENT PE": "#BF360C", "Group D POM1: LC Facilitated Open Lab": "#00838F", "Group D POM1: MSK 2/Derm PE": "#BF360C", "Group D POM1: NEURO CR": "#BF360C", "Group D POM1: NEURO/Derm PE": "#BF360C", "Group D POM1: OSCE Practice": "#C62828", "Group D POM1: PETA Session: CV": "#BF360C", "Group D POM1: PULM PE": "#BF360C", "Group D POM1: Pulm CR": "#BF360C", "Group D POM1: w/LC Small Groups": "#BF360C", "Heme / Onc: CBL": "#3ecf8e", "Heme / Onc: TBL": "#b97cf7", "Immunology: CBL": "#3ecf8e", "Immunology: TBL": "#b97cf7", "Intro to Clinical Reasoning": "#43A047", "Intro to EBM": "#26A69A", "Intro to OSCE": "#C62828", "Intro to Ultrasound": "#00ACC1", "MSK: CBL": "#3ecf8e", "MSK: TBL": "#b97cf7", "Neuro: CBL": "#3ecf8e", "Neuro: TBL": "#b97cf7", "Orientation": "#1565C0", "POM 1: Orientation": "#1565C0", "POM 2: Orientation": "#1565C0", "POM 3: Orientation": "#1565C0", "Pulmonary: CBL": "#3ecf8e", "Pulmonary: TBL": "#b97cf7", "Renal: CBL": "#3ecf8e", "Renal: TBL": "#b97cf7", "Simulation Session": "#E65100", "TBL": "#b97cf7", "Ultrasound Lab": "#00838F", "Vital Signs Workshop": "#F9A825", "Mandatory": "#4f8ef7", "Faculty Discussion": "#3ecf8e", "CBSE": "#f05c6e", "Session": "#4a5168", "ITDE": "#4fd6f7", "Exam Review": "#f7a14f", "Grand Rounds": "#f7a14f"};
+const CATS_LIST=["Abdominal Clinical Application Session", "Assigned Students Only POM1: OSCE Midpoint Retake", "BLACKOUT", "CV Clinical Application Session", "Cardiovascular: CBL", "Cardiovascular: Cardiac Imaging & Echocardiography Clinic", "Cardiovascular: Cardiac Physical Exam / Murmur Clinic", "Cardiovascular: ENGR/MED Blended Session", "Cardiovascular: Orientation", "Cardiovascular: TBL", "Clinical Cadaver Integration Presentation", "Comprehensive Final OSCE", "Comprehensive OSCE Simulation Open Lab", "EBM Librarian Discussion", "EBM: Problem Session", "Endo / Repro: TBL", "FHP Workshop", "FOM II: CBL", "FOM II: Introduction to Precision Medicine", "FOM II: Orientation", "FOM II: TBL", "Final OSCE Remediation (If needed)", "First day of POM 3 Orientation", "FoM I / MGA: Orientation", "FoM I / MGA: TBL", "FoM I: Lab", "Focused Encounter Workshop (BBN related)", "GI / Nutr: CBL", "GI / Nutr: TBL", "Group A  POM1: CV PE", "Group A POM 1: Intro to an OSCE", "Group A POM 3 FHP OSCE", "Group A POM1: ABD CR", "Group A POM1: ABD/MSK I PE", "Group A POM1: CV Application Session", "Group A POM1: CV CR", "Group A POM1: Check-off Vital Signs", "Group A POM1: Final OSCE", "Group A POM1: HEENT CR", "Group A POM1: HEENT PE", "Group A POM1: LC Facilitated Open Lab", "Group A POM1: MSK 2/Derm PE", "Group A POM1: NEURO CR", "Group A POM1: NEURO/Derm PE", "Group A POM1: OSCE Practice", "Group A POM1: PETA Session: CV", "Group A POM1: PULM PE", "Group A POM1: Pulm CR", "Group A POM1: w/LC Small Groups", "Group B POM1: ABD CR", "Group B POM1: ABD/MSK I PE", "Group B POM1: CV Application Session", "Group B POM1: CV CR", "Group B POM1: Check-off Vital Signs", "Group B POM1: Final OSCE", "Group B POM1: HEENT CR", "Group B POM1: HEENT PE", "Group B POM1: LC Facilitated Open Lab", "Group B POM1: MSK 2/Derm PE", "Group B POM1: NEURO CR", "Group B POM1: NEURO/Derm PE", "Group B POM1: OSCE Practice", "Group B POM1: PETA Session: CV", "Group B POM1: PULM PE", "Group B POM1: Pulm CR", "Group B POM1: w/LC Small Groups", "Group C POM1: ABD CR", "Group C POM1: ABD/MSK I PE", "Group C POM1: CV Application Session", "Group C POM1: CV CR", "Group C POM1: Check-off Vital Signs", "Group C POM1: Final OSCE", "Group C POM1: HEENT CR", "Group C POM1: HEENT PE", "Group C POM1: LC Facilitated Open Lab", "Group C POM1: MSK 2/Derm PE", "Group C POM1: NEURO CR", "Group C POM1: NEURO/Derm PE", "Group C POM1: OSCE Practice", "Group C POM1: PETA Session: CV", "Group C POM1: PULM PE", "Group C POM1: Pulm CR", "Group C POM1: w/LC Small Groups", "Group D POM1: ABD CR", "Group D POM1: ABD/MSK I PE", "Group D POM1: CV Application Session", "Group D POM1: CV CR", "Group D POM1: Check-off Vital Signs", "Group D POM1: Final OSCE", "Group D POM1: HEENT CR", "Group D POM1: HEENT PE", "Group D POM1: LC Facilitated Open Lab", "Group D POM1: MSK 2/Derm PE", "Group D POM1: NEURO CR", "Group D POM1: NEURO/Derm PE", "Group D POM1: OSCE Practice", "Group D POM1: PETA Session: CV", "Group D POM1: PULM PE", "Group D POM1: Pulm CR", "Group D POM1: w/LC Small Groups", "Heme / Onc: CBL", "Heme / Onc: TBL", "Immunology: CBL", "Immunology: TBL", "Intro to Clinical Reasoning", "Intro to EBM", "Intro to OSCE", "Intro to Ultrasound", "MSK: CBL", "MSK: TBL", "Neuro: CBL", "Neuro: TBL", "Orientation", "POM 1: Orientation", "POM 2: Orientation", "POM 3: Orientation", "Pulmonary: CBL", "Pulmonary: TBL", "Renal: CBL", "Renal: TBL", "Simulation Session", "TBL", "Ultrasound Lab", "Vital Signs Workshop", "Mandatory", "Faculty Discussion", "CBSE", "ITDE", "Exam Review", "Grand Rounds", "Session"];
+const HOUR_KEYS=[
+  '07:00','08:00','09:00','10:00','11:00','12:00',
+  '13:00','14:00','15:00','16:00','17:00','18:00', '19:00'
+];
+const HOURS=[
+  '7 AM','8 AM','9 AM','10 AM','11 AM','12 PM',
+  '1 PM','2 PM','3 PM','4 PM','5 PM','6 PM', '7 PM'
+];
+const DAYS=['Mon','Tue','Wed','Thu','Fri'];
+
+let CFG={}, EVENTS=[], WEEKS=[];
+let currentWeekIdx=0, currentFilter='All', currentView='month';
+// year filter now handled by selectedYears Set + currentMSub
+let currentMonth=new Date().getMonth(), currentMonthYear=new Date().getFullYear();
+let isFacultyMode=false, editingId=null, prefillDate='', prefillHour='';
+let pendingDeleteId='', sessionLog=[];
+let ghFileSha=''; // GitHub file SHA needed for updates
+
+// ── CONFIG ────────────────────────────────────────────────────
+function loadConfig(){
+  try{CFG=JSON.parse(localStorage.getItem('co2028_gh_cfg')||'{}');}catch(e){CFG={};}
+  return !!(CFG.user && CFG.repo);
+}
+function saveConfig(){
+  const user=document.getElementById('cfgUser').value.trim();
+  const repo=document.getElementById('cfgRepo').value.trim();
+  const token=document.getElementById('cfgToken').value.trim();
+  const pin=document.getElementById('cfgPin').value.trim();
+  if(!user){document.getElementById('cfgErr').textContent='Please enter your GitHub username.';return;}
+  if(!repo){document.getElementById('cfgErr').textContent='Please enter your repository name.';return;}
+  CFG={user,repo,token,pin:pin||'3255'};
+  localStorage.setItem('co2028_gh_cfg',JSON.stringify(CFG));
+  document.getElementById('configOverlay').style.display='none';
+  loadEvents(); // reload with token so SHA gets fetched
+  showToast('✅ Connected! Faculty editing enabled.');
+}
+function openConfig(){
+  document.getElementById('cfgUser').value=CFG.user||'';
+  document.getElementById('cfgRepo').value=CFG.repo||'enmed-pct-calendar';
+  document.getElementById('cfgToken').value=CFG.token||'';
+  document.getElementById('cfgPin').value=CFG.pin||'3255';
+  document.getElementById('cfgErr').textContent='';
+  document.getElementById('configOverlay').style.display='flex';
+}
+
+// ── GITHUB API ────────────────────────────────────────────────
+const DATA_FILE = 'events.json';
+
+function ghHeaders(){
+  const h={'Accept':'application/vnd.github.v3+json'};
+  if(CFG.token) h['Authorization']='token '+CFG.token;
+  return h;
+}
+
+async function loadEvents(){
+  setStatus('loading','Loading events...');
+  document.getElementById('calView').innerHTML='<div style="text-align:center;padding:60px 20px"><div class="spinner"></div><p style="color:var(--muted)">Loading from GitHub...</p></div>';
+  try{
+    // Use raw content URL — no auth needed, no CORS issues
+    const rawUrl=`https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${DATA_FILE}?t=${Date.now()}`;
+    // Show the URL being fetched so we can debug
+    setStatus('loading',`Fetching: ${rawUrl}`);
+    let r;
+    try{ r=await fetch(rawUrl); }
+    catch(fetchErr){ throw new Error(`Network error — check internet connection. (${fetchErr.message})`); }
+    if(!r.ok) throw new Error(`GitHub returned ${r.status} for events.json — URL: ${rawUrl}`);
+
+    EVENTS=await r.json();
+    // Also get SHA for future updates (needs token)
+    if(CFG.token){
+      try{
+        const meta=await fetch(`https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}`,{headers:ghHeaders()});
+        if(meta.ok){const d=await meta.json();ghFileSha=d.sha;}
+      }catch(e){}
+    }
+    setStatus('live',`Live — ${EVENTS.length} events`);
+    document.getElementById('lastSync').textContent='Last sync: '+new Date().toLocaleTimeString();
+    WEEKS=buildWeeks();
+    buildWeekDrawer();
+    updateTabCounts();
+    // Auto-navigate month view to the month where events actually exist
+    if(EVENTS.length){
+      const sorted=[...EVENTS].sort((a,b)=>a.date.localeCompare(b.date));
+      const first=sorted[0].date; // MM/DD/YYYY
+      const parts=first.split('/');
+      if(parts.length===3){currentMonth=parseInt(parts[0])-1;currentMonthYear=parseInt(parts[2]);}
+    }
+    render();
+  }catch(err){
+    setStatus('offline','Error: '+err.message.substring(0,60));
+    showToast('❌ '+err.message);
+    document.getElementById('calView').innerHTML=`<div class="empty-state"><div class="big">❌</div><p>${err.message}</p><p style="margin-top:10px;font-size:11px">Make sure <strong>events.json</strong> exists in your GitHub repo.</p></div>`;
+  }
+}
+
+async function saveEventsToGitHub(){
+  if(!CFG.token) throw new Error('No GitHub token — click ⚙ in the top right and add your token.');
+  // If SHA is missing, fetch it now
+  if(!ghFileSha){
+    const meta=await fetch(`https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}`,{headers:ghHeaders()});
+    if(!meta.ok) throw new Error('Could not get file SHA from GitHub. Check your token.');
+    const d=await meta.json(); ghFileSha=d.sha;
+  }
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify(EVENTS,null,2))));
+  const body={message:'Update calendar events',content,sha:ghFileSha};
+  const r=await fetch(`https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}`,{
+    method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},
+    body:JSON.stringify(body)
+  });
+  if(!r.ok){const t=await r.text();throw new Error(`GitHub save failed (${r.status}): ${t.substring(0,100)}`);}
+  const d=await r.json();
+  ghFileSha=d.content.sha; // update SHA for next save
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+function initApp(){
+  loadVisibility();
+  populateBlockDropdown();
+  populateYearDropdown();
+  updateMCalUI();
+  document.getElementById('configOverlay').style.display='none'; // always hidden for guests
+  document.getElementById('appHeader').style.display='flex';
+  document.getElementById('statusBar').style.display='flex';
+  document.getElementById('layout').style.display='flex';
+  loadEvents();
+}
+
+// ── STATUS ────────────────────────────────────────────────────
+function setStatus(state,msg){
+  document.getElementById('statusDot').className='status-dot '+state;
+  document.getElementById('statusMsg').textContent=msg;
+}
+
+// ── WEEKS / NAV ───────────────────────────────────────────────
+function buildWeeks(){
+  var highestWeekNumber = 32;
+  EVENTS.forEach(e=>{
+    if(e.weekNum > highestWeekNumber)
+    {
+      highestWeekNumber = e.weekNum;
+    }
+  });
+  
+  // Day 3: Edited buildWeeks() to create weeks continuously from earliest week
+  var allWeeksInYear = [];
+  for (let i = 1; i < highestWeekNumber + 1; i++) {
+    allWeeksInYear.push({num:i,name:"Week " + i,block:"Block " + i});
+    
+  }
+  //
+  return allWeeksInYear;
+}
+function buildWeekDrawer(){
+  document.getElementById('weekDrawer').style.display=currentView==='month'?'none':'';
+
+  const allBtn=currentView==='list'?`<button class="wk-btn${currentWeekIdx===-1?' active':''}" style="${currentWeekIdx===-1?'background:var(--accent);border-color:var(--accent)':''}" onclick="jumpToWeek(-1)">All Weeks</button>`:'';
+  document.getElementById('weekDrawer').innerHTML=allBtn+WEEKS.map((w,i)=>{
+    const col=BLOCK_COLOR[w.block]||'#7a829a';
+    const lbl=w.name.replace(/\s*\(\d+\)/,'').replace(/WEEK/i,'Wk').replace(/Week/,'Wk');
+    return `<button class="wk-btn${i===currentWeekIdx?' active':''}" style="${i===currentWeekIdx?'background:'+col+';border-color:'+col:''}" onclick="jumpToWeek(${i})">${lbl}</button>`;
+  }).join('');
+}
+function jumpToWeek(i){currentWeekIdx=i;if(i>=0)weekToMonth(i);buildWeekDrawer();render();}
+function prevWeek(){if(currentWeekIdx>0){currentWeekIdx--;weekToMonth(currentWeekIdx);buildWeekDrawer();render();}}
+function nextWeek(){if(currentWeekIdx<WEEKS.length-1){currentWeekIdx++;weekToMonth(currentWeekIdx);buildWeekDrawer();render();}}
+function setSidebarBlock(el,block){} // legacy stub
+let currentBlockFilter='All';
+function setBlockFilter(block){
+  currentBlockFilter=block;
+  // Update dot color next to heading
+  const sel=document.getElementById('blockFilterSelect');
+  if(sel){
+    const col=block!=='All'?(BLOCK_COLOR[block]||'#7a829a'):'';
+    sel.style.borderColor=col||'var(--border)';
+    sel.style.boxShadow=col?`0 0 0 2px ${col}33`:'none';
+  }
+  render();
+}
+function populateBlockDropdown(){
+  const sel=document.getElementById('blockFilterSelect');
+  if(!sel||sel.options.length>1)return;
+  // Group blocks by course family
+  const groups={
+    'POM':[],'ITDE':[],'FOM':[],'MGA':[],'Neuro/ID/CV':[],'Heme/Resp/Renal/GI/Endo/MSK':[],'Other':[]
+  };
+  BLOCKS_LIST.forEach(b=>{
+    if(b.startsWith('POM')||b.startsWith('PoM'))groups['POM'].push(b);
+    else if(b.startsWith('ITDE'))groups['ITDE'].push(b);
+    else if(b.startsWith('FOM'))groups['FOM'].push(b);
+    else if(b.startsWith('MGA'))groups['MGA'].push(b);
+    else if(b.startsWith('Neuro')||b.startsWith('ID ')||b.startsWith('CV '))groups['Neuro/ID/CV'].push(b);
+    else if(b.startsWith('Heme')||b.startsWith('Resp')||b.startsWith('Renal')||b.startsWith('GI ')||b.startsWith('Endo')||b.startsWith('MSK')||b.startsWith('EBM'))groups['Heme/Resp/Renal/GI/Endo/MSK'].push(b);
+    else groups['Other'].push(b);
+  });
+  Object.entries(groups).forEach(([grp,blocks])=>{
+    if(!blocks.length)return;
+    const og=document.createElement('optgroup');
+    og.label=grp;
+    blocks.forEach(b=>{
+      const o=document.createElement('option');
+      o.value=b;o.textContent=b;
+      og.appendChild(o);
+    });
+    sel.appendChild(og);
+  });
+}
+function setSidebarCat(el,cat){currentFilter=cat;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));const ch=document.querySelector(`.filter-chip[data-cat="${cat}"]`);if(ch)ch.classList.add('active');render();}
+function setFilter(el,cat){currentFilter=cat;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');render();}
+function setView(v,btn){
+  const prev=currentView;
+  currentView=v;
+  document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const isMonth=v==='month';
+  document.getElementById('weekDrawer').style.display=isMonth?'none':'';
+  const wn=document.querySelector('.week-nav');if(wn)wn.style.display=isMonth?'none':'';
+  // Sync position when switching views
+  if(prev==='month'&&!isMonth){
+    // Coming FROM month → find matching week
+    currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);
+  } else if(prev!=='month'&&isMonth){
+    // Coming TO month → sync month from current week
+    weekToMonth(currentWeekIdx);
+  }
+  buildWeekDrawer();render();
+}
+function updateFpViewBtns(v){
+  const wb=document.getElementById('fpWeekBtn');
+  const lb=document.getElementById('fpListBtn');
+  if(!wb||!lb)return;
+  const activeStyle='background:var(--accent);color:white';
+  const inactiveStyle='background:transparent;color:var(--muted)';
+  wb.style.cssText=wb.style.cssText.replace(/background:[^;]+;color:[^;]+/,v==='week'?activeStyle:inactiveStyle);
+  lb.style.cssText=lb.style.cssText.replace(/background:[^;]+;color:[^;]+/,v==='list'?activeStyle:inactiveStyle);
+}
+
+// ── TIME ──────────────────────────────────────────────────────
+function fmtTime(t){const[h,m]=t.split(':').map(Number);return`${h>12?h-12:h===0?12:h}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`;}
+  //<skross>
+function timeToMinutes(t){
+  if(!t) return 0;
+  t = String(t).trim();
+
+  const ampm = t.match(/^(\d{1,2}):?(\d{2})?\s*(AM|PM)$/i);
+  if(ampm){
+    let h = Number(ampm[1]);
+    const m = Number(ampm[2] || 0);
+    const p = ampm[3].toUpperCase();
+    if(p === 'PM' && h !== 12) h += 12;
+    if(p === 'AM' && h === 12) h = 0;
+    return h * 60 + m;
+  }
+
+  const [h,m] = t.split(':').map(Number);
+  return h * 60 + (m || 0);
+}
+//</skross>
+
+function displayTitle(e){
+  const mand=e.mand==='Yes'?'[MAND] ':'';
+  const grp=e.group&&e.group!=='All Students'?` — ${e.group}`:'';
+  return mand + e.title.replace(/\s{2,}/g,' ').trim() + grp;
+}
+function fmtDate(d){const[mo,dy,yr]=d.split('/');return new Date(yr,mo-1,dy).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});}
+function getWeekDates(){
+  const w=WEEKS[currentWeekIdx];
+  const evs=EVENTS.filter(e=>e.weekNum===w.num);
+  const dates=[...new Set(evs.map(e=>e.date))].sort((a,b)=>{const pa=a.split('/'),pb=b.split('/');return new Date(pa[2],pa[0]-1,pa[1])-new Date(pb[2],pb[0]-1,pb[1]);});
+  if(!dates.length)return Array(5).fill('');
+  const[mo,dy,yr]=dates[0].split('/').map(Number);
+  const d=new Date(yr,mo-1,dy),dow=d.getDay(),mon=new Date(d);
+  mon.setDate(d.getDate()-(dow===0?6:dow-1));
+  return Array.from({length:5},(_,i)=>{const dd=new Date(mon);dd.setDate(mon.getDate()+i);return`${String(dd.getMonth()+1).padStart(2,'0')}/${String(dd.getDate()).padStart(2,'0')}/${dd.getFullYear()}`;});
+}
+
+// ── RENDER ────────────────────────────────────────────────────
+function render(){
+  if(!WEEKS.length)return;
+
+  // ── Month view ──────────────────────────────────────────────
+  if(currentView==='month'){
+    const filtEvs=filteredEvents();
+    const mLabel=currentMSub&&currentMSub!=='All'?' · '+currentMSub:'';
+    document.getElementById('toolbarSub').textContent=`${filtEvs.length} event${filtEvs.length!==1?'s':''} shown · ${selectedYears.has('All')?'All Years':[...selectedYears].sort().join(', ')}${mLabel}`;
+    const wn=document.querySelector('.week-nav');if(wn)wn.style.display='none';
+    renderChangeLog();renderMonth();return;
+  }
+
+  // ── Week / List view ─────────────────────────────────────────
+  const wn=document.querySelector('.week-nav');if(wn)wn.style.display='';
+
+  // All Weeks mode (list only)
+  if(currentWeekIdx===-1){
+    const allEvs=filteredEvents();
+    document.getElementById('weekLabel').textContent='All Events';
+    document.getElementById('weekDates').textContent='';
+    document.getElementById('blockPill').textContent='';
+    document.getElementById('toolbarSub').textContent=`${allEvs.length} event${allEvs.length!==1?'s':''} shown`;
+    renderChangeLog();
+    renderList();
+    return;
+  }
+
+  // Normal week
+  if(currentWeekIdx<0||currentWeekIdx>=WEEKS.length)currentWeekIdx=0;
+  const w=WEEKS[currentWeekIdx];
+  const col=BLOCK_COLOR[w.block]||'#7a829a';
+  document.getElementById('weekLabel').textContent=`Week ${w.num}`;
+  const pill=document.getElementById('blockPill');
+  pill.textContent=w.block;pill.style.background=col+'22';pill.style.color=col;pill.style.border='1px solid '+col+'55';
+
+  // Date range from actual events
+  const weekEvs=EVENTS.filter(e=>e.weekNum===w.num).sort((a,b)=>a.date.localeCompare(b.date));
+  const dates=getWeekDates();
+  if(weekEvs.length){
+    const[mo1,dy1,yr1]=weekEvs[0].date.split('/');
+    const[mo2,dy2,yr2]=weekEvs[weekEvs.length-1].date.split('/');
+    const d1=new Date(+yr1,+mo1-1,+dy1),d2=new Date(+yr2,+mo2-1,+dy2);
+    document.getElementById('weekDates').textContent=
+      d1.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+
+      ' – '+d2.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  } else if(dates[0]){
+    document.getElementById('weekDates').textContent=dates[0]+' – '+(dates[4]||dates[0]);
+  }
+  document.getElementById('toolbarSub').textContent=`${EVENTS.length} events · ${weekEvs.length} this week`;
+
+  renderChangeLog();
+  if(currentView==='week')renderWeek(dates);
+  else renderList();
+}
+
+function evClass(e){if(e.category==='Faculty Discussion')return'Faculty';if(e.category==='Exam Review')return'ExamReview';if(e.category==='Grand Rounds')return'GrandRounds';return e.category.replace(/\s/g,'');}
+
+function layoutOverlappingEvents(dayEvents){
+  const events = dayEvents
+    .map(e => ({
+      ...e,
+      startMin: timeToMinutes(e.start),
+      endMin: timeToMinutes(e.end)
+    }))
+    .filter(e =>
+      Number.isFinite(e.startMin) &&
+      Number.isFinite(e.endMin) &&
+      e.endMin > e.startMin
+    )
+    .sort((a,b) => a.startMin - b.startMin || b.endMin - a.endMin);
+
+  const clusters = [];
+  let cluster = [];
+  let clusterEnd = -1;
+
+  events.forEach(e => {
+    if (!cluster.length || e.startMin < clusterEnd) {
+      cluster.push(e);
+      clusterEnd = Math.max(clusterEnd, e.endMin);
+    } else {
+      clusters.push(cluster);
+      cluster = [e];
+      clusterEnd = e.endMin;
+    }
+  });
+
+  if (cluster.length) clusters.push(cluster);
+
+  clusters.forEach(cluster => {
+    const columns = [];
+
+    cluster.forEach(e => {
+      let col = columns.findIndex(colEnd => colEnd <= e.startMin);
+
+      if (col === -1) {
+        col = columns.length;
+        columns.push(e.endMin);
+      } else {
+        columns[col] = e.endMin;
+      }
+
+      e._overlapCol = col;
+    });
+
+    const colCount = Math.max(columns.length, 1);
+
+    cluster.forEach(e => {
+      e._overlapCount = colCount;
+      e._leftPct = (e._overlapCol / colCount) * 100;
+      e._widthPct = 100 / colCount;
+    });
+  });
+
+  return events;
+}
+
+function renderWeek(dates){
+  if(currentWeekIdx<0)currentWeekIdx=0;
+  const w=WEEKS[currentWeekIdx];
+  if(!w||!dates||!dates.length){document.getElementById('calView').innerHTML='<div class="empty-state"><div class="big">📭</div><p>No week data available.</p></div>';return;}
+  const evs=filteredEvents().filter(e=>e.weekNum===w.num);
+  const laidOutByDate = {};
+  dates.forEach(ds => {
+    laidOutByDate[ds] = layoutOverlappingEvents(evs.filter(e => e.date === ds));
+});
+  const today=new Date();
+  const todayStr=`${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${today.getFullYear()}`;
+  let html=`<div class="cal-wrap"><div class="cal-header"><div class="ch-cell"></div>`;
+  DAYS.forEach((day,i)=>{
+    const ds=dates[i]||'';const[,dy]=(ds||'//').split('/');
+    html+=`<div class="ch-cell${ds===todayStr?' today':''}"><div class="ch-day">${day}</div><div class="ch-num">${dy?+dy:''}</div></div>`;
+  });
+  html+='</div>';
+  HOUR_KEYS.forEach((hk,hi)=>{
+    html+=`<div class="cal-row"><div class="cal-time">${HOURS[hi]}</div>`;
+    dates.forEach(ds=>{
+      const rowStartMin = timeToMinutes(hk);
+      const rowEndMin = rowStartMin + 60;
+      const cellEvs = (laidOutByDate[ds] || []).filter(e => {
+        return e.startMin >= rowStartMin && e.startMin < rowEndMin;
+});
+      html+=`<div class="cal-cell" onclick="handleCellClick(event,'${ds}','${hk}')">`;
+      if(isFacultyMode)html+=`<div class="add-slot-btn" onclick="openAddForm('${ds}','${hk}');event.stopPropagation()">+</div>`;
+      cellEvs.forEach(e=>{
+        const startMin = e.startMin;
+        const endMin = e.endMin;
+        const hp = Math.max(18, ((endMin - startMin) / 60) * 52 - 6);
+        const ec = evClass(e);
+        const topOffset = ((startMin - rowStartMin) / 60) * 52 + 3;
+
+        const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+        const mcalCol=mCalColor(e);
+        const catCol=CAT_COLOR[e.category]||'#4a5168';
+        html+=`<div class="event week-event ${ec}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:calc(${e._leftPct}% + 3px);width:calc(${e._widthPct}% - 6px);background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 4px,${mcalCol} 4px,${mcalCol} 8px,${mcalCol}18 8px);color:${mcalCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+          <div class="ev-tag" style="color:${catCol}">${e.category}</div>
+          <div class="ev-title">${displayTitle(e)}</div>
+          <div class="ev-time">${fmtTime(e.start)} – ${fmtTime(e.end)}</div>
+          ${isFacultyMode?`<div class="ev-controls">
+            <button class="ev-ctrl-btn ev-edit-btn" onclick="openEditForm(event,${ej})">✎</button>
+            <button class="ev-ctrl-btn ev-del-btn" onclick="confirmDelete(event,'${e._id}')">✕</button>
+          </div>`:''}
+        </div>`;
+      });
+      html+='</div>';
+    });
+    html+='</div>';
+  });
+  html+='</div>';
+  //Day 3: Commented line below to allow weeks with no events to display correctly
+  //if(!evs.length)html=`<div class="empty-state"><div class="big">📭</div><p>No events match this filter.</p></div>`;
+  document.getElementById('calView').innerHTML=html;
+}
+
+function renderList(){
+  const w=currentWeekIdx>=0?WEEKS[currentWeekIdx]:null;
+  const evs=(currentWeekIdx===-1?filteredEvents():filteredEvents().filter(e=>e.weekNum===w.num)).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
+  if(!evs.length){document.getElementById('calView').innerHTML=`<div class="empty-state"><div class="big">📭</div><p>No events found.</p></div>`;return;}
+  const byDate={};evs.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
+  let html='<div style="max-width:700px">';
+  Object.keys(byDate).sort().forEach(date=>{
+    html+=`<div style="margin-bottom:22px"><div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">${fmtDate(date)}</div>`;
+    byDate[date].forEach(e=>{
+      const col=mCalColor(e),ec=evClass(e);
+      const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+      const catColL=CAT_COLOR[e.category]||'#4a5168';
+      html+=`<div class="event list-event ${ec}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 4px,${col} 4px,${col} 8px,${col}18 8px)" onclick="handleEventClick(event,${ej})">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:${col};white-space:nowrap;min-width:90px">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
+        <div style="flex:1"><div class="ev-tag" style="color:${catColL}">${e.category}</div><div style="font-size:13px;font-weight:500;color:${col}">${displayTitle(e)}</div></div>
+        ${isFacultyMode?`<div style="display:flex;gap:5px;flex-shrink:0">
+          <button class="ev-ctrl-btn ev-edit-btn" style="width:28px;height:28px" onclick="openEditForm(event,${ej})">✎</button>
+          <button class="ev-ctrl-btn ev-del-btn" style="width:28px;height:28px" onclick="confirmDelete(event,'${e._id}')">✕</button>
+        </div>`:''}
+      </div>`;
+    });
+    html+='</div>';
+  });
+  document.getElementById('calView').innerHTML=html+'</div>';
+}
+
+// ── INTERACTIONS ──────────────────────────────────────────────
+function handleEventClick(ev,e){ev.stopPropagation();if(isFacultyMode)return;openModal(e);}
+function handleCellClick(ev,date,hour){if(!isFacultyMode)return;if(ev.target.closest('.event'))return;openAddForm(date,hour);}
+let _modalEvent=null;
+function openModal(e){
+  _modalEvent=e;
+  const col=mCalColor(e);
+  const catColModal=CAT_COLOR[e.category]||'#4a5168';
+  document.getElementById('modalBar').style.background=`linear-gradient(to bottom,${catColModal} 0%,${catColModal} 50%,${col} 50%,${col} 100%)`;
+  document.getElementById('modalCat').style.color=col;
+  document.getElementById('modalTitle').textContent=displayTitle(e);
+  document.getElementById('modalCat').textContent=`${e.calYear||'2028'} ${e.mCal||'M1'} · ${e.category}`;document.getElementById('modalCat').style.color=col;
+  document.getElementById('modalDate').textContent=`${fmtDate(e.date)}, ${fmtTime(e.start)} – ${fmtTime(e.end)}`;
+  const mand=e.mand||'No';const grp=e.group||'';const loc=e.location||'';const notes=e.notes||'';const presenter=e.presenter||'';
+  document.getElementById('modalMandRow').style.display=mand==='Yes'?'flex':'none';
+  if(document.getElementById('modalMand'))document.getElementById('modalMand').textContent='Required';
+  document.getElementById('modalGroupRow').style.display=grp?'flex':'none';
+  if(document.getElementById('modalGroup'))document.getElementById('modalGroup').textContent=grp;
+  document.getElementById('modalLocationRow').style.display=loc?'flex':'none';
+  if(document.getElementById('modalLocation'))document.getElementById('modalLocation').textContent=loc;
+  document.getElementById('modalPresenterRow').style.display=presenter?'flex':'none';
+  if(document.getElementById('modalPresenter'))document.getElementById('modalPresenter').textContent=presenter;
+  document.getElementById('modalNotesRow').style.display=notes?'flex':'none';
+  if(document.getElementById('modalNotes'))document.getElementById('modalNotes').textContent=notes;
+  if(document.getElementById('modalYearRow')){const yr=e.calYear||'';document.getElementById('modalYearRow').style.display=yr?'flex':'none';document.getElementById('modalYear').textContent=yr;}
+  document.getElementById('modalBlock').innerHTML=`<span style="color:${BLOCK_COLOR[e.block]||'#fff'}">${e.block}</span>`;
+  document.getElementById('modalWeek').textContent=e.week;
+  document.getElementById('modalEditBtn').style.display=isFacultyMode?'':'none';
+  document.getElementById('modalDeleteBtn').style.display=isFacultyMode?'':'none';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+// ── FACULTY AUTH ──────────────────────────────────────────────
+function requestFacultyMode(){document.getElementById('pinInput').value='';document.getElementById('pinErr').textContent='';document.getElementById('loginOverlay').classList.add('open');setTimeout(()=>document.getElementById('pinInput').focus(),100);}
+function checkPin(){const val=document.getElementById('pinInput').value.trim();if(val===(CFG.pin||'3255')){document.getElementById('loginOverlay').classList.remove('open');setMode('faculty');}else{document.getElementById('pinErr').textContent='Incorrect PIN.';document.getElementById('pinInput').value='';}}
+function setMode(mode){
+  isFacultyMode=mode==='faculty';
+  document.querySelectorAll('.mode-btn').forEach(b=>{b.classList.remove('active','faculty-active');});
+  if(!isFacultyMode)document.querySelectorAll('.mode-btn')[0].classList.add('active');
+  else document.querySelectorAll('.mode-btn')[1].classList.add('faculty-active');
+  document.getElementById('facultyPanel').classList.toggle('open',isFacultyMode);
+  document.getElementById('sidebarFilters').style.display=isFacultyMode?'':'none';
+  document.getElementById('facultyBadge').style.display=isFacultyMode?'':'none';
+  document.getElementById('addEventBtn').style.display=isFacultyMode?'':'none';
+  document.getElementById('layout').classList.toggle('faculty-mode',isFacultyMode);
+  if(!isFacultyMode)closeForm();
+  renderVisibilityToggles();
+  populateYearDropdown();
+  updateMCalUI();
+  updateYearUI();  // show/hide tabs based on visibility
+  render();
+}
+
+// ── FORM ──────────────────────────────────────────────────────
+function blockFromWeek(wn){return BLOCKS_LIST[0]||'POM I';}
+function weekNameFor(wn){const w=WEEKS.find(w=>w.num===wn);return w?w.name:'Week '+wn;}
+function formHTML(e,isEdit){
+  const w=WEEKS[currentWeekIdx],defBlock=e?e.block:blockFromWeek(w.num),defCat=e?e.category:'Mandatory';
+  const blockOpts=BLOCKS_LIST.map(b=>`<option value="${b}" ${defBlock===b?'selected':''}>${b}</option>`).join('');
+  const catOpts=CATS_LIST.map(c=>`<option value="${c}" ${defCat===c?'selected':''}>${c}</option>`).join('');
+  const weekOpts=WEEKS.map(wk=>`<option value="${wk.num}" ${(e?e.weekNum:w.num)===wk.num?'selected':''}>${wk.name}</option>`).join('');
+  const startTimes=['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'];
+  const endTimes=['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'];
+  return`<div class="form-group"><label class="form-label">[MAND]</label><select class="form-select" id="ff_mand">
+    <option value="No" ${(!e||!e.mand||e.mand==='No')?'selected':''}>No</option>
+    <option value="Yes" ${(e&&e.mand==='Yes')?'selected':''}>Yes</option>
+  </select></div>
+  <div class="form-group"><label class="form-label">Session Name *</label><input class="form-input" id="ff_title" value="${(e?e.title:'').replace(/"/g,'&quot;')}" placeholder="e.g. POM 1: What's a Physician — free text"></div>
+  <div class="form-group"><label class="form-label">Group Assigned</label><input class="form-input" id="ff_group" value="${(e&&e.group?e.group:'').replace(/"/g,'&quot;')}" placeholder="e.g. Group A, All Students"></div>
+  <div class="form-group"><label class="form-label">Session Location</label><input class="form-input" id="ff_location" value="${(e&&e.location?e.location:'').replace(/"/g,'&quot;')}" placeholder="e.g. Room 212 A/B, EnMed Tower"></div>
+  <div class="form-row">
+    <div class="form-group"><label class="form-label">Cohort Year *</label><select class="form-select" id="ff_calyear">
+      <option value="2029" ${(!e||!e.calYear||e.calYear==='2029')?'selected':''}>2029</option>
+      <option value="2030" ${(e&&e.calYear==='2030')?'selected':''}>2030</option>
+      <option value="2031" ${(e&&e.calYear==='2031')?'selected':''}>2031</option>
+      <option value="2032" ${(e&&e.calYear==='2032')?'selected':''}>2032</option>
+      <option value="2033" ${(e&&e.calYear==='2033')?'selected':''}>2033</option>
+      <option value="2034" ${(e&&e.calYear==='2034')?'selected':''}>2034</option>
+      <option value="2035" ${(e&&e.calYear==='2035')?'selected':''}>2035</option>
+      <option value="2036" ${(e&&e.calYear==='2036')?'selected':''}>2036</option>
+      <option value="2037" ${(e&&e.calYear==='2037')?'selected':''}>2037</option>
+      <option value="2038" ${(e&&e.calYear==='2038')?'selected':''}>2038</option>
+    </select></div>
+    <div class="form-group"><label class="form-label">Class *</label><select class="form-select" id="ff_mcal">
+      <option value="M0" ${(e&&e.mCal==='M0')?'selected':''}>M0 — Pre-Matriculation</option>
+      <option value="M1" ${(!e||!e.mCal||e.mCal==='M1')?'selected':''}>M1</option>
+      <option value="M2" ${(e&&e.mCal==='M2')?'selected':''}>M2</option>
+    </select></div>
+  </div>
+  <div class="form-group"><label class="form-label">Week</label><select class="form-select" id="ff_week" onchange="updateFormBlock()">${weekOpts}</select></div>
+  <div class="form-group"><label class="form-label">Date * (MM/DD/YYYY)</label><input class="form-input" id="ff_date" placeholder="MM/DD/YYYY" value="${e?e.date:(prefillDate||'')}"></div>
+  <div class="form-row">
+    <div class="form-group"><label class="form-label">Start</label><select class="form-select" id="ff_start">${startTimes.map(t=>`<option value="${t}" ${(e?e.start:(prefillHour||'08:00'))===t?'selected':''}>${fmtTime(t)}</option>`).join('')}</select></div>
+    <div class="form-group"><label class="form-label">End</label><select class="form-select" id="ff_end">${endTimes.map(t=>`<option value="${t}" ${(e?e.end:'09:00')===t?'selected':''}>${fmtTime(t)}</option>`).join('')}</select></div>
+  </div>
+  <div class="form-group"><label class="form-label">Category</label><select class="form-select" id="ff_cat" onchange="updateCatPreview()">${catOpts}</select>
+    <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[defCat]||'#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[defCat]||'#4f8ef7'}" id="catLabel">${defCat}</span></div></div>
+  <div class="form-group"><label class="form-label">Block</label><select class="form-select" id="ff_block" onchange="updateBlockPreview()">${blockOpts}</select>
+    <div class="color-preview"><div class="color-dot" id="blockDot" style="background:${BLOCK_COLOR[defBlock]||'#7a829a'}"></div><span style="font-size:11px;color:${BLOCK_COLOR[defBlock]||'#7a829a'}" id="blockLabel">${defBlock}</span></div></div>
+  <div class="form-group"><label class="form-label">Additional Information</label><textarea class="form-input" id="ff_notes" rows="4" placeholder="e.g. Required pre-reading, handout links, Canvas notes..." style="resize:vertical;min-height:90px;line-height:1.5;font-size:12px">${(e&&e.notes?e.notes:'')}</textarea></div>
+  <div id="catalogSection"></div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:18px">
+    <button class="btn-full btn-save" id="saveBtn" onclick="saveForm()">💾 ${isEdit?'Save Changes':'Add Event'}</button>
+    ${isEdit?`<button class="btn-full btn-delete-full" onclick="confirmDelete(null,'${editingId}')">🗑 Delete Event</button>`:''}
+    <button class="btn-full btn-cancel" onclick="closeForm()">Cancel</button>
+  </div>`;
+}
+function updateCatPreview(){const v=document.getElementById('ff_cat').value,col=CAT_COLOR[v]||'#4a5168';document.getElementById('catDot').style.background=col;document.getElementById('catLabel').textContent=v;document.getElementById('catLabel').style.color=col;}
+function updateBlockPreview(){const v=document.getElementById('ff_block').value,col=BLOCK_COLOR[v]||'#7a829a';document.getElementById('blockDot').style.background=col;document.getElementById('blockLabel').textContent=v;document.getElementById('blockLabel').style.color=col;}
+function updateFormBlock(){document.getElementById('ff_block').value=blockFromWeek(parseInt(document.getElementById('ff_week').value));updateBlockPreview();}
+function openAddForm(date,hour){if(!isFacultyMode)return;loadCatalog();loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
+function openEditForm(ev,e){if(ev)ev.stopPropagation();loadCatalog();loadCatalog();editingId=e._id;document.getElementById('fpSub').textContent='Editing: '+e.title.substring(0,30);document.getElementById('fpForm').innerHTML=formHTML(e,true);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
+function closeForm(){editingId=null;document.getElementById('fpForm').innerHTML='<div style="text-align:center;padding:30px 0;color:var(--muted)"><div style="font-size:28px;margin-bottom:10px">👆</div><div style="font-size:12px;line-height:1.6">Click an event to edit,<br>or a time slot to add,<br>or press <strong style="color:var(--gold)">+ Add Event</strong>.</div></div>';document.getElementById('fpSub').textContent='Click an event to edit · Click a slot to add';}
+
+
+// ── YEAR TABS ─────────────────────────────────────────────────
+
+// ── TWO-TIER TAB SYSTEM ──────────────────────────────────────
+// ── YEAR + M1/M2 FILTER SYSTEM ───────────────────────────────
+const SESSION_NAMES = ["Abdominal Clinical Application Session", "Assigned Students Only POM1: OSCE Midpoint Retake", "BLACKOUT", "CV Clinical Application Session", "Cardiovascular: CBL", "Cardiovascular: Cardiac Imaging & Echocardiography Clinic", "Cardiovascular: Cardiac Physical Exam / Murmur Clinic", "Cardiovascular: ENGR/MED Blended Session", "Cardiovascular: Orientation", "Cardiovascular: TBL", "Clinical Cadaver Integration Presentation", "Comprehensive Final OSCE", "Comprehensive OSCE Simulation Open Lab", "EBM Librarian Discussion", "EBM: Problem Session", "Endo / Repro: TBL", "FHP Workshop", "FOM II: CBL", "FOM II: Introduction to Precision Medicine", "FOM II: Orientation", "FOM II: TBL", "Final OSCE Remediation (If needed)", "First day of POM 3 Orientation", "FoM I / MGA: Orientation", "FoM I / MGA: TBL", "FoM I: Lab Focused Encounter Workshop (BBN related)", "GI / Nutr: CBL", "GI / Nutr: TBL", "Group A  POM1: CV PE", "Group A POM 1: Intro to an OSCE", "Group A POM 3 FHP OSCE", "Group A POM1: ABD CR", "Group A POM1: ABD/MSK I PE", "Group A POM1: CV Application Session", "Group A POM1: CV CR", "Group A POM1: Check-off Vital Signs", "Group A POM1: Final OSCE", "Group A POM1: HEENT CR", "Group A POM1: HEENT PE", "Group A POM1: LC Facilitated Open Lab", "Group A POM1: MSK 2/Derm PE", "Group A POM1: NEURO CR", "Group A POM1: NEURO/Derm PE", "Group A POM1: OSCE Practice", "Group A POM1: PETA Session: CV", "Group A POM1: PULM PE", "Group A POM1: Pulm CR", "Group A POM1: w/LC Small Groups", "Group B POM1: ABD CR", "Group B POM1: ABD/MSK I PE", "Group B POM1: CV Application Session", "Group B POM1: CV CR", "Group B POM1: Check-off Vital Signs", "Group B POM1: Final OSCE", "Group B POM1: HEENT CR", "Group B POM1: HEENT PE", "Group B POM1: LC Facilitated Open Lab", "Group B POM1: MSK 2/Derm PE", "Group B POM1: NEURO CR", "Group B POM1: NEURO/Derm PE", "Group B POM1: OSCE Practice", "Group B POM1: PETA Session: CV", "Group B POM1: PULM PE", "Group B POM1: Pulm CR", "Group B POM1: w/LC Small Groups", "Group C POM1: ABD CR", "Group C POM1: ABD/MSK I PE", "Group C POM1: CV Application Session", "Group C POM1: CV CR", "Group C POM1: Check-off Vital Signs", "Group C POM1: Final OSCE", "Group C POM1: HEENT CR", "Group C POM1: HEENT PE", "Group C POM1: LC Facilitated Open Lab", "Group C POM1: MSK 2/Derm PE", "Group C POM1: NEURO CR", "Group C POM1: NEURO/Derm PE", "Group C POM1: OSCE Practice", "Group C POM1: PETA Session: CV", "Group C POM1: PULM PE", "Group C POM1: Pulm CR", "Group C POM1: w/LC Small Groups", "Group D POM1: ABD CR", "Group D POM1: ABD/MSK I PE", "Group D POM1: CV Application Session", "Group D POM1: CV CR", "Group D POM1: Check-off Vital Signs", "Group D POM1: Final OSCE", "Group D POM1: HEENT CR", "Group D POM1: HEENT PE", "Group D POM1: LC Facilitated Open Lab", "Group D POM1: MSK 2/Derm PE", "Group D POM1: NEURO CR", "Group D POM1: NEURO/Derm PE", "Group D POM1: OSCE Practice", "Group D POM1: PETA Session: CV", "Group D POM1: PULM PE", "Group D POM1: Pulm CR", "Group D POM1: w/LC Small Groups", "Heme / Onc: CBL", "Heme / Onc: TBL", "Immunology: CBL", "Immunology: TBL", "Intro to Clinical Reasoning", "Intro to EBM", "Intro to OSCE", "Intro to Ultrasound", "MSK: CBL", "MSK: TBL", "Neuro: CBL", "Neuro: TBL", "Orientation", "POM 1: Orientation", "POM 2: Orientation", "POM 3: Orientation", "Pulmonary: CBL", "Pulmonary: TBL", "Renal: CBL", "Renal: TBL", "Simulation Session", "TBL", "Ultrasound Lab", "Vital Signs Workshop"];
+const COHORT_YEARS=['2029','2030','2031','2032','2033','2034','2035','2036','2037','2038'];
+const YEAR_COLORS={'2029':'#C62828','2030':'#1565C0','2031':'#2E7D32','2032':'#6A1B9A','2033':'#BF360C','2034':'#00695C','2035':'#4527A0','2036':'#E65100','2037':'#00838F','2038':'#558B2F'};
+
+let selectedYears=new Set(['All']);
+let selectedMCals=new Set(['All']); // M0/M1/M2/Student Affairs
+let currentMSub='M1';
+
+// Calendar visibility (faculty controlled, stored in localStorage)
+let calendarVisibility={};
+
+// Returns the correct default M sub for a year (skips hidden ones in student mode)
+function defaultMSub(yr){
+  if(isFacultyMode)return'M1';
+  const m1vis=calendarVisibility[yr+'-M1']!==false;
+  const m2vis=calendarVisibility[yr+'-M2']!==false;
+  if(m1vis)return'M1';
+  if(m2vis)return'M2';
+  return'M1'; // fallback
+}
+function loadVisibility(){
+  try{const v=localStorage.getItem('enmed_cal_vis');if(v)calendarVisibility=JSON.parse(v);}catch(e){}
+  COHORT_YEARS.forEach(y=>['M0','M1','M2'].forEach(m=>{
+    const key=y+'-'+m;
+    if(calendarVisibility[key]===undefined)calendarVisibility[key]=true;
+  }));
+}
+function saveVisibility(){
+  localStorage.setItem('enmed_cal_vis',JSON.stringify(calendarVisibility));
+  showToast('✅ Visibility saved — students will see updated calendars.');
+  const btn=document.getElementById('visBtn');
+  if(btn){btn.textContent='✅ Saved!';setTimeout(()=>btn.textContent='Save Visibility',2000);}
+  // Re-evaluate currentMSub in case the active class was just hidden
+  if(!selectedYears.has('All')&&selectedYears.size===1){
+    const yr=[...selectedYears][0];
+    if(currentMSub!=='M0'&&calendarVisibility[yr+'-'+currentMSub]===false)currentMSub=defaultMSub(yr);
+  }
+  updateYearUI();
+  updateYearTabBadges();
+  updateTitle();
+  render();
+}
+function renderVisibilityToggles(){
+  if(!isFacultyMode)return;
+  const el=document.getElementById('visibilityToggles');if(!el)return;
+  el.innerHTML=COHORT_YEARS.map(y=>['M0','M1','M2'].map(m=>{
+    const key=y+'-'+m;
+    const on=calendarVisibility[key]!==false;
+    const col=YEAR_COLORS[y]||'#888';
+    return`<div class="vis-toggle${on?' on':''}" onclick="toggleVisibility('${key}',this)">
+      <div class="vis-switch"></div>
+      <div class="vis-yr-dot" style="background:${col}"></div>
+      <span style="flex:1;font-size:12px;color:var(--text)">${y} — ${m}</span>
+      <span style="font-size:10px;color:var(--muted)">${on?'Visible':'Hidden'}</span>
+    </div>`;
+  }).join('')).join('');
+}
+function toggleVisibility(key,el){
+  calendarVisibility[key]=!calendarVisibility[key];
+  el.classList.toggle('on',calendarVisibility[key]);
+  el.querySelector('span:last-child').textContent=calendarVisibility[key]?'Visible':'Hidden';
+}
+
+
+// ── MCAL FILTER (M0/M1/M2/Student Affairs) ───────────────────
+function toggleMCal(mc){
+  if(mc==='All'){
+    selectedMCals=new Set(['All']);
+  } else {
+    selectedMCals.delete('All');
+    if(selectedMCals.has(mc)){
+      selectedMCals.delete(mc);
+      if(selectedMCals.size===0) selectedMCals=new Set(['All']);
+    } else {
+      selectedMCals.add(mc);
+      const allOptions=new Set(['M0','M1','M2','Student Affairs']);
+      if([...allOptions].every(v=>selectedMCals.has(v))) selectedMCals=new Set(['All']);
+    }
+  }
+  updateMCalUI();
+  updateTitle();
+  render();
+}
+function updateMCalUI(){
+  document.querySelectorAll('.yr-check-label[data-mc]').forEach(el=>{
+    const mc=el.dataset.mc;
+    // In student mode: hide if visibility is off for ALL years for this mCal
+    if(!isFacultyMode && mc!=='All'){
+      const anyVisible=COHORT_YEARS.some(yr=>calendarVisibility[yr+'-'+mc]!==false);
+      el.style.display=anyVisible?'':'none';
+    } else {
+      el.style.display='';
+    }
+    const checked=selectedMCals.has('All')?mc==='All':(mc!=='All'&&selectedMCals.has(mc));
+    el.classList.toggle('checked', checked);
+  });
+}
+function toggleYear(yr){
+  if(yr==='All'){
+    selectedYears=new Set(['All']);
+    currentMSub='M1'; // All years — default M1
+  } else {
+    selectedYears.delete('All');
+    if(selectedYears.has(yr)){
+      selectedYears.delete(yr);
+      if(selectedYears.size===0){selectedYears=new Set(['All']);currentMSub='M1';}
+    } else {
+      selectedYears.add(yr);
+      if(COHORT_YEARS.every(y=>selectedYears.has(y)))selectedYears=new Set(['All']);
+      // Default to M1 when selecting a year
+      if(currentMSub==='All'||(!isFacultyMode&&calendarVisibility[yr+'-'+currentMSub]===false))currentMSub=defaultMSub(yr);
+    }
+  }
+  updateYearUI();updateTitle();render();
+}
+function setMSub(el,m){
+  // True radio — clicking active does nothing
+  if(currentMSub===m)return;
+  currentMSub=m;
+  // Force all buttons off then activate only clicked one
+  document.querySelectorAll('.m-sub-btn').forEach(b=>{
+    b.classList.remove('active');
+    b.style.background='';b.style.borderColor='';b.style.color='';
+  });
+  el.classList.add('active');
+  // Apply year color to active button
+  if(selectedYears.size===1&&!selectedYears.has('All')){
+    const col=YEAR_COLORS[[...selectedYears][0]]||'#888';
+    el.style.background=col;el.style.borderColor=col;el.style.color='white';
+  }
+  updateYearTabBadges();
+  updateTitle();
+  render();
+}
+
+// Show M1/M2 badge next to each year tab based on currentMSub
+function updateYearTabBadges(){
+  document.querySelectorAll('.yr-check-label[data-yr]').forEach(el=>{
+    const yr=el.dataset.yr;
+    // Remove old badge
+    const old=el.querySelector('.yr-tab-badge');if(old)old.remove();
+    if(yr==='All')return;
+    // Show badge on all checked year tabs
+    if(el.classList.contains('checked')){
+      const col=YEAR_COLORS[yr]||'#888';
+      const m=currentMSub&&currentMSub!=='All'?currentMSub:'M1';
+      const badge=document.createElement('span');
+      badge.className='yr-tab-badge';
+      badge.textContent=m;
+      badge.style.cssText=`font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;background:${col};color:white;margin-left:4px;letter-spacing:.3px`;
+      el.appendChild(badge);
+    }
+  });
+}
+
+function populateYearDropdown(){
+  const sel=document.getElementById('yearFilterSelect');
+  if(!sel)return;
+  // Remove all except first "All" option
+  while(sel.options.length>1)sel.remove(1);
+  // Add Student Affairs as first option
+  const saOpt=document.createElement('option');
+  saOpt.value='SA';saOpt.textContent='Student Affairs';
+  sel.appendChild(saOpt);
+  COHORT_YEARS.forEach(yr=>{
+    // In student mode: skip years where both M1 and M2 are hidden
+    if(!isFacultyMode){
+      const m1vis=calendarVisibility[yr+'-M1']!==false;
+      const m2vis=calendarVisibility[yr+'-M2']!==false;
+      if(!m1vis&&!m2vis)return;
+    }
+    const o=document.createElement('option');
+    o.value=yr;
+    o.textContent=yr;
+    o.style.color=YEAR_COLORS[yr]||'';
+    sel.appendChild(o);
+  });
+}
+function setYearSidebar(yr){
+  if(yr==='All'){
+    selectedYears=new Set(['All']);currentMSub='M1';
+  } else {
+    selectedYears=new Set([yr]);currentMSub=defaultMSub(yr);
+  }
+  // Sync dropdown
+  const sel=document.getElementById('yearFilterSelect');
+  if(sel){
+    sel.value=yr;
+    const col=yr!=='All'?(YEAR_COLORS[yr]||''):'';
+    sel.style.borderColor=col||'var(--border)';
+    sel.style.boxShadow=col?`0 0 0 2px ${col}33`:'none';
+  }
+  updateYearUI();updateTitle();render();
+}
+function updateYearUI(){
+  // Show/hide year tabs based on visibility settings (student mode only)
+  document.querySelectorAll('.yr-check-label').forEach(el=>{
+    const yr=el.dataset.yr;
+    if(!isFacultyMode && yr!=='All'){
+      const anyVisible=calendarVisibility[yr+'-M0']!==false||calendarVisibility[yr+'-M1']!==false||calendarVisibility[yr+'-M2']!==false;
+      el.style.display=anyVisible?'':'none';
+    } else {
+      el.style.display='';
+    }
+    const checked=selectedYears.has('All')?yr==='All':(yr!=='All'&&selectedYears.has(yr));
+    el.classList.toggle('checked',checked);
+  });
+  updateYearTabBadges();
+  // Show/hide M1/M2 sub-buttons based on visibility (student mode only)
+  const single=selectedYears.size===1&&!selectedYears.has('All');
+  document.querySelectorAll('.m-sub-btn').forEach(b=>{
+    const m=b.dataset.m;
+    if(!isFacultyMode && single && m!=='All'){
+      const yr=[...selectedYears][0];
+      b.style.display=calendarVisibility[yr+'-'+m]!==false?'':'none';
+    } else {
+      b.style.display='';
+    }
+  });
+  const sub=document.getElementById('mSubRow');
+  if(single){
+    sub.classList.add('visible');
+    const yr=[...selectedYears][0];
+    const col=YEAR_COLORS[yr]||'#888';
+    sub.style.borderColor=col+'44';
+    // Auto-correct currentMSub if the selected one is hidden for this year
+    if(currentMSub==='All'||(!isFacultyMode&&calendarVisibility[yr+'-'+currentMSub]===false)){
+      currentMSub=defaultMSub(yr);
+    }
+    document.querySelectorAll('.m-sub-btn').forEach(b=>{
+      const isActive=b.dataset.m===currentMSub;
+      b.classList.toggle('active',isActive);
+      if(isActive){b.style.background=col;b.style.borderColor=col;b.style.color='white';}
+      else{b.style.background='';b.style.borderColor='';b.style.color='';}
+      // Hide M sub-button if hidden in student mode
+      if(!isFacultyMode){
+        b.style.display=(b.dataset.m==='M0'?calendarVisibility[yr+'-M0']!==false:calendarVisibility[yr+'-'+b.dataset.m]!==false)?'':'none';
+      } else {b.style.display='';}
+    });
+  } else {
+    sub.classList.remove('visible');
+    document.querySelectorAll('.m-sub-btn').forEach(b=>{b.style.background='';b.style.borderColor='';b.style.color='';});
+  }
+}
+function updateTitle(){
+  const t=document.getElementById('toolbarTitle');if(!t)return;
+  // If MCal filter is specific
+  if(!selectedMCals.has('All')&&selectedMCals.size===1){
+    const mc=[...selectedMCals][0];
+    const labels={'M0':'M0 Pre-Matriculation','M1':'M1','M2':'M2','Student Affairs':'Student Affairs'};
+    t.textContent=(labels[mc]||mc)+' Calendar';return;
+  }
+  if(!selectedMCals.has('All')&&selectedMCals.size>1){
+    t.textContent=[...selectedMCals].join(' / ')+' Calendar';return;
+  }
+  if(!selectedYears.has('All')&&selectedYears.size>0){
+    const yrs=[...selectedYears].sort();
+    t.textContent=(yrs.length===1?yrs[0]:yrs.join(' / '))+' Calendar';return;
+  }
+  t.textContent='EnMed Calendar';
+}
+
+// ── TODAY BUTTON ──────────────────────────────────────────────
+function goToToday(){
+  const t=new Date();
+  currentMonth=t.getMonth();currentMonthYear=t.getFullYear();
+  if(currentView!=='month'){currentView='month';document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.vt-btn')[0].classList.add('active');document.getElementById('weekDrawer').style.display='none';}
+  render();
+}
+
+// ── SEARCH ────────────────────────────────────────────────────
+function handleSearch(q){
+  const res=document.getElementById('searchResults');
+  if(!q||q.length<2){res.classList.remove('open');return;}
+  const matches=EVENTS.filter(e=>
+    e.title.toLowerCase().includes(q.toLowerCase())||
+    (e.location||'').toLowerCase().includes(q.toLowerCase())||
+    (e.heal||'').toLowerCase().includes(q.toLowerCase())
+  ).slice(0,10);
+  if(!matches.length){res.innerHTML='<div class="sr-item"><div class="sr-title" style="color:var(--muted)">No results found</div></div>';res.classList.add('open');return;}
+  res.innerHTML=matches.map(e=>{
+    const col=CAT_COLOR[e.category]||'#4a5168';
+    return`<div class="sr-item" onclick="jumpToEvent(${JSON.stringify(e).replace(/"/g,'&quot;')})">
+      <div class="sr-title" style="border-left:3px solid ${col};padding-left:6px">${e.title.replace(/</g,'&lt;')}</div>
+      <div class="sr-meta">📅 ${e.date} · ${fmtTime(e.start)}–${fmtTime(e.end)}${e.location?' · 📍'+e.location:''} · <span style="color:${col}">${e.category}</span></div>
+    </div>`;
+  }).join('');
+  res.classList.add('open');
+}
+function closeSearch(){document.getElementById('searchResults').classList.remove('open');}
+function jumpToEvent(e){
+  document.getElementById('searchInput').value='';
+  closeSearch();
+  // Navigate to that month
+  const parts=e.date.split('/');
+  if(parts.length===3){currentMonth=parseInt(parts[0])-1;currentMonthYear=parseInt(parts[2]);}
+  if(currentView!=='month'){currentView='month';document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.vt-btn')[0].classList.add('active');document.getElementById('weekDrawer').style.display='none';}
+  render();
+  setTimeout(()=>openModal(e),300);
+}
+
+// ── TAB COUNTS ────────────────────────────────────────────────
+function updateTabCounts(){
+  const total=EVENTS.length;
+  const set=(id,n)=>{const el=document.getElementById(id);if(el)el.textContent=n?`(${n})`:'';};
+  set('cnt-All',total);
+  COHORT_YEARS.forEach(y=>{
+    const n=EVENTS.filter(e=>String(e.calYear||'2029')===y).length;
+    set('cnt-'+y,n);
+  });
+}
+
+// setYearTabSidebar replaced by setMCalTabSidebar
+
+// setYearTab replaced by setMCalTab
+
+
+// ── MCAL COLOR ────────────────────────────────────────────────
+function mCalColor(e){
+  const m=e.mCal||'M1';
+  if(m==='M0')return'#E65100';
+  if(m==='M2')return'#2E7D32';
+  if(m==='Student Affairs')return'#6A1B9A';
+  return'#1565C0';
+}
+function yearColor(yr){return YEAR_COLORS[String(yr)]||'#500000';}
+function yearClass(ev){
+  const yr=String(ev.calYear||'2028');
+  const idx=COHORT_YEARS.indexOf(yr);
+  return['yr1','yr2','yr3','yrs','yr1','yr2'][idx]||'yr1';
+}
+function filteredEvents(){
+  return EVENTS.filter(e=>{
+    const blockOk=currentBlockFilter==='All'||(e.block||'')===currentBlockFilter;
+    const catOk=currentFilter==='All'||e.category===currentFilter;
+    const evYear=String(e.calYear||'2029');
+    const evMCal=e.mCal||'M1';
+    // Visibility check (student mode)
+    if(!isFacultyMode){
+      const key=evYear+'-'+evMCal;
+      if(calendarVisibility[key]===false)return false;
+    }
+    // Year sidebar filter
+    const yrOk=selectedYears.has('All')||selectedYears.has(evYear);
+    // M-cal header filter
+    const mcOk=selectedMCals.has('All')||selectedMCals.has(evMCal);
+    return catOk&&yrOk&&mcOk&&blockOk;
+  });
+}
+
+// ── MONTH VIEW ────────────────────────────────────────────────
+function renderMonth(){
+  const MDOWS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const mo=currentMonth,yr=currentMonthYear;
+  const first=new Date(yr,mo,1),last=new Date(yr,mo+1,0);
+  const moName=first.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  const today=new Date();
+  const todayStr=`${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${today.getFullYear()}`;
+  const evs=filteredEvents();
+
+  let html=`<div class="month-nav">
+    <button class="nav-btn" onclick="prevMonth()">‹</button>
+    <div class="month-nav-label">${moName}</div>
+    <button class="nav-btn" onclick="nextMonth()">›</button>
+  </div>
+  <div class="month-grid">
+    <div class="month-grid-header">${MDOWS.map(d=>`<div class="mg-dow">${d}</div>`).join('')}</div>
+    <div class="month-grid-body">`;
+
+  // leading blanks
+  const startDow=first.getDay();
+  for(let i=0;i<startDow;i++){
+    const d=new Date(yr,mo,1-startDow+i);
+    const ds=`${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}/${d.getFullYear()}`;
+    html+=`<div class="mg-cell other-month"><div class="mg-date">${d.getDate()}</div></div>`;
+  }
+  // days of month
+  for(let day=1;day<=last.getDate();day++){
+    const d=new Date(yr,mo,day);
+    const ds=`${String(mo+1).padStart(2,'0')}/${String(day).padStart(2,'0')}/${yr}`;
+    const isToday=ds===todayStr;
+    const dayEvs=evs.filter(e=>e.date===ds).sort((a,b)=>a.start.localeCompare(b.start));
+    const MAX_SHOW=3;
+    const shown=dayEvs.slice(0,MAX_SHOW);
+    const more=dayEvs.length-MAX_SHOW;
+    const escDs=ds.replace(/\//g,'\/');
+    html+=`<div class="mg-cell${isToday?' today-cell':''}">
+      <div class="mg-date">${day}</div>
+      ${shown.map(e=>{
+        const col=mCalColor(e);
+        const catC=CAT_COLOR[e.category]||'#4a5168';
+        const ej=JSON.stringify(e).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
+        return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 3px,${col} 3px,${col} 6px,${col}22 6px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),handleEventClick(event,${ej}))">${displayTitle(e)}</div>`;
+      }).join('')}
+      ${more>0?`<div class="mg-more">+${more} more</div>`:''}
+      ${isFacultyMode?`<button class="mg-add-btn" onclick="openAddForm('${ds}','08:00');event.stopPropagation()">+</button>`:''}
+    </div>`;
+  }
+  // trailing blanks
+  const endDow=last.getDay();
+  for(let i=endDow+1;i<7;i++){
+    html+=`<div class="mg-cell other-month"></div>`;
+  }
+  html+=`</div></div>`;
+  document.getElementById('calView').innerHTML=html;
+  // update week nav visibility
+  document.getElementById('weekDates').textContent='';
+  document.getElementById('weekLabel').textContent='';
+  document.getElementById('blockPill').textContent='';
+}
+
+// ── SYNCED NAVIGATION HELPERS ────────────────────────────────
+// dates are MM/DD/YYYY — parse correctly
+function parseDateParts(dateStr){
+  const p=dateStr.split('/');
+  return{mo:parseInt(p[0])-1, dy:parseInt(p[1]), yr:parseInt(p[2])};
+}
+// Sync month view FROM a week index
+function weekToMonth(weekIdx){
+  if(weekIdx<0||weekIdx>=WEEKS.length)return;
+  const w=WEEKS[weekIdx];
+  // Use first event date in this week
+  const evs=EVENTS.filter(e=>e.weekNum===w.num).sort((a,b)=>a.date.localeCompare(b.date));
+  if(evs.length){
+    const p=parseDateParts(evs[0].date);
+    currentMonth=p.mo; currentMonthYear=p.yr;
+  }
+}
+// Sync week index FROM a month/year — find first week with events in that month
+function monthToWeek(mo,yr){
+  // Score each week: prefer weeks that have events in this exact month+year
+  let best=-1;
+  for(let i=0;i<WEEKS.length;i++){
+    const w=WEEKS[i];
+    const hasMatch=EVENTS.some(e=>{
+      if(e.weekNum!==w.num)return false;
+      const p=parseDateParts(e.date);
+      return p.mo===mo && p.yr===yr;
+    });
+    if(hasMatch){best=i;break;} // take first matching week
+  }
+  // Fallback: find nearest week by year only
+  if(best===-1){
+    for(let i=0;i<WEEKS.length;i++){
+      const w=WEEKS[i];
+      const hasYear=EVENTS.some(e=>e.weekNum===w.num&&parseDateParts(e.date).yr===yr);
+      if(hasYear){best=i;break;}
+    }
+  }
+  return best>=0?best:(currentWeekIdx>=0?currentWeekIdx:0);
+}
+function prevMonth(){currentMonth--;if(currentMonth<0){currentMonth=11;currentMonthYear--;}currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);buildWeekDrawer();render();}
+function nextMonth(){currentMonth++;if(currentMonth>11){currentMonth=0;currentMonthYear++;}currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);buildWeekDrawer();render();}
+
+// ── CATALOG HELPERS ───────────────────────────────────────────
+
+function injectCatalog(){
+  const cs=document.getElementById('catalogSection');if(!cs)return;
+  const yr=(document.getElementById('ff_calyear')||{}).value||'All';
+  cs.innerHTML=buildCatalogUI(yr);
+  const sel=document.getElementById('ff_calyear');
+  if(sel)sel.addEventListener('change',function(){const c=document.getElementById('catalogSection');if(c)c.innerHTML=buildCatalogUI(this.value);});
+}
+function getCatalogSources(yearFilter){
+  const SHEET_YEAR={'POM 1':'Year 1','Pre-Matriculation':'Year 1','Semester 1':'Year 1',
+    'POM 2':'Year 2','Semester 2':'Year 2',
+    'POM 3':'Year 3','Shortened POM 3':'Year 3','Semester 3':'Year 3','TTC':'Year 3',
+    'MSGR':'Student Affairs'};
+  return Object.keys(SESSION_CATALOG).filter(s=>!yearFilter||yearFilter==='All'||SHEET_YEAR[s]===yearFilter);
+}
+function buildCatalogUI(yearFilter){
+  const sources=getCatalogSources(yearFilter);
+  const sourceOpts=sources.map(s=>`<option value="${s}">${s}</option>`).join('');
+  return`<div class="catalog-panel">
+    <div class="fp-section-title" style="margin-top:0">📂 Session Catalog — Pick from Spreadsheet</div>
+    <select class="catalog-source" id="catSource" onchange="populateSessionDropdown()">
+      <option value="">— Select a course/sheet —</option>${sourceOpts}
+    </select>
+    <select class="catalog-source" id="catSessionSelect" style="display:none;margin-top:6px" onchange="applyCatalogSession()">
+      <option value="">— Select a session —</option>
+    </select>
+  </div>`;
+}
+function populateSessionDropdown(){
+  const src=document.getElementById('catSource').value;
+  const sel=document.getElementById('catSessionSelect');
+  if(!src||!sel){if(sel)sel.style.display='none';return;}
+  const sessions=SESSION_CATALOG[src]||[];
+  sel.innerHTML='<option value="">— Select a session —</option>'+
+    sessions.map((s,i)=>`<option value="${i}">${s.name}</option>`).join('');
+  sel.style.display='';
+  sel._sessions=sessions;
+}
+function applyCatalogSession(){
+  const sel=document.getElementById('catSessionSelect');
+  if(!sel||sel.value==='')return;
+  const sessions=sel._sessions||[];
+  const s=sessions[parseInt(sel.value)];
+  if(!s)return;
+  const set=(id,v)=>{const el=document.getElementById(id);if(el&&v)el.value=v;};
+  set('ff_title',s.name);
+  set('ff_group',s.group);
+  set('ff_location',s.location);
+  // Set calendar year and M-cal
+  if(s.year){
+    const yr=document.getElementById('ff_calyear');
+    const mc=document.getElementById('ff_mcal');
+    if(s.year==='Student Affairs'){if(mc)mc.value='Student Affairs';}
+    else{if(yr)yr.value=s.year;}
+    // Default mCal to current active tab
+    if(mc&&selectedYears.size===1&&!selectedYears.has('All'))mc.value='M1';
+  }
+}
+
+
+
+
+// ── BULK SELECT & DELETE ──────────────────────────────────────
+let bulkSelectMode=false;
+let selectedIds=new Set();
+
+function enterBulkSelect(){
+  if(!isFacultyMode){showToast('Enter Edit mode first.');return;}
+  bulkSelectMode=true; selectedIds=new Set();
+  document.getElementById('bulkBar').classList.add('on');
+  updateBulkBar(); render();
+}
+function exitBulkSelect(){
+  bulkSelectMode=false; selectedIds=new Set();
+  document.getElementById('bulkBar').classList.remove('on');
+  render();
+}
+function updateBulkBar(){
+  const n=selectedIds.size;
+  document.getElementById('bulkBarCount').textContent=
+    n===0?'Click events to select':n+' event'+(n!==1?'s':'')+' selected';
+  const allBtn=document.querySelector('.bulk-bar-all');
+  if(allBtn){
+    const tot=filteredEvents().length;
+    allBtn.textContent=(n>0&&n>=tot)?'Deselect All':'Select All';
+  }
+}
+function bulkToggleAll(){
+  const evs=filteredEvents();
+  if(selectedIds.size>0&&selectedIds.size>=evs.length){
+    // Deselect all
+    selectedIds=new Set();
+    document.querySelectorAll('.ev-sel').forEach(el=>el.classList.remove('ev-sel'));
+  } else {
+    // Select all
+    evs.forEach(e=>{
+      selectedIds.add(e._id);
+      const el=document.getElementById('bev_'+e._id);
+      if(el)el.classList.add('ev-sel');
+    });
+  }
+  updateBulkBar();
+}
+function bulkToggleEvent(id){
+  if(!bulkSelectMode)return;
+  if(selectedIds.has(id)){
+    selectedIds.delete(id);
+    const el=document.getElementById('bev_'+id);
+    if(el)el.classList.remove('ev-sel');
+  } else {
+    selectedIds.add(id);
+    const el=document.getElementById('bev_'+id);
+    if(el)el.classList.add('ev-sel');
+  }
+  updateBulkBar();
+}
+async function bulkDeleteSelected(){
+  if(!selectedIds.size){showToast('Select at least one event.');return;}
+  const n=selectedIds.size;
+  if(!confirm('Delete '+n+' event'+(n!==1?'s':'')+'? This cannot be undone.'))return;
+  const delBtn=document.getElementById('bulkBarDel');
+  delBtn.textContent='Deleting...';delBtn.disabled=true;
+  const backup=[...EVENTS];
+  try{
+    EVENTS=EVENTS.filter(e=>!selectedIds.has(e._id));
+    await saveEventsToGitHub();
+    showToast('Deleted '+n+' event'+(n!==1?'s':'')+'!');
+    exitBulkSelect();
+    WEEKS=buildWeeks();buildWeekDrawer();updateTabCounts();render();
+  }catch(err){
+    EVENTS=backup;
+    showToast('Error: '+err.message);
+    delBtn.textContent='Delete Selected';delBtn.disabled=false;
+  }
+}
+
+// ── BULK UPLOAD ───────────────────────────────────────────────
+let bulkParsed = [];
+
+function openBulkUpload(){
+  if(!isFacultyMode){showToast('⚠️ Enter Edit mode first.');return;}
+  bulkParsed=[];
+  document.getElementById('bulkPreview').style.display='none';
+  document.getElementById('bulkStats').style.display='none';
+  document.getElementById('bulkAddBtn').style.display='none';
+  document.getElementById('bulkFile').value='';
+  document.getElementById('bulkOverlay').classList.add('open');
+}
+function closeBulkUpload(){
+  document.getElementById('bulkOverlay').classList.remove('open');
+}
+function handleBulkDrop(e){
+  e.preventDefault();
+  document.getElementById('bulkDrop').classList.remove('drag');
+  const f=e.dataTransfer.files[0];
+  if(f)handleBulkFile(f);
+}
+function handleBulkFile(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=new Uint8Array(e.target.result);
+      const wb=XLSX.read(data,{type:'array',cellDates:true,cellNF:false,cellFormula:false});
+      const ws=wb.Sheets['Events']||wb.Sheets[wb.SheetNames[0]];
+      // Read from row 8 (index 7) - skip title, subtitle, header, notes, samples
+      // Read header row (row 3, index 2) to map columns dynamically
+      const allRows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+      // Find header row (contains 'Session Name' or 'MAND')
+      let headerRow=2; // default row 3 (0-indexed)
+      for(let i=0;i<Math.min(5,allRows.length);i++){
+        const r=allRows[i].join(' ').toLowerCase();
+        if(r.includes('session name')||r.includes('mand')){headerRow=i;break;}
+      }
+      const headers=allRows[headerRow].map(h=>String(h||'').toLowerCase().trim());
+      // Map column names to indices
+      const colIdx={};
+      headers.forEach((h,i)=>{
+        if(h.includes('mand'))colIdx.mand=i;
+        else if(h.includes('session name')||h.includes('session name'))colIdx.title=i;
+        else if(h.includes('group'))colIdx.group=i;
+        else if(h.includes('location'))colIdx.location=i;
+        else if(h.includes('cohort')||h.includes('year'))colIdx.calYear=i;
+        else if(h.includes('class'))colIdx.mCal=i;
+        else if(h.includes('date'))colIdx.date=i;
+        else if(h.includes('start'))colIdx.start=i;
+        else if(h.includes('end'))colIdx.end=i;
+        else if(h.includes('category'))colIdx.category=i;
+        else if(h.includes('block')||h.includes('course'))colIdx.block=i;
+        else if(h.includes('week'))colIdx.week=i;
+        else if(h.includes('presenter'))colIdx.presenter=i;
+        else if(h.includes('additional')||h.includes('info')||h.includes('note'))colIdx.notes=i;
+      });
+      // Data starts after header + note row
+      const dataRows=allRows.slice(headerRow+2).filter(r=>r.some(v=>v!==''));
+      parseBulkRows(dataRows,colIdx);
+    }catch(err){showToast('❌ Could not read file: '+err.message);}
+  };
+  reader.readAsArrayBuffer(file);
+}
+function parseBulkRows(rows,colIdx){
+  // Default column indices (new template format)
+  const ci=colIdx||{};
+  const gi=(name,def)=>ci[name]!==undefined?ci[name]:def;
+  bulkParsed=[];
+  const BLK_LIST=BLOCKS_LIST;
+
+  rows.forEach((row,i)=>{
+    if(!row[0]&&!row[5]&&!row[7])return; // skip fully empty rows
+    const mand=String(row[gi('mand',0)]||'No').trim()||'No';
+    const title=String(row[gi('title',1)]||'').trim();
+    const group=String(row[gi('group',2)]||'').trim();
+    const location=String(row[gi('location',3)]||'').trim();
+    const calYear=String(row[gi('calYear',4)]||'').trim();
+    const mCal=String(row[gi('mCal',5)]||'M1').trim();
+    const presenter=String(row[gi('presenter',12)]||'').trim();
+    const notes=String(row[gi('notes',13)]||'').trim();
+    
+    // Date parsing — handle Excel serial numbers and string dates
+    let dateStr='';
+    const rawDate=row[gi('date',6)];
+    if(rawDate instanceof Date){
+      const mo=String(rawDate.getMonth()+1).padStart(2,'0');
+      const dy=String(rawDate.getDate()).padStart(2,'0');
+      const yr=rawDate.getFullYear();
+      dateStr=`${mo}/${dy}/${yr}`;
+    } else if(typeof rawDate==='number'){
+      const d=XLSX.SSF.parse_date_code(rawDate);
+      dateStr=`${String(d.m).padStart(2,'0')}/${String(d.d).padStart(2,'0')}/${d.y}`;
+    } else {
+      dateStr=String(rawDate||'').trim();
+      // Handle ISO format: 2026-05-26 or 2026-05-26T00:00:00
+      if(dateStr.match(/^\d{4}-\d{2}-\d{2}/)){
+        const p=dateStr.split('T')[0].split('-');
+        dateStr=`${p[1]}/${p[2]}/${p[0]}`;
+      }
+      // Normalize M/D/YYYY → MM/DD/YYYY
+      else if(dateStr && !dateStr.match(/^\d{2}\//)){
+        const dp=dateStr.split('/');
+        if(dp.length===3)dateStr=`${dp[0].padStart(2,'0')}/${dp[1].padStart(2,'0')}/${dp[2]}`;
+      }
+    }
+
+    // Time parsing
+    function parseTime(v){
+      if(!v)return'';
+      if(v instanceof Date)return`${String(v.getHours()).padStart(2,'0')}:${String(v.getMinutes()).padStart(2,'0')}`;
+      if(typeof v==='number'){const h=Math.floor(v*24);const m=Math.round((v*24-h)*60);return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;}
+      const ts=String(v).trim();
+      // Normalize H:MM → HH:MM
+      if(ts.match(/^\d:\d{2}$/))return'0'+ts;
+      return ts;
+    }
+    const start=parseTime(row[gi('start',7)]);
+    const end=parseTime(row[gi('end',8)]);
+    const category=String(row[gi('category',9)]||'Mandatory').trim();
+    const block=String(row[gi('block',10)]||'').trim();
+    const weekNum=parseInt(row[gi('week',11)])||null;
+
+    // Validate
+    const errs=[];
+    if(!title)errs.push('Missing session name');
+    if(!['M0','M1','M2'].includes(mCal))errs.push(`Invalid class: "${mCal}" — use M0, M1, or M2`);
+    if(!['2029','2030','2031','2032','2033','2034','2035','2036','2037','2038'].includes(calYear))errs.push(`Invalid cohort year: "${calYear}" — use 2029–2038`);
+    if(!/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr))errs.push(`Invalid date: "${dateStr}"`);
+    if(!/^\d{2}:\d{2}$/.test(start))errs.push(`Invalid start time: "${start}"`);
+    if(!/^\d{2}:\d{2}$/.test(end))errs.push(`Invalid end time: "${end}"`);
+    if(start&&end&&start>=end)errs.push('Start must be before end');
+    // Category is optional — warn but don't block if not in list
+if(category && typeof CATS_LIST!=='undefined' && !CATS_LIST.includes(category))errs.push(`Unknown category: "${category}" — check spelling or leave blank`);
+
+    bulkParsed.push({
+      _id:Date.now()+'_'+i,
+      title,mand,group,location,mCal,calYear,presenter,notes,
+      date:dateStr,start,end,
+      category:(typeof CATS_LIST!=='undefined'&&CATS_LIST.includes(category))?category:(category||'Session'),
+      block:BLK_LIST.includes(block)?block:blockFromWeek(weekNum||28),
+      weekNum:weekNum||(WEEKS.length?WEEKS[0].num:28),
+      week:weekNameFor(weekNum||(WEEKS.length?WEEKS[0].num:28)),
+      desc:title,
+      _errors:errs,_valid:errs.filter(e=>!e.includes('Unknown category')&&!e.includes('defaulting')).length===0
+    });
+  });
+
+  renderBulkPreview();
+}
+function renderBulkPreview(){
+  const valid=bulkParsed.filter(r=>r._valid).length;
+  const errors=bulkParsed.filter(r=>!r._valid).length;
+  document.getElementById('bulkTotal').textContent=bulkParsed.length;
+  document.getElementById('bulkValid').textContent=valid;
+  document.getElementById('bulkErrors').textContent=errors;
+  document.getElementById('bulkStats').style.display='flex';
+  document.getElementById('bulkAddBtn').style.display=valid>0?'':'none';
+  document.getElementById('bulkAddBtn').textContent=`✅ Add ${valid} Valid Event${valid!==1?'s':''}`;
+
+  if(!bulkParsed.length){
+    document.getElementById('bulkPreview').style.display='none';
+    showToast('⚠️ No data rows found. Make sure you are using the EnMed template.');
+    return;
+  }
+  const cols=['MAND','Session Name','Group','Location','Year','Class','Date','Start','End','Category','Block','Week','Presenter','Notes','Errors'];
+  let tbl=`<table><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
+  bulkParsed.forEach(r=>{
+    const cls=r._valid?'ok':'err';
+    const errText=r._errors.join('; ')||'✓';
+    tbl+=`<tr class="${cls}">
+      <td>${r.mand||'No'}</td>
+      <td>${r.title.substring(0,35)}</td>
+      <td>${r.group}</td>
+      <td>${r.location.substring(0,20)}</td>
+      <td>${r.mCal}</td>
+      <td>${r.calYear}</td>
+      <td>${r.date}</td>
+      <td>${r.start}</td>
+      <td>${r.end}</td>
+      <td>${r.category}</td>
+      <td>${r.block}</td>
+      <td style="color:${r._valid?'#3ecf8e':'#f05c6e'}">${errText}</td>
+    </tr>`;
+  });
+  tbl+='</table>';
+  document.getElementById('bulkPreview').innerHTML=tbl;
+  document.getElementById('bulkPreview').style.display='';
+}
+async function bulkAddAll(){
+  const valid=bulkParsed.filter(r=>r._valid);
+  if(!valid.length)return;
+  const btn=document.getElementById('bulkAddBtn');
+  btn.textContent='Saving to GitHub...';btn.disabled=true;
+  try{
+    valid.forEach(ev=>{const {_errors,_valid,...clean}=ev;EVENTS.push(clean);});
+    await saveEventsToGitHub();
+    addLog('added',{title:`${valid.length} events (bulk)`,date:'',start:'',end:'',category:'Bulk'});
+    showToast(`✅ ${valid.length} events added — live for everyone!`);
+    closeBulkUpload();
+    WEEKS=buildWeeks();buildWeekDrawer();updateTabCounts();render();
+  }catch(err){
+    showToast('❌ '+err.message);
+    btn.textContent='✅ Add Valid Events';btn.disabled=false;
+  }
+}
+
+async function saveForm(){
+  const title=document.getElementById('ff_title').value.trim();
+  const date=document.getElementById('ff_date').value.trim();
+  const start=document.getElementById('ff_start').value;
+  const end=document.getElementById('ff_end').value;
+  const cat=document.getElementById('ff_cat').value;
+  const block=document.getElementById('ff_block').value;
+  const weekNum=parseInt(document.getElementById('ff_week').value);
+  if(!title||!date){showToast('⚠️ Title and Date are required.');return;}
+  if(start>=end){showToast('⚠️ End time must be after start time.');return;}
+  const btn=document.getElementById('saveBtn');
+  btn.textContent='Saving to GitHub...';btn.disabled=true;
+  const calYear=document.getElementById('ff_calyear').value||'2028';
+  const mCal=(document.getElementById('ff_mcal')||{value:'M1'}).value||'M1';
+  const mand=(document.getElementById('ff_mand')||{value:'No'}).value;
+  const group=(document.getElementById('ff_group')||{value:''}).value.trim();
+  const location=(document.getElementById('ff_location')||{value:''}).value.trim();
+  const notes=(document.getElementById('ff_notes')||{value:''}).value.trim();
+  const ev={title,date,start,end,category:cat,block,weekNum,week:weekNameFor(weekNum),desc:title,calYear,mCal,mand,group,location,_id:editingId||(Date.now()+'')};
+  try{
+    if(editingId){const i=EVENTS.findIndex(e=>e._id===editingId);if(i>=0)EVENTS[i]=ev;}
+    else EVENTS.push(ev);
+    await saveEventsToGitHub();
+    addLog(editingId?'edited':'added',ev);
+    showToast(editingId?'✅ Event updated — live for everyone!':'✅ Event added — live for everyone!');
+    closeForm();WEEKS=buildWeeks();buildWeekDrawer();render();
+  }catch(err){
+    showToast('❌ '+err.message);
+    btn.textContent='💾 Save Changes';btn.disabled=false;
+  }
+}
+
+// ── DELETE ────────────────────────────────────────────────────
+function modalEdit(){if(!_modalEvent)return;document.getElementById('modalOverlay').classList.remove('open');openEditForm(null,_modalEvent);}
+function modalDelete(){if(!_modalEvent)return;document.getElementById('modalOverlay').classList.remove('open');confirmDelete(null,_modalEvent._id);}
+function confirmDelete(ev,id){
+  if(ev)ev.stopPropagation();
+  pendingDeleteId=id;
+  const e=EVENTS.find(e=>e._id===id);
+  document.getElementById('confirmMsg').textContent=`Delete "${(e?e.title:'this event').substring(0,50)}"?`;
+  document.getElementById('confirmYes').onclick=()=>{doDelete();document.getElementById('confirmOverlay').classList.remove('open');};
+  document.getElementById('confirmOverlay').classList.add('open');
+}
+async function doDelete(){
+  const e=EVENTS.find(e=>e._id===pendingDeleteId);if(!e)return;
+  const btn=document.getElementById('confirmYes');btn.textContent='Deleting...';btn.disabled=true;
+  try{
+    EVENTS=EVENTS.filter(ev=>ev._id!==pendingDeleteId);
+    await saveEventsToGitHub();
+    addLog('deleted',e);showToast('🗑 Deleted — live for everyone!');
+    closeForm();WEEKS=buildWeeks();buildWeekDrawer();render();
+  }catch(err){
+    EVENTS.push(e); // rollback
+    showToast('❌ '+err.message);
+  }
+  btn.textContent='Delete';btn.disabled=false;
+}
+
+// ── CHANGE LOG ────────────────────────────────────────────────
+function addLog(type,e){sessionLog.unshift({type,title:e.title,date:e.date,start:e.start,end:e.end,cat:e.category,ts:new Date().toLocaleTimeString()});}
+function renderChangeLog(){
+  if(!isFacultyMode)return;
+  document.getElementById('changeCount').textContent=sessionLog.length?`(${sessionLog.length})`:'';
+  if(!sessionLog.length){document.getElementById('changeLog').innerHTML='<div style="font-size:11px;color:var(--muted2);padding:8px 0">No changes this session.</div>';return;}
+  document.getElementById('changeLog').innerHTML=sessionLog.slice(0,8).map(e=>`<div class="change-item change-${e.type}"><div class="ch-type">${e.type==='added'?'✦ Added':e.type==='edited'?'✎ Edited':'✕ Deleted'}</div><div class="ch-title">${e.title.substring(0,45)}</div><div class="ch-meta">${e.date} · ${fmtTime(e.start)}–${fmtTime(e.end)} · ${e.cat} · ${e.ts}</div></div>`).join('');
+}
+
+// ── ICS EXPORT ────────────────────────────────────────────────
+function exportICS(){
+  function toIcsDt(d,t){const[mo,dy,yr]=d.split('/');const[hr,mn]=t.split(':');return`${yr}${mo}${dy}T${hr}${mn}00`;}
+  function esc(s){return(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');}
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//CO2028//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:M1 Calendar'];
+  EVENTS.forEach((e,i)=>{lines.push('BEGIN:VEVENT',`UID:co2028-${i}@cal`,`DTSTART:${toIcsDt(e.date,e.start)}`,`DTEND:${toIcsDt(e.date,e.end)}`,`SUMMARY:${esc(e.title)}`,`CATEGORIES:${esc(e.category)}`,'STATUS:CONFIRMED','END:VEVENT');});
+  lines.push('END:VCALENDAR');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\r\n')],{type:'text/calendar'}));a.download='CO2028_Calendar.ics';a.click();
+  showToast('✅ Downloaded — open to import into Outlook');
+}
+
+// ── TOAST ─────────────────────────────────────────────────────
+function showToast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t);}t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0';},4500);}
+
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){document.getElementById('modalOverlay').classList.remove('open');document.getElementById('confirmOverlay').classList.remove('open');closeForm();}});
+
+// Always load calendar immediately — no setup screen for guests
+loadConfig();
+CFG.user='tamu-edu';
+CFG.repo='enmed-pct-calendar';
+CFG.readOnly=!CFG.token;
+document.getElementById('configOverlay').style.display='none';
+initApp();
+</script>
+
+<!-- BULK UPLOAD MODAL -->
+<div class="bulk-overlay" id="bulkOverlay" onclick="if(event.target.id==='bulkOverlay')closeBulkUpload()">
+  <div class="bulk-box">
+    <div class="bulk-title">
+      <span>📤 Bulk Upload Events</span>
+      <button class="modal-close" onclick="closeBulkUpload()">✕</button>
+    </div>
+    <div class="bulk-drop" id="bulkDrop" onclick="document.getElementById('bulkFile').click()"
+         ondragover="event.preventDefault();this.classList.add('drag')"
+         ondragleave="this.classList.remove('drag')"
+         ondrop="handleBulkDrop(event)">
+      <div style="font-size:32px">📂</div>
+      <strong style="font-size:14px">Click to select or drag &amp; drop your .xlsx file</strong>
+      <p>Use the EnMed Calendar Upload Template — download from the ⚙ settings menu</p>
+      <input type="file" id="bulkFile" accept=".xlsx,.xls" onchange="handleBulkFile(this.files[0])">
+    </div>
+    <div id="bulkStats" class="bulk-stats" style="display:none">
+      <span>Found: <span class="bulk-stat" id="bulkTotal">0</span> rows</span>
+      <span style="color:#3ecf8e">✓ Valid: <span class="bulk-stat" id="bulkValid">0</span></span>
+      <span style="color:#f05c6e">✗ Errors: <span class="bulk-stat" id="bulkErrors">0</span></span>
+    </div>
+    <div id="bulkPreview" class="bulk-preview" style="display:none"></div>
+    <div class="bulk-actions">
+      <button class="bulk-btn bulk-btn-primary" id="bulkAddBtn" style="display:none" onclick="bulkAddAll()">✅ Add All Valid Events</button>
+      <button class="bulk-btn bulk-btn-cancel" onclick="closeBulkUpload()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
