@@ -153,9 +153,9 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 }
 .week-event{
   position:absolute;
-  left:3px;
-  right:3px;
   z-index:20;
+  box-sizing:border-box;
+  overflow:hidden;
 }
 
 .list-event{
@@ -1111,11 +1111,74 @@ function render(){
 
 function evClass(e){if(e.category==='Faculty Discussion')return'Faculty';if(e.category==='Exam Review')return'ExamReview';if(e.category==='Grand Rounds')return'GrandRounds';return e.category.replace(/\s/g,'');}
 
+function layoutOverlappingEvents(dayEvents){
+  const events = dayEvents
+    .map(e => ({
+      ...e,
+      startMin: timeToMinutes(e.start),
+      endMin: timeToMinutes(e.end)
+    }))
+    .filter(e =>
+      Number.isFinite(e.startMin) &&
+      Number.isFinite(e.endMin) &&
+      e.endMin > e.startMin
+    )
+    .sort((a,b) => a.startMin - b.startMin || b.endMin - a.endMin);
+
+  const clusters = [];
+  let cluster = [];
+  let clusterEnd = -1;
+
+  events.forEach(e => {
+    if (!cluster.length || e.startMin < clusterEnd) {
+      cluster.push(e);
+      clusterEnd = Math.max(clusterEnd, e.endMin);
+    } else {
+      clusters.push(cluster);
+      cluster = [e];
+      clusterEnd = e.endMin;
+    }
+  });
+
+  if (cluster.length) clusters.push(cluster);
+
+  clusters.forEach(cluster => {
+    const columns = [];
+
+    cluster.forEach(e => {
+      let col = columns.findIndex(colEnd => colEnd <= e.startMin);
+
+      if (col === -1) {
+        col = columns.length;
+        columns.push(e.endMin);
+      } else {
+        columns[col] = e.endMin;
+      }
+
+      e._overlapCol = col;
+    });
+
+    const colCount = Math.max(columns.length, 1);
+
+    cluster.forEach(e => {
+      e._overlapCount = colCount;
+      e._leftPct = (e._overlapCol / colCount) * 100;
+      e._widthPct = 100 / colCount;
+    });
+  });
+
+  return events;
+}
+
 function renderWeek(dates){
   if(currentWeekIdx<0)currentWeekIdx=0;
   const w=WEEKS[currentWeekIdx];
   if(!w||!dates||!dates.length){document.getElementById('calView').innerHTML='<div class="empty-state"><div class="big">📭</div><p>No week data available.</p></div>';return;}
   const evs=filteredEvents().filter(e=>e.weekNum===w.num);
+  const laidOutByDate = {};
+  dates.forEach(ds => {
+    laidOutByDate[ds] = layoutOverlappingEvents(evs.filter(e => e.date === ds));
+});
   const today=new Date();
   const todayStr=`${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${today.getFullYear()}`;
   let html=`<div class="cal-wrap"><div class="cal-header"><div class="ch-cell"></div>`;
@@ -1129,24 +1192,22 @@ function renderWeek(dates){
     dates.forEach(ds=>{
       const rowStartMin = timeToMinutes(hk);
       const rowEndMin = rowStartMin + 60;
-      const cellEvs = evs.filter(e => {
-        const startMin = timeToMinutes(e.start);
-        return e.date === ds && startMin >= rowStartMin && startMin < rowEndMin;
+      const cellEvs = (laidOutByDate[ds] || []).filter(e => {
+        return e.startMin >= rowStartMin && e.startMin < rowEndMin;
 });
       html+=`<div class="cal-cell" onclick="handleCellClick(event,'${ds}','${hk}')">`;
       if(isFacultyMode)html+=`<div class="add-slot-btn" onclick="openAddForm('${ds}','${hk}');event.stopPropagation()">+</div>`;
       cellEvs.forEach(e=>{
-        const startMin = timeToMinutes(e.start);
-        const endMin = timeToMinutes(e.end);
-        const durHours = Math.max(1, (endMin - startMin) / 60);
-        const hp = durHours * 52 - 6;
+        const startMin = e.startMin;
+        const endMin = e.endMin;
+        const hp = Math.max(18, ((endMin - startMin) / 60) * 52 - 6);
         const ec = evClass(e);
         const topOffset = ((startMin - rowStartMin) / 60) * 52 + 3;
 
         const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
         const mcalCol=mCalColor(e);
         const catCol=CAT_COLOR[e.category]||'#4a5168';
-        html+=`<div class="event week-event ${ec}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 4px,${mcalCol} 4px,${mcalCol} 8px,${mcalCol}18 8px);color:${mcalCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+        html+=`<div class="event week-event ${ec}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:calc(${e._leftPct}% + 3px);width:calc(${e._widthPct}% - 6px);background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 4px,${mcalCol} 4px,${mcalCol} 8px,${mcalCol}18 8px);color:${mcalCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
           <div class="ev-tag" style="color:${catCol}">${e.category}</div>
           <div class="ev-title">${displayTitle(e)}</div>
           <div class="ev-time">${fmtTime(e.start)} – ${fmtTime(e.end)}</div>
