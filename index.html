@@ -912,24 +912,68 @@ function setStatus(state,msg){
 }
 
 // ── WEEKS / NAV ───────────────────────────────────────────────
+const WEEK_ONE_MONDAY = '05/25/2026';
+
+function parseMDY(dateStr){
+  const [mo,dy,yr] = dateStr.split('/').map(Number);
+  return new Date(yr, mo - 1, dy);
+}
+
+function formatMDY(dateObj){
+  return `${String(dateObj.getMonth()+1).padStart(2,'0')}/${String(dateObj.getDate()).padStart(2,'0')}/${dateObj.getFullYear()}`;
+}
+
+function datesForWeekNum(weekNum){
+  const start = parseMDY(WEEK_ONE_MONDAY);
+  start.setDate(start.getDate() + ((weekNum - 1) * 7));
+
+  return Array.from({length:5}, (_, i) => {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    return formatMDY(d);
+  });
+}
+
+function weekNumFromDate(dateStr){
+  const d = parseMDY(dateStr);
+  const start = parseMDY(WEEK_ONE_MONDAY);
+
+  const day = d.getDay();
+  d.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+
+  const diffDays = Math.round((d - start) / (1000 * 60 * 60 * 24));
+  return Math.floor(diffDays / 7) + 1;
+}
+
 function buildWeeks(){
-  var highestWeekNumber = 32;
+  let highestWeekNumber = 32;
+
   EVENTS.forEach(e=>{
-    if(e.weekNum > highestWeekNumber)
-    {
-      highestWeekNumber = e.weekNum;
+    const derivedWeekNum = e.date ? weekNumFromDate(e.date) : Number(e.weekNum);
+
+    if(Number.isFinite(derivedWeekNum) && derivedWeekNum > highestWeekNumber){
+      highestWeekNumber = derivedWeekNum;
     }
   });
-  
-  // Day 3: Edited buildWeeks() to create weeks continuously from earliest week
-  var allWeeksInYear = [];
-  for (let i = 1; i < highestWeekNumber + 1; i++) {
-    allWeeksInYear.push({num:i,name:"Week " + i,block:"Block " + i});
-    
+
+  const allWeeksInYear = [];
+
+  for(let i = 1; i <= highestWeekNumber; i++){
+    const weekDates = datesForWeekNum(i);
+
+    allWeeksInYear.push({
+      num: i,
+      name: 'Week ' + i,
+      block: 'Block ' + i,
+      dates: weekDates,
+      startDate: weekDates[0],
+      endDate: weekDates[4]
+    });
   }
-  //
+
   return allWeeksInYear;
 }
+
 function buildWeekDrawer(){
   document.getElementById('weekDrawer').style.display=currentView==='month'?'none':'';
 
@@ -1043,14 +1087,15 @@ function displayTitle(e){
 }
 function fmtDate(d){const[mo,dy,yr]=d.split('/');return new Date(yr,mo-1,dy).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});}
 function getWeekDates(){
-  const w=WEEKS[currentWeekIdx];
-  const evs=EVENTS.filter(e=>e.weekNum===w.num);
-  const dates=[...new Set(evs.map(e=>e.date))].sort((a,b)=>{const pa=a.split('/'),pb=b.split('/');return new Date(pa[2],pa[0]-1,pa[1])-new Date(pb[2],pb[0]-1,pb[1]);});
-  if(!dates.length)return Array(5).fill('');
-  const[mo,dy,yr]=dates[0].split('/').map(Number);
-  const d=new Date(yr,mo-1,dy),dow=d.getDay(),mon=new Date(d);
-  mon.setDate(d.getDate()-(dow===0?6:dow-1));
-  return Array.from({length:5},(_,i)=>{const dd=new Date(mon);dd.setDate(mon.getDate()+i);return`${String(dd.getMonth()+1).padStart(2,'0')}/${String(dd.getDate()).padStart(2,'0')}/${dd.getFullYear()}`;});
+  const w = WEEKS[currentWeekIdx];
+
+  if(!w) return Array(5).fill('');
+
+  if(w.dates && w.dates.length === 5){
+    return w.dates;
+  }
+
+  return datesForWeekNum(w.num);
 }
 
 // ── RENDER ────────────────────────────────────────────────────
@@ -1090,18 +1135,19 @@ function render(){
   pill.textContent=w.block;pill.style.background=col+'22';pill.style.color=col;pill.style.border='1px solid '+col+'55';
 
   // Date range from actual events
-  const weekEvs=EVENTS.filter(e=>e.weekNum===w.num).sort((a,b)=>a.date.localeCompare(b.date));
+  const weekEvs=EVENTS.filter(e=>weekNumFromDate(e.date)===w.num).sort((a,b)=>a.date.localeCompare(b.date));
   const dates=getWeekDates();
-  if(weekEvs.length){
-    const[mo1,dy1,yr1]=weekEvs[0].date.split('/');
-    const[mo2,dy2,yr2]=weekEvs[weekEvs.length-1].date.split('/');
-    const d1=new Date(+yr1,+mo1-1,+dy1),d2=new Date(+yr2,+mo2-1,+dy2);
-    document.getElementById('weekDates').textContent=
-      d1.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+
-      ' – '+d2.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  } else if(dates[0]){
-    document.getElementById('weekDates').textContent=dates[0]+' – '+(dates[4]||dates[0]);
-  }
+
+  if(dates[0]){
+    const d1 = parseMDY(dates[0]);
+    const d2 = parseMDY(dates[4] || dates[0]);
+
+    document.getElementById('weekDates').textContent =
+      d1.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) +
+     ' – ' +
+      d2.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+  
   document.getElementById('toolbarSub').textContent=`${EVENTS.length} events · ${weekEvs.length} this week`;
 
   renderChangeLog();
@@ -1174,7 +1220,7 @@ function renderWeek(dates){
   if(currentWeekIdx<0)currentWeekIdx=0;
   const w=WEEKS[currentWeekIdx];
   if(!w||!dates||!dates.length){document.getElementById('calView').innerHTML='<div class="empty-state"><div class="big">📭</div><p>No week data available.</p></div>';return;}
-  const evs=filteredEvents().filter(e=>e.weekNum===w.num);
+  const evs=filteredEvents().filter(e=>weekNumFromDate(e.date)===w.num);
   const laidOutByDate = {};
   dates.forEach(ds => {
     laidOutByDate[ds] = layoutOverlappingEvents(evs.filter(e => e.date === ds));
@@ -2084,7 +2130,10 @@ function parseBulkRows(rows,colIdx){
     const end=parseTime(row[gi('end',8)]);
     const category=String(row[gi('category',9)]||'Mandatory').trim();
     const block=String(row[gi('block',10)]||'').trim();
-    const weekNum=parseInt(row[gi('week',11)])||null;
+    const manualWeekNum=parseInt(row[gi('week',11)])||null;
+    const derivedWeekNum = /^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)
+      ? weekNumFromDate(dateStr)
+      : manualWeekNum;
 
     // Validate
     const errs=[];
@@ -2103,9 +2152,9 @@ if(category && typeof CATS_LIST!=='undefined' && !CATS_LIST.includes(category))e
       title,mand,group,location,mCal,calYear,presenter,notes,
       date:dateStr,start,end,
       category:(typeof CATS_LIST!=='undefined'&&CATS_LIST.includes(category))?category:(category||'Session'),
-      block:BLK_LIST.includes(block)?block:blockFromWeek(weekNum||28),
-      weekNum:weekNum||(WEEKS.length?WEEKS[0].num:28),
-      week:weekNameFor(weekNum||(WEEKS.length?WEEKS[0].num:28)),
+      block:BLK_LIST.includes(block)?block:blockFromWeek(derivedWeekNum||28),
+      weekNum:derivedWeekNum,
+      week:weekNameFor(derivedWeekNum),
       desc:title,
       _errors:errs,_valid:errs.filter(e=>!e.includes('Unknown category')&&!e.includes('defaulting')).length===0
     });
@@ -2177,7 +2226,7 @@ async function saveForm(){
   const end=document.getElementById('ff_end').value;
   const cat=document.getElementById('ff_cat').value;
   const block=document.getElementById('ff_block').value;
-  const weekNum=parseInt(document.getElementById('ff_week').value);
+  const weekNum = weekNumFromDate(date);
   if(!title||!date){showToast('⚠️ Title and Date are required.');return;}
   if(start>=end){showToast('⚠️ End time must be after start time.');return;}
   const btn=document.getElementById('saveBtn');
