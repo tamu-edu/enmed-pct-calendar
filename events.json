@@ -936,8 +936,8 @@
   {
     "title": "What is a Physician?", 
     "date": "07/27/2026", 
-    "start": "08:00 AM", 
-    "end": "09:00 AM", 
+    "start": "08:00", 
+    "end": "09:00", 
     "category": "Orientation", 
     "block": "PoM 1", 
     "weekNum": 1, 
@@ -954,8 +954,8 @@
   { 
     "title": "H&P: Patient-Centered Interviewing", 
     "date": "07/27/2026", 
-    "start": "09:00 AM", 
-    "end": "12:00 PM", 
+    "start": "09:00", 
+    "end": "12:00", 
     "category": "Orientation", 
     "block": "PoM 1", 
     "weekNum": 1, 
@@ -972,8 +972,8 @@
   { 
     "title": "Sim Center Tour & Intro to an OSCE", 
     "date": "07/27/2026", 
-    "start": "01:00 PM", 
-    "end": "05:00 PM", 
+    "start": "13:00", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 1, 
@@ -990,8 +990,8 @@
   { 
     "title": "Intro to Professionalism", 
     "date": "07/28/2026", 
-    "start": "08:00 AM", 
-    "end": "12:00 PM", 
+    "start": "08:00", 
+    "end": "12:00", 
     "category": "Orientation", 
     "block": "PoM 1", 
     "weekNum": 1, 
@@ -1008,8 +1008,8 @@
   { 
     "title": "Procedural Skills: Vital Signs Workshop", 
     "date": "07/28/2026", 
-    "start": "01:00 PM", 
-    "end": "05:00 PM", 
+    "start": "13:00", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 1, 
@@ -1026,8 +1026,8 @@
   { 
     "title": "LC Leader Introduction & Roundtable", 
     "date": "07/28/2026", 
-    "start": "01:00 PM", 
-    "end": "05:00 PM", 
+    "start": "13:00", 
+    "end": "17:00", 
     "category": "Orientation", 
     "block": "PoM 1", 
     "weekNum": 1, 
@@ -1080,8 +1080,8 @@
   { 
     "title": "Bootcamp OSCE Prep", 
     "date": "07/29/2026", 
-    "start": "01:00 PM", 
-    "end": "03:00 PM", 
+    "start": "13:00", 
+    "end": "15:00", 
     "category": "Orientation", 
     "block": "PoM 1", 
     "weekNum": 1, 
@@ -1135,8 +1135,8 @@
   { 
     "title": "PETA Session: Head, Eyes, Ears", 
     "date": "08/03/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 2, 
@@ -1153,8 +1153,8 @@
   { 
     "title": "HEENT Clinical Application Session", 
     "date": "08/03/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 2, 
@@ -1189,8 +1189,8 @@
   { 
     "title": "LC Session: HEENT Physical Exam Review, Clinical Reasoning", 
     "date": "08/10/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 3, 
@@ -1207,8 +1207,8 @@
   { 
     "title": "PETA Session: Head, Eyes, Ears", 
     "date": "08/10/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 3, 
@@ -1243,8 +1243,8 @@
   { 
     "title": "LC Session: HEENT Physical Exam Review, Clinical Reasoning", 
     "date": "08/17/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 4, 
@@ -1261,8 +1261,8 @@
   { 
     "title": "PETA Session: Nose, Throat, Neck, Pulmonary", 
     "date": "08/17/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 4, 
@@ -1279,8 +1279,8 @@
   { 
     "title": "Pulmonary Clinical Application Session", 
     "date": "08/17/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 4, 
@@ -1315,8 +1315,8 @@
   { 
     "title": "LC Session: Pulmonary Physical Exam Review, Clinical Reasoning", 
     "date": "08/24/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 5, 
@@ -1333,8 +1333,8 @@
   { 
     "title": "PETA Session: Nose, Throat, Neck, Pulmonary", 
     "date": "08/24/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 5, 
@@ -1351,8 +1351,8 @@
   { 
     "title": "Pulmonary Clinical Application Session", 
     "date": "08/24/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 5, 
@@ -1387,8 +1387,8 @@
   { 
     "title": "LC Session: Pulmonary Physical Exam Review, Clinical Reasoning", 
     "date": "08/31/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 6, 
@@ -1405,8 +1405,8 @@
   { 
     "title": "PETA Session: Cardiovascular", 
     "date": "08/31/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 6, 
@@ -1423,8 +1423,8 @@
   { 
     "title": "Cardiovascular Clinical Application Session", 
     "date": "08/31/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 6, 
@@ -1441,8 +1441,8 @@
   { 
     "title": "LC Session: Cardiovascular Physical Exam Review, Clinical Reasoning", 
     "date": "09/08/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 7, 
@@ -1459,8 +1459,8 @@
   { 
     "title": "PETA Session: Cardiovascular", 
     "date": "09/08/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 7, 
@@ -1477,8 +1477,8 @@
   { 
     "title": "Cardiovascular Clinical Application Session", 
     "date": "09/08/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 7, 
@@ -1513,8 +1513,8 @@
   { 
     "title": "LC Session: Cardiovascular Physical Exam Review, Clinical Reasoning", 
     "date": "09/14/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 8, 
@@ -1531,8 +1531,8 @@
   { 
     "title": "PETA Session: Abdominal & Review", 
     "date": "09/14/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 8, 
@@ -1549,8 +1549,8 @@
   { 
     "title": "Abdominal Clinical Application Session", 
     "date": "09/14/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 8, 
@@ -1585,8 +1585,8 @@
   { 
     "title": "LC Session: Abdominal Physical Exam Review, Clinical Reasoning", 
     "date": "09/21/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 9, 
@@ -1603,8 +1603,8 @@
   { 
     "title": "PETA Session: Abdominal & Review", 
     "date": "09/21/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 9, 
@@ -1621,8 +1621,8 @@
   { 
     "title": "Abdominal Clinical Application Session", 
     "date": "09/21/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 9, 
@@ -1640,7 +1640,7 @@
     "title": "Midpoint OSCE", 
     "date": "09/28/2026", 
     "start": "10:00", 
-    "end": "06:00 PM", 
+    "end": "18:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 10, 
@@ -1676,8 +1676,8 @@
   { 
     "title": "LC Session: Abdominal Physical Exam Review, Clinical Reasoning", 
     "date": "10/05/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 11, 
@@ -1694,8 +1694,8 @@
   { 
     "title": "PETA Session: Upper Extremity MSK + Neuro", 
     "date": "10/05/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 11, 
@@ -1712,8 +1712,8 @@
   { 
     "title": "MSK Clinical Application Session", 
     "date": "10/05/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 11, 
@@ -1748,8 +1748,8 @@
   { 
     "title": "LC Session: MSK Physical Exam Review, Clinical Reasoning", 
     "date": "10/12/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 12, 
@@ -1766,8 +1766,8 @@
   { 
     "title": "PETA Session: Upper Extremity MSK + Neuro", 
     "date": "10/12/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 12, 
@@ -1784,8 +1784,8 @@
   { 
     "title": "MSK Clinical Application Session", 
     "date": "10/12/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 12, 
@@ -1820,8 +1820,8 @@
   { 
     "title": "LC Session: MSK Physical Exam Review, Clinical Reasoning", 
     "date": "10/19/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 13, 
@@ -1838,8 +1838,8 @@
   { 
     "title": "PETA Session: Lower Extremity MSK + Neuro + Derm", 
     "date": "10/19/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 13, 
@@ -1856,8 +1856,8 @@
   { 
     "title": "Neurology Clinical Application Session", 
     "date": "10/19/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 13, 
@@ -1892,8 +1892,8 @@
   { 
     "title": "LC Session: Neurology Physical Exam Review, Clinical Reasoning", 
     "date": "10/26/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 14, 
@@ -1910,8 +1910,8 @@
   { 
     "title": "PETA Session: Lower Extremity MSK + Neuro + Derm", 
     "date": "10/26/2026", 
-    "start": "01:00 PM", 
-    "end": "03:30 PM", 
+    "start": "13:00", 
+    "end": "15:30", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 14, 
@@ -1928,8 +1928,8 @@
   { 
     "title": "Neurology Clinical Application Session", 
     "date": "10/26/2026", 
-    "start": "03:30 PM", 
-    "end": "05:00 PM", 
+    "start": "15:30", 
+    "end": "17:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 14, 
@@ -1964,8 +1964,8 @@
   { 
     "title": "HEAL System Based Practice 3: Patient Safety", 
     "date": "11/02/2026", 
-    "start": "01:00 PM", 
-    "end": "04:00 PM", 
+    "start": "13:00", 
+    "end": "16:00", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 15, 
@@ -2000,8 +2000,8 @@
   { 
     "title": "Ultrasound Integration Workshop", 
     "date": "11/10/2026", 
-    "start": "01:00 PM", 
-    "end": "04:00 PM", 
+    "start": "13:00", 
+    "end": "16:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 16, 
@@ -2036,8 +2036,8 @@
   { 
     "title": "LC Session: Neurology Physical Exam Review, Clinical Reasoning", 
     "date": "11/12/2026", 
-    "start": "01:00 PM", 
-    "end": "03:00 PM", 
+    "start": "13:00", 
+    "end": "15:00", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 16, 
@@ -2054,8 +2054,8 @@
   { 
     "title": "Comprehensive OSCE Simulation Open Lab", 
     "date": "11/12/2026", 
-    "start": "01:00 PM", 
-    "end": "03:00 PM", 
+    "start": "13:00", 
+    "end": "15:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 16, 
@@ -2070,10 +2070,10 @@
     "_id": "1777342011315_122" 
   }, 
   { 
-    "title": "Clinical Cadaver Integration Presentation", 
+    "title": "Clinical Cadaver Integration Presentation: TIME TBD", 
     "date": "11/13/2026", 
-    "start": "", 
-    "end": "", 
+    "start": "7:00", 
+    "end": "8:00", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 16, 
@@ -2092,7 +2092,7 @@
     "title": "Comprehensive Final OSCE", 
     "date": "11/16/2026", 
     "start": "08:00", 
-    "end": "06:00 PM", 
+    "end": "18:00", 
     "category": "Simulation Session", 
     "block": "PoM 1", 
     "weekNum": 17, 
@@ -2128,8 +2128,8 @@
   { 
     "title": "LC Groups: Service Learning Presentation Lifestyle Medicine: Nutrition", 
     "date": "11/30/2026", 
-    "start": "01:00 PM", 
-    "end": "04:00 PM", 
+    "start": "13:00", 
+    "end": "16:00", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 19, 
@@ -2164,8 +2164,8 @@
   { 
     "title": "LC Groups: White Coat Experience Presentation", 
     "date": "12/07/2026", 
-    "start": "01:00 PM", 
-    "end": "03:00 PM", 
+    "start": "13:00", 
+    "end": "15:00", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 20, 
@@ -2182,8 +2182,8 @@
   { 
     "title": "LC Groups: Professionalism & Well-Being", 
     "date": "12/07/2026", 
-    "start": "03:00 PM", 
-    "end": "05:00 PM", 
+    "start": "15:00", 
+    "end": "17:00", 
     "category": "Session", 
     "block": "PoM 1", 
     "weekNum": 20, 
@@ -2202,67 +2202,38 @@
  { 
 
  "title": "PoM 3 Orientation", 
-
  "date": "07/28/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Orientation", 
-
  "block": "PoM 3", 
-
  "weekNum": 1, 
-
  "week": "Week 1", 
-
  "desc": "PoM 3 Orientation", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_130" 
-
  }, 
 
  { 
 
  "title": "HEAL Orientation: Course Introduction and Ethics Review", 
-
  "date": "08/04/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Orientation", 
-
  "block": "PoM 3", 
-
  "weekNum": 2, 
-
  "week": "Week 2", 
-
  "desc": "HEAL Orientation: Course Introduction and Ethics Review", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_131" 
 
  }, 
@@ -2270,33 +2241,19 @@
  { 
 
  "title": "HEAL: Difficult Conversations and Apologies", 
-
  "date": "08/11/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 3, 
-
  "week": "Week 3", 
-
  "desc": "HEAL: Difficult Conversations and Apologies", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_132" 
 
  }, 
@@ -2304,33 +2261,19 @@
  { 
 
  "title": "How to Present", 
-
  "date": "08/11/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 3, 
-
  "week": "Week 3", 
-
  "desc": "How to Present", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_133" 
 
  }, 
@@ -2338,33 +2281,19 @@
  { 
 
  "title": "How to Present", 
-
  "date": "08/12/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 3, 
-
  "week": "Week 3", 
-
  "desc": "How to Present", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_134" 
 
  }, 
@@ -2372,33 +2301,19 @@
  { 
 
  "title": "Palliative and Hospice Care", 
-
  "date": "08/18/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 4, 
-
  "week": "Week 4", 
-
  "desc": "Palliative and Hospice Care", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_135" 
 
  }, 
@@ -2406,1664 +2321,850 @@
  { 
 
  "title": "Assessment & Plan Series, Part 1", 
-
  "date": "08/18/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 4, 
-
  "week": "Week 4", 
-
  "desc": "Assessment & Plan Series, Part 1", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_136" 
-
  }, 
 
  { 
 
  "title": "PoM 3 Preceptorships", 
-
  "date": "08/18/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 4, 
-
  "week": "Week 4", 
-
  "desc": "PoM 3 Preceptorships", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Off Site", 
-
  "_id": "pom3_137" 
-
  }, 
 
  { 
-
  "title": "CHP Workshop", 
-
  "date": "08/19/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 4, 
-
  "week": "Week 4", 
-
  "desc": "CHP Workshop", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_138" 
-
  }, 
 
  { 
-
  "title": "Upset Patient Overview and BBN OSCE Prep", 
-
  "date": "08/25/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 5, 
-
  "week": "Week 5", 
-
  "desc": "Upset Patient Overview and BBN OSCE Prep", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_139" 
-
  }, 
 
- 
-
  { 
-
  "title": "Complete H&P OSCE", 
-
  "date": "08/25/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 5, 
-
  "week": "Week 5", 
-
  "desc": "Complete H&P OSCE", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_140", 
-
  "additional": "Blackout Day" 
-
  }, 
 
  { 
-
  "title": "PoM 3 Preceptorships", 
-
  "date": "08/25/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 5, 
-
  "week": "Week 5", 
-
  "desc": "PoM 3 Preceptorships", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Off Site", 
-
  "_id": "pom3_141" 
-
  }, 
 
  { 
-
  "title": "Complete H&P OSCE", 
-
  "date": "08/26/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 5, 
-
  "week": "Week 5", 
-
  "desc": "Complete H&P OSCE", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group B", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_142", 
-
  "additional": "Blackout Day" 
-
  }, 
 
  { 
-
  "title": "PoM 3 Preceptorships", 
-
  "date": "08/26/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 5, 
-
  "week": "Week 5", 
-
  "desc": "PoM 3 Preceptorships", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Off Site", 
-
  "_id": "pom3_143" 
-
  }, 
 
  { 
-
  "title": "Upset Patient Workshop", 
-
  "date": "09/01/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 6, 
-
  "week": "Week 6", 
-
  "desc": "Upset Patient Workshop", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_144", 
-
  "additional": "Blackout Day" 
-
  }, 
 
  { 
-
  "title": "Focused Encounter Workshop (BBN-related)", 
-
  "date": "09/01/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 6, 
-
  "week": "Week 6", 
-
  "desc": "Focused Encounter Workshop (BBN-related)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_145", 
-
  "additional": "Blackout Day" 
-
- }, 
+ },
 
  { 
-
  "title": "PoM 3 Preceptorships", 
-
  "date": "09/01/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 6, 
-
  "week": "Week 6", 
-
  "desc": "PoM 3 Preceptorships", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Off Site", 
-
  "_id": "pom3_146", 
-
  "additional": "Blackout Day" 
-
  }, 
-
  { 
-
  "title": "Assessment & Plan Series, Part 2 (Note Types)", 
-
  "date": "09/02/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 6, 
-
  "week": "Week 6", 
-
  "desc": "Assessment & Plan Series, Part 2 (Note Types)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_147" 
-
  }, 
 
  { 
-
  "title": "CHP OSCE (Make Up)", 
-
  "date": "09/02/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 6, 
-
  "week": "Week 6", 
-
  "desc": "CHP OSCE (Make Up)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Assigned Students Only", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_148" 
-
  }, 
 
  { 
-
  "title": "Breaking Bad News (BBN) OSCE", 
-
  "date": "09/08/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 7, 
-
  "week": "Week 7", 
-
  "desc": "Breaking Bad News (BBN) OSCE", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_149", 
-
  "additional": "Blackout Day" 
-
  }, 
-
  { 
-
  "title": "Assessment & Plan Series, Part 3 (Oral Presentation)", 
-
  "date": "09/08/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 7, 
-
  "week": "Week 7", 
-
  "desc": "Assessment & Plan Series, Part 3 (Oral Presentation)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_150" 
-
  }, 
 
  { 
-
  "title": "PoM 3 Preceptorships", 
-
  "date": "09/08/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 7, 
-
  "week": "Week 7", 
-
  "desc": "PoM 3 Preceptorships", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Off Site", 
-
  "_id": "pom3_151" 
-
  }, 
 
  { 
-
  "title": "PoM 3 Preceptorships", 
-
  "date": "09/09/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 7, 
-
  "week": "Week 7", 
-
  "desc": "PoM 3 Preceptorships", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Off Site", 
-
  "_id": "pom3_152" 
-
  }, 
 
  { 
-
  "title": "HEAL Best Practices For Using Social Media", 
-
  "date": "09/15/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 8, 
-
  "week": "Week 8", 
-
  "desc": "HEAL Best Practices For Using Social Media", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_153" 
-
  }, 
-
  { 
-
  "title": "Assessment & Plan Series, Part 1", 
-
  "date": "09/15/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 8, 
-
  "week": "Week 8", 
-
  "desc": "Assessment & Plan Series, Part 1", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_154" 
-
  }, 
 
  { 
-
  "title": "PoM 3 Preceptorships", 
-
  "date": "09/15/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 8, 
-
  "week": "Week 8", 
-
  "desc": "PoM 3 Preceptorships", 
-
  "calYear": "2029", 
-
- "mCal": "M2", 
-
+ "mCal": "M2",
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "Off Site", 
-
  "_id": "pom3_155" 
-
  }, 
-
  { 
-
  "title": "CHP Workshop", 
-
  "date": "09/16/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 8, 
-
  "week": "Week 8", 
-
  "desc": "CHP Workshop", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_156" 
-
  }, 
-
  { 
-
  "title": "HEAL Telemedicine and AI Technology Ethics", 
-
  "date": "09/22/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 9, 
-
  "week": "Week 9", 
-
  "desc": "HEAL Telemedicine and AI Technology Ethics", 
-
  "calYear": "2029", 
-
- "mCal": "M2", 
-
+ "mCal": "M2",
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_157" 
-
  }, 
-
  { 
-
  "title": "Complete H&P OSCE (CHP OSCEs)", 
-
  "date": "09/22/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 9, 
-
  "week": "Week 9", 
-
  "desc": "Complete H&P OSCE (CHP OSCEs)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_158", 
-
  "additional": "Blackout Day" 
-
  }, 
-
  { 
-
  "title": "Complete H&P OSCE (CHP OSCEs)", 
-
  "date": "09/23/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 9, 
-
  "week": "Week 9", 
-
  "desc": "Complete H&P OSCE (CHP OSCEs)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group D", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_159", 
-
  "additional": "Blackout Day" 
-
  }, 
-
  
-
  { 
-
  "title": "Upset Patient Workshop", 
-
  "date": "09/29/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 10, 
-
  "week": "Week 10", 
-
  "desc": "Upset Patient Workshop", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_160" 
-
  }, 
-
  { 
-
  "title": "Focused Encounter Workshop (BBN-related)", 
-
  "date": "09/29/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 10, 
-
  "week": "Week 10", 
-
  "desc": "Focused Encounter Workshop (BBN-related)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_161" 
-
  }, 
-
  { 
-
  "title": "Assessment & Plan Series, Part 2 (Note Types)", 
-
  "date": "09/30/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 10, 
-
  "week": "Week 10", 
-
  "desc": "Assessment & Plan Series, Part 2 (Note Types)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_162" 
-
  }, 
-
  { 
-
  "title": "HEAL Breaking Bad News (BBN) OSCE", 
-
  "date": "10/06/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
- "block": "PoM 3", 
-
+ "block": "PoM 3",
  "weekNum": 11, 
-
  "week": "Week 11", 
-
  "desc": "HEAL Breaking Bad News (BBN) OSCE", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_163", 
-
  "additional": "Blackout Day" 
-
  }, 
-
  { 
-
  "title": "Assessment & Plan Series, Part 3 (Oral Presentation)", 
-
  "date": "10/06/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 11, 
-
  "week": "Week 11", 
-
  "desc": "Assessment & Plan Series, Part 3 (Oral Presentation)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_164" 
-
  }, 
-
  { 
-
  "title": "Health Care Economics and Regulation", 
-
  "date": "10/13/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 12, 
-
  "week": "Week 12", 
-
  "desc": "Health Care Economics and Regulation", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_165" 
-
  }, 
-
  { 
-
  "title": "Preceptor Case Presentations", 
-
  "date": "10/13/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 12, 
-
  "week": "Week 12", 
-
  "desc": "Preceptor Case Presentations", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_166" 
-
  }, 
-
  { 
-
  "title": "Focused H&P Workshop", 
-
  "date": "10/14/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 12, 
-
  "week": "Week 12", 
-
  "desc": "Focused H&P Workshop", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_167" 
-
  }, 
-
  { 
-
  "title": "Value-Based Care", 
-
  "date": "10/20/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 13, 
-
  "week": "Week 13", 
-
  "desc": "Value-Based Care", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_168" 
-
  }, 
-
  { 
-
  "title": "Focused H&P OSCE (FHP OSCEs)", 
-
  "date": "10/20/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 13, 
-
  "week": "Week 13", 
-
  "desc": "Focused H&P OSCE (FHP OSCEs)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_169", 
-
  "additional": "Blackout Day" 
-
  }, 
-
  { 
-
  "title": "Focused H&P OSCE (FHP OSCEs)", 
-
  "date": "10/21/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 13, 
-
  "week": "Week 13", 
-
  "desc": "Focused H&P OSCE (FHP OSCEs)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group B", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_170", 
-
  "additional": "Blackout Day" 
-
  }, 
-
  { 
-
  "title": "Selective Session 1", 
-
  "date": "10/27/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 14, 
-
  "week": "Week 14", 
-
  "desc": "Selective Session 1", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_171" 
-
  }, 
-
  { 
-
  "title": "Hospital Simulation", 
-
  "date": "10/27/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
- "block": "PoM 3", 
-
+ "block": "PoM 3",
  "weekNum": 14, 
-
  "week": "Week 14", 
-
  "desc": "Hospital Simulation", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_172" 
-
  }, 
-
  { 
-
  "title": "Harvey Simulation", 
-
  "date": "10/28/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 14, 
-
  "week": "Week 14", 
-
  "desc": "Harvey Simulation", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group A&B", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_173" 
-
  }, 
-
  { 
-
  "title": "Selective Session 2", 
-
  "date": "11/03/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 15, 
-
  "week": "Week 15", 
-
  "desc": "Selective Session 2", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_174" 
-
  }, 
-
  { 
-
  "title": "Preceptor Case Presentations", 
-
  "date": "11/03/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 15, 
-
  "week": "Week 15", 
-
  "desc": "Preceptor Case Presentations", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_175" 
-
  }, 
-
  { 
-
  "title": "Selective Session 3", 
-
  "date": "11/10/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 16, 
-
  "week": "Week 16", 
-
  "desc": "Selective Session 3", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_176" 
-
  }, 
-
  { 
-
  "title": "Focused H&P OSCE (FHP OSCEs)", 
-
  "date": "11/10/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 16, 
-
  "week": "Week 16", 
-
  "desc": "Focused H&P OSCE (FHP OSCEs)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_177", 
-
  "additional": "Blackout Day" 
-
  }, 
-
  { 
-
  "title": "Selective Session 4", 
-
  "date": "11/17/2026", 
-
  "start": "10:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 17, 
-
  "week": "Week 17", 
-
  "desc": "Selective Session 4", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_178" 
-
  }, 
-
  { 
-
  "title": "Hospital Simulation", 
-
  "date": "11/17/2026", 
-
  "start": "13:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 17, 
-
  "week": "Week 17", 
-
  "desc": "Hospital Simulation", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Group C&D", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_179" 
-
  }, 
-
  { 
-
  "title": "PoM 3 Final OSCE", 
-
  "date": "11/23/2026", 
-
  "start": "08:00", 
-
  "end": "17:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 18, 
-
  "week": "Week 18", 
-
  "desc": "PoM 3 Final OSCE", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "All Students", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_180" 
-
  }, 
-
  { 
-
  "title": "Course Debrief", 
-
  "date": "12/01/2026", 
-
  "start": "11:00", 
-
  "end": "12:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 19, 
-
  "week": "Week 19", 
-
  "desc": "Course Debrief", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "No", 
-
  "group": "All Students", 
-
  "location": "Room 216 A/B, EnMed Tower", 
-
  "_id": "pom3_181" 
-
  }, 
-
  { 
-
  "title": "Final OSCE Remediation and/or Makeup (Projected)", 
-
  "date": "12/08/2026", 
-
  "start": "13:00", 
-
  "end": "15:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 20, 
-
  "week": "Week 20", 
-
  "desc": "Final OSCE Remediation and/or Makeup (Projected)", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Assigned Students Only", 
-
  "location": "SIM 404, EnMed Tower", 
-
  "_id": "pom3_182" 
-
  }, 
-
  { 
-
  "title": "FHP OSCE Remediation Tentative", 
-
  "date": "12/08/2026", 
-
  "start": "13:00", 
-
  "end": "15:00", 
-
  "category": "Session", 
-
  "block": "PoM 3", 
-
  "weekNum": 20, 
-
  "week": "Week 20", 
-
  "desc": "FHP OSCE Remediation Tentative", 
-
  "calYear": "2029", 
-
  "mCal": "M2", 
-
  "mand": "Yes", 
-
  "group": "Assigned Students Only", 
-
  "location": "SIM 305, EnMed Tower", 
-
  "_id": "pom3_183" 
-
  } 
-
- 
 
  
 ]
