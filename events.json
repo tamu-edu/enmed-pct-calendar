@@ -907,7 +907,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Auditorium",
-    "_id": "1777342011315_3"
+    "_id": "1777342011315_3",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "EnMed Program Orientation",
@@ -924,7 +926,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Auditorium",
-    "_id": "1777342011315_4"
+    "_id": "1777342011315_4",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Lecture 1 - Course Introduction",
@@ -941,7 +945,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Auditorium",
-    "_id": "1777342011315_5"
+    "_id": "1777342011315_5",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "ENGR Correlation Session 1",
@@ -958,7 +964,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 212 A/B",
-    "_id": "1777342011315_6"
+    "_id": "1777342011315_6",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "ENGR Correlation Session 2",
@@ -975,7 +983,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 212 A/B",
-    "_id": "1777342011315_7"
+    "_id": "1777342011315_7",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "ENGR Correlation Session 3",
@@ -992,7 +1002,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 212 A/B",
-    "_id": "1777342011315_8"
+    "_id": "1777342011315_8",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "ENGR Correlation Session 4",
@@ -1009,7 +1021,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 212 A/B",
-    "_id": "1777342011315_9"
+    "_id": "1777342011315_9",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "ENGR Correlation Session 5",
@@ -1026,7 +1040,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 212 A/B",
-    "_id": "1777342011315_10"
+    "_id": "1777342011315_10",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "ENGR Correlation Session 6",
@@ -1043,7 +1059,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 212 A/B",
-    "_id": "1777342011315_11"
+    "_id": "1777342011315_11",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "ENGR Correlation Session 7",
@@ -1060,7 +1078,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 212 A/B",
-    "_id": "1777342011315_12"
+    "_id": "1777342011315_12",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "ENGR Correlation Session 8",
@@ -1077,7 +1097,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 212 A/B",
-    "_id": "1777342011315_13"
+    "_id": "1777342011315_13",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 1: Reverse Engineering",
@@ -1094,7 +1116,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_14"
+    "_id": "1777342011315_14",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 1: Reverse Engineering",
@@ -1111,7 +1135,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_15"
+    "_id": "1777342011315_15",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Lecture 2 - Clinical Needs - Design Inputs",
@@ -1128,7 +1154,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Auditorium",
-    "_id": "1777342011315_16"
+    "_id": "1777342011315_16",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Lecture 3 - Ideation and Concept Development",
@@ -1145,7 +1173,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Auditorium",
-    "_id": "1777342011315_17"
+    "_id": "1777342011315_17",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 6 - Basic Circuits and Soldering",
@@ -1162,7 +1192,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_18"
+    "_id": "1777342011315_18",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 6 - Basic Circuits and Soldering",
@@ -1179,7 +1211,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_19"
+    "_id": "1777342011315_19",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Lecture 4 - Intellectual Property",
@@ -1196,7 +1230,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Auditorium",
-    "_id": "1777342011315_20"
+    "_id": "1777342011315_20",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 10 - Coding Introduction (Python)",
@@ -1213,7 +1249,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_21"
+    "_id": "1777342011315_21",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 10 - Coding Introduction (Python)",
@@ -1230,7 +1268,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_22"
+    "_id": "1777342011315_22",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 3 - DICOM, 3D Image Reconstruction",
@@ -1247,7 +1287,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_23"
+    "_id": "1777342011315_23",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 3 - DICOM, 3D Image Reconstruction",
@@ -1264,7 +1306,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_24"
+    "_id": "1777342011315_24",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Lecture 5 - Design Outputs - Verification",
@@ -1281,7 +1325,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Auditorium",
-    "_id": "1777342011315_25"
+    "_id": "1777342011315_25",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 7 - Basic Arduino Circuits",
@@ -1298,7 +1344,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_26"
+    "_id": "1777342011315_26",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 7 - Basic Arduino Circuits",
@@ -1315,7 +1363,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_27"
+    "_id": "1777342011315_27",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 11 - Machine Learning",
@@ -1332,7 +1382,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_28"
+    "_id": "1777342011315_28",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 11 - Machine Learning",
@@ -1349,7 +1401,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_29"
+    "_id": "1777342011315_29",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 4 - Mold Assembly & Design",
@@ -1366,7 +1420,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_30"
+    "_id": "1777342011315_30",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 4 - Mold Assembly & Design",
@@ -1383,7 +1439,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_31"
+    "_id": "1777342011315_31",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 8 - Functional Arduino Circuits (1)",
@@ -1400,7 +1458,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_32"
+    "_id": "1777342011315_32",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 8 - Functional Arduino Circuits (1)",
@@ -1417,7 +1477,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_33"
+    "_id": "1777342011315_33",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 5 - Casting & MRI",
@@ -1434,7 +1496,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_34"
+    "_id": "1777342011315_34",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 5 - Casting & MRI",
@@ -1451,7 +1515,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_35"
+    "_id": "1777342011315_35",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Lecture 6 - FDA Design Process & Ethics",
@@ -1468,7 +1534,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Auditorium",
-    "_id": "1777342011315_36"
+    "_id": "1777342011315_36",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 9 - Functional Arduino Circuits (2)",
@@ -1485,7 +1553,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_37"
+    "_id": "1777342011315_37",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 9 - Functional Arduino Circuits (2)",
@@ -1502,7 +1572,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_38"
+    "_id": "1777342011315_38",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 12 - AI-Assisted Coding",
@@ -1519,7 +1591,9 @@
     "mand": "Yes",
     "group": "Section 100",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_39"
+    "_id": "1777342011315_39",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Workshop 12 - AI-Assisted Coding",
@@ -1536,7 +1610,9 @@
     "mand": "Yes",
     "group": "Section 101",
     "location": "Room 106 (EIC)",
-    "_id": "1777342011315_40"
+    "_id": "1777342011315_40",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Biodesign Session 1",
@@ -1553,7 +1629,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "",
-    "_id": "1777342011315_41"
+    "_id": "1777342011315_41",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Biodesign Session 2",
@@ -1570,7 +1648,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "",
-    "_id": "1777342011315_42"
+    "_id": "1777342011315_42",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Biodesign Session 3",
@@ -1587,7 +1667,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "",
-    "_id": "1777342011315_43"
+    "_id": "1777342011315_43",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Biodesign Session 4",
@@ -1604,7 +1686,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "",
-    "_id": "1777342011315_44"
+    "_id": "1777342011315_44",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Biodesign Session 5",
@@ -1621,7 +1705,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "",
-    "_id": "1777342011315_45"
+    "_id": "1777342011315_45",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Biodesign Session 6",
@@ -1638,7 +1724,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "",
-    "_id": "1777342011315_46"
+    "_id": "1777342011315_46",
+    "info": "",
+    "presenter": ""
   },
   {
     "title": "Biodesign Session 7",
@@ -1655,7 +1743,9 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "",
-    "_id": "1777342011315_47"
+    "_id": "1777342011315_47",
+    "info": "",
+    "presenter": ""
   },
   {
     "_id": "1777342011315_48",
@@ -1674,7 +1764,8 @@
     "block": "Pre-Matriculation Week 6",
     "weekNum": 6,
     "week": "Week 6",
-    "desc": "[OPT] Workshop Open Lab"
+    "desc": "[OPT] Workshop Open Lab",
+    "info": ""
   },
   {
     "_id": "1777342011315_49",
@@ -1693,7 +1784,8 @@
     "block": "Pre-Matriculation Week 6",
     "weekNum": 6,
     "week": "Week 6",
-    "desc": "[OPT] Workshop Open Lab"
+    "desc": "[OPT] Workshop Open Lab",
+    "info": ""
   },
   {
     "title": "Engineering Design Workshop Showcase",
@@ -1710,7 +1802,9 @@
     "mand": "Yes",
     "group": "",
     "location": "EnMed Lobby",
-    "_id": "1777342011315_50"
+    "_id": "1777342011315_50",
+    "info": "",
+    "presenter": ""
   },
   {
     "_id": "1777342011315_51",
@@ -1729,7 +1823,8 @@
     "block": "Pre-Matriculation Week 7",
     "weekNum": 7,
     "week": "Week 7",
-    "desc": "[OPT] Workshop Open Lab"
+    "desc": "[OPT] Workshop Open Lab",
+    "info": ""
   },
   {
     "_id": "1777342011315_52",
@@ -1748,7 +1843,8 @@
     "block": "Pre-Matriculation Week 7",
     "weekNum": 7,
     "week": "Week 7",
-    "desc": "[OPT] Workshop Open Lab"
+    "desc": "[OPT] Workshop Open Lab",
+    "info": ""
   },
   {
     "_id": "1777342011315_53",
@@ -1767,7 +1863,8 @@
     "block": "Pre-Matriculation Week 7",
     "weekNum": 7,
     "week": "Week 7",
-    "desc": "[OPT] Workshop Open Lab"
+    "desc": "[OPT] Workshop Open Lab",
+    "info": ""
   },
   {
     "_id": "1777342011315_54",
@@ -1786,7 +1883,8 @@
     "block": "Pre-Matriculation Week 7",
     "weekNum": 7,
     "week": "Week 7",
-    "desc": "[OPT] Workshop Open Lab"
+    "desc": "[OPT] Workshop Open Lab",
+    "info": ""
   },
   {
     "_id": "1777342011315_55",
@@ -1805,7 +1903,8 @@
     "block": "Pre-Matriculation Week 7",
     "weekNum": 7,
     "week": "Week 7",
-    "desc": "[OPT] Workshop Open Lab"
+    "desc": "[OPT] Workshop Open Lab",
+    "info": ""
   },
   {
     "_id": "1777342011315_56",
@@ -1824,9 +1923,9 @@
     "block": "Pre-Matriculation Week 7",
     "weekNum": 7,
     "week": "Week 7",
-    "desc": "[OPT] Workshop Open Lab"
+    "desc": "[OPT] Workshop Open Lab",
+    "info": ""
   },
-  
   {
     "title": "Orientation",
     "date": "07/30/2026",
