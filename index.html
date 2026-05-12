@@ -1253,8 +1253,9 @@ function renderWeek(dates){
         const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
         const mcalCol=mCalColor(e);
         const catCol=CAT_COLOR[e.category]||'#4a5168';
+        const blockLabel = e.block ? `${e.block} · ` : '';
         html+=`<div class="event week-event ${ec}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:calc(${e._leftPct}% + 3px);width:calc(${e._widthPct}% - 6px);background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 4px,${mcalCol} 4px,${mcalCol} 8px,${mcalCol}18 8px);color:${mcalCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
-          <div class="ev-tag" style="color:${catCol}">${e.category}</div>
+          <div class="ev-tag" style="color:${catCol}">${blockLabel}${e.category}</div>
           <div class="ev-title">${displayTitle(e)}</div>
           <div class="ev-time">${fmtTime(e.start)} – ${fmtTime(e.end)}</div>
           ${isFacultyMode?`<div class="ev-controls">
@@ -1285,9 +1286,10 @@ function renderList(){
       const col=mCalColor(e),ec=evClass(e);
       const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
       const catColL=CAT_COLOR[e.category]||'#4a5168';
+      const blockLabel = e.block ? `${e.block} · ` : '';
       html+=`<div class="event list-event ${ec}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 4px,${col} 4px,${col} 8px,${col}18 8px)" onclick="handleEventClick(event,${ej})">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:${col};white-space:nowrap;min-width:90px">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
-        <div style="flex:1"><div class="ev-tag" style="color:${catColL}">${e.category}</div><div style="font-size:13px;font-weight:500;color:${col}">${displayTitle(e)}</div></div>
+        <div style="flex:1"><div class="ev-tag" style="color:${catColL}">${blockLabel}${e.category}</div><div style="font-size:13px;font-weight:500;color:${col}">${displayTitle(e)}</div></div>
         ${isFacultyMode?`<div style="display:flex;gap:5px;flex-shrink:0">
           <button class="ev-ctrl-btn ev-edit-btn" style="width:28px;height:28px" onclick="openEditForm(event,${ej})">✎</button>
           <button class="ev-ctrl-btn ev-del-btn" style="width:28px;height:28px" onclick="confirmDelete(event,'${e._id}')">✕</button>
@@ -1324,7 +1326,10 @@ function openModal(e){
   document.getElementById('modalNotesRow').style.display=notes?'flex':'none';
   if(document.getElementById('modalNotes'))document.getElementById('modalNotes').textContent=notes;
   if(document.getElementById('modalYearRow')){const yr=e.calYear||'';document.getElementById('modalYearRow').style.display=yr?'flex':'none';document.getElementById('modalYear').textContent=yr;}
-  document.getElementById('modalBlock').innerHTML=`<span style="color:${BLOCK_COLOR[e.block]||'#fff'}">${e.block}</span>`;
+  const blockText = e.block == null ? '' : String(e.block);
+  const blockEl = document.getElementById('modalBlock');
+  blockEl.textContent = blockText;
+  blockEl.style.color = BLOCK_COLOR[blockText] || 'var(--text)';
   document.getElementById('modalWeek').textContent=e.week;
   document.getElementById('modalEditBtn').style.display=isFacultyMode?'':'none';
   document.getElementById('modalDeleteBtn').style.display=isFacultyMode?'':'none';
