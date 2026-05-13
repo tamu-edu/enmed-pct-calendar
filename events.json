@@ -8128,25 +8128,6 @@
     "presenter": "Dr. Priya and Dr. Meyer"
   },
   {
-    "title": "Exam #3 Check-In",
-    "date": "09/11/2026",
-    "start": "08:45:00",
-    "end": "08:55:00",
-    "category": "Exam Check-In",
-    "block": "FoM I",
-    "weekNum": 1,
-    "week": "6",
-    "desc": "Exam #3 Check-In",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
-    "_id": "2051226_24",
-    "info": "",
-    "presenter": ""
-  },
-  {
     "title": "Exam #3",
     "date": "09/11/2026",
     "start": "09:00:00",
