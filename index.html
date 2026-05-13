@@ -1504,6 +1504,8 @@ function formHTML(e,isEdit){
     <datalist id="blockList">${blockOptions}</datalist>
     <div class="color-preview"><div class="color-dot" id="blockDot" style="background:${BLOCK_COLOR[defBlock]||'#7a829a'}"></div><span style="font-size:11px;color:${BLOCK_COLOR[defBlock]||'#7a829a'}" id="blockLabel">${escForm(defBlock)}</span></div></div>
 
+  <div class="form-group"><label class="form-label">Presenter(s)</label><input class="form-input" id="ff_presenter" value="${escForm(e?(e.presenter||''):'')}" placeholder="e.g. Dr. Smith, Dr. Jones"></div>
+
   <div class="form-group"><label class="form-label">Additional Information</label><textarea class="form-input" id="ff_info" rows="4" placeholder="Stored in JSON as info" style="resize:vertical;min-height:90px;line-height:1.5;font-size:12px">${escForm(e?(e.info||''):'')}</textarea></div>
 
   <div id="catalogSection"></div>
@@ -2352,6 +2354,7 @@ async function saveForm(){
   const group=document.getElementById('ff_group').value.trim();
   const location=document.getElementById('ff_location').value.trim();
   const info=document.getElementById('ff_info').value.trim();
+  const presenter=document.getElementById('ff_presenter').value.trim();
 
   const ev={
     ...existing,
@@ -2370,7 +2373,7 @@ async function saveForm(){
     group,
     location,
     info,
-    presenter:existing.presenter || '',
+    presenter,
     _id:editingId || existing._id || (Date.now()+'')
   };
 
