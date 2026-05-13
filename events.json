@@ -570,25 +570,6 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
-    "title": "TBL",
-    "date": "08/12/2026",
-    "start": "10:00",
-    "end": "11:30",
-    "category": "TBL",
-    "block": "",
-    "weekNum": 2,
-    "week": "Week 2",
-    "desc": "TBL",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "2nd Flr Room 216 A/B, EnMed Twr",
-    "_id": "10051226_9",
-    "info": "",
-    "presenter": "Dr. Meyer, Dr.Omole"
-  },
-  {
     "title": "MITIE Lab Dissection [Group A]",
     "date": "08/12/2026",
     "start": "13:00",
