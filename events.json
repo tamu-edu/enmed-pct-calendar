@@ -8052,25 +8052,6 @@
     "presenter": ""
   },
   {
-    "title": "Exam #2",
-    "date": "08/28/2026",
-    "start": "09:00:00",
-    "end": "11:00:00",
-    "category": "EXAM",
-    "block": "FoM I",
-    "weekNum": 1,
-    "week": "4",
-    "desc": "Exam #2",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
-    "_id": "2051226_18",
-    "info": "",
-    "presenter": ""
-  },
-  {
     "title": "Active Learning",
     "date": "09/01/2026",
     "start": "09:00:00",
