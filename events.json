@@ -8603,10 +8603,10 @@
   {
     "title": "Blackout Day",
     "date": "05/27/2026",
-    "start": "08:00",
-    "end": "09:00",
-    "category": "Session",
-    "block": "POM I Week 10",
+    "start": "7:00",
+    "end": "7:30",
+    "category": "Abdominal Clinical Application Session",
+    "block": "ITDE 611 Week 1",
     "weekNum": 1,
     "week": "Week 1",
     "desc": "Blackout Day",
@@ -8615,6 +8615,8 @@
     "mand": "No",
     "group": "Section 100",
     "location": "Room 212 A/B",
+    "info": "Testing to see if this works",
+    "presenter": "",
     "_id": "1778703731166"
   }
 ]
