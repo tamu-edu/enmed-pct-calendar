@@ -234,6 +234,45 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .m-icon{font-size:16px;width:22px;flex-shrink:0;margin-top:1px}
 .m-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
 .m-val{font-size:13px;color:var(--text)}
+
+.modal-inline-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:2px 0 14px 34px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.modal-required{
+  color:#C62828;
+  font-weight:700;
+}
+
+.modal-info-box{
+  margin-top:18px;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--surface2);
+}
+
+.modal-info-title{
+  font-size:10px;
+  font-weight:700;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  margin-bottom:8px;
+}
+
+.modal-info-text{
+  font-size:13px;
+  color:var(--text);
+  line-height:1.6;
+  white-space:pre-wrap;
+}
+
 .modal-footer{padding:0 24px 20px}
 .modal-week{font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding-top:14px;font-family:'DM Mono',monospace}
 
@@ -686,17 +725,28 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="modal-row"><div class="m-icon">🗓</div><div><div class="m-label">Date &amp; Time</div><div class="m-val" id="modalDate"></div></div></div>
-      <div class="modal-row" id="modalMandRow" style="display:none"><div class="m-icon">⚠️</div><div><div class="m-label">Mandatory Attendance</div><div class="m-val" id="modalMand" style="font-weight:700;color:#C62828"></div></div></div>
-      <div class="modal-row" id="modalGroupRow" style="display:none"><div class="m-icon">👥</div><div><div class="m-label">Group Assigned</div><div class="m-val" id="modalGroup"></div></div></div>
-      <div class="modal-row" id="modalLocationRow" style="display:none"><div class="m-icon">📍</div><div><div class="m-label">Session Location</div><div class="m-val" id="modalLocation"></div></div></div>
-      <div class="modal-row" id="modalPresenterRow" style="display:none"><div class="m-icon">🎓</div><div><div class="m-label">Presenter</div><div class="m-val" id="modalPresenter"></div></div></div>
-      <div class="modal-row" id="modalNotesRow" style="display:none"><div class="m-icon">📌</div><div><div class="m-label">Additional Information</div><div class="m-val" id="modalNotes" style="white-space:pre-wrap;line-height:1.6"></div></div></div>
-      <div class="modal-row" id="modalYearRow" style="display:none"><div class="m-icon">🎓</div><div><div class="m-label">Calendar</div><div class="m-val" id="modalYear"></div></div></div>
-      <div class="modal-row"><div class="m-icon">📚</div><div><div class="m-label">Block</div><div class="m-val" id="modalBlock"></div></div></div>
+      <div class="modal-row">
+        <div class="m-icon">🗓</div>
+        <div><div class="m-val" id="modalDate"></div></div>
     </div>
+    <div class="modal-row" id="modalLocationRow" style="display:none">
+      <div class="m-icon">📍</div>
+        <div><div class="m-val" id="modalLocation"></div></div>
+    </div>
+
+    <div class="modal-row" id="modalPresenterRow" style="display:none">
+      <div class="m-icon">🎓</div>
+        <div><div class="m-val" id="modalPresenter"></div></div>
+    </div>
+
+   <div class="modal-inline-meta" id="modalMetaLine"></div>
+
+    <div class="modal-info-box" id="modalInfoBox" style="display:none">
+      <div class="modal-info-title">Additional Information</div>
+        <div class="modal-info-text" id="modalInfo"></div>
+    </div>
+  </div>
     <div class="modal-footer">
-      <div class="modal-week" id="modalWeek"></div>
       <div style="display:flex;gap:8px;margin-top:12px">
         <button id="modalEditBtn" style="display:none;flex:1;padding:8px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer" onclick="modalEdit()">&#9998; Edit</button>
         <button id="modalDeleteBtn" style="display:none;flex:1;padding:8px;border-radius:7px;border:none;background:rgba(240,92,110,.15);color:#f05c6e;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer" onclick="modalDelete()">&#128465; Delete</button>
@@ -1312,25 +1362,50 @@ function openModal(e){
   document.getElementById('modalBar').style.background=`linear-gradient(to bottom,${catColModal} 0%,${catColModal} 50%,${col} 50%,${col} 100%)`;
   document.getElementById('modalCat').style.color=col;
   document.getElementById('modalTitle').textContent=displayTitle(e);
-  document.getElementById('modalCat').textContent=`${e.calYear||'2028'} ${e.mCal||'M1'} · ${e.category}`;document.getElementById('modalCat').style.color=col;
+  const blockText = e.block == null ? '' : String(e.block).trim();
+  document.getElementById('modalCat').textContent=`${e.mCal||'M1'}${blockText ? ' · ' + blockText : ''} · ${e.category}`;
+  document.getElementById('modalCat').style.color=col;
   document.getElementById('modalDate').textContent=`${fmtDate(e.date)}, ${fmtTime(e.start)} – ${fmtTime(e.end)}`;
-  const mand=e.mand||'No';const grp=e.group||'';const loc=e.location||'';const notes=e.notes||'';const presenter=e.presenter||'';
-  document.getElementById('modalMandRow').style.display=mand==='Yes'?'flex':'none';
-  if(document.getElementById('modalMand'))document.getElementById('modalMand').textContent='Required';
-  document.getElementById('modalGroupRow').style.display=grp?'flex':'none';
-  if(document.getElementById('modalGroup'))document.getElementById('modalGroup').textContent=grp;
-  document.getElementById('modalLocationRow').style.display=loc?'flex':'none';
-  if(document.getElementById('modalLocation'))document.getElementById('modalLocation').textContent=loc;
-  document.getElementById('modalPresenterRow').style.display=presenter?'flex':'none';
-  if(document.getElementById('modalPresenter'))document.getElementById('modalPresenter').textContent=presenter;
-  document.getElementById('modalNotesRow').style.display=notes?'flex':'none';
-  if(document.getElementById('modalNotes'))document.getElementById('modalNotes').textContent=notes;
-  if(document.getElementById('modalYearRow')){const yr=e.calYear||'';document.getElementById('modalYearRow').style.display=yr?'flex':'none';document.getElementById('modalYear').textContent=yr;}
-  const blockText = e.block == null ? '' : String(e.block);
-  const blockEl = document.getElementById('modalBlock');
-  blockEl.textContent = blockText;
-  blockEl.style.color = BLOCK_COLOR[blockText] || 'var(--text)';
-  document.getElementById('modalWeek').textContent=e.week;
+  
+  
+const mand=e.mand||'No';
+const grp=e.group||'';
+const loc=e.location||'';
+const info=e.info||e.notes||e.desc||'';
+const presenter=e.presenter||'';
+
+document.getElementById('modalLocationRow').style.display=loc?'flex':'none';
+if(document.getElementById('modalLocation'))document.getElementById('modalLocation').textContent=loc;
+
+document.getElementById('modalPresenterRow').style.display=presenter?'flex':'none';
+if(document.getElementById('modalPresenter'))document.getElementById('modalPresenter').textContent=presenter;
+
+const metaLine=document.getElementById('modalMetaLine');
+metaLine.textContent='';
+
+if(mand==='Yes'){
+  const req=document.createElement('span');
+  req.className='modal-required';
+  req.textContent='Required';
+  metaLine.appendChild(req);
+}
+
+if(grp){
+  if(metaLine.childNodes.length){
+    const sep=document.createElement('span');
+    sep.textContent='·';
+    metaLine.appendChild(sep);
+  }
+  const groupSpan=document.createElement('span');
+  groupSpan.textContent=grp;
+  metaLine.appendChild(groupSpan);
+}
+
+metaLine.style.display=metaLine.childNodes.length?'flex':'none';
+
+document.getElementById('modalInfoBox').style.display=info?'block':'none';
+if(document.getElementById('modalInfo'))document.getElementById('modalInfo').textContent=info;
+
   document.getElementById('modalEditBtn').style.display=isFacultyMode?'':'none';
   document.getElementById('modalDeleteBtn').style.display=isFacultyMode?'':'none';
   document.getElementById('modalOverlay').classList.add('open');
