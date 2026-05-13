@@ -1510,10 +1510,13 @@ function formHTML(e,isEdit){
 
   <div id="catalogSection"></div>
   <div style="display:flex;flex-direction:column;gap:8px;margin-top:18px">
-    <button class="btn-full btn-save" id="saveBtn" onclick="saveForm()">💾 ${isEdit?'Save Changes':'Add Event'}</button>
-    ${isEdit?`<button class="btn-full btn-delete-full" onclick="confirmDelete(null,'${editingId}')">🗑 Delete Event</button>`:''}
-    <button class="btn-full btn-cancel" onclick="closeForm()">Cancel</button>
-  </div>`;
+    ${isEdit
+      ? `<button class="btn-full btn-save" id="saveBtn" onclick="saveForm()">💾 Save Changes</button>
+         <button class="btn-full btn-delete-full" onclick="confirmDelete(null,'${editingId}')">🗑 Delete Event</button>`
+      : `<button class="btn-full btn-save" id="saveBtn" onclick="saveForm()">➕ Add Event</button>`
+    }
+  <button class="btn-full btn-cancel" onclick="closeForm()">Cancel</button>
+</div>`;
 }
 function updateCatPreview(){const v=document.getElementById('ff_cat').value,col=CAT_COLOR[v]||'#4a5168';document.getElementById('catDot').style.background=col;document.getElementById('catLabel').textContent=v;document.getElementById('catLabel').style.color=col;}
 function updateBlockPreview(){const v=document.getElementById('ff_block').value,col=BLOCK_COLOR[v]||'#7a829a';document.getElementById('blockDot').style.background=col;document.getElementById('blockLabel').textContent=v;document.getElementById('blockLabel').style.color=col;}
@@ -2343,6 +2346,7 @@ async function saveForm(){
   if(timeToMinutes(start)>=timeToMinutes(end)){showToast('⚠️ End time must be after start time.');return;}
 
   const btn=document.getElementById('saveBtn');
+  const isEditing=!!editingId;
   btn.textContent='Saving to GitHub...';
   btn.disabled=true;
 
@@ -2378,12 +2382,17 @@ async function saveForm(){
   };
 
   try{
-    if(editingId){
+    if(isEditing){
       const i=EVENTS.findIndex(e=>e._id===editingId);
-      if(i>=0)EVENTS[i]=ev;
-    } else {
-      EVENTS.push(ev);
+
+      if(i<0){
+        throw new Error('Original event not found. Refresh and try again.');
     }
+
+  EVENTS[i]=ev;
+} else {
+  EVENTS.push(ev);
+}
 
     await saveEventsToGitHub();
     addLog(editingId?'edited':'added',ev);
@@ -2394,7 +2403,7 @@ async function saveForm(){
     render();
   }catch(err){
     showToast('❌ '+err.message);
-    btn.textContent=editingId?'💾 Save Changes':'💾 Add Event';
+    btn.textContent=isEditing?'💾 Save Changes':'➕ Add Event';
     btn.disabled=false;
   }
 }
