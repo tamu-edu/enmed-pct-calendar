@@ -7976,25 +7976,6 @@
     "presenter": ""
   },
   {
-    "title": "Exam #1",
-    "date": "08/14/2026",
-    "start": "09:00:00",
-    "end": "11:00:00",
-    "category": "EXAM",
-    "block": "FoM I",
-    "weekNum": 1,
-    "week": "2",
-    "desc": "Exam #1",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
-    "_id": "2051226_10",
-    "info": "",
-    "presenter": ""
-  },
-  {
     "title": "Histology Lab",
     "date": "08/18/2026",
     "start": "08:00:00",
