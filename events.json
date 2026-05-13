@@ -800,7 +800,7 @@
     "date": "08/28/2026",
     "start": "08:00",
     "end": "12:00",
-    "category": "",
+    "category": "EXAM",
     "block": "MGA/FoM I",
     "weekNum": 14,
     "week": "Week 14",
