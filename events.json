@@ -4195,7 +4195,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_5",
     "info": "",
-    "presenter": "Dr. Nicholas Sears Dr. Shannon Wilson"
+    "presenter": "Dr. Nicholas Sears, Dr. Shannon Wilson"
   },
   {
     "title": "ENGR Correlation Session 1",
@@ -4404,7 +4404,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_16",
     "info": "",
-    "presenter": "Dr. Nicholas Sears Dr. Shannon Wilson"
+    "presenter": "Dr. Nicholas Sears, Dr. Shannon Wilson"
   },
   {
     "title": "Lecture 3 - Ideation and Concept Development",
@@ -4423,7 +4423,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_17",
     "info": "",
-    "presenter": "Dr. Nicholas Sears\nDr. Shannon Wilson\nTyler Melton"
+    "presenter": "Dr. Nicholas Sears, Dr. Shannon Wilson, Tyler Melton"
   },
   {
     "title": "Workshop 6 - Basic Circuits and Soldering",
@@ -4480,7 +4480,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_20",
     "info": "",
-    "presenter": "Dr. Nicholas Sears\nDr. Shannon Wilson\nKebbeh Darpolor"
+    "presenter": "Dr. Nicholas Sears, Dr. Shannon Wilson, Kebbeh Darpolor"
   },
   {
     "title": "Workshop 10 - Coding Introduction (Python)",
@@ -4575,7 +4575,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_25",
     "info": "",
-    "presenter": "Dr. Nicholas Sears\nDr. Shannon Wilson"
+    "presenter": "Dr. Nicholas Sears, Dr. Shannon Wilson"
   },
   {
     "title": "Workshop 7 - Basic Arduino Circuits",
@@ -4784,7 +4784,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_36",
     "info": "",
-    "presenter": "Dr. Nicholas Sears\nDr. Shannon Wilson"
+    "presenter": "Dr. Nicholas Sears, Dr. Shannon Wilson"
   },
   {
     "title": "Workshop 9 - Functional Arduino Circuits (2)",
