@@ -8437,7 +8437,7 @@
     "start": "07:00:00",
     "end": "07:30:00",
     "category": "BLACKOUT",
-    "block": "ALL M1 STUDENTS",
+    "block": "ALL STUDENTS",
     "weekNum": 25,
     "week": "Week 25",
     "desc": "Blackout Day",
@@ -8448,6 +8448,6 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "1778708084369"
+    "_id": "1778706550195"
   }
 ]
