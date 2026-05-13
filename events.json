@@ -8603,8 +8603,8 @@
   {
     "title": "Blackout Day",
     "date": "05/27/2026",
-    "start": "7:00",
-    "end": "7:30",
+    "start": "08:00",
+    "end": "09:00",
     "category": "Session",
     "block": "POM 2 Full",
     "weekNum": 1,
@@ -8615,8 +8615,6 @@
     "mand": "No",
     "group": "Section 100",
     "location": "Room 212 A/B",
-    "info": "Words wrods rowds",
-    "presenter": "",
     "_id": "1778703731166"
   }
 ]
