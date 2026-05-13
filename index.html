@@ -1371,7 +1371,7 @@ function openModal(e){
 const mand=e.mand||'No';
 const grp=e.group||'';
 const loc=e.location||'';
-const info=e.info||e.notes||e.desc||'';
+const info=e.info||'';
 const presenter=e.presenter||'';
 
 document.getElementById('modalLocationRow').style.display=loc?'flex':'none';
@@ -1435,23 +1435,35 @@ function setMode(mode){
 // ── FORM ──────────────────────────────────────────────────────
 function blockFromWeek(wn){return BLOCKS_LIST[0]||'POM I';}
 function weekNameFor(wn){const w=WEEKS.find(w=>w.num===wn);return w?w.name:'Week '+wn;}
+function escForm(v){
+  return String(v ?? '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 function formHTML(e,isEdit){
-  const w=WEEKS[currentWeekIdx],defBlock=e?e.block:blockFromWeek(w.num),defCat=e?e.category:'Mandatory';
-  const blockOpts=BLOCKS_LIST.map(b=>`<option value="${b}" ${defBlock===b?'selected':''}>${b}</option>`).join('');
-  const catOpts=CATS_LIST.map(c=>`<option value="${c}" ${defCat===c?'selected':''}>${c}</option>`).join('');
-  const weekOpts=WEEKS.map(wk=>`<option value="${wk.num}" ${(e?e.weekNum:w.num)===wk.num?'selected':''}>${wk.name}</option>`).join('');
-  const startTimes=['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'];
-  const endTimes=['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'];
+  const defBlock=e?e.block:'';
+  const defCat=e?e.category:'Session';
+
+  const hourTimes=['07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+  const timeOptions=hourTimes.map(t=>`<option value="${t}">${fmtTime(t)}</option>`).join('');
+
+  const catOptions=CATS_LIST.map(c=>`<option value="${escForm(c)}"></option>`).join('');
+  const blockOptions=BLOCKS_LIST.map(b=>`<option value="${escForm(b)}"></option>`).join('');
+
   return`<div class="form-group"><label class="form-label">[MAND]</label><select class="form-select" id="ff_mand">
     <option value="No" ${(!e||!e.mand||e.mand==='No')?'selected':''}>No</option>
     <option value="Yes" ${(e&&e.mand==='Yes')?'selected':''}>Yes</option>
   </select></div>
-  <div class="form-group"><label class="form-label">Session Name *</label><input class="form-input" id="ff_title" value="${(e?e.title:'').replace(/"/g,'&quot;')}" placeholder="e.g. POM 1: What's a Physician — free text"></div>
-  <div class="form-group"><label class="form-label">Group Assigned</label><input class="form-input" id="ff_group" value="${(e&&e.group?e.group:'').replace(/"/g,'&quot;')}" placeholder="e.g. Group A, All Students"></div>
-  <div class="form-group"><label class="form-label">Session Location</label><input class="form-input" id="ff_location" value="${(e&&e.location?e.location:'').replace(/"/g,'&quot;')}" placeholder="e.g. Room 212 A/B, EnMed Tower"></div>
+
+  <div class="form-group"><label class="form-label">Session Name *</label><input class="form-input" id="ff_title" value="${escForm(e?e.title:'')}" placeholder="e.g. Blackout Day, Active Learning, TBL"></div>
+
+  <div class="form-group"><label class="form-label">Group Assigned</label><input class="form-input" id="ff_group" value="${escForm(e&&e.group?e.group:'')}" placeholder="e.g. Group A, All Students"></div>
+
+  <div class="form-group"><label class="form-label">Session Location</label><input class="form-input" id="ff_location" value="${escForm(e&&e.location?e.location:'')}" placeholder="e.g. Room 212 A/B, EnMed Tower"></div>
+
   <div class="form-row">
     <div class="form-group"><label class="form-label">Cohort Year *</label><select class="form-select" id="ff_calyear">
-      <option value="2029" ${(!e||!e.calYear||e.calYear==='2029')?'selected':''}>2029</option>
+      <option value="" ${(e&&e.calYear==='')?'selected':''}>— None —</option>
+      <option value="2029" ${(!e||e.calYear==='2029')?'selected':''}>2029</option>
       <option value="2030" ${(e&&e.calYear==='2030')?'selected':''}>2030</option>
       <option value="2031" ${(e&&e.calYear==='2031')?'selected':''}>2031</option>
       <option value="2032" ${(e&&e.calYear==='2032')?'selected':''}>2032</option>
@@ -1462,23 +1474,38 @@ function formHTML(e,isEdit){
       <option value="2037" ${(e&&e.calYear==='2037')?'selected':''}>2037</option>
       <option value="2038" ${(e&&e.calYear==='2038')?'selected':''}>2038</option>
     </select></div>
+
     <div class="form-group"><label class="form-label">Class *</label><select class="form-select" id="ff_mcal">
+      <option value="" ${(e&&e.mCal==='')?'selected':''}>— None —</option>
       <option value="M0" ${(e&&e.mCal==='M0')?'selected':''}>M0 — Pre-Matriculation</option>
-      <option value="M1" ${(!e||!e.mCal||e.mCal==='M1')?'selected':''}>M1</option>
+      <option value="M1" ${(!e||e.mCal==='M1')?'selected':''}>M1</option>
       <option value="M2" ${(e&&e.mCal==='M2')?'selected':''}>M2</option>
     </select></div>
   </div>
-  <div class="form-group"><label class="form-label">Week</label><select class="form-select" id="ff_week" onchange="updateFormBlock()">${weekOpts}</select></div>
-  <div class="form-group"><label class="form-label">Date * (MM/DD/YYYY)</label><input class="form-input" id="ff_date" placeholder="MM/DD/YYYY" value="${e?e.date:(prefillDate||'')}"></div>
-  <div class="form-row">
-    <div class="form-group"><label class="form-label">Start</label><select class="form-select" id="ff_start">${startTimes.map(t=>`<option value="${t}" ${(e?e.start:(prefillHour||'08:00'))===t?'selected':''}>${fmtTime(t)}</option>`).join('')}</select></div>
-    <div class="form-group"><label class="form-label">End</label><select class="form-select" id="ff_end">${endTimes.map(t=>`<option value="${t}" ${(e?e.end:'09:00')===t?'selected':''}>${fmtTime(t)}</option>`).join('')}</select></div>
+
+  <div class="form-group"><label class="form-label">Date * (MM/DD/YYYY)</label><input class="form-input" id="ff_date" placeholder="MM/DD/YYYY" value="${escForm(e?e.date:(prefillDate||''))}"></div>
+
+  <div style="font-size:11px;color:var(--muted2);line-height:1.5;margin:-4px 0 8px">
+    Enter times in military time. Use the dropdown for hour-only times, or type a custom time like <code>08:30</code> or <code>12:45:00</code>.
   </div>
-  <div class="form-group"><label class="form-label">Category</label><select class="form-select" id="ff_cat" onchange="updateCatPreview()">${catOpts}</select>
-    <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[defCat]||'#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[defCat]||'#4f8ef7'}" id="catLabel">${defCat}</span></div></div>
-  <div class="form-group"><label class="form-label">Block</label><select class="form-select" id="ff_block" onchange="updateBlockPreview()">${blockOpts}</select>
-    <div class="color-preview"><div class="color-dot" id="blockDot" style="background:${BLOCK_COLOR[defBlock]||'#7a829a'}"></div><span style="font-size:11px;color:${BLOCK_COLOR[defBlock]||'#7a829a'}" id="blockLabel">${defBlock}</span></div></div>
-  <div class="form-group"><label class="form-label">Additional Information</label><textarea class="form-input" id="ff_notes" rows="4" placeholder="e.g. Required pre-reading, handout links, Canvas notes..." style="resize:vertical;min-height:90px;line-height:1.5;font-size:12px">${(e&&e.notes?e.notes:'')}</textarea></div>
+
+  <div class="form-row">
+    <div class="form-group"><label class="form-label">Start</label><input class="form-input" id="ff_start" list="timeList" value="${escForm(e?e.start:(prefillHour||'08:00'))}" placeholder="08:30"></div>
+    <div class="form-group"><label class="form-label">End</label><input class="form-input" id="ff_end" list="timeList" value="${escForm(e?e.end:'09:00')}" placeholder="09:30"></div>
+  </div>
+
+  <datalist id="timeList">${timeOptions}</datalist>
+
+  <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="ff_cat" list="categoryList" value="${escForm(defCat)}" oninput="updateCatPreview()" placeholder="e.g. Session, EXAM, BLACKOUT">
+    <datalist id="categoryList">${catOptions}</datalist>
+    <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[defCat]||'#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[defCat]||'#4f8ef7'}" id="catLabel">${escForm(defCat)}</span></div></div>
+
+  <div class="form-group"><label class="form-label">Block</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; can be blank">
+    <datalist id="blockList">${blockOptions}</datalist>
+    <div class="color-preview"><div class="color-dot" id="blockDot" style="background:${BLOCK_COLOR[defBlock]||'#7a829a'}"></div><span style="font-size:11px;color:${BLOCK_COLOR[defBlock]||'#7a829a'}" id="blockLabel">${escForm(defBlock)}</span></div></div>
+
+  <div class="form-group"><label class="form-label">Additional Information</label><textarea class="form-input" id="ff_info" rows="4" placeholder="Stored in JSON as info" style="resize:vertical;min-height:90px;line-height:1.5;font-size:12px">${escForm(e?(e.info||''):'')}</textarea></div>
+
   <div id="catalogSection"></div>
   <div style="display:flex;flex-direction:column;gap:8px;margin-top:18px">
     <button class="btn-full btn-save" id="saveBtn" onclick="saveForm()">💾 ${isEdit?'Save Changes':'Add Event'}</button>
@@ -1488,7 +1515,6 @@ function formHTML(e,isEdit){
 }
 function updateCatPreview(){const v=document.getElementById('ff_cat').value,col=CAT_COLOR[v]||'#4a5168';document.getElementById('catDot').style.background=col;document.getElementById('catLabel').textContent=v;document.getElementById('catLabel').style.color=col;}
 function updateBlockPreview(){const v=document.getElementById('ff_block').value,col=BLOCK_COLOR[v]||'#7a829a';document.getElementById('blockDot').style.background=col;document.getElementById('blockLabel').textContent=v;document.getElementById('blockLabel').style.color=col;}
-function updateFormBlock(){document.getElementById('ff_block').value=blockFromWeek(parseInt(document.getElementById('ff_week').value));updateBlockPreview();}
 function openAddForm(date,hour){if(!isFacultyMode)return;loadCatalog();loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
 function openEditForm(ev,e){if(ev)ev.stopPropagation();loadCatalog();loadCatalog();editingId=e._id;document.getElementById('fpSub').textContent='Editing: '+e.title.substring(0,30);document.getElementById('fpForm').innerHTML=formHTML(e,true);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
 function closeForm(){editingId=null;document.getElementById('fpForm').innerHTML='<div style="text-align:center;padding:30px 0;color:var(--muted)"><div style="font-size:28px;margin-bottom:10px">👆</div><div style="font-size:12px;line-height:1.6">Click an event to edit,<br>or a time slot to add,<br>or press <strong style="color:var(--gold)">+ Add Event</strong>.</div></div>';document.getElementById('fpSub').textContent='Click an event to edit · Click a slot to add';}
@@ -2303,32 +2329,70 @@ async function bulkAddAll(){
 async function saveForm(){
   const title=document.getElementById('ff_title').value.trim();
   const date=document.getElementById('ff_date').value.trim();
-  const start=document.getElementById('ff_start').value;
-  const end=document.getElementById('ff_end').value;
-  const cat=document.getElementById('ff_cat').value;
-  const block=document.getElementById('ff_block').value;
+  const start=document.getElementById('ff_start').value.trim();
+  const end=document.getElementById('ff_end').value.trim();
+  const cat=document.getElementById('ff_cat').value.trim();
+  const block=document.getElementById('ff_block').value.trim();
+
   const weekNum = weekNumFromDate(date);
+
   if(!title||!date){showToast('⚠️ Title and Date are required.');return;}
-  if(start>=end){showToast('⚠️ End time must be after start time.');return;}
+  if(!start||!end){showToast('⚠️ Start and end times are required.');return;}
+  if(timeToMinutes(start)>=timeToMinutes(end)){showToast('⚠️ End time must be after start time.');return;}
+
   const btn=document.getElementById('saveBtn');
-  btn.textContent='Saving to GitHub...';btn.disabled=true;
-  const calYear=document.getElementById('ff_calyear').value||'2028';
-  const mCal=(document.getElementById('ff_mcal')||{value:'M1'}).value||'M1';
-  const mand=(document.getElementById('ff_mand')||{value:'No'}).value;
-  const group=(document.getElementById('ff_group')||{value:''}).value.trim();
-  const location=(document.getElementById('ff_location')||{value:''}).value.trim();
-  const notes=(document.getElementById('ff_notes')||{value:''}).value.trim();
-  const ev={title,date,start,end,category:cat,block,weekNum,week:weekNameFor(weekNum),desc:title,calYear,mCal,mand,group,location,_id:editingId||(Date.now()+'')};
+  btn.textContent='Saving to GitHub...';
+  btn.disabled=true;
+
+  const existing=editingId ? (EVENTS.find(e=>e._id===editingId)||{}) : {};
+
+  const calYear=document.getElementById('ff_calyear').value;
+  const mCal=document.getElementById('ff_mcal').value;
+  const mand=document.getElementById('ff_mand').value;
+  const group=document.getElementById('ff_group').value.trim();
+  const location=document.getElementById('ff_location').value.trim();
+  const info=document.getElementById('ff_info').value.trim();
+
+  const ev={
+    ...existing,
+    title,
+    date,
+    start,
+    end,
+    category:cat,
+    block,
+    weekNum,
+    week:weekNum ? weekNameFor(weekNum) : '',
+    desc:title,
+    calYear,
+    mCal,
+    mand,
+    group,
+    location,
+    info,
+    presenter:existing.presenter || '',
+    _id:editingId || existing._id || (Date.now()+'')
+  };
+
   try{
-    if(editingId){const i=EVENTS.findIndex(e=>e._id===editingId);if(i>=0)EVENTS[i]=ev;}
-    else EVENTS.push(ev);
+    if(editingId){
+      const i=EVENTS.findIndex(e=>e._id===editingId);
+      if(i>=0)EVENTS[i]=ev;
+    } else {
+      EVENTS.push(ev);
+    }
+
     await saveEventsToGitHub();
     addLog(editingId?'edited':'added',ev);
     showToast(editingId?'✅ Event updated — live for everyone!':'✅ Event added — live for everyone!');
-    closeForm();WEEKS=buildWeeks();buildWeekDrawer();render();
+    closeForm();
+    WEEKS=buildWeeks();
+    buildWeekDrawer();
+    render();
   }catch(err){
     showToast('❌ '+err.message);
-    btn.textContent='💾 Save Changes';btn.disabled=false;
+    btn.textContent=editingId?'💾 Save Changes':'💾 Add Event';
+    btn.disabled=false;
   }
 }
 
