@@ -570,6 +570,25 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
+    "title": "TBL",
+    "date": "08/12/2026",
+    "start": "10:00",
+    "end": "11:30",
+    "category": "TBL",
+    "block": "",
+    "weekNum": 2,
+    "week": "Week 2",
+    "desc": "TBL",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Flr Room 216 A/B, EnMed Twr",
+    "_id": "10051226_9",
+    "info": "",
+    "presenter": "Dr. Meyer, Dr.Omole"
+  },
+  {
     "title": "MITIE Lab Dissection [Group A]",
     "date": "08/12/2026",
     "start": "13:00",
@@ -7924,9 +7943,9 @@
     "start": "10:00:00",
     "end": "11:30:00",
     "category": "TBL",
-    "block": "MGA/FoM I",
-    "weekNum": 12,
-    "week": "Week 12",
+    "block": "FoM I",
+    "weekNum": 1,
+    "week": "2",
     "desc": "TBL",
     "calYear": "2030",
     "mCal": "M1",
@@ -7934,7 +7953,7 @@
     "group": "All Students",
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "2051226_8",
-    "info": "",
+    "info": "Histology and Physiology",
     "presenter": "Dr. Priya, Dr. Meyer, and Dr. Peterson"
   },
   {
@@ -8586,9 +8605,9 @@
   {
     "title": "Blackout Day",
     "date": "05/27/2026",
-    "start": "7:00",
-    "end": "09:00",
-    "category": "Session",
+    "start": "17:17",
+    "end": "18:00",
+    "category": "",
     "block": "POM 2 Full",
     "weekNum": 1,
     "week": "Week 1",
@@ -8598,7 +8617,7 @@
     "mand": "No",
     "group": "Section 100",
     "location": "Room 212 A/B",
-    "info": "wrods",
+    "info": "Testing",
     "presenter": "",
     "_id": "1778703731166"
   }
