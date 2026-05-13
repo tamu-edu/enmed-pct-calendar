@@ -8468,5 +8468,24 @@
     "info": "",
     "presenter": "",
     "_id": "1778706627008"
+  },
+  {
+    "title": "terst",
+    "date": "05/27/2026",
+    "start": "08:00",
+    "end": "09:00",
+    "category": "Session",
+    "block": "",
+    "weekNum": 1,
+    "week": "Week 1",
+    "desc": "terst",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1778707984307"
   }
 ]
