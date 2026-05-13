@@ -2543,7 +2543,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_5",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears Dr. Shannon Wilson"
   },
   {
     "title": "ENGR Correlation Session 1",
@@ -2562,7 +2562,7 @@
     "location": "Room 212 A/B",
     "_id": "1777342011315_6",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Ashutosh Agrawal"
   },
   {
     "title": "ENGR Correlation Session 2",
@@ -2581,7 +2581,7 @@
     "location": "Room 212 A/B",
     "_id": "1777342011315_7",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Ashutosh Agrawal"
   },
   {
     "title": "ENGR Correlation Session 3",
@@ -2600,7 +2600,7 @@
     "location": "Room 212 A/B",
     "_id": "1777342011315_8",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Ashutosh Agrawal"
   },
   {
     "title": "ENGR Correlation Session 4",
@@ -2619,7 +2619,7 @@
     "location": "Room 212 A/B",
     "_id": "1777342011315_9",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Ashutosh Agrawal"
   },
   {
     "title": "ENGR Correlation Session 5",
@@ -2638,7 +2638,7 @@
     "location": "Room 212 A/B",
     "_id": "1777342011315_10",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Ashutosh Agrawal"
   },
   {
     "title": "ENGR Correlation Session 6",
@@ -2657,7 +2657,7 @@
     "location": "Room 212 A/B",
     "_id": "1777342011315_11",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Ashutosh Agrawal"
   },
   {
     "title": "ENGR Correlation Session 7",
@@ -2676,7 +2676,7 @@
     "location": "Room 212 A/B",
     "_id": "1777342011315_12",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Ashutosh Agrawal"
   },
   {
     "title": "ENGR Correlation Session 8",
@@ -2695,7 +2695,7 @@
     "location": "Room 212 A/B",
     "_id": "1777342011315_13",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Ashutosh Agrawal"
   },
   {
     "title": "Workshop 1: Reverse Engineering",
@@ -2714,7 +2714,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_14",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson"
   },
   {
     "title": "Workshop 1: Reverse Engineering",
@@ -2733,7 +2733,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_15",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson"
   },
   {
     "title": "Lecture 2 - Clinical Needs - Design Inputs",
@@ -2752,7 +2752,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_16",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears Dr. Shannon Wilson"
   },
   {
     "title": "Lecture 3 - Ideation and Concept Development",
@@ -2771,7 +2771,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_17",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears\nDr. Shannon Wilson\nTyler Melton"
   },
   {
     "title": "Workshop 6 - Basic Circuits and Soldering",
@@ -2790,7 +2790,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_18",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears"
   },
   {
     "title": "Workshop 6 - Basic Circuits and Soldering",
@@ -2809,7 +2809,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_19",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears"
   },
   {
     "title": "Lecture 4 - Intellectual Property",
@@ -2828,7 +2828,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_20",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears\nDr. Shannon Wilson\nKebbeh Darpolor"
   },
   {
     "title": "Workshop 10 - Coding Introduction (Python)",
@@ -2847,7 +2847,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_21",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Workshop 10 - Coding Introduction (Python)",
@@ -2866,7 +2866,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_22",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Workshop 3 - DICOM, 3D Image Reconstruction",
@@ -2885,7 +2885,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_23",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson"
   },
   {
     "title": "Workshop 3 - DICOM, 3D Image Reconstruction",
@@ -2904,7 +2904,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_24",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson"
   },
   {
     "title": "Lecture 5 - Design Outputs - Verification",
@@ -2923,7 +2923,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_25",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears\nDr. Shannon Wilson"
   },
   {
     "title": "Workshop 7 - Basic Arduino Circuits",
@@ -2942,7 +2942,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_26",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears"
   },
   {
     "title": "Workshop 7 - Basic Arduino Circuits",
@@ -2961,7 +2961,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_27",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears"
   },
   {
     "title": "Workshop 11 - Machine Learning",
@@ -2980,7 +2980,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_28",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Workshop 11 - Machine Learning",
@@ -2999,7 +2999,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_29",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Workshop 4 - Mold Assembly & Design",
@@ -3018,7 +3018,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_30",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson"
   },
   {
     "title": "Workshop 4 - Mold Assembly & Design",
@@ -3037,7 +3037,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_31",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson"
   },
   {
     "title": "Workshop 8 - Functional Arduino Circuits (1)",
@@ -3056,7 +3056,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_32",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears"
   },
   {
     "title": "Workshop 8 - Functional Arduino Circuits (1)",
@@ -3075,7 +3075,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_33",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears"
   },
   {
     "title": "Workshop 5 - Casting & MRI",
@@ -3094,7 +3094,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_34",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson"
   },
   {
     "title": "Workshop 5 - Casting & MRI",
@@ -3113,7 +3113,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_35",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson"
   },
   {
     "title": "Lecture 6 - FDA Design Process & Ethics",
@@ -3132,7 +3132,7 @@
     "location": "Auditorium",
     "_id": "1777342011315_36",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears\nDr. Shannon Wilson"
   },
   {
     "title": "Workshop 9 - Functional Arduino Circuits (2)",
@@ -3151,7 +3151,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_37",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears"
   },
   {
     "title": "Workshop 9 - Functional Arduino Circuits (2)",
@@ -3170,7 +3170,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_38",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Nicholas Sears"
   },
   {
     "title": "Workshop 12 - AI-Assisted Coding",
@@ -3189,7 +3189,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_39",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Workshop 12 - AI-Assisted Coding",
@@ -3208,7 +3208,7 @@
     "location": "Room 106 (EIC)",
     "_id": "1777342011315_40",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Biodesign Session 1",
@@ -3227,7 +3227,7 @@
     "location": "",
     "_id": "1777342011315_41",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Biodesign Session 2",
@@ -3246,7 +3246,7 @@
     "location": "",
     "_id": "1777342011315_42",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Biodesign Session 3",
@@ -3265,7 +3265,7 @@
     "location": "",
     "_id": "1777342011315_43",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Biodesign Session 4",
@@ -3284,7 +3284,7 @@
     "location": "",
     "_id": "1777342011315_44",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Biodesign Session 5",
@@ -3303,7 +3303,7 @@
     "location": "",
     "_id": "1777342011315_45",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Biodesign Session 6",
@@ -3322,7 +3322,7 @@
     "location": "",
     "_id": "1777342011315_46",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "title": "Biodesign Session 7",
@@ -3341,7 +3341,7 @@
     "location": "",
     "_id": "1777342011315_47",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Omar Mohtar"
   },
   {
     "_id": "1777342011315_48",
@@ -3400,7 +3400,7 @@
     "location": "EnMed Lobby",
     "_id": "1777342011315_50",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Shannon Wilson\nDr. Nicholas Sears\nDr. Omar Mohtar"
   },
   {
     "_id": "1777342011315_51",
