@@ -4522,11 +4522,11 @@
     "end": "10:00",
     "category": "Workshop",
     "block": "PoM 1",
-    "weekNum": 1,
-    "week": "Week 1",
+    "weekNum": 10,
+    "week": "Week 10",
     "desc": "Vital Signs Check-off",
     "presenter": "Dr. Yeh, Dr. Monga",
-    "info": "Additional info, please see Canvas"
+    "info": "Please see Canvas for student group assignments and additional information."
   },
   {
     "_id": "1051226_8",
