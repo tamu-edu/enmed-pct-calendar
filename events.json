@@ -2259,25 +2259,6 @@
     "presenter": ""
   },
   {
-    "title": "Blackout Day",
-    "date": "10/30/2026",
-    "start": "07:00",
-    "end": "07:30",
-    "category": "BLACKOUT",
-    "block": "Endo/ Repro",
-    "weekNum": "",
-    "week": "",
-    "desc": "Blackout Day",
-    "calYear": "",
-    "mCal": "",
-    "mand": "Yes",
-    "group": "",
-    "location": "",
-    "_id": "",
-    "info": "",
-    "presenter": ""
-  },
-  {
     "title": "Exam {Blackout Day}",
     "date": "10/30/2026",
     "start": "10:00",
@@ -7992,7 +7973,7 @@
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "2051226_16",
     "info": "",
-    "presenter": "Dr. Priya, Dr. Meyer, Dr. Omole, and Dr. Peterson"
+    "presenter": "Dr. Priya, Dr. Meyer, and Dr. Peterson"
   },
   {
     "title": "Exam #2 Check-In",
@@ -8390,25 +8371,6 @@
     "group": "All Students",
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "2051226_42",
-    "info": "",
-    "presenter": ""
-  },
-  {
-    "title": "Blackout Day",
-    "date": "11/13/2026",
-    "start": "07:00:00",
-    "end": "07:30:00",
-    "category": "BLACKOUT",
-    "block": "",
-    "weekNum": 1,
-    "week": "",
-    "desc": "Blackout Day",
-    "calYear": "",
-    "mCal": "",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "",
-    "_id": "",
     "info": "",
     "presenter": ""
   },
