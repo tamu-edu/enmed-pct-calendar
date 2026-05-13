@@ -8599,22 +8599,5 @@
     "_id": "2051226_43",
     "info": "",
     "presenter": ""
-  },
-  {
-    "title": "Testing Session Name",
-    "date": "05/27/2026",
-    "start": "08:00",
-    "end": "09:00",
-    "category": "Intro to Ultrasound",
-    "block": "ITDE 611 Week 2",
-    "weekNum": 1,
-    "week": "Week 1",
-    "desc": "Testing Session Name",
-    "calYear": "2029",
-    "mCal": "M2",
-    "mand": "No",
-    "group": "Section 100",
-    "location": "EnMed Lobby",
-    "_id": "1778699887081"
   }
 ]
