@@ -384,14 +384,14 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .month-grid{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:0}
 .month-grid-header{display:grid;grid-template-columns:repeat(7,1fr);background:var(--surface2);border-bottom:1px solid var(--border)}
 .mg-dow{padding:8px 4px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
-.month-grid-body{display:grid;grid-template-columns:repeat(7,1fr)}
-.mg-cell{min-height:100px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:5px;position:relative;vertical-align:top}
+.month-grid-body{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.mg-cell{min-height:100px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:5px;position:relative;vertical-align:top;min-width:0;overflow:hidden}
 .mg-cell:nth-child(7n){border-right:none}
 .mg-cell.other-month{background:var(--surface2);opacity:.55}
 .mg-cell.today-cell{background:rgba(80,0,0,.06)}
 .mg-date{font-size:11px;font-weight:700;color:var(--muted2);margin-bottom:3px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%}
 .mg-cell.today-cell .mg-date{background:var(--accent);color:white}
-.mg-event{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4;border-left:3px solid}
+.mg-event{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;margin-bottom:2px;cursor:pointer;white-space:normal;overflow-wrap:anywhere;word-break:break-word;overflow:hidden;text-overflow:clip;line-height:1.25;border-left:3px solid;max-width:100%;min-width:0}
 .mg-event:hover{opacity:.85;transform:translateX(1px)}
 .mg-more{font-size:9px;color:var(--muted2);padding:1px 4px;cursor:pointer;font-weight:600}
 .mg-more:hover{color:var(--accent)}
@@ -1890,7 +1890,8 @@ function renderMonth(){
         const col=mCalColor(e);
         const catC=CAT_COLOR[e.category]||'#4a5168';
         const ej=JSON.stringify(e).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
-        return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 3px,${col} 3px,${col} 6px,${col}22 6px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),handleEventClick(event,${ej}))">${displayTitle(e)}</div>`;
+        const monthBlockLabel = e.block ? `${e.block}<br>` : '';
+        return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 3px,${col} 3px,${col} 6px,${col}22 6px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),handleEventClick(event,${ej}))">${monthBlockLabel}${displayTitle(e)}</div>`;
       }).join('')}
       ${more>0?`<div class="mg-more">+${more} more</div>`:''}
       ${isFacultyMode?`<button class="mg-add-btn" onclick="openAddForm('${ds}','08:00');event.stopPropagation()">+</button>`:''}
