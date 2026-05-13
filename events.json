@@ -4465,11 +4465,11 @@
     "end": "12:00",
     "category": "Session",
     "block": "PoM 1",
-    "weekNum": 1,
-    "week": "Week 1",
+    "weekNum": 10,
+    "week": "Week 10",
     "desc": "Intro to Professionalism",
     "presenter": "Dr. Yeh, Dr. Monga",
-    "info": "Additional info, please see Canvas"
+    "info": "Please see Canvas for student group assignments and additional information."
   },
   {
     "_id": "1051226_5",
