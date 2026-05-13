@@ -8430,5 +8430,24 @@
     "info": "wrods",
     "presenter": "",
     "_id": "1778703731166"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "11/13/2026",
+    "start": "07:00:00",
+    "end": "07:30:00",
+    "category": "BLACKOUT",
+    "block": "ALL M1 STUDENTS",
+    "weekNum": 25,
+    "week": "Week 25",
+    "desc": "Blackout Day",
+    "calYear": "",
+    "mCal": "",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1778708084369"
   }
 ]
