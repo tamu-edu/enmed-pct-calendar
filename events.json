@@ -8601,24 +8601,5 @@
     "_id": "2051226_43",
     "info": "",
     "presenter": ""
-  },
-  {
-    "title": "Blackout Day",
-    "date": "05/27/2026",
-    "start": "17:17",
-    "end": "18:00",
-    "category": "",
-    "block": "POM 2 Full",
-    "weekNum": 1,
-    "week": "Week 1",
-    "desc": "Blackout Day",
-    "calYear": "2029",
-    "mCal": "M1",
-    "mand": "No",
-    "group": "Section 100",
-    "location": "Room 212 A/B",
-    "info": "Testing",
-    "presenter": "",
-    "_id": "1778703731166"
   }
 ]
