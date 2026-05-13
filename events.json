@@ -8605,8 +8605,8 @@
     "date": "05/27/2026",
     "start": "7:00",
     "end": "7:30",
-    "category": "Abdominal Clinical Application Session",
-    "block": "ITDE 611 Week 1",
+    "category": "Session",
+    "block": "POM 2 Full",
     "weekNum": 1,
     "week": "Week 1",
     "desc": "Blackout Day",
@@ -8615,7 +8615,7 @@
     "mand": "No",
     "group": "Section 100",
     "location": "Room 212 A/B",
-    "info": "Testing to see if this works",
+    "info": "wrods",
     "presenter": "",
     "_id": "1778703731166"
   }
