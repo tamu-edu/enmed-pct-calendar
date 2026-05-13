@@ -8413,25 +8413,6 @@
     "presenter": ""
   },
   {
-    "title": "Cadaveric Clinical Integration",
-    "date": "11/13/2026",
-    "start": "08:00:00",
-    "end": "12:00:00",
-    "category": "Session",
-    "block": "FoM I",
-    "weekNum": 1,
-    "week": "15",
-    "desc": "Cadaveric Clinical Integration",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "1st Flr Rm 140 EnMed Twr",
-    "_id": "2051226_43",
-    "info": "",
-    "presenter": ""
-  },
-  {
     "title": "Blackout Day",
     "date": "05/27/2026",
     "start": "7:00",
