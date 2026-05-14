@@ -8392,5 +8392,24 @@
     "info": "",
     "presenter": "Dr. Caplan",
     "_id": "1778765004163"
+  },
+  {
+    "title": "Active Learning",
+    "date": "09/23/2026",
+    "start": "09:00",
+    "end": "10:00",
+    "category": "Session",
+    "block": "GI",
+    "weekNum": 18,
+    "week": "Week 18",
+    "desc": "Active Learning",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "",
+    "location": "2nd Flr Rm 216 EnMed Twr",
+    "info": "Approach to GI patients \nGI biomechanics",
+    "presenter": "Dr. Mobaraki",
+    "_id": "1778765228347"
   }
 ]
