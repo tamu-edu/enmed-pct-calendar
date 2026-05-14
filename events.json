@@ -1,5 +1,5 @@
 [
-    {
+  {
     "title": "Nephrology Active Learning",
     "date": "08/24/2026",
     "start": "10:00",
@@ -1429,10 +1429,10 @@
     "date": "08/14/2026",
     "start": "09:00",
     "end": "12:00",
-    "category": "Exam",
+    "category": "EXAM",
     "block": "FoM/ MGA",
-    "weekNum": 2,
-    "week": "Week 2",
+    "weekNum": 12,
+    "week": "Week 12",
     "desc": "Unit 1 Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
