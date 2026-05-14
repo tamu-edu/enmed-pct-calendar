@@ -3553,7 +3553,7 @@
   {
     "_id": "11051226_12",
     "mand": "Yes",
-    "title": "Complete H&POSCE {Blackout Day}",
+    "title": "Complete H&POSCE",
     "group": "Group A",
     "location": "4th Flr SIM Ctr Rm 404, EnMed Twr",
     "cohortYear": "2029",
@@ -3563,11 +3563,13 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": "5",
+    "weekNum": 14,
     "presenter": "Dr. Caplan",
     "info": "",
     "calYear": "2029",
-    "mCal": "M2"
+    "mCal": "M2",
+    "week": "Week 14",
+    "desc": "Complete H&POSCE"
   },
   {
     "_id": "11051226_13",
