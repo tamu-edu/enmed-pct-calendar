@@ -5818,7 +5818,7 @@
     "location": "2nd Flr Rm 216 EnMed Twr",
     "_id": "4051226_2",
     "info": "Obstructive vs Restrictive Lung Disease; Obstructive Lung Disease; Restrictive Lung Diseases I and II; Vascular Lung Diseases & ARDS",
-    "presenter": "Dr. Hughes"
+    "presenter": ""
   },
   {
     "title": "Active Learning",
@@ -5936,13 +5936,13 @@
   },
   {
     "title": "Active Learning",
-    "date": "08/06/2026",
+    "date": "08/07/2026",
     "start": "10:00:00",
     "end": "12:00:00",
     "category": "Session",
     "block": "Respiratory",
-    "weekNum": 1,
-    "week": "2",
+    "weekNum": 11,
+    "week": "Week 11",
     "desc": "Active Learning",
     "calYear": "2029",
     "mCal": "M2",
