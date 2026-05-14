@@ -126,6 +126,9 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .ch-cell.today .ch-num{background:var(--accent);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;margin:2px auto 0;font-weight:600;font-size:14px}
 .cal-row{display:grid;grid-template-columns:64px repeat(5,1fr);border-bottom:1px solid var(--border);height:52px;min-height:52px}
 .cal-row:last-child{border-bottom:none}
+.cal-row.event-crossed-line{
+  border-bottom-color:rgba(0,0,0,.06);
+}
 .cal-time{padding:0px 6px 0px 6px;font-size:10px;color:var(--muted2);border-right:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace;display:flex;align-items:flex-start;justify-content:flex-end; transform:translateY(-6px)}
 .cal-cell{border-right:1px solid var(--border);padding:3px;position:relative;height:52px;min-height:52px;overflow:visible}
 .cal-cell:last-child{border-right:none}
@@ -156,7 +159,9 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
   z-index:20;
   box-sizing:border-box;
   overflow:hidden;
+  isolation:isolate;
 }
+
 
 .list-event{
   position:relative;
@@ -652,18 +657,16 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
     </div>
 
     <!-- COLOR LEGEND -->
-    <div class="legend-row" id="colorLegend">
-      <span class="legend-label">Type (left stripe):</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#b97cf7"></span>TBL</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#3ecf8e"></span>CBL</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#0F766E"></span>ITDE</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#C62828"></span>OSCE/Exam</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#1565C0"></span>Orientation</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#00838F"></span>Lab</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#F9A825"></span>Workshop</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#424242"></span>Blackout</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#607D8B"></span>Other</span>
-    </div>
+<div class="legend-row" id="colorLegend">
+  <span class="legend-label">Type (left stripe):</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#E65100"></span>M0 Classes</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#1565C0"></span>M1 Classes</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#2E7D32"></span>M2 Classes</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#7F1D1D"></span>Exams</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#C58B00"></span>Exam Check-Ins</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#111111"></span>Blackout Days</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#cfa3d8"></span>Events</span>
+</div>
 
     <div class="week-nav">
       <button class="nav-btn" onclick="prevWeek()">‹</button>
@@ -826,8 +829,13 @@ const BLOCK_COLOR=(()=>{
   });
   return c;
 })();
-const CAT_COLOR={"Abdominal Clinical Application Session": "#4a5168", "Assigned Students Only POM1: OSCE Midpoint Retake": "#C62828", "BLACKOUT": "#424242", "CV Clinical Application Session": "#4a5168", "Cardiovascular: CBL": "#3ecf8e", "Cardiovascular: Cardiac Imaging & Echocardiography Clinic": "#607D8B", "Cardiovascular: Cardiac Physical Exam / Murmur Clinic": "#607D8B", "Cardiovascular: ENGR/MED Blended Session": "#4a5168", "Cardiovascular: Orientation": "#1565C0", "Cardiovascular: TBL": "#b97cf7", "Clinical Cadaver Integration Presentation": "#8E24AA", "Comprehensive Final OSCE": "#C62828", "Comprehensive OSCE Simulation Open Lab": "#C62828", "EBM Librarian Discussion": "#26A69A", "EBM: Problem Session": "#26A69A", "Endo / Repro: TBL": "#b97cf7", "FHP Workshop": "#F9A825", "FOM II: CBL": "#3ecf8e", "FOM II: Introduction to Precision Medicine": "#43A047", "FOM II: Orientation": "#1565C0", "FOM II: TBL": "#b97cf7", "Final OSCE Remediation (If needed)": "#C62828", "First day of POM 3 Orientation": "#1565C0", "FoM I / MGA: Orientation": "#1565C0", "FoM I / MGA: TBL": "#b97cf7", "FoM I: Lab": "#00838F", "Focused Encounter Workshop (BBN related)": "#F9A825", "GI / Nutr: CBL": "#3ecf8e", "GI / Nutr: TBL": "#b97cf7", "Group A  POM1: CV PE": "#1565C0", "Group A POM 1: Intro to an OSCE": "#C62828", "Group A POM 3 FHP OSCE": "#C62828", "Group A POM1: ABD CR": "#1565C0", "Group A POM1: ABD/MSK I PE": "#1565C0", "Group A POM1: CV Application Session": "#1565C0", "Group A POM1: CV CR": "#1565C0", "Group A POM1: Check-off Vital Signs": "#1565C0", "Group A POM1: Final OSCE": "#C62828", "Group A POM1: HEENT CR": "#1565C0", "Group A POM1: HEENT PE": "#1565C0", "Group A POM1: LC Facilitated Open Lab": "#00838F", "Group A POM1: MSK 2/Derm PE": "#1565C0", "Group A POM1: NEURO CR": "#1565C0", "Group A POM1: NEURO/Derm PE": "#1565C0", "Group A POM1: OSCE Practice": "#C62828", "Group A POM1: PETA Session: CV": "#1565C0", "Group A POM1: PULM PE": "#1565C0", "Group A POM1: Pulm CR": "#1565C0", "Group A POM1: w/LC Small Groups": "#1565C0", "Group B POM1: ABD CR": "#2E7D32", "Group B POM1: ABD/MSK I PE": "#2E7D32", "Group B POM1: CV Application Session": "#2E7D32", "Group B POM1: CV CR": "#2E7D32", "Group B POM1: Check-off Vital Signs": "#2E7D32", "Group B POM1: Final OSCE": "#C62828", "Group B POM1: HEENT CR": "#2E7D32", "Group B POM1: HEENT PE": "#2E7D32", "Group B POM1: LC Facilitated Open Lab": "#00838F", "Group B POM1: MSK 2/Derm PE": "#2E7D32", "Group B POM1: NEURO CR": "#2E7D32", "Group B POM1: NEURO/Derm PE": "#2E7D32", "Group B POM1: OSCE Practice": "#C62828", "Group B POM1: PETA Session: CV": "#2E7D32", "Group B POM1: PULM PE": "#2E7D32", "Group B POM1: Pulm CR": "#2E7D32", "Group B POM1: w/LC Small Groups": "#2E7D32", "Group C POM1: ABD CR": "#6A1B9A", "Group C POM1: ABD/MSK I PE": "#6A1B9A", "Group C POM1: CV Application Session": "#6A1B9A", "Group C POM1: CV CR": "#6A1B9A", "Group C POM1: Check-off Vital Signs": "#6A1B9A", "Group C POM1: Final OSCE": "#C62828", "Group C POM1: HEENT CR": "#6A1B9A", "Group C POM1: HEENT PE": "#6A1B9A", "Group C POM1: LC Facilitated Open Lab": "#00838F", "Group C POM1: MSK 2/Derm PE": "#6A1B9A", "Group C POM1: NEURO CR": "#6A1B9A", "Group C POM1: NEURO/Derm PE": "#6A1B9A", "Group C POM1: OSCE Practice": "#C62828", "Group C POM1: PETA Session: CV": "#6A1B9A", "Group C POM1: PULM PE": "#6A1B9A", "Group C POM1: Pulm CR": "#6A1B9A", "Group C POM1: w/LC Small Groups": "#6A1B9A", "Group D POM1: ABD CR": "#BF360C", "Group D POM1: ABD/MSK I PE": "#BF360C", "Group D POM1: CV Application Session": "#BF360C", "Group D POM1: CV CR": "#BF360C", "Group D POM1: Check-off Vital Signs": "#BF360C", "Group D POM1: Final OSCE": "#C62828", "Group D POM1: HEENT CR": "#BF360C", "Group D POM1: HEENT PE": "#BF360C", "Group D POM1: LC Facilitated Open Lab": "#00838F", "Group D POM1: MSK 2/Derm PE": "#BF360C", "Group D POM1: NEURO CR": "#BF360C", "Group D POM1: NEURO/Derm PE": "#BF360C", "Group D POM1: OSCE Practice": "#C62828", "Group D POM1: PETA Session: CV": "#BF360C", "Group D POM1: PULM PE": "#BF360C", "Group D POM1: Pulm CR": "#BF360C", "Group D POM1: w/LC Small Groups": "#BF360C", "Heme / Onc: CBL": "#3ecf8e", "Heme / Onc: TBL": "#b97cf7", "Immunology: CBL": "#3ecf8e", "Immunology: TBL": "#b97cf7", "Intro to Clinical Reasoning": "#43A047", "Intro to EBM": "#26A69A", "Intro to OSCE": "#C62828", "Intro to Ultrasound": "#00ACC1", "MSK: CBL": "#3ecf8e", "MSK: TBL": "#b97cf7", "Neuro: CBL": "#3ecf8e", "Neuro: TBL": "#b97cf7", "Orientation": "#1565C0", "POM 1: Orientation": "#1565C0", "POM 2: Orientation": "#1565C0", "POM 3: Orientation": "#1565C0", "Pulmonary: CBL": "#3ecf8e", "Pulmonary: TBL": "#b97cf7", "Renal: CBL": "#3ecf8e", "Renal: TBL": "#b97cf7", "Simulation Session": "#E65100", "TBL": "#b97cf7", "Ultrasound Lab": "#00838F", "Vital Signs Workshop": "#F9A825", "Mandatory": "#4f8ef7", "Faculty Discussion": "#3ecf8e", "CBSE": "#f05c6e", "Session": "#4a5168", "ITDE": "#0F766E", "Exam Review": "#f7a14f", "Grand Rounds": "#f7a14f"};
-const CATS_LIST=["Abdominal Clinical Application Session", "Assigned Students Only POM1: OSCE Midpoint Retake", "BLACKOUT", "CV Clinical Application Session", "Cardiovascular: CBL", "Cardiovascular: Cardiac Imaging & Echocardiography Clinic", "Cardiovascular: Cardiac Physical Exam / Murmur Clinic", "Cardiovascular: ENGR/MED Blended Session", "Cardiovascular: Orientation", "Cardiovascular: TBL", "Clinical Cadaver Integration Presentation", "Comprehensive Final OSCE", "Comprehensive OSCE Simulation Open Lab", "EBM Librarian Discussion", "EBM: Problem Session", "Endo / Repro: TBL", "FHP Workshop", "FOM II: CBL", "FOM II: Introduction to Precision Medicine", "FOM II: Orientation", "FOM II: TBL", "Final OSCE Remediation (If needed)", "First day of POM 3 Orientation", "FoM I / MGA: Orientation", "FoM I / MGA: TBL", "FoM I: Lab", "Focused Encounter Workshop (BBN related)", "GI / Nutr: CBL", "GI / Nutr: TBL", "Group A  POM1: CV PE", "Group A POM 1: Intro to an OSCE", "Group A POM 3 FHP OSCE", "Group A POM1: ABD CR", "Group A POM1: ABD/MSK I PE", "Group A POM1: CV Application Session", "Group A POM1: CV CR", "Group A POM1: Check-off Vital Signs", "Group A POM1: Final OSCE", "Group A POM1: HEENT CR", "Group A POM1: HEENT PE", "Group A POM1: LC Facilitated Open Lab", "Group A POM1: MSK 2/Derm PE", "Group A POM1: NEURO CR", "Group A POM1: NEURO/Derm PE", "Group A POM1: OSCE Practice", "Group A POM1: PETA Session: CV", "Group A POM1: PULM PE", "Group A POM1: Pulm CR", "Group A POM1: w/LC Small Groups", "Group B POM1: ABD CR", "Group B POM1: ABD/MSK I PE", "Group B POM1: CV Application Session", "Group B POM1: CV CR", "Group B POM1: Check-off Vital Signs", "Group B POM1: Final OSCE", "Group B POM1: HEENT CR", "Group B POM1: HEENT PE", "Group B POM1: LC Facilitated Open Lab", "Group B POM1: MSK 2/Derm PE", "Group B POM1: NEURO CR", "Group B POM1: NEURO/Derm PE", "Group B POM1: OSCE Practice", "Group B POM1: PETA Session: CV", "Group B POM1: PULM PE", "Group B POM1: Pulm CR", "Group B POM1: w/LC Small Groups", "Group C POM1: ABD CR", "Group C POM1: ABD/MSK I PE", "Group C POM1: CV Application Session", "Group C POM1: CV CR", "Group C POM1: Check-off Vital Signs", "Group C POM1: Final OSCE", "Group C POM1: HEENT CR", "Group C POM1: HEENT PE", "Group C POM1: LC Facilitated Open Lab", "Group C POM1: MSK 2/Derm PE", "Group C POM1: NEURO CR", "Group C POM1: NEURO/Derm PE", "Group C POM1: OSCE Practice", "Group C POM1: PETA Session: CV", "Group C POM1: PULM PE", "Group C POM1: Pulm CR", "Group C POM1: w/LC Small Groups", "Group D POM1: ABD CR", "Group D POM1: ABD/MSK I PE", "Group D POM1: CV Application Session", "Group D POM1: CV CR", "Group D POM1: Check-off Vital Signs", "Group D POM1: Final OSCE", "Group D POM1: HEENT CR", "Group D POM1: HEENT PE", "Group D POM1: LC Facilitated Open Lab", "Group D POM1: MSK 2/Derm PE", "Group D POM1: NEURO CR", "Group D POM1: NEURO/Derm PE", "Group D POM1: OSCE Practice", "Group D POM1: PETA Session: CV", "Group D POM1: PULM PE", "Group D POM1: Pulm CR", "Group D POM1: w/LC Small Groups", "Heme / Onc: CBL", "Heme / Onc: TBL", "Immunology: CBL", "Immunology: TBL", "Intro to Clinical Reasoning", "Intro to EBM", "Intro to OSCE", "Intro to Ultrasound", "MSK: CBL", "MSK: TBL", "Neuro: CBL", "Neuro: TBL", "Orientation", "POM 1: Orientation", "POM 2: Orientation", "POM 3: Orientation", "Pulmonary: CBL", "Pulmonary: TBL", "Renal: CBL", "Renal: TBL", "Simulation Session", "TBL", "Ultrasound Lab", "Vital Signs Workshop", "Mandatory", "Faculty Discussion", "CBSE", "ITDE", "Exam Review", "Grand Rounds", "Session"];
+const CAT_COLOR = {
+  'EXAM':'#7F1D1D',
+  'Exam Check-In':'#C58B00',
+  'BLACKOUT':'#111111',
+  'EventS' : '#E56B6F'
+};
+const CATS_LIST=["SDL","Orientation","TBL","CBL","ITDE","EXAM","Workshop","LC Small Groups","BLACKOUT", "Session", "Lab", "Seminar", "Clinic","Review Session", "Office Hours","Events","Announcements"]
 const HOUR_KEYS=[
   '07:00','08:00','09:00','10:00','11:00','12:00',
   '13:00','14:00','15:00','16:00','17:00','18:00', '19:00'
@@ -1207,6 +1215,85 @@ function render(){
 
 function evClass(e){if(e.category==='Faculty Discussion')return'Faculty';if(e.category==='Exam Review')return'ExamReview';if(e.category==='Grand Rounds')return'GrandRounds';return e.category.replace(/\s/g,'');}
 
+function eventSearchText(e){
+  return `${e.category||''} ${e.block||''} ${e.title||''} ${e.name||''} ${e.session||''}`.toLowerCase();
+}
+
+function eventLayoutKey(e){
+  return e._id || `${e.date}|${e.start}|${e.end}|${e.category||''}|${e.block||''}|${e.title||e.name||e.session||''}`;
+}
+
+function isExamCheckIn(e){
+  const t = eventSearchText(e);
+  return /exam\s*check[-\s]*in|exam\s*check\s*in|check[-\s]*in.*exam|check\s*in.*exam/.test(t);
+}
+
+function isExamLike(e){
+  const t = eventSearchText(e);
+  if(isExamCheckIn(e)) return false;
+  if(/exam\s*review|review\s*exam|exam\s*prep|practice\s*exam|exam\s*remediation/.test(t)) return false;
+  return /\bexam\b|\bosce\b|\bcbse\b/.test(t);
+}
+
+function examPairCategoryKey(e){
+  return `${e.category||''} ${e.block||''} ${e.title||''}`
+    .toLowerCase()
+    .replace(/exam\s*check[-\s]*in/g,'')
+    .replace(/exam\s*check\s*in/g,'')
+    .replace(/check[-\s]*in/g,'')
+    .replace(/\bexam\b/g,'')
+    .replace(/\bosce\b/g,'')
+    .replace(/\bcbse\b/g,'')
+    .replace(/[^a-z0-9]+/g,' ')
+    .trim();
+}
+
+function sameExamFamily(a,b){
+  const ak = examPairCategoryKey(a);
+  const bk = examPairCategoryKey(b);
+
+  if(!ak || !bk) return false;
+
+  return ak === bk || ak.includes(bk) || bk.includes(ak);
+}
+
+function findExamPairs(cluster){
+  const pairs = [];
+  const used = new Set();
+
+  cluster
+    .filter(isExamCheckIn)
+    .sort((a,b) => a.startMin - b.startMin)
+    .forEach(checkIn => {
+      const checkKey = eventLayoutKey(checkIn);
+      if(used.has(checkKey)) return;
+
+      const possibleExams = cluster
+        .filter(e => {
+          const examKey = eventLayoutKey(e);
+          const gap = e.startMin - checkIn.endMin;
+
+          return !used.has(examKey) &&
+            isExamLike(e) &&
+            e.date === checkIn.date &&
+            gap >= 0 &&
+            gap <= 30 &&
+            sameExamFamily(checkIn, e);
+        })
+        .sort((a,b) => a.startMin - b.startMin);
+
+      const exam = possibleExams[0];
+
+      if(exam){
+        pairs.push({ checkIn, exam });
+        used.add(checkKey);
+        used.add(eventLayoutKey(exam));
+      }
+    });
+
+  return pairs;
+}
+
 function layoutOverlappingEvents(dayEvents){
   const events = dayEvents
     .map(e => ({
@@ -1225,33 +1312,74 @@ function layoutOverlappingEvents(dayEvents){
   let cluster = [];
   let clusterEnd = -1;
 
-  events.forEach(e => {
-    if (!cluster.length || e.startMin < clusterEnd) {
-      cluster.push(e);
-      clusterEnd = Math.max(clusterEnd, e.endMin);
-    } else {
-      clusters.push(cluster);
-      cluster = [e];
-      clusterEnd = e.endMin;
-    }
+ events.forEach(e => {
+  const bridgesFromCheckIn = cluster.some(c => {
+    const gap = e.startMin - c.endMin;
+
+    return isExamCheckIn(c) &&
+      isExamLike(e) &&
+      e.date === c.date &&
+      gap >= 0 &&
+      gap <= 30 &&
+      sameExamFamily(c, e);
   });
+
+  if (!cluster.length || e.startMin < clusterEnd || bridgesFromCheckIn) {
+    cluster.push(e);
+    clusterEnd = Math.max(clusterEnd, e.endMin);
+  } else {
+    clusters.push(cluster);
+    cluster = [e];
+    clusterEnd = e.endMin;
+  }
+});
 
   if (cluster.length) clusters.push(cluster);
 
   clusters.forEach(cluster => {
     const columns = [];
+    const examPairs = findExamPairs(cluster);
+    const pairedKeys = new Set();
 
-    cluster.forEach(e => {
-      let col = columns.findIndex(colEnd => colEnd <= e.startMin);
+    examPairs.forEach(pair => {
+      pairedKeys.add(eventLayoutKey(pair.checkIn));
+      pairedKeys.add(eventLayoutKey(pair.exam));
+    });
+
+    const layoutItems = [
+      ...examPairs.map(pair => ({
+        _isExamPair: true,
+        _examLaneKey: examPairCategoryKey(pair.checkIn),
+        startMin: pair.checkIn.startMin,
+        endMin: pair.exam.endMin,
+        members: [pair.checkIn, pair.exam]
+      })),
+      ...cluster.filter(e => !pairedKeys.has(eventLayoutKey(e)))
+    ].sort((a,b) => {
+      const ap = a._isExamPair ? 0 : 1;
+      const bp = b._isExamPair ? 0 : 1;
+
+      return ap - bp ||
+        String(a._examLaneKey || '').localeCompare(String(b._examLaneKey || '')) ||
+        a.startMin - b.startMin ||
+        b.endMin - a.endMin;
+    });
+
+    layoutItems.forEach(item => {
+      let col = columns.findIndex(colEnd => colEnd <= item.startMin);
 
       if (col === -1) {
         col = columns.length;
-        columns.push(e.endMin);
+        columns.push(item.endMin);
       } else {
-        columns[col] = e.endMin;
+        columns[col] = item.endMin;
       }
 
-      e._overlapCol = col;
+      if(item._isExamPair){
+        item.members.forEach(e => e._overlapCol = col);
+      } else {
+        item._overlapCol = col;
+      }
     });
 
     const colCount = Math.max(columns.length, 1);
@@ -1284,10 +1412,17 @@ function renderWeek(dates){
   });
   html+='</div>';
   HOUR_KEYS.forEach((hk,hi)=>{
-    html+=`<div class="cal-row"><div class="cal-time">${HOURS[hi]}</div>`;
+   const rowStartMin = timeToMinutes(hk);
+   const rowEndMin = rowStartMin + 60;
+
+   const eventCrossesRowLine = dates.some(ds =>
+      (laidOutByDate[ds] || []).some(e =>
+        e.startMin < rowEndMin && e.endMin > rowEndMin
+      )
+  );
+
+  html+=`<div class="cal-row${eventCrossesRowLine ? ' event-crossed-line' : ''}"><div class="cal-time">${HOURS[hi]}</div>`;
     dates.forEach(ds=>{
-      const rowStartMin = timeToMinutes(hk);
-      const rowEndMin = rowStartMin + 60;
       const cellEvs = (laidOutByDate[ds] || []).filter(e => {
         return e.startMin >= rowStartMin && e.startMin < rowEndMin;
 });
@@ -1297,14 +1432,24 @@ function renderWeek(dates){
         const startMin = e.startMin;
         const endMin = e.endMin;
         const hp = Math.max(18, ((endMin - startMin) / 60) * 52 - 6);
+
         const ec = evClass(e);
         const topOffset = ((startMin - rowStartMin) / 60) * 52 + 3;
+        const isCheckInOverlay = isExamCheckIn(e);
+        const eventLeft = isCheckInOverlay ? '3px' : `calc(${e._leftPct}% + 3px)`;
+        const eventWidth = isCheckInOverlay ? 'calc(100% - 6px)' : `calc(${e._widthPct}% - 6px)`;
+        const eventZ = isCheckInOverlay ? 80 : 20;
 
         const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
-        const mcalCol=mCalColor(e);
-        const catCol=CAT_COLOR[e.category]||'#4a5168';
-        const blockLabel = e.block ? `${e.block} · ` : '';
-        html+=`<div class="event week-event ${ec}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:calc(${e._leftPct}% + 3px);width:calc(${e._widthPct}% - 6px);background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 4px,${mcalCol} 4px,${mcalCol} 8px,${mcalCol}18 8px);color:${mcalCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+
+        const mcalCol = mCalColor(e);
+
+        const textCol = mCalTextColor(e);
+
+        const catCol = CAT_COLOR[e.category] || mcalCol;
+
+const blockLabel = e.block ? `${e.block} · ` : '';
+        html+=`<div class="event week-event ${ec}${isCheckInOverlay ? ' check-in-overlay' : ''}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:${eventLeft};width:${eventWidth};z-index:${eventZ};background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${mcalCol}18 5px);color:${textCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
           <div class="ev-tag" style="color:${catCol}">${blockLabel}${e.category}</div>
           <div class="ev-title">${displayTitle(e)}</div>
           <div class="ev-time">${fmtTime(e.start)} – ${fmtTime(e.end)}</div>
@@ -1322,6 +1467,16 @@ function renderWeek(dates){
   //Day 3: Commented line below to allow weeks with no events to display correctly
   //if(!evs.length)html=`<div class="empty-state"><div class="big">📭</div><p>No events match this filter.</p></div>`;
   document.getElementById('calView').innerHTML=html;
+}
+
+function mCalTextColor(e){
+  const mc = String(e.mCal || '').trim();
+
+  if(mc === 'M0') return '#7A3200';
+  if(mc === 'M1') return '#163B6B';
+  if(mc === 'M2') return '#1D5223';
+
+  return '#333333';
 }
 
 function renderList(){
@@ -1919,10 +2074,10 @@ function renderMonth(){
       <div class="mg-date">${day}</div>
       ${shown.map(e=>{
         const col=mCalColor(e);
-        const catC=CAT_COLOR[e.category]||'#4a5168';
+        const catC = CAT_COLOR[e.category] || col;
         const ej=JSON.stringify(e).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
         const monthBlockLabel = e.block ? `${e.block}<br>` : '';
-        return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 3px,${col} 3px,${col} 6px,${col}22 6px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),handleEventClick(event,${ej}))">${monthBlockLabel}${displayTitle(e)}</div>`;
+        return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),handleEventClick(event,${ej}))">${monthBlockLabel}${displayTitle(e)}</div>`;
       }).join('')}
       ${more>0?`<div class="mg-more">+${more} more</div>`:''}
       ${isFacultyMode?`<button class="mg-add-btn" onclick="openAddForm('${ds}','08:00');event.stopPropagation()">+</button>`:''}
