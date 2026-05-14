@@ -8430,5 +8430,24 @@
     "info": "Musculoskeletal Disorders",
     "presenter": "",
     "_id": "1778765595570"
+  },
+  {
+    "title": "Announcement",
+    "date": "12/08/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "Announcement",
+    "block": "MSK",
+    "weekNum": 29,
+    "week": "Week 29",
+    "desc": "Announcement",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "Orthopedic Quiz due at 11:59PM",
+    "presenter": "",
+    "_id": "1778766025825"
   }
 ]
