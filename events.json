@@ -9249,5 +9249,24 @@
     "info": "All handouts",
     "presenter": "TBD",
     "_id": "1778791089919"
+  },
+  {
+    "title": "Exam #2",
+    "date": "11/19/2026",
+    "start": "13:00",
+    "end": "16:00",
+    "category": "EXAM",
+    "block": "Endo/ Repro",
+    "weekNum": 26,
+    "week": "Week 26",
+    "desc": "Exam #2",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "_id": "1778791380279"
   }
 ]
