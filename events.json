@@ -1999,8 +1999,8 @@
     "end": "10:00",
     "category": "Session",
     "block": "Hem/Onc",
-    "weekNum": 3,
-    "week": "Week 3",
+    "weekNum": 9,
+    "week": "Week 9",
     "desc": "Active Learning",
     "calYear": "2029",
     "mCal": "M2",
@@ -2009,7 +2009,7 @@
     "location": "2nd Flr Room 216 A/B, EnMed Twr",
     "_id": "9051226_9",
     "info": "2.1 Introduction to oncology; 2.2 Surgical pathology;",
-    "presenter": "Dr. Hughes"
+    "presenter": "Dr. Parilkh and Dr. Hughes"
   },
   {
     "title": "Active Learning",
