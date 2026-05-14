@@ -8430,5 +8430,24 @@
     "info": "Overview of GI Function/ Regulation/",
     "presenter": "",
     "_id": "1778765270575"
+  },
+  {
+    "title": "Orthopedic Surgery Session",
+    "date": "12/01/2026",
+    "start": "08:00",
+    "end": "10:00",
+    "category": "Session",
+    "block": "MSK",
+    "weekNum": 28,
+    "week": "Week 28",
+    "desc": "Orthopedic Surgery Session",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "2nd Flr Rm 216 EnMed Twr",
+    "info": "Musculoskeletal Disorders",
+    "presenter": "",
+    "_id": "1778765595570"
   }
 ]
