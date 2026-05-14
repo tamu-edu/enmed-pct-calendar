@@ -9230,5 +9230,24 @@
     "info": "Orthopedic Quiz Opens at 12pm",
     "presenter": "",
     "_id": "1778776536063"
+  },
+  {
+    "title": "TBL",
+    "date": "11/17/2026",
+    "start": "08:00",
+    "end": "10:00",
+    "category": "Session",
+    "block": "Endo Week 5",
+    "weekNum": 26,
+    "week": "Week 26",
+    "desc": "TBL",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Flr Room 216 A/B, EnMed Twr",
+    "info": "All handouts",
+    "presenter": "TBD",
+    "_id": "1778791089919"
   }
 ]
