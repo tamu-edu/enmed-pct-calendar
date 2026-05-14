@@ -8886,5 +8886,24 @@
     "info": "Orthopedic Quiz due at 11:59PM",
     "presenter": "",
     "_id": "1778766025825"
+  },
+  {
+    "title": "Announcement",
+    "date": "12/04/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "Announcement",
+    "block": "MSK",
+    "weekNum": 28,
+    "week": "Week 28",
+    "desc": "Announcement",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "Orthopedic Quiz Opens at 12pm",
+    "presenter": "",
+    "_id": "1778776536063"
   }
 ]
