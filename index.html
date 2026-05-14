@@ -1488,12 +1488,13 @@ function renderList(){
   Object.keys(byDate).sort().forEach(date=>{
     html+=`<div style="margin-bottom:22px"><div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">${fmtDate(date)}</div>`;
     byDate[date].forEach(e=>{
-      const col=mCalColor(e),ec=evClass(e);
-      const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
-      const catColL=CAT_COLOR[e.category]||'#4a5168';
+      const col = mCalColor(e), ec = evClass(e);
+      const textCol = mCalTextColor(e);
+      const ej = JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+      const catColL = CAT_COLOR[e.category] || col;
       const blockLabel = e.block ? `${e.block} · ` : '';
-      html+=`<div class="event list-event ${ec}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 4px,${col} 4px,${col} 8px,${col}18 8px)" onclick="handleEventClick(event,${ej})">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:${col};white-space:nowrap;min-width:90px">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
+      html+=`<div class="event list-event ${ec}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 5px,${col}18 5px)" onclick="handleEventClick(event,${ej})">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:${textCol};white-space:nowrap;min-width:90px">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
         <div style="flex:1"><div class="ev-tag" style="color:${catColL}">${blockLabel}${e.category}</div><div style="font-size:13px;font-weight:500;color:${col}">${displayTitle(e)}</div></div>
         ${isFacultyMode?`<div style="display:flex;gap:5px;flex-shrink:0">
           <button class="ev-ctrl-btn ev-edit-btn" style="width:28px;height:28px" onclick="openEditForm(event,${ej})">✎</button>
