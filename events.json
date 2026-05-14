@@ -4320,25 +4320,6 @@
     "presenter": ""
   },
   {
-    "title": "Comprehensive Exam Check-In",
-    "date": "12/10/2026",
-    "start": "09:45",
-    "end": "09:55",
-    "category": "Exam Check-In",
-    "block": "EBM",
-    "weekNum": 3,
-    "week": "Week 3",
-    "desc": "Comprehensive Exam Check-In",
-    "calYear": "2029",
-    "mCal": "M2",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "Room 409",
-    "_id": "20260512_008",
-    "info": "",
-    "presenter": ""
-  },
-  {
     "title": "Comprehensive Exam",
     "date": "12/10/2026",
     "start": "10:00",
