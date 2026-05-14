@@ -3323,25 +3323,6 @@
     "mCal": "M2"
   },
   {
-    "_id": "11051226_19",
-    "mand": "Yes",
-    "title": "Blackout Day",
-    "group": "",
-    "location": "",
-    "cohortYear": "2029",
-    "class": "M2",
-    "date": "09/01/2026",
-    "start": "07:00",
-    "end": "07:30",
-    "category": "BLACKOUT",
-    "block": "PoM 3",
-    "weekNum": "",
-    "presenter": "",
-    "info": "",
-    "calYear": "2029",
-    "mCal": "M2"
-  },
-  {
     "_id": "11051226_20",
     "mand": "Yes",
     "title": "Focused Encounter Workshop (BBN-related) {Blackout Day}",
