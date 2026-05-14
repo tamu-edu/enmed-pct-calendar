@@ -8373,5 +8373,24 @@
     "info": "",
     "presenter": "",
     "_id": "1778708163465"
+  },
+  {
+    "title": "PoM 3 Orientation",
+    "date": "07/28/2026",
+    "start": "10:00",
+    "end": "12:00",
+    "category": "Session",
+    "block": "POM 3",
+    "weekNum": 10,
+    "week": "Week 10",
+    "desc": "PoM 3 Orientation",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "Room 216 A/B, EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Caplan",
+    "_id": "1778765004163"
   }
 ]
