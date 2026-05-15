@@ -2571,17 +2571,17 @@
     "end": "10:00",
     "category": "Session",
     "block": "MGA",
-    "weekNum": 14,
-    "week": "Week 14",
+    "weekNum": 24,
+    "week": "Week 24",
     "desc": "Active Learning",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
-    "location": "2nd Flr Room 216 A/B, EnMed Twr",
+    "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_76",
     "info": "Exam Review",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Unit 6 Exam Check-in",
