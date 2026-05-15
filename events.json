@@ -1425,7 +1425,7 @@
     "presenter": ""
   },
   {
-    "title": "Exam (Written)",
+    "title": "Unit 1 Exam (Written)",
     "date": "08/14/2026",
     "start": "09:00",
     "end": "12:00",
@@ -1433,7 +1433,7 @@
     "block": "FoM/ MGA",
     "weekNum": 12,
     "week": "Week 12",
-    "desc": "Exam (Written)",
+    "desc": "Unit 1 Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1596,7 +1596,7 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
-    "title": "Exam (Written)",
+    "title": "Unit 2 Exam (Written)",
     "date": "08/28/2026",
     "start": "08:00",
     "end": "12:00",
@@ -1604,7 +1604,7 @@
     "block": "MGA/FoM I",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "Exam (Written)",
+    "desc": "Unit 2 Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1612,7 +1612,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_23",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
     "title": "Unit 2 Practical Exam",
@@ -9115,7 +9115,7 @@
     "mand": "Yes",
     "group": "All Students",
     "location": "Room 216 A/B, EnMed Tower",
-    "info": "",
+    "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Caplan",
     "_id": "1778765004163"
   },
