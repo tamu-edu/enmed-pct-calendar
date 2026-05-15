@@ -2546,23 +2546,23 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group A]",
+    "title": "MITIE Lab Dissection",
     "date": "11/03/2026",
     "start": "13:30",
     "end": "16:30",
     "category": "Lab",
     "block": "MGA",
-    "weekNum": 14,
-    "week": "Week 14",
-    "desc": "MITIE Lab Dissection [Group A]",
+    "weekNum": 24,
+    "week": "Week 24",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group A",
-    "location": "MITIE, Lab 208",
+    "location": "MITIE",
     "_id": "10051226_75",
     "info": "Palate, nasal cavity, and sinuses",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Active Learning",
