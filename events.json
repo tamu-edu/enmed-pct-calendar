@@ -2590,8 +2590,8 @@
     "end": "08:00",
     "category": "Exam Check-In",
     "block": "MGA",
-    "weekNum": 14,
-    "week": "Week 14",
+    "weekNum": 24,
+    "week": "Week 24",
     "desc": "Unit 6 Exam Check-in",
     "calYear": "2030",
     "mCal": "M1",
@@ -2600,7 +2600,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_78",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Unit 6 EXAM (Written)",
