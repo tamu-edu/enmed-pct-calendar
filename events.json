@@ -8778,7 +8778,7 @@
     "presenter": "Dr. Meyer"
   },
   {
-    "title": "TBL #3",
+    "title": "TBL",
     "date": "09/09/2026",
     "start": "10:00:00",
     "end": "11:30:00",
@@ -8786,7 +8786,7 @@
     "block": "MGA/FoM I",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "TBL #3",
+    "desc": "TBL",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
