@@ -1976,7 +1976,7 @@
     "presenter": ""
   },
   {
-    "title": "Unit 4 Exam (Written)",
+    "title": "Exam (Written)",
     "date": "09/25/2026",
     "start": "08:00",
     "end": "12:00",
@@ -1984,7 +1984,7 @@
     "block": "MGA/FOM I",
     "weekNum": 18,
     "week": "Week 18",
-    "desc": "Unit 4 Exam (Written)",
+    "desc": "Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1992,7 +1992,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_45",
     "info": "",
-    "presenter": "Dr. Meyer, Dr. Omole"
+    "presenter": ""
   },
   {
     "title": "NBME Exam",
