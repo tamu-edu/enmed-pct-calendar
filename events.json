@@ -2039,8 +2039,8 @@
     "end": "10:00",
     "category": "Session",
     "block": "MGA",
-    "weekNum": 9,
-    "week": "Week 9",
+    "weekNum": 19,
+    "week": "Week 19",
     "desc": "Active Learning",
     "calYear": "2030",
     "mCal": "M1",
@@ -2049,7 +2049,7 @@
     "location": "Room 212 A/B, EnMed Tower",
     "_id": "10051226_48",
     "info": "Introduction to joints",
-    "presenter": "Dr.Meyer, Dr.M Mobaraki-Omoumi"
+    "presenter": "Dr. Meyer, Dr. M Mobaraki-Omoumi"
   },
   {
     "title": "MITIE Lab Dissection [Group A]",
