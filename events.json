@@ -2001,17 +2001,17 @@
     "end": "17:00",
     "category": "Exam",
     "block": "MGA",
-    "weekNum": 8,
-    "week": "Week 8",
+    "weekNum": 18,
+    "week": "Week 18",
     "desc": "Unit 4 Practical Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "location": "MITIE",
     "_id": "10051226_46",
     "info": "",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Active Learning",
