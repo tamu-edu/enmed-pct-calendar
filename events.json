@@ -2096,17 +2096,17 @@
     "end": "12:00",
     "category": "Session",
     "block": "MGA",
-    "weekNum": 9,
-    "week": "Week 9",
+    "weekNum": 19,
+    "week": "Week 19",
     "desc": "Active Learning",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
-    "location": "2nd Flr Room 216 A/B, EnMed Twr",
+    "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_51",
     "info": "Lower extremity osteology, Anterior and medial thigh; Gluteal region and posterior thigh; Hip, knee, and ankle joints",
-    "presenter": ""
+    "presenter": "Dr. Meyer"
   },
   {
     "title": "Active Learning",
