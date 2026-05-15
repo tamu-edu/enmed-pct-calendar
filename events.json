@@ -2153,17 +2153,17 @@
     "end": "12:00",
     "category": "Session",
     "block": "MGA",
-    "weekNum": 10,
-    "week": "Week 10",
+    "weekNum": 20,
+    "week": "Week 20",
     "desc": "Active Learning",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
-    "location": "2nd Flr Room 216 A/B, EnMed Twr",
+    "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_54",
     "info": "Overview of the Upper Extremity; Upper Extremity osteology; Axilla; Shoulder and upper extremity extrinsics; Arm and cubital fossa",
-    "presenter": "Dr.Omole"
+    "presenter": "Dr. Omole"
   },
   {
     "title": "MITIE Lab Dissection [Group B]",
