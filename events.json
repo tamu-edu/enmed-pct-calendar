@@ -2071,23 +2071,23 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
+    "title": "MITIE Lab Dissection",
     "date": "10/01/2026",
     "start": "08:00",
     "end": "12:00",
     "category": "Lab",
     "block": "MGA",
-    "weekNum": 9,
-    "week": "Week 9",
-    "desc": "MITIE Lab Dissection [Group B]",
+    "weekNum": 19,
+    "week": "Week 19",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group B",
-    "location": "MITIE, Lab 208",
+    "location": "MITIE",
     "_id": "10051226_50",
     "info": "Gluteal and posterior thigh",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Active Learning",
