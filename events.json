@@ -2166,23 +2166,23 @@
     "presenter": "Dr. Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
+    "title": "MITIE Lab Dissection",
     "date": "10/08/2026",
     "start": "09:00",
     "end": "12:00",
     "category": "Lab",
     "block": "MGA",
-    "weekNum": 10,
-    "week": "Week 10",
-    "desc": "MITIE Lab Dissection [Group B]",
+    "weekNum": 20,
+    "week": "Week 20",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group B",
-    "location": "MITIE, Lab 208",
+    "location": "MITIE",
     "_id": "10051226_55",
     "info": "Axilla",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "MITIE Lab Dissection [Group A]",
