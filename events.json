@@ -8567,7 +8567,7 @@
     "presenter": "Dr. Priya, Dr. Meyer, and Dr. Peterson"
   },
   {
-    "title": "TBL",
+    "title": "TBL #1",
     "date": "08/12/2026",
     "start": "10:00:00",
     "end": "11:30:00",
@@ -8575,7 +8575,7 @@
     "block": "MGA/FoM I",
     "weekNum": 12,
     "week": "Week 12",
-    "desc": "TBL",
+    "desc": "TBL #1",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
