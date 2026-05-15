@@ -3423,11 +3423,13 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": "4",
+    "weekNum": 13,
     "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas",
+    "info": "Please see Canvas for student group assignments and additional information.",
     "calYear": "2029",
-    "mCal": "M2"
+    "mCal": "M2",
+    "week": "Week 13",
+    "desc": "Assessment & Plan Series, Part 1"
   },
   {
     "_id": "11051226_7",
