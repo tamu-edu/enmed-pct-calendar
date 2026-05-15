@@ -1900,23 +1900,23 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
+    "title": "MITIE Lab Dissection",
     "date": "09/22/2026",
     "start": "13:30",
     "end": "16:30",
     "category": "Lab",
     "block": "MGA",
-    "weekNum": 8,
-    "week": "Week 8",
-    "desc": "MITIE Lab Dissection [Group B]",
+    "weekNum": 18,
+    "week": "Week 18",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group B",
-    "location": "MITIE, Lab 208",
+    "location": "MITIE",
     "_id": "10051226_41",
     "info": "Pelvis II and neurovasculature",
-    "presenter": "Dr.Omole"
+    "presenter": "Dr. Omole, Dr. Meyer"
   },
   {
     "title": "MGA: Active Learning",
