@@ -2394,23 +2394,23 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
+    "title": "MITIE Lab Dissection",
     "date": "10/21/2026",
     "start": "13:00",
     "end": "16:00",
     "category": "Lab",
     "block": "MGA",
-    "weekNum": 12,
-    "week": "Week 12",
-    "desc": "MITIE Lab Dissection [Group B]",
+    "weekNum": 22,
+    "week": "Week 22",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group B",
-    "location": "MITIE, Lab 208",
+    "location": "MITIE",
     "_id": "10051226_67",
     "info": "Deep neck",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "EnMed Lab [Groups A&B]",
