@@ -4482,9 +4482,11 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": 13,
+    "weekNum": 22,
     "presenter": "Dr. Caplan",
-    "info": ""
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "week": "Week 22",
+    "desc": "Focused H&P OSCE (FHP OSCEs) {Blackout Day}"
   },
   {
     "_id": "11051226_64",
