@@ -1349,7 +1349,7 @@
     "presenter": "Dr. Omole, Dr. Meyer"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
+    "title": "MITIE Lab Dissection",
     "date": "08/11/2026",
     "start": "13:30",
     "end": "15:00",
@@ -1357,7 +1357,7 @@
     "block": "MGA",
     "weekNum": 12,
     "week": "Week 12",
-    "desc": "MITIE Lab Dissection [Group B]",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
