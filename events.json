@@ -2584,25 +2584,6 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "Unit 6 Exam Check-in",
-    "date": "11/06/2026",
-    "start": "07:45",
-    "end": "08:00",
-    "category": "Exam Check-In",
-    "block": "MGA",
-    "weekNum": 24,
-    "week": "Week 24",
-    "desc": "Unit 6 Exam Check-in",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
-    "_id": "10051226_78",
-    "info": "",
-    "presenter": "Dr. Meyer, Dr. Omole"
-  },
-  {
     "title": "Unit 6 EXAM (Written)",
     "date": "11/06/2026",
     "start": "08:00",
@@ -3423,13 +3404,11 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": 13,
+    "weekNum": "4",
     "presenter": "Dr. Caplan",
-    "info": "Please see Canvas for student group assignments and additional information.",
+    "info": "Additional info, please see Canvas",
     "calYear": "2029",
-    "mCal": "M2",
-    "week": "Week 13",
-    "desc": "Assessment & Plan Series, Part 1"
+    "mCal": "M2"
   },
   {
     "_id": "11051226_7",
@@ -3444,13 +3423,11 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": 13,
+    "weekNum": "4",
     "presenter": "",
-    "info": "Please see Canvas for student group assignments and additional information.",
+    "info": "Additional info, please see Canvas",
     "calYear": "2029",
-    "mCal": "M2",
-    "week": "Week 13",
-    "desc": "PoM 3 Preceptorships"
+    "mCal": "M2"
   },
   {
     "_id": "11051226_8",
