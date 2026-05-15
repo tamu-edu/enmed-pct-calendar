@@ -1729,23 +1729,23 @@
     "presenter": "Dr. Meyer"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
+    "title": "MITIE Lab Dissection",
     "date": "09/04/2026",
     "start": "13:00",
     "end": "15:30",
-    "category": "",
+    "category": "Lab",
     "block": "MGA",
-    "weekNum": 5,
-    "week": "Week 5",
-    "desc": "MITIE Lab Dissection [Group B]",
+    "weekNum": 15,
+    "week": "Week 15",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group B",
-    "location": "Group B",
+    "location": "MITIE",
     "_id": "10051226_31",
-    "info": "",
-    "presenter": ""
+    "info": "Posterior abdominal wall",
+    "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
     "title": "Active Learning",
