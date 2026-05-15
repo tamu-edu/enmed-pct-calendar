@@ -2362,17 +2362,17 @@
     "end": "10:00",
     "category": "Session",
     "block": "MGA",
-    "weekNum": 12,
-    "week": "Week 12",
+    "weekNum": 22,
+    "week": "Week 22",
     "desc": "Active Learning",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
-    "location": "2nd Flr Room 216 A/B, EnMed Twr",
+    "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_65",
     "info": "Triangles of the neck; Deep neck; Lymphatics of the head; Scalp, meninges, and vasculature; Orbit",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "MITIE Lab Dissection [Group A]",
