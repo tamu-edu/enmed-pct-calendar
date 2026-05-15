@@ -1830,17 +1830,17 @@
     "end": "17:00",
     "category": "Exam",
     "block": "MGA",
-    "weekNum": 6,
-    "week": "Week 6",
+    "weekNum": 16,
+    "week": "Week 16",
     "desc": "Unit 3 Practical Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "location": "MITIE",
     "_id": "10051226_37",
     "info": "",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "MITIE Lab Dissection [Group B]",
