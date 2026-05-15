@@ -1919,23 +1919,23 @@
     "presenter": "Dr. Omole, Dr. Meyer"
   },
   {
-    "title": "MGA: Active Learning",
+    "title": "Active Learning",
     "date": "09/23/2026",
     "start": "08:00",
     "end": "09:00",
     "category": "Session",
     "block": "MGA",
-    "weekNum": 8,
-    "week": "Week 8",
-    "desc": "MGA: Active Learning",
+    "weekNum": 18,
+    "week": "Week 18",
+    "desc": "Active Learning",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
-    "location": "2nd Flr Room 216 A/B, EnMed Twr",
+    "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_42",
     "info": "Pelvis, pelvis floor and neurovasculature; Perineum",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "MGA: Active Learning",
