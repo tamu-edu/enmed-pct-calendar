@@ -3800,11 +3800,13 @@
     "end": "12:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": "7",
+    "weekNum": 16,
     "presenter": "Dr. Caplan",
-    "info": "",
+    "info": "Please see Canvas for student group assignments and additional information.",
     "calYear": "2029",
-    "mCal": "M2"
+    "mCal": "M2",
+    "week": "Week 16",
+    "desc": "Breaking Bad News (BBN) OSCE {BLACKOUT Day}"
   },
   {
     "_id": "11051226_28",
