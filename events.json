@@ -4556,9 +4556,11 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": 13,
+    "weekNum": 22,
     "presenter": "",
-    "info": "Additional info, please see Canvas"
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "week": "Week 22",
+    "desc": "PoM 3 Preceptorships"
   },
   {
     "_id": "11051226_68",
