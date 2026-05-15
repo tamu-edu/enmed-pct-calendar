@@ -2432,23 +2432,23 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group A]",
+    "title": "MITIE Lab Dissection",
     "date": "10/22/2026",
     "start": "13:30",
     "end": "15:30",
     "category": "Lab",
     "block": "MGA",
-    "weekNum": 12,
-    "week": "Week 12",
-    "desc": "MITIE Lab Dissection [Group A]",
+    "weekNum": 22,
+    "week": "Week 22",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group A",
-    "location": "MITIE, Lab 208",
+    "location": "MITIE",
     "_id": "10051226_69",
     "info": "Cranial cavity",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "MITIE Lab Dissection [Group B]",
