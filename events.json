@@ -1805,7 +1805,7 @@
     "presenter": ""
   },
   {
-    "title": "Exam (Written)",
+    "title": "Unit 3 Exam (Written)",
     "date": "09/11/2026",
     "start": "08:00",
     "end": "12:00",
@@ -1813,7 +1813,7 @@
     "block": "MGA/FoM I",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "Exam (Written)",
+    "desc": "Unit 3 Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1821,10 +1821,10 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_36",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "NBME Exam",
+    "title": "Unit 3 Practical Exam",
     "date": "09/11/2026",
     "start": "13:00",
     "end": "17:00",
@@ -1832,7 +1832,7 @@
     "block": "MGA",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "NBME Exam",
+    "desc": "Unit 3 Practical Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1840,7 +1840,7 @@
     "location": "MITIE",
     "_id": "10051226_37",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "MITIE Lab Dissection",
@@ -1976,7 +1976,7 @@
     "presenter": ""
   },
   {
-    "title": "Exam (Written)",
+    "title": "Unit 4 Exam (Written)",
     "date": "09/25/2026",
     "start": "08:00",
     "end": "12:00",
@@ -1984,7 +1984,7 @@
     "block": "MGA/FOM I",
     "weekNum": 18,
     "week": "Week 18",
-    "desc": "Exam (Written)",
+    "desc": "Unit 4 Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1992,7 +1992,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_45",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Unit 4 Practical Exam",
@@ -3394,11 +3394,13 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": "3",
+    "weekNum": 12,
     "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas",
+    "info": "Please see Canvas for student group assignments and additional information.",
     "calYear": "2029",
-    "mCal": "M2"
+    "mCal": "M2",
+    "week": "Week 12",
+    "desc": "How to Present"
   },
   {
     "_id": "11051226_5",
