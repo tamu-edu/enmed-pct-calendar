@@ -4275,9 +4275,11 @@
     "end": "12:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": 11,
+    "weekNum": 20,
     "presenter": "Dr. Smith",
-    "info": ""
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "week": "Week 20",
+    "desc": "HEAL: Breaking Bad News (BBN) OSCE {Blackout Day}"
   },
   {
     "_id": "11051226_53",
