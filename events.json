@@ -1805,7 +1805,7 @@
     "presenter": ""
   },
   {
-    "title": "Unit 3 Exam (Written)",
+    "title": "Exam (Written)",
     "date": "09/11/2026",
     "start": "08:00",
     "end": "12:00",
@@ -1813,7 +1813,7 @@
     "block": "MGA/FoM I",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "Unit 3 Exam (Written)",
+    "desc": "Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1821,7 +1821,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_36",
     "info": "",
-    "presenter": "Dr. Meyer, Dr. Omole"
+    "presenter": ""
   },
   {
     "title": "Unit 3 Practical Exam",
@@ -3337,13 +3337,11 @@
     "end": "12:00",
     "category": "Orientation",
     "block": "PoM 3",
-    "weekNum": 11,
+    "weekNum": "2",
     "presenter": "Dr. Smith",
-    "info": "Please see Canvas for student group assignments and additional information.",
+    "info": "Additional info, please see Canvas",
     "calYear": "2029",
-    "mCal": "M2",
-    "week": "Week 11",
-    "desc": "HEALOrientation:Course Introduction and Ethics Review"
+    "mCal": "M2"
   },
   {
     "_id": "11051226_2",
