@@ -3337,11 +3337,13 @@
     "end": "12:00",
     "category": "Orientation",
     "block": "PoM 3",
-    "weekNum": "2",
+    "weekNum": 11,
     "presenter": "Dr. Smith",
-    "info": "Additional info, please see Canvas",
+    "info": "Please see Canvas for student group assignments and additional information.",
     "calYear": "2029",
-    "mCal": "M2"
+    "mCal": "M2",
+    "week": "Week 11",
+    "desc": "HEALOrientation:Course Introduction and Ethics Review"
   },
   {
     "_id": "11051226_2",
