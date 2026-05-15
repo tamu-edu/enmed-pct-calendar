@@ -2324,8 +2324,8 @@
     "end": "12:00",
     "category": "Exam",
     "block": "MGA",
-    "weekNum": 11,
-    "week": "Week 11",
+    "weekNum": 21,
+    "week": "Week 21",
     "desc": "Unit 5 Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
@@ -2334,7 +2334,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_63",
     "info": "",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Unit 5 Practical Exam",
