@@ -1463,7 +1463,7 @@
     "presenter": "Dr.Meyer"
   },
   {
-    "title": "MITIE Lab Dissection [Group A]",
+    "title": "MITIE Lab Dissection",
     "date": "08/19/2026",
     "start": "08:00",
     "end": "12:00",
@@ -1471,7 +1471,7 @@
     "block": "MGA",
     "weekNum": 13,
     "week": "Week 13",
-    "desc": "MITIE Lab Dissection [Group A]",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
