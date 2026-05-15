@@ -9251,5 +9251,24 @@
     "info": "",
     "presenter": "",
     "_id": "1778791380279"
+  },
+  {
+    "title": "MITIE Lab Dissection",
+    "date": "09/02/2026",
+    "start": "13:00",
+    "end": "16:00",
+    "category": "Lab",
+    "block": "MGA",
+    "weekNum": 15,
+    "week": "Week 15",
+    "desc": "MITIE Lab Dissection",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "MITIE",
+    "info": "Abdominal contents (foregut)",
+    "presenter": "Dr. Meyer, Dr.Omole",
+    "_id": "1778811053268"
   }
 ]
