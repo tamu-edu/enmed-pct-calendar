@@ -2451,23 +2451,23 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
+    "title": "MITIE Lab Dissection",
     "date": "10/27/2026",
     "start": "13:30",
     "end": "15:30",
     "category": "Lab",
     "block": "MGA",
-    "weekNum": 13,
-    "week": "Week 13",
-    "desc": "MITIE Lab Dissection [Group B]",
+    "weekNum": 23,
+    "week": "Week 23",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group B",
-    "location": "MITIE, Lab 208",
+    "location": "MITIE",
     "_id": "10051226_70",
     "info": "Orbit & face",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Active Learning",
