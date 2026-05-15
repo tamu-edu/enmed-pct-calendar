@@ -2622,15 +2622,15 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
-    "title": "MGA: Unit 6 Practical Exam",
+    "title": "MGA: Unit 6 Exam (Written)",
     "date": "11/06/2026",
-    "start": "13:00",
-    "end": "17:00",
-    "category": "Exam",
+    "start": "08:00",
+    "end": "12:00",
+    "category": "EXAM",
     "block": "MGA",
-    "weekNum": 14,
-    "week": "Week 14",
-    "desc": "MGA: Unit 6 Practical Exam",
+    "weekNum": 24,
+    "week": "Week 24",
+    "desc": "MGA: Unit 6 Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -2638,7 +2638,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_80",
     "info": "",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Active Learning",
