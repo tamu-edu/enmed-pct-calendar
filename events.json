@@ -1672,25 +1672,6 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
-    "date": "09/02/2026",
-    "start": "13:00",
-    "end": "16:00",
-    "category": "",
-    "block": "MGA",
-    "weekNum": 5,
-    "week": "Week 5",
-    "desc": "MITIE Lab Dissection [Group B]",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "Group B",
-    "location": "2nd Flr Room 216 A/B, EnMed Twr",
-    "_id": "10051226_27",
-    "info": "Abdominal contents (foregut)",
-    "presenter": "Dr. Meyer, Dr.Omole"
-  },
-  {
     "title": "Active Learning",
     "date": "09/03/2026",
     "start": "11:00",
