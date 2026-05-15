@@ -2476,17 +2476,17 @@
     "end": "12:00",
     "category": "Session",
     "block": "MGA",
-    "weekNum": 13,
-    "week": "Week 13",
+    "weekNum": 23,
+    "week": "Week 23",
     "desc": "Active Learning",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
-    "location": "2nd Flr Room 216 A/B, EnMed Twr",
+    "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_71",
     "info": "Face; Facial nerve; Prevertebral region; Pharynx and palate; Maxillary n. & pterygopalatine fossa; Ear; Development of the pharynx; Face and palate development",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "MITIE Lab Dissection [Group A]",
