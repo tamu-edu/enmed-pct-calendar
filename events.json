@@ -3760,11 +3760,13 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": "6",
+    "weekNum": 15,
     "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas",
+    "info": "Please see Canvas for student group assignments and additional information.",
     "calYear": "2029",
-    "mCal": "M2"
+    "mCal": "M2",
+    "week": "Week 15",
+    "desc": "CHP OSCE (Make Up)"
   },
   {
     "_id": "11051226_26",
