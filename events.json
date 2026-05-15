@@ -8664,7 +8664,7 @@
     "presenter": "Dr. Meyer, Dr. Peterson, and Dr. Slivkoff"
   },
   {
-    "title": "TBL #2",
+    "title": "TBL",
     "date": "08/26/2026",
     "start": "13:00:00",
     "end": "14:30:00",
@@ -8672,7 +8672,7 @@
     "block": "MGA/FoM I",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "TBL #2",
+    "desc": "TBL",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
