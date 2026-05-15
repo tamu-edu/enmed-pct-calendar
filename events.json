@@ -3697,11 +3697,13 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": "6",
+    "weekNum": 15,
     "presenter": "",
-    "info": "",
+    "info": "Please see Canvas for student group assignments and additional information.",
     "calYear": "2029",
-    "mCal": "M2"
+    "mCal": "M2",
+    "week": "Week 15",
+    "desc": "PoM 3 Preceptorships {Blackout Day}"
   },
   {
     "_id": "11051226_23",
