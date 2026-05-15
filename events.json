@@ -2508,23 +2508,23 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "MITIE Lab Dissection [Group B]",
+    "title": "MITIE Lab Dissection",
     "date": "10/29/2026",
     "start": "13:00",
     "end": "16:00",
     "category": "Lab",
     "block": "MGA",
-    "weekNum": 13,
-    "week": "Week 13",
-    "desc": "MITIE Lab Dissection [Group B]",
+    "weekNum": 23,
+    "week": "Week 23",
+    "desc": "MITIE Lab Dissection",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group B",
-    "location": "MITIE, Lab 208",
+    "location": "MITIE",
     "_id": "10051226_73",
     "info": "Oral cavity & tongue/prosections",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Active Learning",
