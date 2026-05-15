@@ -4313,9 +4313,11 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": 11,
+    "weekNum": 20,
     "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas"
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "week": "Week 20",
+    "desc": "Assessment & Plan Series, Part 3 (Oral Presentation)"
   },
   {
     "_id": "11051226_55",
