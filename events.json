@@ -2413,23 +2413,23 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "EnMed Lab [Groups A&B]",
+    "title": "EnMed Lab",
     "date": "10/22/2026",
     "start": "10:00",
     "end": "12:00",
-    "category": "Simulation Session",
+    "category": "Lab",
     "block": "MGA",
-    "weekNum": 12,
-    "week": "Week 12",
-    "desc": "EnMed Lab [Groups A&B]",
+    "weekNum": 22,
+    "week": "Week 22",
+    "desc": "EnMed Lab",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
     "group": "Groups A&B",
-    "location": "EnMed Lab",
+    "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_68",
     "info": "Skull",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "MITIE Lab Dissection [Group A]",
