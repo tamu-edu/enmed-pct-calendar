@@ -1995,7 +1995,7 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "Unit 4 Practical Exam",
+    "title": "NBME Exam",
     "date": "09/25/2026",
     "start": "13:00",
     "end": "17:00",
@@ -2003,7 +2003,7 @@
     "block": "MGA",
     "weekNum": 18,
     "week": "Week 18",
-    "desc": "Unit 4 Practical Exam",
+    "desc": "NBME Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -2011,7 +2011,7 @@
     "location": "MITIE",
     "_id": "10051226_46",
     "info": "",
-    "presenter": "Dr. Meyer, Dr. Omole"
+    "presenter": ""
   },
   {
     "title": "Active Learning",
@@ -3394,13 +3394,11 @@
     "end": "17:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": 12,
+    "weekNum": "3",
     "presenter": "Dr. Caplan",
-    "info": "Please see Canvas for student group assignments and additional information.",
+    "info": "Additional info, please see Canvas",
     "calYear": "2029",
-    "mCal": "M2",
-    "week": "Week 12",
-    "desc": "How to Present"
+    "mCal": "M2"
   },
   {
     "_id": "11051226_5",
