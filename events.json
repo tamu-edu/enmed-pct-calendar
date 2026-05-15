@@ -4132,11 +4132,13 @@
     "end": "12:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": "10",
+    "weekNum": 19,
     "presenter": "Dr. Smith",
-    "info": "Additional info, please see Canvas",
+    "info": "Please see Canvas for student group assignments and additional information.",
     "calYear": "2029",
-    "mCal": "M2"
+    "mCal": "M2",
+    "week": "Week 19",
+    "desc": "Upset Patient Workshop"
   },
   {
     "_id": "11051226_46",
