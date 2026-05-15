@@ -9289,5 +9289,24 @@
     "info": "Abdominal contents (midgut)",
     "presenter": "Dr. Meyer, Dr.Omole",
     "_id": "1778811358625"
+  },
+  {
+    "title": "Unit 6 Practical Exam",
+    "date": "11/06/2026",
+    "start": "13:00",
+    "end": "17:00",
+    "category": "EXAM",
+    "block": "MGA",
+    "weekNum": 24,
+    "week": "Week 24",
+    "desc": "Unit 6 Practical Exam",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "MITIE",
+    "info": "",
+    "presenter": "Dr. Meyer, Dr. Omole",
+    "_id": "1778814499057"
   }
 ]
