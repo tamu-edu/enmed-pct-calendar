@@ -4575,9 +4575,11 @@
     "end": "12:00",
     "category": "Session",
     "block": "PoM 3",
-    "weekNum": 14,
+    "weekNum": 23,
     "presenter": "Dr. Smith",
-    "info": "Additional info, please see Canvas"
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "week": "Week 23",
+    "desc": "Selective Session 1"
   },
   {
     "_id": "11051226_69",
