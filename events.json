@@ -1425,7 +1425,7 @@
     "presenter": ""
   },
   {
-    "title": "Unit 1 Exam (Written)",
+    "title": "Exam (Written)",
     "date": "08/14/2026",
     "start": "09:00",
     "end": "12:00",
@@ -1433,7 +1433,7 @@
     "block": "FoM/ MGA",
     "weekNum": 12,
     "week": "Week 12",
-    "desc": "Unit 1 Exam (Written)",
+    "desc": "Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -2620,6 +2620,25 @@
     "_id": "10051226_79",
     "info": "",
     "presenter": "Dr. Meyer, Dr.Omole"
+  },
+  {
+    "title": "MGA: Unit 6 Exam (Written)",
+    "date": "11/06/2026",
+    "start": "08:00",
+    "end": "12:00",
+    "category": "EXAM",
+    "block": "MGA",
+    "weekNum": 24,
+    "week": "Week 24",
+    "desc": "MGA: Unit 6 Exam (Written)",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "_id": "10051226_80",
+    "info": "",
+    "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
     "title": "Active Learning",
@@ -9006,7 +9025,7 @@
     "presenter": "Dr. Meyer and Dr. Slivkoff"
   },
   {
-    "title": "TBL",
+    "title": "TBL #5",
     "date": "11/04/2026",
     "start": "10:00:00",
     "end": "11:30:00",
@@ -9014,7 +9033,7 @@
     "block": "MGA/FoM I",
     "weekNum": 24,
     "week": "Week 24",
-    "desc": "TBL",
+    "desc": "TBL #5",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
