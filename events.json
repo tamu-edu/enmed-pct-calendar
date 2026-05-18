@@ -1789,7 +1789,7 @@
     "title": "Unit 3 Exam Check-in",
     "date": "09/11/2026",
     "start": "07:45",
-    "end": "08:00",
+    "end": "07:55",
     "category": "Exam Check-In",
     "block": "MGA/FOM I",
     "weekNum": 16,
@@ -8812,7 +8812,7 @@
     "presenter": "Dr. Priya, Dr. Meyer, and Dr. Peterson"
   },
   {
-    "title": "Unit 2 Exam (Written) Check-In",
+    "title": "Exam #2 Check-In",
     "date": "08/28/2026",
     "start": "07:45:00",
     "end": "07:55:00",
@@ -8820,7 +8820,7 @@
     "block": "MGA/FoM I",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "Unit 2 Exam (Written) Check-In",
+    "desc": "Exam #2 Check-In",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
