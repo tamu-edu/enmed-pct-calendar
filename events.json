@@ -9437,5 +9437,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779140947977"
+  },
+  {
+    "title": "Exam Check-in",
+    "date": "11/06/2026",
+    "start": "12:45",
+    "end": "12:55",
+    "category": "Exam Check-In",
+    "block": "",
+    "weekNum": 24,
+    "week": "Week 24",
+    "desc": "Exam Check-in",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "",
+    "location": "MITIE",
+    "info": "",
+    "presenter": "Dr. Meyer, Dr. Omole",
+    "_id": "1779206074882"
   }
 ]
