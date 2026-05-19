@@ -9475,5 +9475,24 @@
     "info": "",
     "presenter": "Dr. Meyer, Dr.Omole",
     "_id": "1779207901085"
+  },
+  {
+    "title": "test",
+    "date": "05/27/2026",
+    "start": "08:00",
+    "end": "09:00",
+    "category": "Session",
+    "block": "",
+    "weekNum": 1,
+    "week": "Week 1",
+    "desc": "test",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1779228911767"
   }
 ]
