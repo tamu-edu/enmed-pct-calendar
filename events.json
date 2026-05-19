@@ -1824,7 +1824,7 @@
     "presenter": "Dr. Meyer, Dr. Omole, Dr. Priya"
   },
   {
-    "title": "Unit 3 Practical Exam",
+    "title": "NBME Exam",
     "date": "09/11/2026",
     "start": "13:00",
     "end": "17:00",
@@ -1832,7 +1832,7 @@
     "block": "MGA",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "Unit 3 Practical Exam",
+    "desc": "NBME Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
