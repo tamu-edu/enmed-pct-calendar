@@ -9456,5 +9456,24 @@
     "info": "",
     "presenter": "Dr. Meyer, Dr. Omole",
     "_id": "1779206074882"
+  },
+  {
+    "title": "Exam Check-in",
+    "date": "09/11/2026",
+    "start": "12:45",
+    "end": "12:55",
+    "category": "Session",
+    "block": "MGA",
+    "weekNum": 16,
+    "week": "Week 16",
+    "desc": "Exam Check-in",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "Dr. Meyer, Dr.Omole",
+    "_id": "1779207901085"
   }
 ]
