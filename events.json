@@ -9201,8 +9201,8 @@
     "weekNum": 25,
     "week": "Week 25",
     "desc": "Blackout Day",
-    "calYear": "2030",
-    "mCal": "M1",
+    "calYear": "",
+    "mCal": "",
     "mand": "Yes",
     "group": "All Students",
     "location": "",
@@ -9439,7 +9439,7 @@
     "_id": "1779140947977"
   },
   {
-    "title": "Exam Check-in",
+    "title": "MGA Exam Check-in",
     "date": "11/06/2026",
     "start": "12:45",
     "end": "12:55",
@@ -9447,7 +9447,7 @@
     "block": "",
     "weekNum": 24,
     "week": "Week 24",
-    "desc": "Exam Check-in",
+    "desc": "MGA Exam Check-in",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
