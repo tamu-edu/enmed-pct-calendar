@@ -1805,7 +1805,7 @@
     "presenter": ""
   },
   {
-    "title": "Unit 3 Exam (Written)",
+    "title": "Exam (Written)",
     "date": "09/11/2026",
     "start": "08:00",
     "end": "12:00",
@@ -1813,7 +1813,7 @@
     "block": "MGA/FoM I",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "Unit 3 Exam (Written)",
+    "desc": "Exam (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1821,7 +1821,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_36",
     "info": "",
-    "presenter": "Dr. Meyer, Dr. Omole"
+    "presenter": "Dr. Meyer, Dr. Omole, Dr. Priya"
   },
   {
     "title": "Unit 3 Practical Exam",
