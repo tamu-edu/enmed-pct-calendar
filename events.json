@@ -1786,7 +1786,7 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "Unit 3 Exam Check-in",
+    "title": "Exam Check-in",
     "date": "09/11/2026",
     "start": "07:45",
     "end": "08:00",
@@ -1794,7 +1794,7 @@
     "block": "MGA/FOM I",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "Unit 3 Exam Check-in",
+    "desc": "Exam Check-in",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -1802,7 +1802,7 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "10051226_35",
     "info": "",
-    "presenter": ""
+    "presenter": "Dr. Meyer, Dr. Omole, Dr. Priya"
   },
   {
     "title": "Exam (Written)",
