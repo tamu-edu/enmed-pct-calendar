@@ -9532,5 +9532,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779291018135"
+  },
+  {
+    "title": "Breaking Bad News (BBN) OSCE CHECK-IN 9:50 AM-10:00 AM",
+    "date": "10/06/2026",
+    "start": "09:50",
+    "end": "10:00",
+    "category": "exam check-in",
+    "block": "PoM 3",
+    "weekNum": 20,
+    "week": "Week 20",
+    "desc": "Breaking Bad News (BBN) OSCE CHECK-IN 9:50 AM-10:00 AM",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group C&D",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "1779291190357"
   }
 ]
