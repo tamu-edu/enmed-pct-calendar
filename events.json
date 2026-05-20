@@ -9458,22 +9458,22 @@
     "_id": "1779287918843"
   },
   {
-    "title": "Memorial Day - No Classes",
-    "date": "05/25/2026",
-    "start": "07:00",
-    "end": "07:30",
-    "category": "Holiday",
-    "block": "",
-    "weekNum": 1,
-    "week": "Week 1",
-    "desc": "Memorial Day - No Classes",
+    "title": "[MAND] Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
+    "date": "08/26/2026",
+    "start": "12:50 PM",
+    "end": "1:00 PM",
+    "category": "EXAM CHECK-IN",
+    "block": "POM 3",
+    "weekNum": 14,
+    "week": "Week 14",
+    "desc": "[MAND] Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
     "calYear": "2029",
-    "mCal": "",
-    "mand": "No",
-    "group": "All Students",
-    "location": "",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "SIM 404, EnMed Tower",
     "info": "",
     "presenter": "",
-    "_id": "1779288549624"
+    "_id": "1779288610352"
   }
 ]
