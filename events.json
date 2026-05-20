@@ -9458,7 +9458,7 @@
     "_id": "1779287918843"
   },
   {
-    "title": "[MAND] Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
+    "title": "Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
     "date": "08/26/2026",
     "start": "12:50 PM",
     "end": "1:00 PM",
@@ -9466,7 +9466,7 @@
     "block": "POM 3",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "[MAND] Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
+    "desc": "Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
