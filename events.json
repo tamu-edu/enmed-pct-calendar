@@ -9652,7 +9652,7 @@
     "date": "11/25/2026",
     "start": "7:00",
     "end": "7:30",
-    "category": "Reading Day",
+    "category": "Holiday",
     "block": "Holiday - No Classes",
     "weekNum": 27,
     "week": "Week 27",
@@ -9665,5 +9665,24 @@
     "info": "No classes",
     "presenter": "",
     "_id": "1779298020590"
+  },
+  {
+    "title": "Thanksgiving Holiday",
+    "date": "11/26/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "Thanksgiving",
+    "block": "Holiday - No Classes",
+    "weekNum": 27,
+    "week": "Week 27",
+    "desc": "Thanksgiving Holiday",
+    "calYear": "2029",
+    "mCal": "Student Affairs",
+    "mand": "No",
+    "group": "",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1779298481494"
   }
 ]
