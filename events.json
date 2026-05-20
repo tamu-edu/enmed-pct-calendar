@@ -9437,5 +9437,24 @@
     "info": "",
     "presenter": "Dr. Meyer, Dr.Omole",
     "_id": "1779207901085"
+  },
+  {
+    "title": "[MAND] Complete H&POSCE CHECK-IN 12:50 PM (You will be considered late at 1:00 PM)",
+    "date": "08/25/2026",
+    "start": "12:50",
+    "end": "01:00 PM",
+    "category": "Exam Check- Ins",
+    "block": "POM 3",
+    "weekNum": 14,
+    "week": "Week 14",
+    "desc": "[MAND] Complete H&POSCE CHECK-IN 12:50 PM (You will be considered late at 1:00 PM)",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "1779287918843"
   }
 ]
