@@ -9608,5 +9608,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779291862108"
+  },
+  {
+    "title": "Focused H&P OSCE (FHP OSCEs) CHECK-IN 12:50 PM-1:00 PM",
+    "date": "11/11/2026",
+    "start": "12:50",
+    "end": "13:00",
+    "category": "exam check-in",
+    "block": "POM 3",
+    "weekNum": 25,
+    "week": "Week 25",
+    "desc": "Focused H&P OSCE (FHP OSCEs) CHECK-IN 12:50 PM-1:00 PM",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group D",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "1779291963151"
   }
 ]
