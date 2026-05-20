@@ -9646,5 +9646,24 @@
     "info": "No classes",
     "presenter": "",
     "_id": "1779297415886"
+  },
+  {
+    "title": "Reading Day",
+    "date": "11/25/2026",
+    "start": "7:00",
+    "end": "7:30",
+    "category": "Holiday",
+    "block": "",
+    "weekNum": 27,
+    "week": "Week 27",
+    "desc": "Reading Day",
+    "calYear": "2029",
+    "mCal": "Student Affairs",
+    "mand": "No",
+    "group": "",
+    "location": "",
+    "info": "No classes",
+    "presenter": "",
+    "_id": "1779298020590"
   }
 ]
