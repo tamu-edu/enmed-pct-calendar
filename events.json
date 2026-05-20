@@ -9685,7 +9685,7 @@
     "presenter": "",
     "_id": "1779298481494"
   },
-    {
+  {
     "title": "Thanksgiving Holiday",
     "date": "11/27/2026",
     "start": "07:00",
@@ -9704,7 +9704,7 @@
     "presenter": "",
     "_id": "1779298481495"
   },
-      {
+  {
     "title": "Winter Break",
     "date": "12/24/2026",
     "start": "07:00",
@@ -9723,7 +9723,7 @@
     "presenter": "",
     "_id": "1779298481496"
   },
-        {
+  {
     "title": "Winter Break",
     "date": "12/25/2026",
     "start": "07:00",
@@ -9742,7 +9742,7 @@
     "presenter": "",
     "_id": "1779298481497"
   },
-          {
+  {
     "title": "Winter Break",
     "date": "12/26/2026",
     "start": "07:00",
@@ -9761,7 +9761,7 @@
     "presenter": "",
     "_id": "1779298481498"
   },
- {
+  {
     "title": "Winter Break",
     "date": "12/27/2026",
     "start": "07:00",
@@ -9780,7 +9780,7 @@
     "presenter": "",
     "_id": "17792984814981"
   },
-    {
+  {
     "title": "Winter Break",
     "date": "12/28/2026",
     "start": "07:00",
@@ -9799,7 +9799,7 @@
     "presenter": "",
     "_id": "17792984814982"
   },
-      {
+  {
     "title": "Winter Break",
     "date": "12/29/2026",
     "start": "07:00",
@@ -9818,7 +9818,7 @@
     "presenter": "",
     "_id": "17792984814983"
   },
- {
+  {
     "title": "Winter Break",
     "date": "12/30/2026",
     "start": "07:00",
@@ -9856,7 +9856,7 @@
     "presenter": "",
     "_id": "17792984814985"
   },
-        {
+  {
     "title": "New Year's Holiday",
     "date": "01/01/2027",
     "start": "07:00",
@@ -9874,5 +9874,24 @@
     "info": "",
     "presenter": "",
     "_id": "17792984814986"
+  },
+  {
+    "title": "Juneteenth - Emancipation Holiday",
+    "date": "06/19/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "Holiday - No Classes",
+    "block": "Juneteenth",
+    "weekNum": 4,
+    "week": "Week 4",
+    "desc": "Juneteenth - Emancipation Holiday",
+    "calYear": "2029",
+    "mCal": "Student Affairs",
+    "mand": "No",
+    "group": "",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1779299348086"
   }
 ]
