@@ -9494,5 +9494,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779289852316"
+  },
+  {
+    "title": "Complete H&P OSCE CHECK-IN 12:50 PM-1:00 PM",
+    "date": "09/22/2026",
+    "start": "12:50 PM",
+    "end": "01:00 PM",
+    "category": "exam check-in",
+    "block": "POM 3",
+    "weekNum": 18,
+    "week": "Week 18",
+    "desc": "Complete H&P OSCE CHECK-IN 12:50 PM-1:00 PM",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group C",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "1779290316165"
   }
 ]
