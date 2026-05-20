@@ -9627,5 +9627,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779291963151"
+  },
+  {
+    "title": "Memorial Day",
+    "date": "05/25/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "Holiday",
+    "block": "",
+    "weekNum": 1,
+    "week": "Week 1",
+    "desc": "Memorial Day",
+    "calYear": "2029",
+    "mCal": "Student Affairs",
+    "mand": "No",
+    "group": "",
+    "location": "",
+    "info": "No classes",
+    "presenter": "",
+    "_id": "1779294053807"
   }
 ]
