@@ -116,6 +116,7 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .block-pill{font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px}
 .week-dates{font-size:12px;color:var(--muted)}
 
+
 /* CALENDAR */
 .cal-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:640px}
 .cal-header{display:grid;grid-template-columns:64px repeat(5,1fr);background:var(--surface2);border-bottom:1px solid var(--border)}
@@ -161,6 +162,35 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
   overflow:hidden;
   isolation:isolate;
 }
+.week-event.has-checkin-ribbon{
+  padding-top:20px !important;
+}
+
+.exam-checkin-ribbon{
+  position:absolute;
+  top:4px;
+  left:10px;
+  right:auto;
+  max-width:calc(100% - 18px);
+  height:13px;
+  display:flex;
+  align-items:center;
+  padding:0 7px;
+  background:#7A5C2E;
+  color:#fff8ed;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:.45px;
+  line-height:13px;
+  text-transform:uppercase;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  border-radius:999px;
+  z-index:2;
+  pointer-events:none;
+  box-shadow:0 1px 2px rgba(0,0,0,.12);
+}
 
 
 .list-event{
@@ -183,14 +213,24 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .ev-edit-btn:hover{background:var(--gray-dk);color:#1a1200}
 .ev-del-btn{background:rgba(0,0,0,.4);color:#f05c6e}
 .ev-del-btn:hover{background:#f05c6e;color:white}
-.event.Mandatory{background:rgba(79,142,247,.15);border-color:#4f8ef7;color:#1a3a70}
-.event.Faculty{background:rgba(62,207,142,.15);border-color:#3ecf8e;color:#0a4a28}
-.event.TBL{background:rgba(185,124,247,.15);border-color:#b97cf7;color:#3a1a6a}
-.event.CBSE{background:rgba(240,92,110,.15);border-color:#f05c6e;color:#7a0a18}
-.event.Session{background:rgba(122,130,154,.15);border-color:#4a5168;color:#1a1f30}
-.event.ITDE{background:rgba(79,214,247,.15);border-color:#0F766E;color:#003a50}
-.event.ExamReview{background:rgba(247,161,79,.15);border-color:#f7a14f;color:#5a2a00}
-.event.GrandRounds{background:rgba(247,161,79,.15);border-color:#f7a14f;color:#5a2a00}
+.event.mandatory{background:rgba(79,142,247,.15);border-color:#4f8ef7;color:#1a3a70}
+.event.faculty{background:rgba(62,207,142,.15);border-color:#3ecf8e;color:#0a4a28}
+.event.tbl{background:rgba(185,124,247,.15);border-color:#b97cf7;color:#3a1a6a}
+.event.cbse{background:rgba(240,92,110,.15);border-color:#f05c6e;color:#7a0a18}
+.event.session{background:rgba(122,130,154,.15);border-color:#4a5168;color:#1a1f30}
+.event.itde{background:rgba(79,214,247,.15);border-color:#0F766E;color:#003a50}
+.event.examreview{background:rgba(247,161,79,.15);border-color:#f7a14f;color:#5a2a00}
+.event.grandrounds{background:rgba(247,161,79,.15);border-color:#f7a14f;color:#5a2a00}
+.event.exam{
+  background:rgba(247,161,79,.15);
+  border-color:#f7a14f;
+  color:#5a2a00;
+}
+.event.examcheckin{
+  background:rgba(122,92,46,.15);
+  border-color:#7A5C2E;
+  color:#4a3214;
+}
 
 /* FACULTY PANEL */
 .faculty-panel{display:none;width:340px;flex-shrink:0;background:var(--surface);border-left:2px solid var(--gray-dk);overflow-y:auto;flex-direction:column;position:sticky;top:56px;height:calc(100vh - 56px)}
@@ -655,6 +695,13 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
         <div class="yr-check-box"></div>Student Affairs
       </label>
     </div>
+    
+    <button class="yr-check-label" type="button" onclick="regenerateAllICSFeeds()">
+  Regenerate ICS Feeds
+</button>
+<button class="yr-check-label" type="button" onclick="openSyncLinksModal()">
+  Google Sync Links
+</button>
 
     <!-- COLOR LEGEND -->
 <div class="legend-row" id="colorLegend">
@@ -830,10 +877,11 @@ const BLOCK_COLOR=(()=>{
   return c;
 })();
 const CAT_COLOR = {
-  'EXAM':'#7F1D1D',
-  'Exam Check-In':'#C58B00',
-  'BLACKOUT':'#111111',
-  'EventS' : '#E56B6F'
+  'exam':'#7F1D1D',
+  'exam check-in':'#C58B00',
+  'exam check in':'#C58B00',
+  'blackout':'#111111',
+  'events' : '#E56B6F'
 };
 const CATS_LIST=["SDL","Orientation","TBL","CBL","ITDE","EXAM","Workshop","LC Small Groups","BLACKOUT", "Session", "Lab", "Seminar", "Clinic","Review Session", "Office Hours","Events","Announcements"]
 const HOUR_KEYS=[
@@ -883,6 +931,10 @@ function openConfig(){
 
 // ── GITHUB API ────────────────────────────────────────────────
 const DATA_FILE = 'events.json';
+const ICS_FILE = 'calendar.ics';
+const ICS_FILE_M0 = 'calendar-m0.ics';
+const ICS_FILE_M1 = 'calendar-m1.ics';
+const ICS_FILE_M2 = 'calendar-m2.ics';
 
 function ghHeaders(){
   const h={'Accept':'application/vnd.github.v3+json'};
@@ -931,23 +983,129 @@ async function loadEvents(){
   }
 }
 
-async function saveEventsToGitHub(){
-  if(!CFG.token) throw new Error('No GitHub token — click ⚙ in the top right and add your token.');
-  // If SHA is missing, fetch it now
-  if(!ghFileSha){
-    const meta=await fetch(`https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}`,{headers:ghHeaders()});
-    if(!meta.ok) throw new Error('Could not get file SHA from GitHub. Check your token.');
-    const d=await meta.json(); ghFileSha=d.sha;
+function cleanEventForSave(e){
+  const {
+    startMin,
+    endMin,
+    _leftPct,
+    _widthPct,
+    _layoutIndex,
+    _layoutCols,
+    _attachedCheckIn,
+    ...clean
+  } = e;
+
+  return clean;
+}
+
+async function fetchLatestGitHubSha(){
+  const meta = await fetch(
+    `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}?ref=main`,
+    { headers: ghHeaders() }
+  );
+
+  if(!meta.ok){
+    throw new Error('Could not get latest file SHA from GitHub. Check your token.');
   }
-  const content=btoa(unescape(encodeURIComponent(JSON.stringify(EVENTS,null,2))));
-  const body={message:'Update calendar events',content,sha:ghFileSha};
-  const r=await fetch(`https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}`,{
-    method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},
-    body:JSON.stringify(body)
-  });
-  if(!r.ok){const t=await r.text();throw new Error(`GitHub save failed (${r.status}): ${t.substring(0,100)}`);}
-  const d=await r.json();
-  ghFileSha=d.content.sha; // update SHA for next save
+
+  const d = await meta.json();
+  return d.sha;
+}
+
+async function saveTextFileToGitHub(filePath, textContent, commitMessage){
+  const encodedContent = btoa(unescape(encodeURIComponent(textContent)));
+
+  async function attemptSave(){
+    let sha = null;
+
+    const meta = await fetch(
+      `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${filePath}?ref=main&t=${Date.now()}`,
+      { headers: ghHeaders() }
+    );
+
+    if (meta.ok) {
+      const d = await meta.json();
+      sha = d.sha;
+    }
+
+    const body = {
+      message: commitMessage,
+      content: encodedContent,
+      branch: 'main'
+    };
+
+    if (sha) body.sha = sha;
+
+    return fetch(
+      `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${filePath}`,
+      {
+        method: 'PUT',
+        headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }
+    );
+  }
+
+  let r = await attemptSave();
+
+  if (r.status === 409) {
+    r = await attemptSave();
+  }
+
+  if (!r.ok) {
+    const t = await r.text();
+    throw new Error(`GitHub save failed for ${filePath}: ${t.substring(0,150)}`);
+  }
+
+  return r.json();
+}
+
+async function saveEventsToGitHub(){
+  if(!CFG.token){
+    throw new Error('No GitHub token — click ⚙ in the top right and add your token.');
+  }
+
+  const cleanEvents = EVENTS.map(cleanEventForSave);
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(cleanEvents, null, 2))));
+
+  async function attemptSave(){
+    ghFileSha = await fetchLatestGitHubSha();
+
+    const body = {
+      message: 'Update calendar events',
+      content,
+      sha: ghFileSha,
+      branch: 'main'
+    };
+
+    return fetch(
+      `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}`,
+      {
+        method: 'PUT',
+        headers: {...ghHeaders(), 'Content-Type': 'application/json'},
+        body: JSON.stringify(body)
+      }
+    );
+  }
+
+  let r = await attemptSave();
+
+  if(r.status === 409){
+    r = await attemptSave();
+  }
+
+  if(!r.ok){
+    const t = await r.text();
+    throw new Error(`GitHub save failed (${r.status}): ${t.substring(0,150)}`);
+  }
+
+  const d = await r.json();
+  ghFileSha = d.content.sha;
+  EVENTS = cleanEvents;
+  await saveTextFileToGitHub(ICS_FILE, buildICS(), 'Update full calendar ICS feed');
+  await saveTextFileToGitHub(ICS_FILE_M0, buildICS({ mCal: 'M0' }), 'Update M0 calendar ICS feed');
+  await saveTextFileToGitHub(ICS_FILE_M1, buildICS({ mCal: 'M1' }), 'Update M1 calendar ICS feed');
+  await saveTextFileToGitHub(ICS_FILE_M2, buildICS({ mCal: 'M2' }), 'Update M2 calendar ICS feed');
 }
 
 // ── INIT ──────────────────────────────────────────────────────
@@ -1213,7 +1371,9 @@ function render(){
   else renderList();
 }
 
-function evClass(e){if(e.category==='Faculty Discussion')return'Faculty';if(e.category==='Exam Review')return'ExamReview';if(e.category==='Grand Rounds')return'GrandRounds';return e.category.replace(/\s/g,'');}
+function evClass(e){
+  return normalizeCategory(e.category);
+}
 
 function eventSearchText(e){
   return `${e.category||''} ${e.block||''} ${e.title||''} ${e.name||''} ${e.session||''}`.toLowerCase();
@@ -1236,14 +1396,18 @@ function isExamLike(e){
 }
 
 function examPairCategoryKey(e){
-  return `${e.category||''} ${e.block||''} ${e.title||''}`
+  return `${e.category||''} ${e.block||''} ${e.title||''} ${e.desc||''}`
     .toLowerCase()
     .replace(/exam\s*check[-\s]*in/g,'')
     .replace(/exam\s*check\s*in/g,'')
     .replace(/check[-\s]*in/g,'')
     .replace(/\bexam\b/g,'')
+    .replace(/\bunit\b/g,'')
+    .replace(/\bwritten\b/g,'')
+    .replace(/\bpractical\b/g,'')
     .replace(/\bosce\b/g,'')
     .replace(/\bcbse\b/g,'')
+    .replace(/#/g,'')
     .replace(/[^a-z0-9]+/g,' ')
     .trim();
 }
@@ -1292,6 +1456,26 @@ function findExamPairs(cluster){
     });
 
   return pairs;
+}
+function matchingCheckInForExam(exam, dayEvents){
+  if(!isExamLike(exam)) return null;
+
+  return dayEvents
+    .filter(e => {
+      if(!isExamCheckIn(e)) return false;
+
+      const gap = exam.startMin - e.endMin;
+
+      return gap >= 0 &&
+        gap <= 30 &&
+        e.date === exam.date &&
+        sameExamFamily(e, exam);
+    })
+    .sort((a,b) => {
+      const gapA = exam.startMin - a.endMin;
+      const gapB = exam.startMin - b.endMin;
+      return gapA - gapB;
+    })[0] || null;
 }
 
 function layoutOverlappingEvents(dayEvents){
@@ -1399,9 +1583,28 @@ function renderWeek(dates){
   const w=WEEKS[currentWeekIdx];
   if(!w||!dates||!dates.length){document.getElementById('calView').innerHTML='<div class="empty-state"><div class="big">📭</div><p>No week data available.</p></div>';return;}
   const evs=filteredEvents().filter(e=>weekNumFromDate(e.date)===w.num);
-  const laidOutByDate = {};
-  dates.forEach(ds => {
-    laidOutByDate[ds] = layoutOverlappingEvents(evs.filter(e => e.date === ds));
+const laidOutByDate = {};
+const attachedCheckInsByDate = {};
+
+dates.forEach(ds => {
+  laidOutByDate[ds] = layoutOverlappingEvents(
+  evs
+    .filter(e => e.date === ds)
+    .map(e => ({...e}))
+);
+
+  const attached = new Set();
+
+  laidOutByDate[ds].forEach(e => {
+    const checkIn = matchingCheckInForExam(e, laidOutByDate[ds]);
+    e._attachedCheckIn = checkIn;
+
+    if(checkIn){
+      attached.add(eventLayoutKey(checkIn));
+    }
+  });
+
+  attachedCheckInsByDate[ds] = attached;
 });
   const today=new Date();
   const todayStr=`${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${today.getFullYear()}`;
@@ -1424,8 +1627,10 @@ function renderWeek(dates){
   html+=`<div class="cal-row${eventCrossesRowLine ? ' event-crossed-line' : ''}"><div class="cal-time">${HOURS[hi]}</div>`;
     dates.forEach(ds=>{
       const cellEvs = (laidOutByDate[ds] || []).filter(e => {
-        return e.startMin >= rowStartMin && e.startMin < rowEndMin;
-});
+      return e.startMin >= rowStartMin &&
+       e.startMin < rowEndMin &&
+       !attachedCheckInsByDate[ds].has(eventLayoutKey(e));
+    });
       html+=`<div class="cal-cell" onclick="handleCellClick(event,'${ds}','${hk}')">`;
       if(isFacultyMode)html+=`<div class="add-slot-btn" onclick="openAddForm('${ds}','${hk}');event.stopPropagation()">+</div>`;
       cellEvs.forEach(e=>{
@@ -1435,21 +1640,27 @@ function renderWeek(dates){
 
         const ec = evClass(e);
         const topOffset = ((startMin - rowStartMin) / 60) * 52 + 3;
-        const isCheckInOverlay = isExamCheckIn(e);
-        const eventLeft = isCheckInOverlay ? '3px' : `calc(${e._leftPct}% + 3px)`;
-        const eventWidth = isCheckInOverlay ? 'calc(100% - 6px)' : `calc(${e._widthPct}% - 6px)`;
-        const eventZ = isCheckInOverlay ? 80 : 20;
+        const attachedCheckIn = e._attachedCheckIn || null;
+        const hasCheckInRibbon = !!attachedCheckIn;
 
+        const eventLeft = `calc(${e._leftPct}% + 3px)`;
+        const eventWidth = `calc(${e._widthPct}% - 6px)`;
+        const eventZ = hasCheckInRibbon ? 30 : 20;
+
+        const checkInRibbonHtml = hasCheckInRibbon
+           ? `<div class="exam-checkin-ribbon">CHECK-IN • ${fmtTime(attachedCheckIn.start).replace(' AM','').replace(' PM','')}–${fmtTime(attachedCheckIn.end).replace(' AM','').replace(' PM','')}</div>`
+            : '';
         const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
 
         const mcalCol = mCalColor(e);
 
         const textCol = mCalTextColor(e);
 
-        const catCol = CAT_COLOR[e.category] || mcalCol;
+        const catCol = CAT_COLOR[normalizeCategory(e.category)] || mcalCol;
 
 const blockLabel = e.block ? `${e.block} · ` : '';
-        html+=`<div class="event week-event ${ec}${isCheckInOverlay ? ' check-in-overlay' : ''}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:${eventLeft};width:${eventWidth};z-index:${eventZ};background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${mcalCol}18 5px);color:${textCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+        html+=`<div class="event week-event ${ec}${hasCheckInRibbon ? ' has-checkin-ribbon' : ''}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:${eventLeft};width:${eventWidth};z-index:${eventZ};background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${mcalCol}18 5px);color:${textCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+          ${checkInRibbonHtml}
           <div class="ev-tag" style="color:${catCol}">${blockLabel}${e.category}</div>
           <div class="ev-title">${displayTitle(e)}</div>
           <div class="ev-time">${fmtTime(e.start)} – ${fmtTime(e.end)}</div>
@@ -1469,6 +1680,13 @@ const blockLabel = e.block ? `${e.block} · ` : '';
   document.getElementById('calView').innerHTML=html;
 }
 
+function normalizeCategory(cat){
+  return String(cat || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g,'');
+}
+
 function mCalTextColor(e){
   const mc = String(e.mCal || '').trim();
 
@@ -1480,8 +1698,16 @@ function mCalTextColor(e){
 }
 
 function renderList(){
-  const w=currentWeekIdx>=0?WEEKS[currentWeekIdx]:null;
-  const evs=(currentWeekIdx===-1?filteredEvents():filteredEvents().filter(e=>e.weekNum===w.num)).sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));
+  const w = currentWeekIdx >= 0 ? WEEKS[currentWeekIdx] : null;
+
+  const evs = (
+    currentWeekIdx === -1
+      ? filteredEvents()
+      : filteredEvents().filter(e => weekNumFromDate(e.date) === w.num)
+  ).sort((a,b) =>
+    parseMDY(a.date) - parseMDY(b.date) ||
+    timeToMinutes(a.start) - timeToMinutes(b.start)
+  );
   if(!evs.length){document.getElementById('calView').innerHTML=`<div class="empty-state"><div class="big">📭</div><p>No events found.</p></div>`;return;}
   const byDate={};evs.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
   let html='<div style="max-width:700px">';
@@ -1491,7 +1717,7 @@ function renderList(){
       const col = mCalColor(e), ec = evClass(e);
       const textCol = mCalTextColor(e);
       const ej = JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
-      const catColL = CAT_COLOR[e.category] || col;
+      const catColL = CAT_COLOR[normalizeCategory(e.category)] || col;
       const blockLabel = e.block ? `${e.block} · ` : '';
       html+=`<div class="event list-event ${ec}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 5px,${col}18 5px)" onclick="handleEventClick(event,${ej})">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:${textCol};white-space:nowrap;min-width:90px">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
@@ -1514,7 +1740,7 @@ let _modalEvent=null;
 function openModal(e){
   _modalEvent=e;
   const col=mCalColor(e);
-  const catColModal=CAT_COLOR[e.category]||'#4a5168';
+  const catColModal=CAT_COLOR[normalizeCategory(e.category)]||'#4a5168';
   document.getElementById('modalBar').style.background=`linear-gradient(to bottom,${catColModal} 0%,${catColModal} 50%,${col} 50%,${col} 100%)`;
   document.getElementById('modalCat').style.color=col;
   document.getElementById('modalTitle').textContent=displayTitle(e);
@@ -1966,7 +2192,7 @@ function handleSearch(q){
   ).slice(0,10);
   if(!matches.length){res.innerHTML='<div class="sr-item"><div class="sr-title" style="color:var(--muted)">No results found</div></div>';res.classList.add('open');return;}
   res.innerHTML=matches.map(e=>{
-    const col=CAT_COLOR[e.category]||'#4a5168';
+    const col=CAT_COLOR[normalizeCategory(e.category)]||'#4a5168';
     return`<div class="sr-item" onclick="jumpToEvent(${JSON.stringify(e).replace(/"/g,'&quot;')})">
       <div class="sr-title" style="border-left:3px solid ${col};padding-left:6px">${e.title.replace(/</g,'&lt;')}</div>
       <div class="sr-meta">📅 ${e.date} · ${fmtTime(e.start)}–${fmtTime(e.end)}${e.location?' · 📍'+e.location:''} · <span style="color:${col}">${e.category}</span></div>
@@ -2075,7 +2301,7 @@ function renderMonth(){
       <div class="mg-date">${day}</div>
       ${shown.map(e=>{
         const col=mCalColor(e);
-        const catC = CAT_COLOR[e.category] || col;
+        const catC = CAT_COLOR[normalizeCategory(e.category)] || col;
         const ej=JSON.stringify(e).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
         const monthBlockLabel = e.block ? `${e.block}<br>` : '';
         return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),handleEventClick(event,${ej}))">${monthBlockLabel}${displayTitle(e)}</div>`;
@@ -2600,8 +2826,200 @@ function renderChangeLog(){
 }
 
 // ── ICS EXPORT ────────────────────────────────────────────────
+function buildICS(options = {}){
+  const mCalFilter = options.mCal || null;
+  function pad(n){
+    return String(n).padStart(2, '0');
+  }
+
+  function toIcsDt(dateStr, timeStr){
+    const [mo, dy, yr] = dateStr.split('/').map(Number);
+    const [hr, mn] = timeStr.split(':').map(Number);
+    return `${yr}${pad(mo)}${pad(dy)}T${pad(hr)}${pad(mn)}00`;
+  }
+
+  function esc(s){
+    return String(s || '')
+      .replace(/\\/g, '\\\\')
+      .replace(/;/g, '\\;')
+      .replace(/,/g, '\\,')
+      .replace(/\n/g, '\\n');
+  }
+
+  let calName = 'EnMed Calendar';
+
+if (mCalFilter === 'M0') calName = 'EnMed M0 Calendar';
+if (mCalFilter === 'M1') calName = 'EnMed M1 Calendar';
+if (mCalFilter === 'M2') calName = 'EnMed M2 Calendar';
+if (mCalFilter === 'Student Affairs') calName = 'EnMed Student Affairs Calendar';
+
+const lines = [
+  'BEGIN:VCALENDAR',
+  'VERSION:2.0',
+  'PRODID:-//EnMed Calendar//EN',
+  'CALSCALE:GREGORIAN',
+  'METHOD:PUBLISH',
+  `X-WR-CALNAME:${calName}`,
+  'X-WR-TIMEZONE:America/Chicago'
+];
+
+  EVENTS.forEach(e => {
+  if (mCalFilter && e.mCal !== mCalFilter) return;
+  if (!e.date || !e.start || !e.end || !e.title) return;
+
+  const startMin = timeToMinutes(e.start);
+  const endMin = timeToMinutes(e.end);
+
+  if (!Number.isFinite(startMin) || !Number.isFinite(endMin)) return;
+  if (endMin <= startMin) return;
+
+  // Optional: do not export check-in-only events
+  if (isExamCheckIn && isExamCheckIn(e)) return;
+
+    lines.push(
+      'BEGIN:VEVENT',
+      `UID:${e._id}@enmed-calendar`,
+      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+      `DTSTART;TZID=America/Chicago:${toIcsDt(e.date, e.start)}`,
+      `DTEND;TZID=America/Chicago:${toIcsDt(e.date, e.end)}`,
+      `SUMMARY:${esc(e.title)}`,
+      `DESCRIPTION:${esc(e.info || e.notes || e.desc || '')}`,
+      `LOCATION:${esc(e.location || '')}`,
+      `CATEGORIES:${esc(e.category || '')}`,
+      'STATUS:CONFIRMED',
+      'END:VEVENT'
+    );
+  });
+
+  lines.push('END:VCALENDAR');
+  return lines.join('\r\n');
+}
+
+async function regenerateAllICSFeeds(){
+  try {
+    showToast('Regenerating all calendar feeds...');
+
+    await loadEvents();
+
+    const feeds = [
+      [ICS_FILE, buildICS(), 'Regenerate full calendar ICS'],
+      [ICS_FILE_M0, buildICS({ mCal: 'M0' }), 'Regenerate M0 calendar ICS'],
+      [ICS_FILE_M1, buildICS({ mCal: 'M1' }), 'Regenerate M1 calendar ICS'],
+      [ICS_FILE_M2, buildICS({ mCal: 'M2' }), 'Regenerate M2 calendar ICS']
+    ];
+
+    for (const [file, content, message] of feeds) {
+      console.log('Saving ICS feed:', file);
+      await saveTextFileToGitHub(file, content, message);
+    }
+
+    showToast('All ICS feeds regenerated');
+  } catch (err) {
+    console.error(err);
+    alert('Failed to regenerate ICS feeds: ' + err.message);
+    showToast('Failed to regenerate ICS feeds');
+  }
+}
+
+function getRawCalendarUrl(fileName){
+  return `https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${fileName}?v=${Date.now()}`;
+}
+
+function openSyncLinksModal(){
+
+  const feeds = [
+    ['Full Calendar', 'calendar.ics'],
+    ['M0 Calendar', 'calendar-m0.ics'],
+    ['M1 Calendar', 'calendar-m1.ics'],
+    ['M2 Calendar', 'calendar-m2.ics']
+  ];
+
+  document.getElementById('syncLinksList').innerHTML =
+    feeds.map(([label,file]) => {
+
+      const url = getRawCalendarUrl(file);
+
+      return `
+        <div style="margin-bottom:16px">
+
+          <div style="
+            font-size:11px;
+            font-weight:700;
+            text-transform:uppercase;
+            color:var(--muted);
+            margin-bottom:6px;
+          ">
+            ${label}
+          </div>
+
+          <input
+            class="form-input"
+            readonly
+            value="${url}"
+            onclick="this.select()"
+          >
+
+          <button
+            class="btn-sm"
+            style="margin-top:6px"
+            onclick="copySyncUrl('${url}')"
+          >
+            Copy Link
+          </button>
+
+        </div>
+      `;
+    }).join('');
+
+  document
+    .getElementById('syncLinksModal')
+    .classList
+    .add('open');
+}
+
+function closeSyncLinksModal(){
+  document
+    .getElementById('syncLinksModal')
+    .classList
+    .remove('open');
+}
+
+async function copySyncUrl(url){
+
+  await navigator.clipboard.writeText(url);
+
+  showToast('Copied calendar link');
+}
+
+async function regenerateICSFromJSON(){
+  try {
+    showToast('Regenerating calendar.ics...');
+
+    await loadEvents();
+
+    const icsContent = buildICS();
+
+    await saveTextFileToGitHub(
+      ICS_FILE,
+      icsContent,
+      'Regenerate calendar ICS from events.json'
+    );
+
+    showToast('calendar.ics regenerated from events.json');
+
+  } catch (err) {
+    console.error(err);
+    showToast('Failed to regenerate ICS: ' + err.message);
+  }
+}
+
 function exportICS(){
-  function toIcsDt(d,t){const[mo,dy,yr]=d.split('/');const[hr,mn]=t.split(':');return`${yr}${mo}${dy}T${hr}${mn}00`;}
+  function toIcsDt(d,t){
+  const [mo,dy,yr] = d.split('/').map(Number);
+  const [hr,mn] = t.split(':').map(Number);
+
+  return `${yr}${String(mo).padStart(2,'0')}${String(dy).padStart(2,'0')}T${String(hr).padStart(2,'0')}${String(mn).padStart(2,'0')}00`;
+}
   function esc(s){return(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');}
   const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//CO2028//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:M1 Calendar'];
   EVENTS.forEach((e,i)=>{lines.push('BEGIN:VEVENT',`UID:co2028-${i}@cal`,`DTSTART:${toIcsDt(e.date,e.start)}`,`DTEND:${toIcsDt(e.date,e.end)}`,`SUMMARY:${esc(e.title)}`,`CATEGORIES:${esc(e.category)}`,'STATUS:CONFIRMED','END:VEVENT');});
@@ -2653,5 +3071,41 @@ initApp();
   </div>
 </div>
 
+<div class="modal-overlay" id="syncLinksModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">
+        Google Calendar Sync Links
+      </div>
+
+      <button class="modal-close"
+              onclick="closeSyncLinksModal()">
+        ×
+      </button>
+    </div>
+
+    <div class="modal-body">
+
+      <p style="font-size:13px;
+                color:var(--muted);
+                margin-bottom:14px;
+                line-height:1.5">
+
+        Copy the link for the calendar you want,
+        then paste it into:
+
+        <br><br>
+
+        Google Calendar →
+        Add calendar →
+        From URL
+
+      </p>
+
+      <div id="syncLinksList"></div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>
