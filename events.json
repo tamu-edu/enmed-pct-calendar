@@ -1,22 +1,4 @@
 [
-    {
-    "title": "Memorial Day",
-    "date": "05/25/2026",
-    "start": "07:00",
-    "end": "07:30",
-    "category": "Holiday",
-    "block": "",
-    "weekNum": 1,
-    "week": "1",
-    "desc": "Memorial Day Holiday",
-    "calYear": "2030",
-    "mCal": "Student Affairs",
-    "mand": "No",
-    "group": "All Students",
-    "location": "",
-    "_id": "2052026_5",
-    "info": "No classes"
-  },
   {
     "title": "Nephrology Active Learning",
     "date": "08/24/2026",
@@ -9461,7 +9443,7 @@
     "date": "08/25/2026",
     "start": "12:50PM",
     "end": "01:00PM",
-    "category": "EXAM CHECK-IN",
+    "category": "exam check-in",
     "block": "POM 3",
     "weekNum": 14,
     "week": "Week 14",
