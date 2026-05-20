@@ -10000,12 +10000,31 @@
     "week": "Week 7",
     "desc": "CBSE",
     "calYear": "2029",
-    "mCal": "M1",
+    "mCal": "M2",
     "mand": "Yes",
     "group": "All Students",
     "location": "4th Floor, Rm 409, EnMed Tower",
     "info": "",
     "presenter": "",
     "_id": "1779301958459"
+  },
+    {
+    "title": "CBSE",
+    "date": "11/30/2026",
+    "start": "08:30",
+    "end": "13:45",
+    "category": "EXAM",
+    "block": "CBSE",
+    "weekNum": 7,
+    "week": "Week 7",
+    "desc": "CBSE",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "4th Floor, Rm 409, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "1779301958460"
   }
 ]
