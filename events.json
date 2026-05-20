@@ -9443,7 +9443,7 @@
     "date": "08/25/2026",
     "start": "12:50PM",
     "end": "01:00PM",
-    "category": "exam check-in",
+    "category": "EXAM CHECK-IN",
     "block": "POM 3",
     "weekNum": 14,
     "week": "Week 14",
@@ -9462,7 +9462,7 @@
     "date": "08/26/2026",
     "start": "12:50 PM",
     "end": "1:00 PM",
-    "category": "exam check-in",
+    "category": "EXAM CHECK-IN",
     "block": "POM 3",
     "weekNum": 14,
     "week": "Week 14",
@@ -9475,5 +9475,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779288610352"
+  },
+  {
+    "title": "Breaking Bad News (BBN) OSCE CHECK-IN 9:50 AM-10:00 AM",
+    "date": "09/08/2026",
+    "start": "09:50",
+    "end": "10:00",
+    "category": "exam check-in",
+    "block": "",
+    "weekNum": 16,
+    "week": "Week 16",
+    "desc": "Breaking Bad News (BBN) OSCE CHECK-IN 9:50 AM-10:00 AM",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group A&B",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "1779289852316"
   }
 ]
