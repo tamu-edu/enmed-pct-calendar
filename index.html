@@ -1013,6 +1013,28 @@ async function fetchLatestGitHubSha(){
   return d.sha;
 }
 
+async function fetchLatestEventsFromGitHub(){
+  const rawUrl=`https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${DATA_FILE}?t=${Date.now()}`;
+  const r=await fetch(rawUrl);
+  if(!r.ok) throw new Error(`Could not fetch latest ${DATA_FILE} before saving.`);
+  return await r.json();
+}
+
+async function fetchEventsFromGitHubAPI(){
+  const r = await fetch(
+    `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}?ref=main&t=${Date.now()}`,
+    { headers: ghHeaders() }
+  );
+
+  if(!r.ok){
+    throw new Error('Could not verify saved events.json through GitHub API.');
+  }
+
+  const d = await r.json();
+  const text = decodeURIComponent(escape(atob(d.content.replace(/\n/g, ''))));
+  return JSON.parse(text);
+}
+
 async function saveTextFileToGitHub(filePath, textContent, commitMessage){
   const encodedContent = btoa(unescape(encodeURIComponent(textContent)));
 
@@ -1065,6 +1087,9 @@ async function saveEventsToGitHub(){
   if(!CFG.token){
     throw new Error('No GitHub token — click ⚙ in the top right and add your token.');
   }
+  console.log('WRITING events.json from this page:', window.location.href);
+  console.log('EVENT COUNT BEING WRITTEN:', EVENTS.length);
+  console.trace('saveEventsToGitHub caller');
 
   const cleanEvents = EVENTS.map(cleanEventForSave);
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(cleanEvents, null, 2))));
@@ -1799,9 +1824,9 @@ if(document.getElementById('modalInfo'))document.getElementById('modalInfo').tex
 function requestFacultyMode(){document.getElementById('pinInput').value='';document.getElementById('pinErr').textContent='';document.getElementById('loginOverlay').classList.add('open');setTimeout(()=>document.getElementById('pinInput').focus(),100);}
 function checkPin(){const val=document.getElementById('pinInput').value.trim();if(val===(CFG.pin||'3255')){document.getElementById('loginOverlay').classList.remove('open');setMode('faculty');}else{document.getElementById('pinErr').textContent='Incorrect PIN.';document.getElementById('pinInput').value='';}}
 function setMode(mode){
+  isFacultyMode=mode==='faculty';
   const regenBtn = document.getElementById('regenICSBtn');
   if (regenBtn) regenBtn.style.display = isFacultyMode ? '' : 'none';
-  isFacultyMode=mode==='faculty';
   document.querySelectorAll('.mode-btn').forEach(b=>{b.classList.remove('active','faculty-active');});
   if(!isFacultyMode)document.querySelectorAll('.mode-btn')[0].classList.add('active');
   else document.querySelectorAll('.mode-btn')[1].classList.add('faculty-active');
@@ -1862,10 +1887,10 @@ function formHTML(e,isEdit){
     </select></div>
 
     <div class="form-group"><label class="form-label">Class *</label><select class="form-select" id="ff_mcal">
-      <option value="" ${(e&&e.mCal==='')?'selected':''}>— None —</option>
       <option value="M0" ${(e&&e.mCal==='M0')?'selected':''}>M0 — Pre-Matriculation</option>
       <option value="M1" ${(!e||e.mCal==='M1')?'selected':''}>M1</option>
       <option value="M2" ${(e&&e.mCal==='M2')?'selected':''}>M2</option>
+       <option value="Student Affairs" ${(e&&e.mCal==='Student Affairs')?'selected':''}>Student Affairs</option>
     </select></div>
   </div>
 
@@ -2077,7 +2102,7 @@ function populateYearDropdown(){
   while(sel.options.length>1)sel.remove(1);
   // Add Student Affairs as first option
   const saOpt=document.createElement('option');
-  saOpt.value='SA';saOpt.textContent='Student Affairs';
+  saOpt.value='Student Affairs';saOpt.textContent='Student Affairs';
   sel.appendChild(saOpt);
   COHORT_YEARS.forEach(yr=>{
     // In student mode: skip years where both M1 and M2 are hidden
@@ -2094,20 +2119,32 @@ function populateYearDropdown(){
   });
 }
 function setYearSidebar(yr){
-  if(yr==='All'){
-    selectedYears=new Set(['All']);currentMSub='M1';
+  if(yr === 'Student Affairs' || yr === 'SA'){
+    selectedYears = new Set(['All']);
+    selectedMCals = new Set(['Student Affairs']);
+    currentMSub = 'M1';
+  } else if(yr === 'All'){
+    selectedYears = new Set(['All']);
+    selectedMCals = new Set(['All']);
+    currentMSub = 'M1';
   } else {
-    selectedYears=new Set([yr]);currentMSub=defaultMSub(yr);
+    selectedYears = new Set([yr]);
+    selectedMCals = new Set(['All']);
+    currentMSub = defaultMSub(yr);
   }
-  // Sync dropdown
+
   const sel=document.getElementById('yearFilterSelect');
   if(sel){
-    sel.value=yr;
+    sel.value = (yr === 'SA') ? 'Student Affairs' : yr;
     const col=yr!=='All'?(YEAR_COLORS[yr]||''):'';
     sel.style.borderColor=col||'var(--border)';
     sel.style.boxShadow=col?`0 0 0 2px ${col}33`:'none';
   }
-  updateYearUI();updateTitle();render();
+
+  updateMCalUI();
+  updateYearUI();
+  updateTitle();
+  render();
 }
 function updateYearUI(){
   // Show/hide year tabs based on visibility settings (student mode only)
@@ -2495,7 +2532,8 @@ async function bulkDeleteSelected(){
   delBtn.textContent='Deleting...';delBtn.disabled=true;
   const backup=[...EVENTS];
   try{
-    EVENTS=EVENTS.filter(e=>!selectedIds.has(e._id));
+    EVENTS = await fetchLatestEventsFromGitHub();
+    EVENTS = EVENTS.filter(e => !selectedIds.has(e._id));
     await saveEventsToGitHub();
     showToast('Deleted '+n+' event'+(n!==1?'s':'')+'!');
     exitBulkSelect();
@@ -2710,7 +2748,11 @@ async function bulkAddAll(){
   const btn=document.getElementById('bulkAddBtn');
   btn.textContent='Saving to GitHub...';btn.disabled=true;
   try{
-    valid.forEach(ev=>{const {_errors,_valid,...clean}=ev;EVENTS.push(clean);});
+    EVENTS = await fetchLatestEventsFromGitHub();
+    valid.forEach(ev => {
+      const {_errors, _valid, ...clean} = ev;
+      EVENTS.push(clean);
+    });
     await saveEventsToGitHub();
     addLog('added',{title:`${valid.length} events (bulk)`,date:'',start:'',end:'',category:'Bulk'});
     showToast(`✅ ${valid.length} events added — live for everyone!`);
@@ -2773,6 +2815,7 @@ async function saveForm(){
   };
 
   try{
+  EVENTS = await fetchLatestEventsFromGitHub();
     if(isEditing){
       const i=EVENTS.findIndex(e=>e._id===editingId);
 
@@ -2786,6 +2829,18 @@ async function saveForm(){
 }
 
     await saveEventsToGitHub();
+
+    const confirmedEvents = await fetchEventsFromGitHubAPI();
+    const confirmed = confirmedEvents.some(x => x._id === ev._id);
+
+    if(!confirmed){
+      throw new Error('GitHub API save completed, but the event was not found in events.json.');
+    }
+
+EVENTS = confirmedEvents;
+WEEKS = buildWeeks();
+buildWeekDrawer();
+render();
     addLog(editingId?'edited':'added',ev);
     showToast(editingId?'✅ Event updated — live for everyone!':'✅ Event added — live for everyone!');
     closeForm();
@@ -2793,10 +2848,14 @@ async function saveForm(){
     buildWeekDrawer();
     render();
   }catch(err){
-    showToast('❌ '+err.message);
-    btn.textContent=isEditing?'💾 Save Changes':'➕ Add Event';
-    btn.disabled=false;
+  if(!isEditing){
+    EVENTS = EVENTS.filter(x => x._id !== ev._id);
+    render();
   }
+  showToast('❌ '+err.message);
+  btn.textContent=isEditing?'💾 Save Changes':'➕ Add Event';
+  btn.disabled=false;
+}
 }
 
 // ── DELETE ────────────────────────────────────────────────────
@@ -2814,7 +2873,8 @@ async function doDelete(){
   const e=EVENTS.find(e=>e._id===pendingDeleteId);if(!e)return;
   const btn=document.getElementById('confirmYes');btn.textContent='Deleting...';btn.disabled=true;
   try{
-    EVENTS=EVENTS.filter(ev=>ev._id!==pendingDeleteId);
+    EVENTS = await fetchLatestEventsFromGitHub();
+    EVENTS = EVENTS.filter(ev => ev._id !== pendingDeleteId);
     await saveEventsToGitHub();
     addLog('deleted',e);showToast('🗑 Deleted — live for everyone!');
     closeForm();WEEKS=buildWeeks();buildWeekDrawer();render();
@@ -2873,7 +2933,13 @@ const lines = [
 ];
 
   EVENTS.forEach(e => {
-  if (mCalFilter && e.mCal !== mCalFilter) return;
+  if (
+  mCalFilter &&
+  !(
+    e.mCal === mCalFilter ||
+    (mCalFilter === 'Student Affairs' && e.mCal === 'SA')
+  )
+) return;
   if (!e.date || !e.start || !e.end || !e.title) return;
 
   const startMin = timeToMinutes(e.start);
