@@ -9439,7 +9439,7 @@
     "_id": "1779207901085"
   },
   {
-    "title": "[MAND] Complete H&POSCE CHECK-IN 12:50 PM (You will be considered late at 1:00 PM)",
+    "title": "CHECK-IN 12:50 PM-1:00 PM)",
     "date": "08/25/2026",
     "start": "12:50",
     "end": "01:00 PM",
@@ -9447,7 +9447,7 @@
     "block": "POM 3",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "[MAND] Complete H&POSCE CHECK-IN 12:50 PM (You will be considered late at 1:00 PM)",
+    "desc": "CHECK-IN 12:50 PM-1:00 PM)",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
