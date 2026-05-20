@@ -9875,7 +9875,7 @@
     "presenter": "",
     "_id": "1779299348086"
   },
-    {
+  {
     "title": "M2 Orientation Day",
     "date": "07/06/2026",
     "start": "07:00",
@@ -9894,7 +9894,7 @@
     "presenter": "",
     "_id": "1779299348087"
   },
-      {
+  {
     "title": "Break - No class",
     "date": "09/18/2026",
     "start": "07:00",
@@ -9913,7 +9913,7 @@
     "presenter": "",
     "_id": "17792993480871"
   },
-        {
+  {
     "title": "Break - No class",
     "date": "10/19/2026",
     "start": "07:00",
@@ -9932,7 +9932,7 @@
     "presenter": "",
     "_id": "17792993480872"
   },
-        {
+  {
     "title": "IPER Symposium Day",
     "date": "11/11/2026",
     "start": "07:00",
@@ -9951,7 +9951,7 @@
     "presenter": "",
     "_id": "17792993480873"
   },
-        {
+  {
     "title": "Mass Casualty Day",
     "date": "11/20/2026",
     "start": "07:00",
@@ -9988,5 +9988,24 @@
     "info": "",
     "presenter": "",
     "_id": "17792993480875"
+  },
+  {
+    "title": "CBSE",
+    "date": "07/10/2026",
+    "start": "08:30",
+    "end": "13:45",
+    "category": "EXAM",
+    "block": "CBSE",
+    "weekNum": 7,
+    "week": "Week 7",
+    "desc": "CBSE",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "4th Floor, Rm 409, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "1779301958459"
   }
 ]
