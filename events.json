@@ -9456,5 +9456,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779287918843"
+  },
+  {
+    "title": "Memorial Day - No Classes",
+    "date": "05/25/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "Holiday",
+    "block": "",
+    "weekNum": 1,
+    "week": "Week 1",
+    "desc": "Memorial Day - No Classes",
+    "calYear": "2029",
+    "mCal": "",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1779288549624"
   }
 ]
