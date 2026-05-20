@@ -696,7 +696,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       </label>
     </div>
     
-    <button class="yr-check-label" type="button" onclick="regenerateAllICSFeeds()">
+    <button class="yr-check-label" id="regenICSBtn" type="button" onclick="regenerateAllICSFeeds()" style="display:none">
   Regenerate ICS Feeds
 </button>
 <button class="yr-check-label" type="button" onclick="openSyncLinksModal()">
@@ -729,7 +729,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
   <div class="faculty-panel" id="facultyPanel">
     <div class="fp-header">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <div class="fp-title">Edit Editor</div>
+        <div class="fp-title">Event Editor</div>
         <div style="display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden">
           <button style="padding:4px 10px;background:transparent;border:none;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .12s" id="fpWeekBtn" onclick="setView('week',document.querySelectorAll('.vt-btn')[0]);updateFpViewBtns('week')">Week</button>
           <button style="padding:4px 10px;background:var(--accent);border:none;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;color:white;transition:all .12s" id="fpListBtn" onclick="setView('list',document.querySelectorAll('.vt-btn')[1]);updateFpViewBtns('list')">List</button>
@@ -935,6 +935,7 @@ const ICS_FILE = 'calendar.ics';
 const ICS_FILE_M0 = 'calendar-m0.ics';
 const ICS_FILE_M1 = 'calendar-m1.ics';
 const ICS_FILE_M2 = 'calendar-m2.ics';
+const ICS_FILE_SA = 'calendar-student-affairs.ics';
 
 function ghHeaders(){
   const h={'Accept':'application/vnd.github.v3+json'};
@@ -1106,6 +1107,7 @@ async function saveEventsToGitHub(){
   await saveTextFileToGitHub(ICS_FILE_M0, buildICS({ mCal: 'M0' }), 'Update M0 calendar ICS feed');
   await saveTextFileToGitHub(ICS_FILE_M1, buildICS({ mCal: 'M1' }), 'Update M1 calendar ICS feed');
   await saveTextFileToGitHub(ICS_FILE_M2, buildICS({ mCal: 'M2' }), 'Update M2 calendar ICS feed');
+  await saveTextFileToGitHub(ICS_FILE_SA, buildICS({ mCal: 'Student Affairs' }), 'Update Student Affairs calendar ICS feed');
 }
 
 // ── INIT ──────────────────────────────────────────────────────
@@ -1797,6 +1799,8 @@ if(document.getElementById('modalInfo'))document.getElementById('modalInfo').tex
 function requestFacultyMode(){document.getElementById('pinInput').value='';document.getElementById('pinErr').textContent='';document.getElementById('loginOverlay').classList.add('open');setTimeout(()=>document.getElementById('pinInput').focus(),100);}
 function checkPin(){const val=document.getElementById('pinInput').value.trim();if(val===(CFG.pin||'3255')){document.getElementById('loginOverlay').classList.remove('open');setMode('faculty');}else{document.getElementById('pinErr').textContent='Incorrect PIN.';document.getElementById('pinInput').value='';}}
 function setMode(mode){
+  const regenBtn = document.getElementById('regenICSBtn');
+  if (regenBtn) regenBtn.style.display = isFacultyMode ? '' : 'none';
   isFacultyMode=mode==='faculty';
   document.querySelectorAll('.mode-btn').forEach(b=>{b.classList.remove('active','faculty-active');});
   if(!isFacultyMode)document.querySelectorAll('.mode-btn')[0].classList.add('active');
@@ -1880,7 +1884,7 @@ function formHTML(e,isEdit){
 
   <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="ff_cat" list="categoryList" value="${escForm(defCat)}" oninput="updateCatPreview()" placeholder="e.g. Session, EXAM, BLACKOUT">
     <datalist id="categoryList">${catOptions}</datalist>
-    <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[defCat]||'#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[defCat]||'#4f8ef7'}" id="catLabel">${escForm(defCat)}</span></div></div>
+    <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}" id="catLabel">${escForm(defCat)}</span></div></div>
 
   <div class="form-group"><label class="form-label">Block</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; can be blank">
     <datalist id="blockList">${blockOptions}</datalist>
@@ -1902,8 +1906,8 @@ function formHTML(e,isEdit){
 }
 function updateCatPreview(){const v=document.getElementById('ff_cat').value,col=CAT_COLOR[v]||'#4a5168';document.getElementById('catDot').style.background=col;document.getElementById('catLabel').textContent=v;document.getElementById('catLabel').style.color=col;}
 function updateBlockPreview(){const v=document.getElementById('ff_block').value,col=BLOCK_COLOR[v]||'#7a829a';document.getElementById('blockDot').style.background=col;document.getElementById('blockLabel').textContent=v;document.getElementById('blockLabel').style.color=col;}
-function openAddForm(date,hour){if(!isFacultyMode)return;loadCatalog();loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
-function openEditForm(ev,e){if(ev)ev.stopPropagation();loadCatalog();loadCatalog();editingId=e._id;document.getElementById('fpSub').textContent='Editing: '+e.title.substring(0,30);document.getElementById('fpForm').innerHTML=formHTML(e,true);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
+function openAddForm(date,hour){if(!isFacultyMode)return;loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
+function openEditForm(ev,e){if(ev)ev.stopPropagation();loadCatalog();editingId=e._id;document.getElementById('fpSub').textContent='Editing: '+e.title.substring(0,30);document.getElementById('fpForm').innerHTML=formHTML(e,true);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
 function closeForm(){editingId=null;document.getElementById('fpForm').innerHTML='<div style="text-align:center;padding:30px 0;color:var(--muted)"><div style="font-size:28px;margin-bottom:10px">👆</div><div style="font-size:12px;line-height:1.6">Click an event to edit,<br>or a time slot to add,<br>or press <strong style="color:var(--gold)">+ Add Event</strong>.</div></div>';document.getElementById('fpSub').textContent='Click an event to edit · Click a slot to add';}
 
 
@@ -2643,7 +2647,7 @@ if(category && typeof CATS_LIST!=='undefined' && !CATS_LIST.includes(category))e
 
     bulkParsed.push({
       _id:Date.now()+'_'+i,
-      title,mand,group,location,mCal,calYear,presenter,notes,
+      title,mand,group,location,mCal,calYear,presenter, info: notes, notes,
       date:dateStr,start,end,
       category:(typeof CATS_LIST!=='undefined'&&CATS_LIST.includes(category))?category:(category||'Session'),
       block:BLK_LIST.includes(block)?block:blockFromWeek(derivedWeekNum||28),
@@ -2676,20 +2680,25 @@ function renderBulkPreview(){
   bulkParsed.forEach(r=>{
     const cls=r._valid?'ok':'err';
     const errText=r._errors.join('; ')||'✓';
+
     tbl+=`<tr class="${cls}">
-      <td>${r.mand||'No'}</td>
+      <td>${r.mand || 'No'}</td>
       <td>${r.title.substring(0,35)}</td>
-      <td>${r.group}</td>
+      <td>${r.group || ''}</td>
       <td>${r.location.substring(0,20)}</td>
-      <td>${r.mCal}</td>
-      <td>${r.calYear}</td>
-      <td>${r.date}</td>
-      <td>${r.start}</td>
-      <td>${r.end}</td>
-      <td>${r.category}</td>
-      <td>${r.block}</td>
+      <td>${r.calYear || ''}</td>
+      <td>${r.mCal || ''}</td>
+      <td>${r.date || ''}</td>
+      <td>${r.start || ''}</td>
+      <td>${r.end || ''}</td>
+      <td>${r.category || ''}</td>
+      <td>${r.block || ''}</td>
+      <td>${r.weekNum || ''}</td>
+      <td>${r.presenter || ''}</td>
+      <td>${r.notes || r.info || ''}</td>
       <td style="color:${r._valid?'#3ecf8e':'#f05c6e'}">${errText}</td>
     </tr>`;
+
   });
   tbl+='</table>';
   document.getElementById('bulkPreview').innerHTML=tbl;
@@ -2882,8 +2891,13 @@ const lines = [
       `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
       `DTSTART;TZID=America/Chicago:${toIcsDt(e.date, e.start)}`,
       `DTEND;TZID=America/Chicago:${toIcsDt(e.date, e.end)}`,
-      `SUMMARY:${esc(e.title)}`,
-      `DESCRIPTION:${esc(e.info || e.notes || e.desc || '')}`,
+      `SUMMARY:${esc(`${e.mand === 'Yes' ? '[MAND] ' : ''}${e.title}${e.block ? ' - ' + e.block : ''}`)}`,
+      `DESCRIPTION:${esc([
+         e.mand ? `Mandatory: ${e.mand}` : '',
+         e.group ? `Group: ${e.group}` : '',
+         e.presenter ? `Presenter: ${e.presenter}` : '',
+         e.info || e.notes || e.desc || ''
+        ].filter(Boolean).join('\n'))}`,
       `LOCATION:${esc(e.location || '')}`,
       `CATEGORIES:${esc(e.category || '')}`,
       'STATUS:CONFIRMED',
@@ -2905,7 +2919,8 @@ async function regenerateAllICSFeeds(){
       [ICS_FILE, buildICS(), 'Regenerate full calendar ICS'],
       [ICS_FILE_M0, buildICS({ mCal: 'M0' }), 'Regenerate M0 calendar ICS'],
       [ICS_FILE_M1, buildICS({ mCal: 'M1' }), 'Regenerate M1 calendar ICS'],
-      [ICS_FILE_M2, buildICS({ mCal: 'M2' }), 'Regenerate M2 calendar ICS']
+      [ICS_FILE_M2, buildICS({ mCal: 'M2' }), 'Regenerate M2 calendar ICS'],
+      [ICS_FILE_SA, buildICS({ mCal: 'Student Affairs' }), 'Regenerate Student Affairs calendar ICS']
     ];
 
     for (const [file, content, message] of feeds) {
@@ -2922,7 +2937,7 @@ async function regenerateAllICSFeeds(){
 }
 
 function getRawCalendarUrl(fileName){
-  return `https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${fileName}?v=${Date.now()}`;
+  return `https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${fileName}`;
 }
 
 function openSyncLinksModal(){
@@ -2931,7 +2946,8 @@ function openSyncLinksModal(){
     ['Full Calendar', 'calendar.ics'],
     ['M0 Calendar', 'calendar-m0.ics'],
     ['M1 Calendar', 'calendar-m1.ics'],
-    ['M2 Calendar', 'calendar-m2.ics']
+    ['M2 Calendar', 'calendar-m2.ics'],
+    ['Student Affairs Calendar', 'calendar-student-affairs.ics']
   ];
 
   document.getElementById('syncLinksList').innerHTML =
