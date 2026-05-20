@@ -7,2145 +7,2145 @@ X-WR-CALNAME:EnMed M2 Calendar
 X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
 UID:5051226_1@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260824T100000
 DTEND;TZID=America/Chicago:20260824T120000
-SUMMARY:Nephrology Active Learning
-DESCRIPTION:Regulation of Acid-Base (Phys)\; Acid-Base Balance\;Potassium Balance
+SUMMARY:Nephrology Active Learning - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nRegulation of Acid-Base (Phys)\; Acid-Base Balance\;Potassium Balance
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Workshop
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_2@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260826T090000
 DTEND;TZID=America/Chicago:20260826T100000
-SUMMARY:Pharmacology of Diuretics
-DESCRIPTION:Review of Diuretics\; ACE Inhibitors and ARB
+SUMMARY:Pharmacology of Diuretics - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nReview of Diuretics\; ACE Inhibitors and ARB
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_3@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260826T100000
 DTEND;TZID=America/Chicago:20260826T120000
-SUMMARY:Nephrology Case Studies
-DESCRIPTION:Regulation of Acid-Base (Phys)\; Acid-Base Balance\; Potassium Balance
+SUMMARY:Nephrology Case Studies - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nRegulation of Acid-Base (Phys)\; Acid-Base Balance\; Potassium Balance
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_4@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260827T100000
 DTEND;TZID=America/Chicago:20260827T110000
-SUMMARY:Medicine Active Learning
-DESCRIPTION:Urinalysis
+SUMMARY:Medicine Active Learning - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nUrinalysis
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_5@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260827T110000
 DTEND;TZID=America/Chicago:20260827T120000
-SUMMARY:Infectious Disease Active Learning
-DESCRIPTION:Infectious Disease of the Urinary Tract
+SUMMARY:Infectious Disease Active Learning - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nInfectious Disease of the Urinary Tract
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_6@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260831T100000
 DTEND;TZID=America/Chicago:20260831T110000
-SUMMARY:Nephrology Review
-DESCRIPTION:Calcium and Phosphorous Balance
+SUMMARY:Nephrology Review - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Paolini\nCalcium and Phosphorous Balance
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_7@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260902T080000
 DTEND;TZID=America/Chicago:20260902T100000
-SUMMARY:Nephrology Active Learning
-DESCRIPTION:Sodium Balance
+SUMMARY:Nephrology Active Learning - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nSodium Balance
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_8@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260902T100000
 DTEND;TZID=America/Chicago:20260902T120000
-SUMMARY:TBL #1
-DESCRIPTION:All Handouts
+SUMMARY:[MAND] TBL #1 - Renal
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Paolini\, Dr. Peterson\nAll Handouts
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_10@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260904T130000
 DTEND;TZID=America/Chicago:20260904T153000
-SUMMARY:Exam #1
-DESCRIPTION:Exam #1
+SUMMARY:[MAND] Exam #1 - Renal
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #1
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_11@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260908T100000
 DTEND;TZID=America/Chicago:20260908T110000
-SUMMARY:Pediatrics Active Learning*
-DESCRIPTION:Pediatric Fluid Management
+SUMMARY:Pediatrics Active Learning* - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nPediatric Fluid Management
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_12@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260908T110000
 DTEND;TZID=America/Chicago:20260908T120000
-SUMMARY:Pathology Active Learning*
-DESCRIPTION:Cystic Disease\, Calculi\, and Tumors
+SUMMARY:Pathology Active Learning* - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Paolini\nCystic Disease\, Calculi\, and Tumors
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_13@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260909T100000
 DTEND;TZID=America/Chicago:20260909T120000
-SUMMARY:TBL #2
-DESCRIPTION:Fluid Management
+SUMMARY:[MAND] TBL #2 - Renal
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Paolini\, Dr. Peterson\nFluid Management
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_14@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260910T100000
 DTEND;TZID=America/Chicago:20260910T113000
-SUMMARY:Medicine Active Learning
-DESCRIPTION:Acute Kidney Injury\; Chronic Kidney Disease
+SUMMARY:Medicine Active Learning - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nAcute Kidney Injury\; Chronic Kidney Disease
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_15@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260914T080000
 DTEND;TZID=America/Chicago:20260914T093000
-SUMMARY:Pathology Active Learning
-DESCRIPTION:Glomerular Disease
+SUMMARY:Pathology Active Learning - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nGlomerular Disease
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_16@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260914T093000
 DTEND;TZID=America/Chicago:20260914T120000
-SUMMARY:Blended Engineering Medicine Activity
-DESCRIPTION:Blended Engineering Medicine Activity
+SUMMARY:[MAND] Blended Engineering Medicine Activity - Renal
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: TBD\nBlended Engineering Medicine Activity
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_17@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260915T083000
 DTEND;TZID=America/Chicago:20260915T100000
-SUMMARY:Urology Active Learning
-DESCRIPTION:Overview of Urology
+SUMMARY:Urology Active Learning - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nOverview of Urology
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_18@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260916T100000
 DTEND;TZID=America/Chicago:20260916T120000
-SUMMARY:Pathology Active Learning and Review
-DESCRIPTION:Tubulointerstitial Disease\nRenal Vascular Disease
+SUMMARY:Pathology Active Learning and Review - Renal
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Paolini\nTubulointerstitial Disease\nRenal Vascular Disease
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:5051226_20@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260918T080000
 DTEND;TZID=America/Chicago:20260918T120000
-SUMMARY:Exam #2
-DESCRIPTION:Exam #2
+SUMMARY:[MAND] Exam #2 - Renal
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #2
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_1@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260708T090000
 DTEND;TZID=America/Chicago:20260708T100000
-SUMMARY:Active Learning
-DESCRIPTION:1.1 Intro to Blood\; 1.2 RBCs\; 1.3 WBC and Lymph Nodes\; 1.4 Blood Pathogens
+SUMMARY:Active Learning - Hem/ Onc
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Hughes\n1.1 Intro to Blood\; 1.2 RBCs\; 1.3 WBC and Lymph Nodes\; 1.4 Blood Pathogens
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_2@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260709T090000
 DTEND;TZID=America/Chicago:20260709T100000
-SUMMARY:Active Learning
-DESCRIPTION:1.5 Anemia (intro and classification)\; 1.6 Anemia I\; 1.7 Anemia II
+SUMMARY:Active Learning - Hem/Onc
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Hughes\n1.5 Anemia (intro and classification)\; 1.6 Anemia I\; 1.7 Anemia II
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_3@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260713T090000
 DTEND;TZID=America/Chicago:20260713T100000
-SUMMARY:Active Learning
-DESCRIPTION:1.8 Intro to Coagulation\; 1.9 Bleeding Disorders\; 1.10 Thrombotic Disorders\;
+SUMMARY:Active Learning - Hem/Onc
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Hughes\n1.8 Intro to Coagulation\; 1.9 Bleeding Disorders\; 1.10 Thrombotic Disorders\;
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_4@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260713T100000
 DTEND;TZID=America/Chicago:20260713T110000
-SUMMARY:Active Learning
-DESCRIPTION:1.11 Intro to Transfusion Medicine\; 1.12 Transfusions and Transfusion Reactions
+SUMMARY:Active Learning - Hem/ Onc
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Hughes\n1.11 Intro to Transfusion Medicine\; 1.12 Transfusions and Transfusion Reactions
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_5@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260714T110000
 DTEND;TZID=America/Chicago:20260714T120000
-SUMMARY:Active Learning
-DESCRIPTION:1.13 Anemia meds and treatment\; 1.14 Anticoagulants
+SUMMARY:Active Learning - Hem/Onc
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\n1.13 Anemia meds and treatment\; 1.14 Anticoagulants
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_6@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260715T080000
 DTEND;TZID=America/Chicago:20260715T110000
-SUMMARY:Unit 1 TBL
-DESCRIPTION:Hematology
+SUMMARY:[MAND] Unit 1 TBL - Hem/ Onc
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Hughes\nHematology
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_8@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260717T090000
 DTEND;TZID=America/Chicago:20260717T120000
-SUMMARY:Unit 1 Exam
-DESCRIPTION:Unit 1 Exam
+SUMMARY:[MAND] Unit 1 Exam - Hem/Onc
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nUnit 1 Exam
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_9@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260721T090000
 DTEND;TZID=America/Chicago:20260721T100000
-SUMMARY:Active Learning
-DESCRIPTION:2.1 Introduction to oncology\; 2.2 Surgical pathology\;
+SUMMARY:Active Learning - Hem/Onc
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Parilkh and Dr. Hughes\n2.1 Introduction to oncology\; 2.2 Surgical pathology\;
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_10@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260721T100000
 DTEND;TZID=America/Chicago:20260721T110000
-SUMMARY:Active Learning
-DESCRIPTION:2.3 Chemotherapy
+SUMMARY:Active Learning - Hem/Onc
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\n2.3 Chemotherapy
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_11@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260723T090000
 DTEND;TZID=America/Chicago:20260723T110000
-SUMMARY:Active Learning
-DESCRIPTION:2.4 Intro to Heme Malignancies\; 2.5 B-lymphoid neoplasms\; 2.6 T-lymphoid neoplasms\; 2.7 Myeloid neoplasms
+SUMMARY:Active Learning - Hem/ Onc
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Hughes\n2.4 Intro to Heme Malignancies\; 2.5 B-lymphoid neoplasms\; 2.6 T-lymphoid neoplasms\; 2.7 Myeloid neoplasms
 LOCATION:Room 216 A/B
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_12@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260724T080000
 DTEND;TZID=America/Chicago:20260724T100000
-SUMMARY:Unit 2 TBL
-DESCRIPTION:All
+SUMMARY:[MAND] Unit 2 TBL - Hem/Onc
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Hughes\nAll
 LOCATION:Room 216 A/B\, EnMed Tower
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:9051226_14@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260727T090000
 DTEND;TZID=America/Chicago:20260727T120000
-SUMMARY:Unit 2 Exam
-DESCRIPTION:Unit 2 Exam
+SUMMARY:[MAND] Unit 2 Exam - Hem/Onc
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nUnit 2 Exam
 LOCATION:4th Floor\, Testing Room 409\, EnMed Tower
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_1@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261021T090000
 DTEND;TZID=America/Chicago:20261021T100000
-SUMMARY:Active Learning
-DESCRIPTION:Physiology - Endocrine System
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Slivkoff\nPhysiology - Endocrine System
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_2@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261021T100000
 DTEND;TZID=America/Chicago:20261021T120000
-SUMMARY:Active Learning
-DESCRIPTION:Pathology - Pituitary Disorders\; Pathology - Thyroid Disorders\; Pathology - Parathyroid Disorders\; Pathology - Adrenal Disorders\; Pathology - Pancreas Disorders Diabetes Mellitus
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Hughes\nPathology - Pituitary Disorders\; Pathology - Thyroid Disorders\; Pathology - Parathyroid Disorders\; Pathology - Adrenal Disorders\; Pathology - Pancreas Disorders Diabetes Mellitus
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_3@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261022T093000
 DTEND;TZID=America/Chicago:20261022T120000
-SUMMARY:Active Learning
-DESCRIPTION:Clinical - Pituitary & Adrenal Gland Disorders\; Clinical - Thyroid and Parathyroid Disorders\; Clinical - Diabetes and complications
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Parikh\nClinical - Pituitary & Adrenal Gland Disorders\; Clinical - Thyroid and Parathyroid Disorders\; Clinical - Diabetes and complications
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_4@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261026T093000
 DTEND;TZID=America/Chicago:20261026T113000
-SUMMARY:Active Learning
-DESCRIPTION:Pharmacology - Diabetes\; Pharmacology - Thyroid and antithyroid drugs\; Pharmacology - Calcium and Bone Regulating Drugs\; Pharmacology - Adrenal Pharmacotherapy\; Pharmacology - Pituitary Agents
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\nPharmacology - Diabetes\; Pharmacology - Thyroid and antithyroid drugs\; Pharmacology - Calcium and Bone Regulating Drugs\; Pharmacology - Adrenal Pharmacotherapy\; Pharmacology - Pituitary Agents
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_5@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261028T100000
 DTEND;TZID=America/Chicago:20261028T120000
-SUMMARY:TBL #1
-DESCRIPTION:All handouts
+SUMMARY:[MAND] TBL #1 - Endo/ Repro
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: TBD\nAll handouts
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_7@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261030T100000
 DTEND;TZID=America/Chicago:20261030T120000
-SUMMARY:Exam #1
-DESCRIPTION:Exam #1
+SUMMARY:[MAND] Exam #1 - Endo/ Repro
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #1
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_8@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261102T100000
 DTEND;TZID=America/Chicago:20261102T110000
-SUMMARY:Active Learning
-DESCRIPTION:Physiology - Female Reproductive System\; Physiology - Male Reproductive System
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Priya\nPhysiology - Female Reproductive System\; Physiology - Male Reproductive System
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_9@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261102T110000
 DTEND;TZID=America/Chicago:20261102T120000
-SUMMARY:Active Learning
-DESCRIPTION:Physiology - Pregnancy and Placental Physiology\; Physiology - Menopause
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Priya\nPhysiology - Pregnancy and Placental Physiology\; Physiology - Menopause
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_10@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261104T100000
 DTEND;TZID=America/Chicago:20261104T120000
-SUMMARY:Active Learning
-DESCRIPTION:Microbiology - STI and STD Fundamentals\; Microbiology -Reproductive Tract Infections\; Microbiology -HIV\; Pharmacology -HIV Treatment and Prevention
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Ganguly\nMicrobiology - STI and STD Fundamentals\; Microbiology -Reproductive Tract Infections\; Microbiology -HIV\; Pharmacology -HIV Treatment and Prevention
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_11@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261105T090000
 DTEND;TZID=America/Chicago:20261105T110000
-SUMMARY:Active Learning
-DESCRIPTION:Pathology -Female  Reproductive Neoplasia\; Pathology - Female Repro Non-neoplastic Disorders\; Pathology - Breast
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nPathology -Female  Reproductive Neoplasia\; Pathology - Female Repro Non-neoplastic Disorders\; Pathology - Breast
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_12@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261105T110000
 DTEND;TZID=America/Chicago:20261105T120000
-SUMMARY:Active Learning
-DESCRIPTION:Pharmacology - Genitourinary\; Pharmacology -Endocrine Therapy of Breast Cancer
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\nPharmacology - Genitourinary\; Pharmacology -Endocrine Therapy of Breast Cancer
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_13@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261109T100000
 DTEND;TZID=America/Chicago:20261109T110000
-SUMMARY:Active Learning
-DESCRIPTION:Clinical - Fertility and Infertility\; Clinical - Menstrual and endocrine disorders
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nClinical - Fertility and Infertility\; Clinical - Menstrual and endocrine disorders
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_14@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261109T110000
 DTEND;TZID=America/Chicago:20261109T120000
-SUMMARY:Active Learning
-DESCRIPTION:Pharmacology - Pregnancy\; Pharmacology - Postmenopausal Hormone Therapy
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\nPharmacology - Pregnancy\; Pharmacology - Postmenopausal Hormone Therapy
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_15@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261111T090000
 DTEND;TZID=America/Chicago:20261111T120000
-SUMMARY:Active Learning
-DESCRIPTION:Clinical - Early Pregnancy\; Clinical - Labor and Delivery\; Clinical - Obstetric complications
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nClinical - Early Pregnancy\; Clinical - Labor and Delivery\; Clinical - Obstetric complications
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_16@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261112T090000
 DTEND;TZID=America/Chicago:20261112T100000
-SUMMARY:Active Learning
-DESCRIPTION:Pathology - Male Genital System Disorders
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nPathology - Male Genital System Disorders
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_17@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261112T100000
 DTEND;TZID=America/Chicago:20261112T110000
-SUMMARY:Active Learning
-DESCRIPTION:Pharmacology - Hormonal Contraception & Sexual Dysfunction
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\nPharmacology - Hormonal Contraception & Sexual Dysfunction
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_18@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261116T090000
 DTEND;TZID=America/Chicago:20261116T120000
-SUMMARY:Active Learning
-DESCRIPTION:Clinical - Perinatal Nutrition\; Clinical - Disorders of Newborns
+SUMMARY:Active Learning - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: TBD\nClinical - Perinatal Nutrition\; Clinical - Disorders of Newborns
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_21@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261119T010000
 DTEND;TZID=America/Chicago:20261119T040000
-SUMMARY:Exam 
-DESCRIPTION:Exam 
+SUMMARY:[MAND] Exam  - Endo/ Repro
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam 
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:12051226_22@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261119T070000
 DTEND;TZID=America/Chicago:20261119T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Blackout Day
+SUMMARY:[MAND] Blackout Day - Endo/ Repro
+DESCRIPTION:Mandatory: Yes\nBlackout Day
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_1@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260804T100000
 DTEND;TZID=America/Chicago:20260804T120000
-SUMMARY:HEALOrientation:Course Introduction and Ethics Review
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] HEALOrientation:Course Introduction and Ethics Review - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Orientation
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_2@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260811T100000
 DTEND;TZID=America/Chicago:20260811T120000
-SUMMARY:HEAL: Difficult Conversations and Apologies
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] HEAL: Difficult Conversations and Apologies - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_3@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260811T130000
 DTEND;TZID=America/Chicago:20260811T170000
-SUMMARY:How to Present
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] How to Present - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_4@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260812T130000
 DTEND;TZID=America/Chicago:20260812T170000
-SUMMARY:How to Present
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] How to Present - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_5@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260818T100000
 DTEND;TZID=America/Chicago:20260818T120000
-SUMMARY:Palliative and Hospice Care
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Palliative and Hospice Care - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_6@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260818T130000
 DTEND;TZID=America/Chicago:20260818T170000
-SUMMARY:Assessment & Plan Series\, Part 1
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Assessment & Plan Series\, Part 1 - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_7@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260818T130000
 DTEND;TZID=America/Chicago:20260818T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_8@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260819T130000
 DTEND;TZID=America/Chicago:20260819T170000
-SUMMARY:CHP Workshop
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] CHP Workshop - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_9@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260819T130000
 DTEND;TZID=America/Chicago:20260819T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_10@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260825T100000
 DTEND;TZID=America/Chicago:20260825T120000
-SUMMARY:Upset Patient Overview and BBN OSCE Prep
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Upset Patient Overview and BBN OSCE Prep - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_11@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260825T070000
 DTEND;TZID=America/Chicago:20260825T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes\nAdditional info\, please see Canvas
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_12@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260825T130000
 DTEND;TZID=America/Chicago:20260825T170000
-SUMMARY:Complete H&POSCE
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Complete H&POSCE - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_13@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260825T130000
 DTEND;TZID=America/Chicago:20260825T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_14@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260826T070000
 DTEND;TZID=America/Chicago:20260826T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes\nAdditional info\, please see Canvas
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_15@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260826T130000
 DTEND;TZID=America/Chicago:20260826T170000
-SUMMARY:Complete H&POSCE {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Complete H&POSCE {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_16@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260826T130000
 DTEND;TZID=America/Chicago:20260826T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_17@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260901T070000
 DTEND;TZID=America/Chicago:20260901T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes\nAdditional info\, please see Canvas
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_18@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260901T100000
 DTEND;TZID=America/Chicago:20260901T120000
-SUMMARY:Upset Patient Workshop {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Upset Patient Workshop {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_20@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260901T130000
 DTEND;TZID=America/Chicago:20260901T170000
-SUMMARY:Focused Encounter Workshop (BBN-related) {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Focused Encounter Workshop (BBN-related) {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_22@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260901T130000
 DTEND;TZID=America/Chicago:20260901T170000
-SUMMARY:PoM 3 Preceptorships {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_23@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260902T130000
 DTEND;TZID=America/Chicago:20260902T170000
-SUMMARY:Assessment & Plan Series\, Part 2 (Note Types)
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Assessment & Plan Series\, Part 2 (Note Types) - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_24@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260902T130000
 DTEND;TZID=America/Chicago:20260902T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_25@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260902T130000
 DTEND;TZID=America/Chicago:20260902T170000
-SUMMARY:CHP OSCE (Make Up)
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] CHP OSCE (Make Up) - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Assigned Students Only\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_26@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260908T070000
 DTEND;TZID=America/Chicago:20260908T073000
-SUMMARY:Blackout Day
-DESCRIPTION:
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_27@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260908T100000
 DTEND;TZID=America/Chicago:20260908T120000
-SUMMARY:Breaking Bad News (BBN) OSCE {BLACKOUT Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Breaking Bad News (BBN) OSCE {BLACKOUT Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_28@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260908T130000
 DTEND;TZID=America/Chicago:20260908T170000
-SUMMARY:Assessment & Plan Series\, Part 3 (Oral Presentation)
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Assessment & Plan Series\, Part 3 (Oral Presentation) - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_29@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260908T130000
 DTEND;TZID=America/Chicago:20260908T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_30@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260909T130000
 DTEND;TZID=America/Chicago:20260909T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_31@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260915T100000
 DTEND;TZID=America/Chicago:20260915T120000
-SUMMARY:HEAL Best Practices For Using Social Media
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] HEAL Best Practices For Using Social Media - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_32@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260915T130000
 DTEND;TZID=America/Chicago:20260915T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_33@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260915T130000
 DTEND;TZID=America/Chicago:20260915T170000
-SUMMARY:Assessment & Plan Series\, Part 1
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Assessment & Plan Series\, Part 1 - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_34@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260916T130000
 DTEND;TZID=America/Chicago:20260916T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_35@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260916T130000
 DTEND;TZID=America/Chicago:20260916T170000
-SUMMARY:CHP Workshop
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] CHP Workshop - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:SIM 305\, EnMed Tower
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_36@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260922T100000
 DTEND;TZID=America/Chicago:20260922T120000
-SUMMARY:HEAL Telemedicine and AI Technology Ethics
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] HEAL Telemedicine and AI Technology Ethics - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_37@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260922T130000
 DTEND;TZID=America/Chicago:20260922T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_40@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260922T070000
 DTEND;TZID=America/Chicago:20260922T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes\nAdditional info\, please see Canvas
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_41@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260922T130000
 DTEND;TZID=America/Chicago:20260922T170000
-SUMMARY:Complete H&P OSCE (CHP OSCEs) {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Complete H&P OSCE (CHP OSCEs) {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_42@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260923T130000
 DTEND;TZID=America/Chicago:20260923T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_43@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260923T070000
 DTEND;TZID=America/Chicago:20260923T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes\nAdditional info\, please see Canvas
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_44@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260923T130000
 DTEND;TZID=America/Chicago:20260923T170000
-SUMMARY:Complete H&P OSCE (CHP OSCEs) {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Complete H&P OSCE (CHP OSCEs) {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_45@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260929T100000
 DTEND;TZID=America/Chicago:20260929T120000
-SUMMARY:Upset Patient Workshop
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Upset Patient Workshop - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_46@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260929T130000
 DTEND;TZID=America/Chicago:20260929T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_47@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260929T130000
 DTEND;TZID=America/Chicago:20260929T170000
-SUMMARY:Focused Encounter Workshop (BBN-related)
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Focused Encounter Workshop (BBN-related) - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_48@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260930T130000
 DTEND;TZID=America/Chicago:20260930T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_49@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260930T130000
 DTEND;TZID=America/Chicago:20260930T170000
-SUMMARY:Assessment & Plan Series\, Part 2 (Note Types)
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Assessment & Plan Series\, Part 2 (Note Types) - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_50@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260930T130000
 DTEND;TZID=America/Chicago:20260930T170000
-SUMMARY:CHP OSCE (Make Up)
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] CHP OSCE (Make Up) - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Assigned Students Only\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_51@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261006T070000
 DTEND;TZID=America/Chicago:20261006T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes\nAdditional info\, please see Canvas
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_52@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261006T100000
 DTEND;TZID=America/Chicago:20261006T120000
-SUMMARY:HEAL: Breaking Bad News (BBN) OSCE {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] HEAL: Breaking Bad News (BBN) OSCE {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_53@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261006T130000
 DTEND;TZID=America/Chicago:20261006T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_54@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261006T130000
 DTEND;TZID=America/Chicago:20261006T170000
-SUMMARY:Assessment & Plan Series\, Part 3 (Oral Presentation)
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Assessment & Plan Series\, Part 3 (Oral Presentation) - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_55@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261007T130000
 DTEND;TZID=America/Chicago:20261007T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_56@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261013T100000
 DTEND;TZID=America/Chicago:20261013T120000
-SUMMARY:Health Care Economics and Regulation
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Health Care Economics and Regulation - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_57@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261013T130000
 DTEND;TZID=America/Chicago:20261013T170000
-SUMMARY:Preceptor Case Presentations
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Preceptor Case Presentations - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_58@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261013T130000
 DTEND;TZID=America/Chicago:20261013T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_59@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261014T130000
 DTEND;TZID=America/Chicago:20261014T170000
-SUMMARY:Focused H&P Workshop
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Focused H&P Workshop - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_60@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261014T130000
 DTEND;TZID=America/Chicago:20261014T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_61@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261020T100000
 DTEND;TZID=America/Chicago:20261020T120000
-SUMMARY:Value-Based Care
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Value-Based Care - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_62@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261020T070000
 DTEND;TZID=America/Chicago:20261020T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes\nAdditional info\, please see Canvas
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_63@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261020T130000
 DTEND;TZID=America/Chicago:20261020T170000
-SUMMARY:Focused H&P OSCE (FHP OSCEs) {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Focused H&P OSCE (FHP OSCEs) {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_64@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261020T130000
 DTEND;TZID=America/Chicago:20261020T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_65@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261021T070000
 DTEND;TZID=America/Chicago:20261021T073000
-SUMMARY:Blackout Day
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes\nAdditional info\, please see Canvas
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_66@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261021T130000
 DTEND;TZID=America/Chicago:20261021T170000
-SUMMARY:Focused H&P OSCE (FHP OSCEs) {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Focused H&P OSCE (FHP OSCEs) {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_67@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261021T130000
 DTEND;TZID=America/Chicago:20261021T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_68@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261027T100000
 DTEND;TZID=America/Chicago:20261027T120000
-SUMMARY:Selective Session 1
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Selective Session 1 - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_69@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261027T130000
 DTEND;TZID=America/Chicago:20261027T170000
-SUMMARY:Hospital Simulation
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Hospital Simulation - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_70@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261027T130000
 DTEND;TZID=America/Chicago:20261027T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_71@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261028T130000
 DTEND;TZID=America/Chicago:20261028T170000
-SUMMARY:Harvey Simulation
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Harvey Simulation - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_72@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261028T130000
 DTEND;TZID=America/Chicago:20261028T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_73@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261103T100000
 DTEND;TZID=America/Chicago:20261103T120000
-SUMMARY:Selective Session 2
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Selective Session 2 - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_74@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261103T130000
 DTEND;TZID=America/Chicago:20261103T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_75@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261103T130000
 DTEND;TZID=America/Chicago:20261103T170000
-SUMMARY:Preceptor Case Presentations
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Preceptor Case Presentations - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_76@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261104T130000
 DTEND;TZID=America/Chicago:20261104T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_77@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261104T130000
 DTEND;TZID=America/Chicago:20261104T170000
-SUMMARY:Focused H&P Workshop
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Focused H&P Workshop - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_78@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261110T100000
 DTEND;TZID=America/Chicago:20261110T120000
-SUMMARY:Selective Session 3
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Selective Session 3 - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_79@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261110T130000
 DTEND;TZID=America/Chicago:20261110T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_80@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261110T070000
 DTEND;TZID=America/Chicago:20261110T073000
-SUMMARY:Blackout Day
-DESCRIPTION:
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_81@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261110T130000
 DTEND;TZID=America/Chicago:20261110T170000
-SUMMARY:Focused H&P OSCE (FHP OSCEs) {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Focused H&P OSCE (FHP OSCEs) {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_82@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261111T130000
 DTEND;TZID=America/Chicago:20261111T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_83@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261111T070000
 DTEND;TZID=America/Chicago:20261111T073000
-SUMMARY:Blackout Day
-DESCRIPTION:
+SUMMARY:[MAND] Blackout Day - PoM 3
+DESCRIPTION:Mandatory: Yes
 LOCATION:
 CATEGORIES:BLACKOUT
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_84@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261111T130000
 DTEND;TZID=America/Chicago:20261111T170000
-SUMMARY:Focused H&P OSCE (FHP OSCEs) {Blackout Day}
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Focused H&P OSCE (FHP OSCEs) {Blackout Day} - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_85@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261117T100000
 DTEND;TZID=America/Chicago:20261117T120000
-SUMMARY:Selective Session 4
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Selective Session 4 - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Smith\nPlease see Canvas for student group assignments and additional information.
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_86@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261117T130000
 DTEND;TZID=America/Chicago:20261117T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_87@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261117T130000
 DTEND;TZID=America/Chicago:20261117T170000
-SUMMARY:Hospital Simulation
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Hospital Simulation - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_88@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261118T130000
 DTEND;TZID=America/Chicago:20261118T170000
-SUMMARY:PoM 3 Preceptorships
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Preceptorships - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group A&B\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Off Site
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_89@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261118T130000
 DTEND;TZID=America/Chicago:20261118T170000
-SUMMARY:Harvey Simulation
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] Harvey Simulation - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Group C&D\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_90@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261123T080000
 DTEND;TZID=America/Chicago:20261123T170000
-SUMMARY:PoM 3 Final OSCE
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Final OSCE - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_91@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261201T110000
 DTEND;TZID=America/Chicago:20261201T120000
-SUMMARY:Course Debrief
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:Course Debrief - PoM 3
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Caplan\nAdditional info\, please see Canvas
 LOCATION:2nd Flr Rm 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_92@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261208T130000
 DTEND;TZID=America/Chicago:20261208T150000
-SUMMARY:PoM 3 Final OSCE Remediation and/or Makeup (Projected)
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] PoM 3 Final OSCE Remediation and/or Makeup (Projected) - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Assigned Students Only\nPresenter: Dr. Caplan\nAdditional info\, please see Canvas
 LOCATION:4th Flr SIM Ctr Rm 404\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:11051226_93@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261208T130000
 DTEND;TZID=America/Chicago:20261208T150000
-SUMMARY:FHP OSCE Remediation Tentative**
-DESCRIPTION:Additional info\, please see Canvas
+SUMMARY:[MAND] FHP OSCE Remediation Tentative** - PoM 3
+DESCRIPTION:Mandatory: Yes\nGroup: Assigned Students Only\nPresenter: Dr. Caplan\nAdditional info\, please see Canvas
 LOCATION:3rd Flr SIM Ctr Rm 305\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:20260512_001@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261123T070000
 DTEND;TZID=America/Chicago:20261123T073000
-SUMMARY:Asynchronous Modules 1-12 Open
-DESCRIPTION:Module 1: Critical Appraisal\; Module 2: Key Concepts of Study Designs\; Module 3: Measures of Diagnostic Accuracy\; Module 4: Key Concepts for Likelihood Ratios\; Module 5: Key Association Measures\; Module 6: Study Interpretation\; Module 7: Bias and Confounding\; Module 8: Key Concepts of Systematic Review and Meta-Analyses\; Module 9: Appraising Clinical Practice Guidelines\; Module 10: Applying EBM in Clinical Practice\; Module 11: Ethical and Legal Considerations\; Module 12: Measures of Disease Outcome
+SUMMARY:[MAND] Asynchronous Modules 1-12 Open - EBM
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nModule 1: Critical Appraisal\; Module 2: Key Concepts of Study Designs\; Module 3: Measures of Diagnostic Accuracy\; Module 4: Key Concepts for Likelihood Ratios\; Module 5: Key Association Measures\; Module 6: Study Interpretation\; Module 7: Bias and Confounding\; Module 8: Key Concepts of Systematic Review and Meta-Analyses\; Module 9: Appraising Clinical Practice Guidelines\; Module 10: Applying EBM in Clinical Practice\; Module 11: Ethical and Legal Considerations\; Module 12: Measures of Disease Outcome
 LOCATION:Canvas
 CATEGORIES:Announcement
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:20260512_002@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261201T100000
 DTEND;TZID=America/Chicago:20261201T110000
-SUMMARY:Course Intro + Librarian Session
-DESCRIPTION:Librarian Session: Introduction to EBM Sources of Evidence
+SUMMARY:[MAND] Course Intro + Librarian Session - EBM
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nLibrarian Session: Introduction to EBM Sources of Evidence
 LOCATION:Room 216 A/B
 CATEGORIES:Orientation
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:20260512_003@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261201T130000
 DTEND;TZID=America/Chicago:20261201T150000
-SUMMARY:Active Learning
-DESCRIPTION:Modules 1-4 Review Critical Appraisal of Scientific Literature Predatory Publications
+SUMMARY:Active Learning - EBM
+DESCRIPTION:Mandatory: No\nGroup: All Students\nModules 1-4 Review Critical Appraisal of Scientific Literature Predatory Publications
 LOCATION:Room 216 A/B
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:20260512_004@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261203T130000
 DTEND;TZID=America/Chicago:20261203T140000
-SUMMARY:Active Learning
-DESCRIPTION:Modules 5-8 Review
+SUMMARY:Active Learning - EBM
+DESCRIPTION:Mandatory: No\nGroup: All Students\nModules 5-8 Review
 LOCATION:Room 216 A/B
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:20260512_005@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261203T140000
 DTEND;TZID=America/Chicago:20261203T160000
-SUMMARY:Problem Session #1
-DESCRIPTION:Observational Studies
+SUMMARY:[MAND] Problem Session #1 - EBM
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nObservational Studies
 LOCATION:Room 216 A/B
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:20260512_006@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261208T090000
 DTEND;TZID=America/Chicago:20261208T100000
-SUMMARY:Active Learning
-DESCRIPTION:Modules 9-12
+SUMMARY:Active Learning - EBM
+DESCRIPTION:Mandatory: No\nGroup: All Students\nModules 9-12
 LOCATION:Room 216 A/B
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:20260512_007@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261208T100000
 DTEND;TZID=America/Chicago:20261208T120000
-SUMMARY:Problem Session #2
-DESCRIPTION:Randomized Control Trials
+SUMMARY:[MAND] Problem Session #2 - EBM
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nRandomized Control Trials
 LOCATION:Room 216 A/B
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:20260512_009@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261210T100000
 DTEND;TZID=America/Chicago:20261210T120000
-SUMMARY:Comprehensive Exam
-DESCRIPTION:Comprehensive Exam
+SUMMARY:[MAND] Comprehensive Exam - EBM
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nComprehensive Exam
 LOCATION:Room 409
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_1@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260729T100000
 DTEND;TZID=America/Chicago:20260729T120000
-SUMMARY:Course Intro + Active Learning
-DESCRIPTION:Lung Volumes and Capacities\; Ventilation\; Blood Gases
+SUMMARY:Course Intro + Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Slivkoff\nLung Volumes and Capacities\; Ventilation\; Blood Gases
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_2@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260731T090000
 DTEND;TZID=America/Chicago:20260731T110000
-SUMMARY:Active Learning
-DESCRIPTION:Obstructive vs Restrictive Lung Disease\; Obstructive Lung Disease\; Restrictive Lung Diseases I and II\; Vascular Lung Diseases & ARDS
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nObstructive vs Restrictive Lung Disease\; Obstructive Lung Disease\; Restrictive Lung Diseases I and II\; Vascular Lung Diseases & ARDS
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_3@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260731T110000
 DTEND;TZID=America/Chicago:20260731T120000
-SUMMARY:Active Learning
-DESCRIPTION:Asthma Pharmacotherapy\; COPD Pharmacotherapy\; Respiratory Vaccines
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\nAsthma Pharmacotherapy\; COPD Pharmacotherapy\; Respiratory Vaccines
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_4@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260803T100000
 DTEND;TZID=America/Chicago:20260803T120000
-SUMMARY:TBL #1
-DESCRIPTION:All Handouts in Week 1
+SUMMARY:[MAND] TBL #1 - Respiratory
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nAll Handouts in Week 1
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_6@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260805T130000
 DTEND;TZID=America/Chicago:20260805T150000
-SUMMARY:Exam #1
-DESCRIPTION:Exam #1
+SUMMARY:[MAND] Exam #1 - Respiratory
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #1
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_7@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260806T090000
 DTEND;TZID=America/Chicago:20260806T110000
-SUMMARY:Active Learning
-DESCRIPTION:Disorders of the Pleura and Mediastinum\;  Tumors of the Respiratory Tract
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Paolini\nDisorders of the Pleura and Mediastinum\;  Tumors of the Respiratory Tract
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_8@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260806T110000
 DTEND;TZID=America/Chicago:20260806T120000
-SUMMARY:Active Learning
-DESCRIPTION:ENT Pharmacotherapy\; Pulmonary Arterial Hypertension\; Lung Cancer Prevention\, Screening\, and Treatment
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\nENT Pharmacotherapy\; Pulmonary Arterial Hypertension\; Lung Cancer Prevention\, Screening\, and Treatment
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_9@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260806T100000
 DTEND;TZID=America/Chicago:20260806T120000
-SUMMARY:Active Learning
-DESCRIPTION:General Concepts of Respiratory Infections\; Upper Respiratory Tract Infections\; Lower Respiratory Tract Infections\; Respiratory Virus Infections
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Ganguly\nGeneral Concepts of Respiratory Infections\; Upper Respiratory Tract Infections\; Lower Respiratory Tract Infections\; Respiratory Virus Infections
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_10@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260810T100000
 DTEND;TZID=America/Chicago:20260810T110000
-SUMMARY:Active Learning
-DESCRIPTION:Tuberculosis and Other Infections\; Fungal Infections of the Respiratory Tract
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Ganguly\nTuberculosis and Other Infections\; Fungal Infections of the Respiratory Tract
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_11@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260810T110000
 DTEND;TZID=America/Chicago:20260810T120000
-SUMMARY:Active Learning
-DESCRIPTION:Antitubercular Medications\; Pneumonia Treatments\; Therapeutics and Prophylaxis for Common Respiratory Viruses
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\nAntitubercular Medications\; Pneumonia Treatments\; Therapeutics and Prophylaxis for Common Respiratory Viruses
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_12@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260812T100000
 DTEND;TZID=America/Chicago:20260812T120000
-SUMMARY:TBL #2
-DESCRIPTION:All Handouts
+SUMMARY:[MAND] TBL #2 - Respiratory
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nAll Handouts
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_13@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260814T090000
 DTEND;TZID=America/Chicago:20260814T100000
-SUMMARY:Active Learning
-DESCRIPTION:Trauma and Mechanical Disorders
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Gotur\nTrauma and Mechanical Disorders
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_14@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260814T100000
 DTEND;TZID=America/Chicago:20260814T110000
-SUMMARY:Active Learning
-DESCRIPTION:Introduction to Chest Radiograph
+SUMMARY:Active Learning - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Wilson\nIntroduction to Chest Radiograph
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_15@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260814T110000
 DTEND;TZID=America/Chicago:20260814T120000
-SUMMARY:EnMed Correlation
-DESCRIPTION:Innovations in Pulmonary Medicine
+SUMMARY:EnMed Correlation - Respiratory
+DESCRIPTION:Mandatory: No\nGroup: All Students\nInnovations in Pulmonary Medicine
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_16@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260817T130000
 DTEND;TZID=America/Chicago:20260817T140000
-SUMMARY:Pulmonary Medicine Workshop
-DESCRIPTION:Pulmonary Medicine Workshop
+SUMMARY:[MAND] Pulmonary Medicine Workshop - Respiratory
+DESCRIPTION:Mandatory: Yes\nGroup: Group A\nPresenter: Drs. Gotur\, Sanchez-Ato\, Wilson\, & Hendrickson\nPulmonary Medicine Workshop
 LOCATION:MITIE
 CATEGORIES:Workshop
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_17@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260817T140000
 DTEND;TZID=America/Chicago:20260817T150000
-SUMMARY:Pulmonary Medicine Workshop
-DESCRIPTION:Pulmonary Medicine Workshop
+SUMMARY:[MAND] Pulmonary Medicine Workshop - Respiratory
+DESCRIPTION:Mandatory: Yes\nGroup: Group B\nPresenter: Drs. Gotur\, Sanchez-Ato\, Wilson\, & Hendrickson\nPulmonary Medicine Workshop
 LOCATION:MITIE
 CATEGORIES:Workshop
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_18@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260817T150000
 DTEND;TZID=America/Chicago:20260817T170000
-SUMMARY:Pulmonary Medicine Workshop
-DESCRIPTION:Pulmonary Medicine Workshop
+SUMMARY:[MAND] Pulmonary Medicine Workshop - Respiratory
+DESCRIPTION:Mandatory: Yes\nGroup: ALL STUDENTS\nPresenter: Drs. Gotur\, Sanchez-Ato\, Wilson\, & Hendrickson\nPulmonary Medicine Workshop
 LOCATION:MITIE
 CATEGORIES:Workshop
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:4051226_20@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260820T130000
 DTEND;TZID=America/Chicago:20260820T170000
-SUMMARY:Exam #2 & NBME
-DESCRIPTION:Exam #2 & NBME
+SUMMARY:[MAND] Exam #2 & NBME - Respiratory
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #2 & NBME
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_1@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261203T080000
 DTEND;TZID=America/Chicago:20261203T100000
-SUMMARY:Orthopedic Surgery Session
-DESCRIPTION:Musculoskeletal Disorders
+SUMMARY:Orthopedic Surgery Session - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nMusculoskeletal Disorders
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_2@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261204T080000
 DTEND;TZID=America/Chicago:20261204T100000
-SUMMARY:Active Learning
-DESCRIPTION:Rheumatoid and Autoimmune Disorders\, Anti-Rheumatic Drugs
+SUMMARY:Active Learning - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nRheumatoid and Autoimmune Disorders\, Anti-Rheumatic Drugs
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_3@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261207T100000
 DTEND;TZID=America/Chicago:20261207T120000
-SUMMARY:Active Learning
-DESCRIPTION:Rheumatoid and Autoimmune Disorders\, Joint Pathology\, Neoplastic Bone Disease\, Non-neoplastic Bone Disease\, NSAIDs\, Anti-Rheumatic Drugs\, Drugs affecting Bone Mineralization
+SUMMARY:Active Learning - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Paolini\nRheumatoid and Autoimmune Disorders\, Joint Pathology\, Neoplastic Bone Disease\, Non-neoplastic Bone Disease\, NSAIDs\, Anti-Rheumatic Drugs\, Drugs affecting Bone Mineralization
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_4@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261208T130000
 DTEND;TZID=America/Chicago:20261208T143000
-SUMMARY:TBL #1
-DESCRIPTION:All Handouts
+SUMMARY:[MAND] TBL #1 - MSK
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Paolini\nAll Handouts
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_6@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261210T080000
 DTEND;TZID=America/Chicago:20261210T100000
-SUMMARY:Exam #1
-DESCRIPTION:Exam #1
+SUMMARY:[MAND] Exam #1 - MSK
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #1
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_7@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261211T110000
 DTEND;TZID=America/Chicago:20261211T120000
-SUMMARY:Active Learning
-DESCRIPTION:Adult and Pediatric Dermatology
+SUMMARY:Active Learning - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Paolini\nAdult and Pediatric Dermatology
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_8@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261214T100000
 DTEND;TZID=America/Chicago:20261214T110000
-SUMMARY:Active Learning
-DESCRIPTION:Bacterial\, Viral\, Fungal\, and Parasitic Infections of the Skin
+SUMMARY:Active Learning - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nBacterial\, Viral\, Fungal\, and Parasitic Infections of the Skin
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_9@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261214T110000
 DTEND;TZID=America/Chicago:20261214T120000
-SUMMARY:Active Learning
-DESCRIPTION:Soft Tissue Tumors\, Muscle Pathology
+SUMMARY:Active Learning - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nSoft Tissue Tumors\, Muscle Pathology
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_10@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261215T083000
 DTEND;TZID=America/Chicago:20261215T103000
-SUMMARY:Active Learning & Exam Review
-DESCRIPTION:All Handouts
+SUMMARY:Active Learning & Exam Review - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nAll Handouts
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Review Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_11@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261215T130000
 DTEND;TZID=America/Chicago:20261215T143000
-SUMMARY:TBL #2
-DESCRIPTION:All Handouts
+SUMMARY:[MAND] TBL #2 - MSK
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Paolini\nAll Handouts
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:8051226_13@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261217T090000
 DTEND;TZID=America/Chicago:20261217T120000
-SUMMARY:Exam #2 & NBME
-DESCRIPTION:Exam #2 & NBME
+SUMMARY:[MAND] Exam #2 & NBME - MSK
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #2 & NBME
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_1@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260925T100000
 DTEND;TZID=America/Chicago:20260925T120000
-SUMMARY:Active Learning
-DESCRIPTION:Pathology of the Oral Cavity\, Pathology of the Esophagus\, Pathology of the Stomach
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPathology of the Oral Cavity\, Pathology of the Esophagus\, Pathology of the Stomach
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_2@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260928T090000
 DTEND;TZID=America/Chicago:20260928T120000
-SUMMARY:Active Learning
-DESCRIPTION:Pathology of Lower GI
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPathology of Lower GI
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_3@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260930T090000
 DTEND;TZID=America/Chicago:20260930T120000
-SUMMARY:TBL
-DESCRIPTION:Clinical Case Discussion
+SUMMARY:[MAND] TBL - GI
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nClinical Case Discussion
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:TBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_5@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261002T130000
 DTEND;TZID=America/Chicago:20261002T150000
-SUMMARY:Exam #1
-DESCRIPTION:Exam #1
+SUMMARY:[MAND] Exam #1 - GI
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #1
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_6@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261005T090000
 DTEND;TZID=America/Chicago:20261005T120000
-SUMMARY:Active Learning
-DESCRIPTION:Pathology of the Liver I\, Pathology of the Liver II\, Pathology of the Gall Bladder and Biliary Tract
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPathology of the Liver I\, Pathology of the Liver II\, Pathology of the Gall Bladder and Biliary Tract
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_7@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261007T100000
 DTEND;TZID=America/Chicago:20261007T110000
-SUMMARY:Active Learning
-DESCRIPTION:Pathology of Pancreas
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Paolini\nPathology of Pancreas
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_8@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261007T110000
 DTEND;TZID=America/Chicago:20261007T120000
-SUMMARY:Active Learning
-DESCRIPTION:Review of Metabolism / Metabolic Disorders
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Derry\nReview of Metabolism / Metabolic Disorders
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_9@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261009T100000
 DTEND;TZID=America/Chicago:20261009T120000
-SUMMARY:Active Learning
-DESCRIPTION:Nutrition/Malnutrition\, Vitamins and Minerals
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nNutrition/Malnutrition\, Vitamins and Minerals
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_10@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261012T100000
 DTEND;TZID=America/Chicago:20261012T120000
-SUMMARY:CBL
-DESCRIPTION:Upper/Lower/Hepatobiliary/Pancreas
+SUMMARY:[MAND] CBL - GI
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nUpper/Lower/Hepatobiliary/Pancreas
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:CBL
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_11@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261014T100000
 DTEND;TZID=America/Chicago:20261014T110000
-SUMMARY:Active Learning
-DESCRIPTION:Pharmacology
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Rogers\nPharmacology
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_12@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261014T110000
 DTEND;TZID=America/Chicago:20261014T120000
-SUMMARY:Exam Review
-DESCRIPTION:Liver/Gall bladder/ Pancreas/Nutrition
+SUMMARY:Exam Review - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nLiver/Gall bladder/ Pancreas/Nutrition
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Review Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:6051226_14@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261016T130000
 DTEND;TZID=America/Chicago:20261016T160000
-SUMMARY:Exam #2 & NBME
-DESCRIPTION:Exam #2 & NBME
+SUMMARY:[MAND] Exam #2 & NBME - GI
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nExam #2 & NBME
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1778765004163@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260728T100000
 DTEND;TZID=America/Chicago:20260728T120000
-SUMMARY:PoM 3 Orientation
-DESCRIPTION:Please see Canvas for student group assignments and additional information.
+SUMMARY:[MAND] PoM 3 Orientation - POM 3
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: Dr. Caplan\nPlease see Canvas for student group assignments and additional information.
 LOCATION:Room 216 A/B\, EnMed Tower
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1778765228347@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260923T090000
 DTEND;TZID=America/Chicago:20260923T100000
-SUMMARY:Active Learning
-DESCRIPTION:Approach to GI patients \nGI biomechanics
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nPresenter: Dr. Mobaraki\nApproach to GI patients \nGI biomechanics
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1778765270575@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20260923T100000
 DTEND;TZID=America/Chicago:20260923T120000
-SUMMARY:Active Learning
-DESCRIPTION:Overview of GI Function/ Regulation/
+SUMMARY:Active Learning - GI
+DESCRIPTION:Mandatory: No\nGroup: All Students\nOverview of GI Function/ Regulation/
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1778765595570@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261201T080000
 DTEND;TZID=America/Chicago:20261201T100000
-SUMMARY:Orthopedic Surgery Session
-DESCRIPTION:Musculoskeletal Disorders
+SUMMARY:Orthopedic Surgery Session - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nMusculoskeletal Disorders
 LOCATION:2nd Flr Rm 216 EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1778766025825@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261208T070000
 DTEND;TZID=America/Chicago:20261208T073000
-SUMMARY:Announcement
-DESCRIPTION:Orthopedic Quiz due at 11:59PM
+SUMMARY:Announcement - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nOrthopedic Quiz due at 11:59PM
 LOCATION:
 CATEGORIES:Announcement
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1778776536063@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261204T070000
 DTEND;TZID=America/Chicago:20261204T073000
-SUMMARY:Announcement
-DESCRIPTION:Orthopedic Quiz Opens at 12pm
+SUMMARY:Announcement - MSK
+DESCRIPTION:Mandatory: No\nGroup: All Students\nOrthopedic Quiz Opens at 12pm
 LOCATION:
 CATEGORIES:Announcement
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1778791089919@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261117T080000
 DTEND;TZID=America/Chicago:20261117T100000
-SUMMARY:TBL #2
-DESCRIPTION:All handouts
+SUMMARY:[MAND] TBL #2 - Endo Week 5
+DESCRIPTION:Mandatory: Yes\nGroup: All Students\nPresenter: TBD\nAll handouts
 LOCATION:2nd Flr Room 216 A/B\, EnMed Twr
 CATEGORIES:Session
 STATUS:CONFIRMED
 END:VEVENT
 BEGIN:VEVENT
 UID:1778791380279@enmed-calendar
-DTSTAMP:20260520T000731Z
+DTSTAMP:20260520T143221Z
 DTSTART;TZID=America/Chicago:20261119T130000
 DTEND;TZID=America/Chicago:20261119T160000
-SUMMARY:Exam #2
-DESCRIPTION:Exam #2
+SUMMARY:Exam #2 - Endo/ Repro
+DESCRIPTION:Mandatory: No\nGroup: All Students\nExam #2
 LOCATION:4th Flr Exam Rm 409 EnMed Twr
 CATEGORIES:EXAM
 STATUS:CONFIRMED
