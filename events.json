@@ -10026,5 +10026,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779301958460"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "05/26/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "BLACKOUT",
+    "block": "Pre-Matriculation",
+    "weekNum": 1,
+    "week": "Week 1",
+    "desc": "Blackout Day",
+    "calYear": "2029",
+    "mCal": "M0",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1779393751324"
   }
 ]
