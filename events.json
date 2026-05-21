@@ -7780,8 +7780,8 @@
   {
     "title": "Lecture 2 - Clinical Needs - Design Inputs",
     "date": "06/02/2026",
-    "start": "10:00",
-    "end": "11:00",
+    "start": "11:00",
+    "end": "12:00",
     "category": "ITDE",
     "block": "Pre-Matriculation Week 2",
     "weekNum": 2,
@@ -7797,15 +7797,15 @@
     "presenter": "Dr. Nicholas Sears, Dr. Shannon Wilson"
   },
   {
-    "title": "Lecture 3 - Ideation and Concept Development",
+    "title": "Lecture 4 - Ideation and Concept Development",
     "date": "06/09/2026",
     "start": "10:00",
     "end": "11:00",
     "category": "ITDE",
-    "block": "Pre-Matriculation Week 2",
+    "block": "Pre-Matriculation Week 3",
     "weekNum": 3,
     "week": "Week 3",
-    "desc": "Lecture 3 - Ideation and Concept Development",
+    "desc": "Lecture 4 - Ideation and Concept Development",
     "calYear": "2030",
     "mCal": "M0",
     "mand": "Yes",
@@ -7854,7 +7854,7 @@
     "presenter": "Dr. Nicholas Sears"
   },
   {
-    "title": "Lecture 4 - Intellectual Property",
+    "title": "Lecture 3 - Intellectual Property",
     "date": "06/04/2026",
     "start": "11:00",
     "end": "12:00",
@@ -7862,7 +7862,7 @@
     "block": "Pre-Matriculation Week 2",
     "weekNum": 2,
     "week": "Week 2",
-    "desc": "Lecture 4 - Intellectual Property",
+    "desc": "Lecture 3 - Intellectual Property",
     "calYear": "2030",
     "mCal": "M0",
     "mand": "Yes",
