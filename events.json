@@ -9918,14 +9918,14 @@
     "date": "10/19/2026",
     "start": "07:00",
     "end": "07:30",
-    "category": "Holiday",
+    "category": "",
     "block": "Break - No class",
-    "weekNum": 4,
-    "week": "Week 4",
-    "desc": "",
+    "weekNum": 22,
+    "week": "Week 22",
+    "desc": "Break - No class",
     "calYear": "2029",
     "mCal": "M2",
-    "mand": "",
+    "mand": "No",
     "group": "",
     "location": "",
     "info": "",
@@ -10008,7 +10008,7 @@
     "presenter": "",
     "_id": "1779301958459"
   },
-    {
+  {
     "title": "CBSE",
     "date": "11/30/2026",
     "start": "08:30",
