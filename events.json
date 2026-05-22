@@ -1,5 +1,5 @@
 [
-    {
+  {
     "title": "ITDE 613 Orientation",
     "date": "07/06/2026",
     "start": "13:30",
@@ -379,8 +379,7 @@
     "info": "",
     "presenter": ""
   },
-
-    {
+  {
     "title": "Blackout Day",
     "date": "10/22/2026",
     "start": "07:00",
@@ -10673,5 +10672,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779393751324"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "05/27/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "BLACKOUT",
+    "block": "Pre-Matriculation",
+    "weekNum": 1,
+    "week": "Week 1",
+    "desc": "Blackout Day",
+    "calYear": "2030",
+    "mCal": "M0",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1779465968752"
   }
 ]
