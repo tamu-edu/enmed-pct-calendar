@@ -8435,7 +8435,7 @@
     "desc": "Lecture 2 - Clinical Needs - Design Inputs",
     "calYear": "2030",
     "mCal": "M0",
-    "mand": "Yes",
+    "mand": "No",
     "group": "All Students",
     "location": "2nd Flr Rm 216 A/B EnMed Twr",
     "_id": "1777342011315_16",
@@ -10710,24 +10710,5 @@
     "info": "",
     "presenter": "",
     "_id": "1779467804078"
-  },
-  {
-    "title": "Blackout Day",
-    "date": "05/28/2026",
-    "start": "07:00",
-    "end": "07:30",
-    "category": "BLACKOUT",
-    "block": "Pre-Matriculation",
-    "weekNum": 1,
-    "week": "Week 1",
-    "desc": "Blackout Day",
-    "calYear": "2030",
-    "mCal": "M0",
-    "mand": "No",
-    "group": "All Students",
-    "location": "",
-    "info": "",
-    "presenter": "",
-    "_id": "1779468004237"
   }
 ]
