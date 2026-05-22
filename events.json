@@ -8233,6 +8233,25 @@
     "info": "",
     "presenter": "Dr. Nicholas Sears, Dr. Shannon Wilson"
   },
+      {
+    "title": "Blackout Day",
+    "date": "05/28/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "BLACKOUT",
+    "block": "Pre-Matriculation",
+    "weekNum": 6,
+    "week": "Week 6",
+    "desc": "Blackout Day",
+    "calYear": "2030",
+    "mCal": "M0",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "_id": "1777342011315_417",
+    "info": "",
+    "presenter": ""
+  },
   {
     "title": "ENGR Correlation Session 1",
     "date": "05/28/2026",
