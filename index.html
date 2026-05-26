@@ -3113,7 +3113,14 @@ function exportICS(){
 // ── TOAST ─────────────────────────────────────────────────────
 function showToast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t);}t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0';},4500);}
 
-document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){document.getElementById('modalOverlay').classList.remove('open');document.getElementById('confirmOverlay').classList.remove('open');closeForm();}});
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='Escape'){
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.getElementById('confirmOverlay').classList.remove('open');
+    document.getElementById('syncLinksModal').classList.remove('open');
+    closeForm();
+  }
+});
 
 // Always load calendar immediately — no setup screen for guests
 loadConfig();
