@@ -1225,9 +1225,18 @@ function buildWeekDrawer(){
 
   const allBtn=currentView==='list'?`<button class="wk-btn${currentWeekIdx===-1?' active':''}" style="${currentWeekIdx===-1?'background:var(--accent);border-color:var(--accent)':''}" onclick="jumpToWeek(-1)">All Weeks</button>`:'';
   document.getElementById('weekDrawer').innerHTML=allBtn+WEEKS.map((w,i)=>{
-    const col=BLOCK_COLOR[w.block]||'#7a829a';
-    const lbl=w.name.replace(/\s*\(\d+\)/,'').replace(/WEEK/i,'Wk').replace(/Week/,'Wk');
-    return `<button class="wk-btn${i===currentWeekIdx?' active':''}" style="${i===currentWeekIdx?'background:'+col+';border-color:'+col:''}" onclick="jumpToWeek(${i})">${lbl}</button>`;
+  const col=BLOCK_COLOR[w.block]||'#7a829a';
+  const start = new Date(w.startDate);
+  const end = new Date(w.endDate);
+  const startMonth = start.toLocaleString('en-US', { month: 'short' });
+  const endMonth = end.toLocaleString('en-US', { month: 'short' });
+  const startDay = start.getDate();
+  const endDay = end.getDate();
+  const lbl =
+    startMonth === endMonth
+    ? `${startMonth} ${startDay}-${endDay}`
+    : `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
+  return `<button class="wk-btn${i===currentWeekIdx?' active':''}" style="${i===currentWeekIdx?'background:'+col+';border-color:'+col:''}" onclick="jumpToWeek(${i})">${lbl}</button>`;
   }).join('');
 }
 function jumpToWeek(i){currentWeekIdx=i;if(i>=0)weekToMonth(i);buildWeekDrawer();render();}
