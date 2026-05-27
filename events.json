@@ -10995,5 +10995,24 @@
     "info": "",
     "presenter": "",
     "_id": "100b34df-17fb-4d8f-80df-a4b14ad1fd4e"
+  },
+  {
+    "title": "Black Out Day",
+    "date": "07/24/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "BLACKOUT",
+    "block": "White Coat Ceremony",
+    "weekNum": 9,
+    "week": "Week 9",
+    "desc": "Black Out Day",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "4fef13f5-6369-4b75-90ad-3a08e4fae763"
   }
 ]
