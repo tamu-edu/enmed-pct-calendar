@@ -908,10 +908,8 @@ const CAT_COLOR = {
   'events' : '#E56B6F'
 };
 const CATS_LIST=["SDL","Orientation","TBL","CBL","ITDE","EXAM","Workshop","LC Small Groups","BLACKOUT", "Session", "Lab", "Seminar", "Clinic","Review Session", "Office Hours","Events","Announcements"]
-const HOUR_KEYS=[
-  '06:00','07:00','08:00','09:00','10:00','11:00','12:00',
-  '13:00','14:00','15:00','16:00','17:00','18:00', '19:00'
-];
+const DEFAULT_START_HOUR = 7;
+const DEFAULT_END_HOUR = 19;
 const HOURS=[
   '6 AM','7 AM','8 AM','9 AM','10 AM','11 AM','12 PM',
   '1 PM','2 PM','3 PM','4 PM','5 PM','6 PM', '7 PM'
@@ -1358,7 +1356,38 @@ function timeToMinutes(t){
   const [h,m] = t.split(':').map(Number);
   return h * 60 + (m || 0);
 }
-//</skross>
+
+function hourLabel(hour){
+  const h12 = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+  return `${h12} ${hour >= 12 ? 'PM' : 'AM'}`;
+}
+
+function hourKey(hour){
+  return `${String(hour).padStart(2,'0')}:00`;
+}
+
+function getWeekHourRange(events){
+  let startHour = DEFAULT_START_HOUR;
+  let endHour = DEFAULT_END_HOUR;
+
+  events.forEach(e => {
+    const startMin = timeToMinutes(e.start);
+    const endMin = timeToMinutes(e.end);
+
+    if(Number.isFinite(startMin)){
+      startHour = Math.min(startHour, Math.floor(startMin / 60));
+    }
+
+    if(Number.isFinite(endMin)){
+      endHour = Math.max(endHour, Math.ceil(endMin / 60));
+    }
+  });
+
+  return Array.from(
+    { length: endHour - startHour + 1 },
+    (_, i) => startHour + i
+  );
+}
 
 function displayTitle(e){
   const mand=e.mand==='Yes'?'[MAND] ':'';
@@ -1678,17 +1707,20 @@ dates.forEach(ds => {
     html+=`<div class="ch-cell${ds===todayStr?' today':''}"><div class="ch-day">${day}</div><div class="ch-num">${dy?+dy:''}</div></div>`;
   });
   html+='</div>';
-  HOUR_KEYS.forEach((hk,hi)=>{
-   const rowStartMin = timeToMinutes(hk);
-   const rowEndMin = rowStartMin + 60;
+  const visibleHours = getWeekHourRange(evs);
 
-   const eventCrossesRowLine = dates.some(ds =>
+  visibleHours.forEach(hour=>{
+    const hk = hourKey(hour);
+    const rowStartMin = timeToMinutes(hk);
+    const rowEndMin = rowStartMin + 60;
+
+    const eventCrossesRowLine = dates.some(ds =>
       (laidOutByDate[ds] || []).some(e =>
         e.startMin < rowEndMin && e.endMin > rowEndMin
       )
   );
 
-  html+=`<div class="cal-row${eventCrossesRowLine ? ' event-crossed-line' : ''}"><div class="cal-time">${HOURS[hi]}</div>`;
+  html+=`<div class="cal-row${eventCrossesRowLine ? ' event-crossed-line' : ''}"><div class="cal-time">${hourLabel(hour)}</div>`;
     dates.forEach(ds=>{
       const cellEvs = (laidOutByDate[ds] || []).filter(e => {
       return e.startMin >= rowStartMin &&
