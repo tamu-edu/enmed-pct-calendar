@@ -750,14 +750,6 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
         <div id="changeLog"><div style="font-size:11px;color:var(--muted2);padding:8px 0">No changes this session.</div></div>
       </div>
     </div>
-    <!-- CALENDAR VISIBILITY SECTION -->
-    <div class="fp-body" style="border-top:1px solid var(--border);padding-top:16px">
-      <div class="fp-section">
-        <div class="fp-section-title">👁 Calendar Visibility <span style="font-size:9px;color:var(--muted2);font-weight:400;text-transform:none;letter-spacing:0">(controls what students see)</span></div>
-        <div id="visibilityToggles" style="margin-top:8px"></div>
-        <button onclick="saveVisibility()" style="margin-top:10px;width:100%;padding:7px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer" id="visBtn">Save Visibility</button>
-      </div>
-    </div>
     <div class="fp-footer">
       <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Changes save directly to GitHub — everyone sees updates within seconds.</div>
       <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
@@ -834,6 +826,35 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
   </div>
 </div>
 
+<!-- BULK UPLOAD MODAL -->
+<div class="bulk-overlay" id="bulkOverlay" onclick="if(event.target.id==='bulkOverlay')closeBulkUpload()">
+  <div class="bulk-box">
+    <div class="bulk-title">
+      <span>📤 Bulk Upload Events</span>
+      <button class="modal-close" onclick="closeBulkUpload()">✕</button>
+    </div>
+    <div class="bulk-drop" id="bulkDrop" onclick="document.getElementById('bulkFile').click()"
+         ondragover="event.preventDefault();this.classList.add('drag')"
+         ondragleave="this.classList.remove('drag')"
+         ondrop="handleBulkDrop(event)">
+      <div style="font-size:32px">📂</div>
+      <strong style="font-size:14px">Click to select or drag &amp; drop your .xlsx file</strong>
+      <p>Use the EnMed Calendar Upload Template — download from the ⚙ settings menu</p>
+      <input type="file" id="bulkFile" accept=".xlsx,.xls" onchange="handleBulkFile(this.files[0])">
+    </div>
+    <div id="bulkStats" class="bulk-stats" style="display:none">
+      <span>Found: <span class="bulk-stat" id="bulkTotal">0</span> rows</span>
+      <span style="color:#3ecf8e">✓ Valid: <span class="bulk-stat" id="bulkValid">0</span></span>
+      <span style="color:#f05c6e">✗ Errors: <span class="bulk-stat" id="bulkErrors">0</span></span>
+    </div>
+    <div id="bulkPreview" class="bulk-preview" style="display:none"></div>
+    <div class="bulk-actions">
+      <button class="bulk-btn bulk-btn-primary" id="bulkAddBtn" style="display:none" onclick="bulkAddAll()">✅ Add All Valid Events</button>
+      <button class="bulk-btn bulk-btn-cancel" onclick="closeBulkUpload()">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <script>
 let SESSION_CATALOG = {};
 async function loadCatalog(){
@@ -888,11 +909,11 @@ const CAT_COLOR = {
 };
 const CATS_LIST=["SDL","Orientation","TBL","CBL","ITDE","EXAM","Workshop","LC Small Groups","BLACKOUT", "Session", "Lab", "Seminar", "Clinic","Review Session", "Office Hours","Events","Announcements"]
 const HOUR_KEYS=[
-  '07:00','08:00','09:00','10:00','11:00','12:00',
+  '06:00','07:00','08:00','09:00','10:00','11:00','12:00',
   '13:00','14:00','15:00','16:00','17:00','18:00', '19:00'
 ];
 const HOURS=[
-  '7 AM','8 AM','9 AM','10 AM','11 AM','12 PM',
+  '6 AM','7 AM','8 AM','9 AM','10 AM','11 AM','12 PM',
   '1 PM','2 PM','3 PM','4 PM','5 PM','6 PM', '7 PM'
 ];
 const DAYS=['Mon','Tue','Wed','Thu','Fri'];
@@ -1028,9 +1049,7 @@ async function fetchLatestGitHubSha(){
   return d.sha;
 }
 
-async function fetchLatestEventsFromGitHub(){
-  return await fetchEventsFromGitHubAPI();
-}
+const fetchLatestEventsFromGitHub = fetchEventsFromGitHubAPI;
 
 async function fetchEventsFromGitHubAPI(){
   const r = await fetch(
@@ -1099,9 +1118,6 @@ async function saveEventsToGitHub(){
   if(!CFG.token){
     throw new Error('No GitHub token — click ⚙ in the top right and add your token.');
   }
-  console.log('WRITING events.json from this page:', window.location.href);
-  console.log('EVENT COUNT BEING WRITTEN:', EVENTS.length);
-  console.trace('saveEventsToGitHub caller');
 
   const cleanEvents = EVENTS.map(cleanEventForSave);
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(cleanEvents, null, 2))));
@@ -1857,7 +1873,6 @@ function setMode(mode){
   document.getElementById('addEventBtn').style.display=isFacultyMode?'':'none';
   document.getElementById('layout').classList.toggle('faculty-mode',isFacultyMode);
   if(!isFacultyMode)closeForm();
-  renderVisibilityToggles();
   populateYearDropdown();
   updateMCalUI();
   updateYearUI();  // show/hide tabs based on visibility
@@ -1875,7 +1890,7 @@ function formHTML(e,isEdit){
   const defBlock=e?e.block:'';
   const defCat=e?e.category:'Session';
 
-  const hourTimes=['07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+  const hourTimes=['06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
   const timeOptions=hourTimes.map(t=>`<option value="${t}">${fmtTime(t)}</option>`).join('');
 
   const catOptions=CATS_LIST.map(c=>`<option value="${escForm(c)}"></option>`).join('');
@@ -2003,21 +2018,7 @@ function saveVisibility(){
   updateTitle();
   render();
 }
-function renderVisibilityToggles(){
-  if(!isFacultyMode)return;
-  const el=document.getElementById('visibilityToggles');if(!el)return;
-  el.innerHTML=COHORT_YEARS.map(y=>['M0','M1','M2'].map(m=>{
-    const key=y+'-'+m;
-    const on=calendarVisibility[key]!==false;
-    const col=YEAR_COLORS[y]||'#888';
-    return`<div class="vis-toggle${on?' on':''}" onclick="toggleVisibility('${key}',this)">
-      <div class="vis-switch"></div>
-      <div class="vis-yr-dot" style="background:${col}"></div>
-      <span style="flex:1;font-size:12px;color:var(--text)">${y} — ${m}</span>
-      <span style="font-size:10px;color:var(--muted)">${on?'Visible':'Hidden'}</span>
-    </div>`;
-  }).join('')).join('');
-}
+
 function toggleVisibility(key,el){
   calendarVisibility[key]=!calendarVisibility[key];
   el.classList.toggle('on',calendarVisibility[key]);
@@ -3155,34 +3156,6 @@ document.getElementById('configOverlay').style.display='none';
 initApp();
 </script>
 
-<!-- BULK UPLOAD MODAL -->
-<div class="bulk-overlay" id="bulkOverlay" onclick="if(event.target.id==='bulkOverlay')closeBulkUpload()">
-  <div class="bulk-box">
-    <div class="bulk-title">
-      <span>📤 Bulk Upload Events</span>
-      <button class="modal-close" onclick="closeBulkUpload()">✕</button>
-    </div>
-    <div class="bulk-drop" id="bulkDrop" onclick="document.getElementById('bulkFile').click()"
-         ondragover="event.preventDefault();this.classList.add('drag')"
-         ondragleave="this.classList.remove('drag')"
-         ondrop="handleBulkDrop(event)">
-      <div style="font-size:32px">📂</div>
-      <strong style="font-size:14px">Click to select or drag &amp; drop your .xlsx file</strong>
-      <p>Use the EnMed Calendar Upload Template — download from the ⚙ settings menu</p>
-      <input type="file" id="bulkFile" accept=".xlsx,.xls" onchange="handleBulkFile(this.files[0])">
-    </div>
-    <div id="bulkStats" class="bulk-stats" style="display:none">
-      <span>Found: <span class="bulk-stat" id="bulkTotal">0</span> rows</span>
-      <span style="color:#3ecf8e">✓ Valid: <span class="bulk-stat" id="bulkValid">0</span></span>
-      <span style="color:#f05c6e">✗ Errors: <span class="bulk-stat" id="bulkErrors">0</span></span>
-    </div>
-    <div id="bulkPreview" class="bulk-preview" style="display:none"></div>
-    <div class="bulk-actions">
-      <button class="bulk-btn bulk-btn-primary" id="bulkAddBtn" style="display:none" onclick="bulkAddAll()">✅ Add All Valid Events</button>
-      <button class="bulk-btn bulk-btn-cancel" onclick="closeBulkUpload()">Cancel</button>
-    </div>
-  </div>
-</div>
 
 <div class="modal-overlay" id="syncLinksModal">
   <div class="modal">
@@ -3199,7 +3172,7 @@ initApp();
 
     <div class="modal-body">
 
-      <p style="font-size:13px;
+      <div style="font-size:13px;
                 color:var(--muted);
                 margin-bottom:14px;
                 line-height:1.5">
@@ -3232,7 +3205,7 @@ From URL
 
 Copy the link for the calendar(s) you would like to subscribe to and paste it into the URL field.
 
-
+</div>
       <div id="syncLinksList"></div>
 
     </div>
