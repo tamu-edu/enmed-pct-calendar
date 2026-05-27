@@ -10806,7 +10806,7 @@
     "presenter": "",
     "_id": "1779759583433"
   },
-    {
+  {
     "title": "[MAND] M1 Orientation Day",
     "date": "07/20/2026",
     "start": "08:00",
@@ -10825,7 +10825,7 @@
     "presenter": "",
     "_id": "17798322561821"
   },
-      {
+  {
     "title": "[MAND] M1 Orientation Day",
     "date": "07/21/2026",
     "start": "08:00",
@@ -10881,5 +10881,24 @@
     "info": "",
     "presenter": "",
     "_id": "1779832405367"
+  },
+  {
+    "title": "Test_Refactor",
+    "date": "12/31/2026",
+    "start": "19:00",
+    "end": "20:00",
+    "category": "Session",
+    "block": "",
+    "weekNum": 32,
+    "week": "Week 32",
+    "desc": "Test_Refactor",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "ebfcf0cf-3252-4bc3-bd18-5e532ee29722"
   }
 ]
