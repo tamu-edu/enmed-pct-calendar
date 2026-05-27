@@ -10976,5 +10976,24 @@
     "info": "",
     "presenter": "",
     "_id": "a97ff922-cf37-4324-a07d-715461e74bf0"
+  },
+  {
+    "title": "2030 White Coat Ceremony",
+    "date": "07/24/2026",
+    "start": "10:00",
+    "end": "11:00",
+    "category": "White Coat",
+    "block": "M1 Orientation Day",
+    "weekNum": 9,
+    "week": "Week 9",
+    "desc": "2030 White Coat Ceremony",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "EnMed 140 Auditorium",
+    "info": "",
+    "presenter": "",
+    "_id": "100b34df-17fb-4d8f-80df-a4b14ad1fd4e"
   }
 ]
