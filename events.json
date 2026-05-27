@@ -10655,25 +10655,6 @@
     "_id": "17792993480873"
   },
   {
-    "title": "Mass Casualty Day",
-    "date": "11/20/2026",
-    "start": "06:30",
-    "end": "13:00",
-    "category": "BLACKOUT",
-    "block": "Mass Casualty Day",
-    "weekNum": 26,
-    "week": "Week 26",
-    "desc": "Mass Casualty Day",
-    "calYear": "2029",
-    "mCal": "M2",
-    "mand": "Yes",
-    "group": "",
-    "location": "",
-    "info": "",
-    "presenter": "",
-    "_id": "17792993480874"
-  },
-  {
     "title": "Last Day - Fall Semester",
     "date": "12/18/2026",
     "start": "07:00",
