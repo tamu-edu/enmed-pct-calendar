@@ -441,8 +441,77 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .mg-cell.today-cell .mg-date{background:var(--accent);color:white}
 .mg-event{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;margin-bottom:2px;cursor:pointer;white-space:normal;overflow-wrap:anywhere;word-break:break-word;overflow:hidden;text-overflow:clip;line-height:1.25;border-left:3px solid;max-width:100%;min-width:0}
 .mg-event:hover{opacity:.85;transform:translateX(1px)}
-.mg-more{font-size:9px;color:var(--muted2);padding:1px 4px;cursor:pointer;font-weight:600}
-.mg-more:hover{color:var(--accent)}
+.mg-more{
+  font-size:9px;
+  color:var(--accent);
+  padding:2px 5px;
+  cursor:pointer;
+  font-weight:700;
+  border-radius:4px;
+  display:inline-block;
+}
+.mg-more:hover{background:rgba(80,0,0,.08);color:var(--maroon-dk)}
+
+.month-popout{
+  position:fixed;
+  z-index:850;
+  width:min(340px,calc(100vw - 24px));
+  max-height:min(420px,70vh);
+  overflow-y:auto;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:0 16px 48px rgba(0,0,0,.28);
+  padding:12px;
+}
+
+.month-popout-title{
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:8px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+
+.month-popout-event{
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+  border-bottom:1px solid var(--border);
+}
+
+.month-popout-event:last-child{border-bottom:none}
+
+.month-popout-event:hover{background:var(--surface2)}
+
+.month-popout-time{
+  width:62px;
+  flex-shrink:0;
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  color:var(--muted2);
+  line-height:1.35;
+}
+
+.month-popout-main{min-width:0;flex:1}
+
+.month-popout-cat{
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  margin-bottom:2px;
+}
+
+.month-popout-name{
+  font-size:12px;
+  font-weight:600;
+  line-height:1.3;
+  color:var(--text);
+}
 .mg-add-btn{display:none;position:absolute;bottom:3px;right:3px;width:18px;height:18px;border-radius:50%;border:none;background:var(--gray-dk);color:#1a1200;font-size:12px;cursor:pointer;align-items:center;justify-content:center;line-height:1}
 .faculty-mode .mg-cell:hover .mg-add-btn{display:flex}
 
@@ -2595,7 +2664,7 @@ function renderMonth(){
         const monthBlockLabel = e.block ? `${e.block}<br>` : '';
         return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),handleEventClick(event,${ej}))">${monthBlockLabel}${displayTitle(e)}</div>`;
       }).join('')}
-      ${more>0?`<div class="mg-more">+${more} more</div>`:''}
+      ${more>0?`<div class="mg-more" onclick="openMonthMore(event,'${ds}')">+${more} more</div>`:''}
       ${isFacultyMode?`<button class="mg-add-btn" onclick="openAddForm('${ds}','08:00');event.stopPropagation()">+</button>`:''}
     </div>`;
   }
@@ -2610,6 +2679,69 @@ function renderMonth(){
   document.getElementById('weekDates').textContent='';
   document.getElementById('weekLabel').textContent='';
   document.getElementById('blockPill').textContent='';
+}
+
+function closeMonthMore(){
+  const old=document.getElementById('monthMorePopout');
+  if(old)old.remove();
+}
+
+function openMonthMore(ev,dateStr){
+  ev.stopPropagation();
+  closeMonthMore();
+
+  const dayEvs=filteredEvents()
+    .filter(e=>e.date===dateStr)
+    .sort((a,b)=>timeToMinutes(a.start)-timeToMinutes(b.start));
+
+  if(!dayEvs.length)return;
+
+  const pop=document.createElement('div');
+  pop.id='monthMorePopout';
+  pop.className='month-popout';
+
+  const rect=ev.currentTarget.getBoundingClientRect();
+  const desiredLeft=rect.left;
+  const desiredTop=rect.bottom+6;
+
+  pop.innerHTML=`
+    <div class="month-popout-title">${fmtDate(dateStr)}</div>
+    ${dayEvs.map(e=>{
+      const col=mCalColor(e);
+      const catCol=CAT_COLOR[normalizeCategory(e.category)] || col;
+      const ej=JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+      const blockLabel=e.block ? `${escForm(e.block)} · ` : '';
+
+      return `
+        <div class="month-popout-event" onclick="event.stopPropagation();closeMonthMore();handleEventClick(event,${ej})">
+          <div class="month-popout-time">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
+          <div class="month-popout-main">
+            <div class="month-popout-cat" style="color:${catCol}">${blockLabel}${escForm(e.category||'Session')}</div>
+            <div class="month-popout-name">${escForm(displayTitle(e))}</div>
+          </div>
+        </div>
+      `;
+    }).join('')}
+  `;
+
+  document.body.appendChild(pop);
+
+  const popRect=pop.getBoundingClientRect();
+  let left=desiredLeft;
+  let top=desiredTop;
+
+  if(left+popRect.width>window.innerWidth-12){
+    left=window.innerWidth-popRect.width-12;
+  }
+  if(left<12)left=12;
+
+  if(top+popRect.height>window.innerHeight-12){
+    top=rect.top-popRect.height-6;
+  }
+  if(top<12)top=12;
+
+  pop.style.left=left+'px';
+  pop.style.top=top+'px';
 }
 
 // ── SYNCED NAVIGATION HELPERS ────────────────────────────────
@@ -3662,8 +3794,15 @@ function exportICS(){
 // ── TOAST ─────────────────────────────────────────────────────
 function showToast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t);}t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0';},4500);}
 
+document.addEventListener('click',ev=>{
+  if(!ev.target.closest('#monthMorePopout') && !ev.target.closest('.mg-more')){
+    closeMonthMore();
+  }
+});
+
 document.addEventListener('keydown',ev=>{
   if(ev.key==='Escape'){
+    closeMonthMore();
     document.getElementById('modalOverlay').classList.remove('open');
     document.getElementById('confirmOverlay').classList.remove('open');
     document.getElementById('syncLinksModal').classList.remove('open');
