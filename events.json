@@ -10919,5 +10919,24 @@
     "info": "",
     "presenter": "Dr. Day, Dr. Priya, Dr. Meyer, Dr. Omule, Dr. Chance",
     "_id": "47def259-61e7-43dd-893d-41b15186790d"
+  },
+  {
+    "title": "Black Out Day",
+    "date": "07/20/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "BLACKOUT",
+    "block": "M1 Orientation Day",
+    "weekNum": 9,
+    "week": "Week 9",
+    "desc": "Black Out Day",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "6195d187-cc55-416a-9559-2c15971545bd"
   }
 ]
