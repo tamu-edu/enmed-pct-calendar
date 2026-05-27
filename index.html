@@ -946,6 +946,16 @@ function ghHeaders(){
   return h;
 }
 
+function generateUniqueId(events){
+  let id;
+
+  do {
+    id = crypto.randomUUID();
+  } while(events.some(e => e._id === id));
+
+  return id;
+}
+
 async function loadEvents(){
   setStatus('loading','Loading events...');
   document.getElementById('calView').innerHTML='<div style="text-align:center;padding:60px 20px"><div class="spinner"></div><p style="color:var(--muted)">Loading from GitHub...</p></div>';
@@ -1119,8 +1129,8 @@ async function saveEventsToGitHub(){
   let r = await attemptSave();
 
   if(r.status === 409){
-    r = await attemptSave();
-  }
+  throw new Error('Another save happened at the same time. Reloading latest events prevented an overwrite. Please click Save again.');
+}
 
   if(!r.ok){
     const t = await r.text();
@@ -2695,7 +2705,7 @@ function parseBulkRows(rows,colIdx){
 if(category && typeof CATS_LIST!=='undefined' && !CATS_LIST.includes(category))errs.push(`Unknown category: "${category}" — check spelling or leave blank`);
 
     bulkParsed.push({
-      _id:Date.now()+'_'+i,
+      _id: generateUniqueId(EVENTS.concat(bulkParsed)),
       title,mand,group,location,mCal,calYear,presenter, info: notes, notes,
       date:dateStr,start,end,
       category:(typeof CATS_LIST!=='undefined'&&CATS_LIST.includes(category))?category:(category||'Session'),
@@ -2822,11 +2832,14 @@ async function saveForm(){
     location,
     info,
     presenter,
-    _id:editingId || existing._id || (Date.now()+'')
+    _id: editingId || existing._id || null
   };
 
   try{
   EVENTS = await fetchLatestEventsFromGitHub();
+    if (!ev._id) {
+  ev._id = generateUniqueId(EVENTS);
+}
     if(isEditing){
       const i=EVENTS.findIndex(e=>e._id===editingId);
 
