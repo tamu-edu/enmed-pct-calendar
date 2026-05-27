@@ -513,6 +513,55 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .bulk-btn-primary:disabled{opacity:.5;cursor:not-allowed}
 .bulk-btn-cancel{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
 
+/* MULTI-ADD */
+#multiAddOverlay .bulk-box{
+  max-height:85vh;
+  overflow:hidden;
+}
+
+#multiAddForm{
+  overflow-y:auto;
+  padding-right:4px;
+  -webkit-overflow-scrolling:touch;
+}
+
+#multiAddOverlay .bulk-actions{
+  flex-shrink:0;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+}
+
+.multiadd-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.multiadd-days{display:flex;gap:6px;flex-wrap:wrap}
+.multiadd-day{padding:6px 10px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);font-size:12px;cursor:pointer;user-select:none}
+.multiadd-day.on{background:var(--maroon);border-color:var(--maroon);color:white}
+.multiadd-note{font-size:11px;color:var(--muted2);line-height:1.5;margin-top:4px}
+.multiadd-preview-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px}
+.multiadd-preview-list{max-height:220px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:11px}
+.multiadd-preview-item{padding:8px 10px;border-bottom:1px solid var(--border)}
+.multiadd-preview-item:last-child{border-bottom:none}
+.multiadd-preview-meta{color:var(--muted2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px}
+.multiadd-subhead{font-size:12px;font-weight:700;color:var(--text);margin:16px 0 8px;padding-top:12px;border-top:1px solid var(--border)}
+.multiadd-custom-row{display:grid;grid-template-columns:1.2fr .8fr .8fr auto;gap:8px;align-items:center;margin-bottom:8px}
+.multiadd-custom-row .form-input{padding:8px 10px;font-size:12px}
+.multiadd-remove{width:30px;height:30px;border-radius:7px;border:1px solid rgba(240,92,110,.3);background:rgba(240,92,110,.1);color:#f05c6e;cursor:pointer;font-weight:700}
+.multiadd-small-btn{padding:7px 12px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+@media(max-width:768px){
+  .multiadd-grid{grid-template-columns:1fr}
+  .multiadd-custom-row{grid-template-columns:1fr}
+  .multiadd-remove{width:100%}
+}
+.multiadd-days{display:flex;gap:6px;flex-wrap:wrap}
+.multiadd-day{padding:6px 10px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);font-size:12px;cursor:pointer;user-select:none}
+.multiadd-day.on{background:var(--maroon);border-color:var(--maroon);color:white}
+.multiadd-note{font-size:11px;color:var(--muted2);line-height:1.5;margin-top:4px}
+.multiadd-preview-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px}
+.multiadd-preview-list{max-height:220px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:11px}
+.multiadd-preview-item{padding:8px 10px;border-bottom:1px solid var(--border)}
+.multiadd-preview-item:last-child{border-bottom:none}
+.multiadd-preview-meta{color:var(--muted2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px}
+
 
 /* BLOCK FILTER DROPDOWN */
 .block-filter-select{width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;outline:none;transition:border-color .15s}
@@ -751,10 +800,11 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       </div>
     </div>
     <div class="fp-footer">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Changes save directly to GitHub — everyone sees updates within seconds.</div>
-      <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
-      <button class="btn-full" onclick="enterBulkSelect()" style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">&#9745; Select &amp; Delete Events</button>
-    </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Bulk tools preview changes before committing them to GitHub.</div>
+        <button class="btn-full" onclick="openMultiAdd()" style="background:var(--maroon);color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">➕ Multi-Add Session</button>
+        <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
+        <button class="btn-full" onclick="enterBulkSelect()" style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">&#9745; Select &amp; Delete Events</button>  
+      </div>
   </div>
 </div>
 
@@ -851,6 +901,150 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
     <div class="bulk-actions">
       <button class="bulk-btn bulk-btn-primary" id="bulkAddBtn" style="display:none" onclick="bulkAddAll()">✅ Add All Valid Events</button>
       <button class="bulk-btn bulk-btn-cancel" onclick="closeBulkUpload()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- MULTI-ADD MODAL -->
+<div class="bulk-overlay" id="multiAddOverlay" onclick="if(event.target.id==='multiAddOverlay')closeMultiAdd()">
+  <div class="bulk-box">
+    <div class="bulk-title">
+      <span>➕ Multi-Add Session</span>
+      <button class="modal-close" onclick="closeMultiAdd()">✕</button>
+    </div>
+
+    <div id="multiAddForm">
+      <div class="multiadd-grid">
+        <div class="form-group">
+          <label class="form-label">[MAND]</label>
+          <select class="form-select" id="ma_mand">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <input class="form-input" id="ma_cat" list="categoryListMA" value="Session">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Session Name *</label>
+        <input class="form-input" id="ma_title" placeholder="e.g. Active Learning Session">
+      </div>
+
+      <div class="multiadd-grid">
+        <div class="form-group">
+          <label class="form-label">Group Assigned</label>
+          <input class="form-input" id="ma_group" placeholder="All Students">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Session Location</label>
+          <input class="form-input" id="ma_location" placeholder="Room 216">
+        </div>
+      </div>
+
+      <div class="multiadd-grid">
+        <div class="form-group">
+          <label class="form-label">Cohort Year *</label>
+          <select class="form-select" id="ma_calyear">
+            <option value="">— None —</option>
+            <option value="2029" selected>2029</option>
+            <option value="2030">2030</option>
+            <option value="2031">2031</option>
+            <option value="2032">2032</option>
+            <option value="2033">2033</option>
+            <option value="2034">2034</option>
+            <option value="2035">2035</option>
+            <option value="2036">2036</option>
+            <option value="2037">2037</option>
+            <option value="2038">2038</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Class *</label>
+          <select class="form-select" id="ma_mcal">
+            <option value="M0">M0 — Pre-Matriculation</option>
+            <option value="M1" selected>M1</option>
+            <option value="M2">M2</option>
+            <option value="Student Affairs">Student Affairs</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="multiadd-grid">
+        <div class="form-group">
+          <label class="form-label">Start Date *</label>
+          <input class="form-input" id="ma_startdate" placeholder="MM/DD/YYYY">
+        </div>
+        <div class="form-group">
+          <label class="form-label">End Date *</label>
+          <input class="form-input" id="ma_enddate" placeholder="MM/DD/YYYY">
+        </div>
+      </div>
+
+      <div class="multiadd-grid">
+        <div class="form-group">
+          <label class="form-label">Start Time *</label>
+          <input class="form-input" id="ma_start" list="timeListMA" value="08:00">
+        </div>
+        <div class="form-group">
+          <label class="form-label">End Time *</label>
+          <input class="form-input" id="ma_end" list="timeListMA" value="09:00">
+        </div>
+      </div>
+
+          <div class="multiadd-subhead">Repeating Pattern</div>
+
+      <div class="form-group">
+        <label class="form-label">Repeat On</label>
+        <div class="multiadd-days" id="multiAddDays">
+          <div class="multiadd-day" data-day="1" onclick="toggleMultiAddDay(this)">Mon</div>
+          <div class="multiadd-day" data-day="2" onclick="toggleMultiAddDay(this)">Tue</div>
+          <div class="multiadd-day" data-day="3" onclick="toggleMultiAddDay(this)">Wed</div>
+          <div class="multiadd-day" data-day="4" onclick="toggleMultiAddDay(this)">Thu</div>
+          <div class="multiadd-day" data-day="5" onclick="toggleMultiAddDay(this)">Fri</div>
+        </div>
+        <div class="multiadd-note">Use this for regular repeats. Leave blank if you only want custom dates below.</div>
+      </div>
+
+      <div class="multiadd-subhead">Custom Dates & Times</div>
+
+      <div id="multiAddCustomRows"></div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+        <button type="button" class="multiadd-small-btn" onclick="addMultiAddCustomRow()">+ Add Custom Date</button>
+      </div>
+
+      <div class="multiadd-note">Custom rows are combined with the repeating pattern in the same preview.</div>
+
+      <div class="form-group">
+        <label class="form-label">Block</label>
+        <input class="form-input" id="ma_block" list="blockListMA" placeholder="Optional; can be blank">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Presenter(s)</label>
+        <input class="form-input" id="ma_presenter" placeholder="e.g. Dr. Smith">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Additional Information</label>
+        <textarea class="form-input" id="ma_info" rows="3" style="resize:vertical;min-height:70px;line-height:1.5;font-size:12px"></textarea>
+      </div>
+
+      <datalist id="categoryListMA"></datalist>
+      <datalist id="blockListMA"></datalist>
+      <datalist id="timeListMA"></datalist>
+    </div>
+
+    <div id="multiAddPreview" style="display:none"></div>
+
+    <div class="bulk-actions">
+      <button class="bulk-btn bulk-btn-primary" id="multiAddPreviewBtn" onclick="previewMultiAdd()">Preview Events</button>
+      <button class="bulk-btn bulk-btn-primary" id="multiAddCommitBtn" style="display:none" onclick="commitMultiAdd()">Create Events</button>
+      <button class="bulk-btn bulk-btn-cancel" id="multiAddBackBtn" style="display:none" onclick="backToMultiAddForm()">Back to Edit</button>
+      <button class="bulk-btn bulk-btn-cancel" onclick="closeMultiAdd()">Cancel</button>
     </div>
   </div>
 </div>
@@ -2596,6 +2790,304 @@ async function bulkDeleteSelected(){
     EVENTS=backup;
     showToast('Error: '+err.message);
     delBtn.textContent='Delete Selected';delBtn.disabled=false;
+  }
+}
+
+// ── MULTI-ADD ─────────────────────────────────────────────────
+let multiAddGenerated = [];
+
+function openMultiAdd(){
+  if(!isFacultyMode){showToast('⚠️ Enter Edit mode first.');return;}
+
+  multiAddGenerated = [];
+
+  const catList = document.getElementById('categoryListMA');
+  const blockList = document.getElementById('blockListMA');
+  const timeList = document.getElementById('timeListMA');
+
+  if(catList) catList.innerHTML = CATS_LIST.map(c=>`<option value="${escForm(c)}"></option>`).join('');
+  if(blockList) blockList.innerHTML = BLOCKS_LIST.map(b=>`<option value="${escForm(b)}"></option>`).join('');
+
+  if(timeList){
+    const hourTimes=['06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+    timeList.innerHTML = hourTimes.map(t=>`<option value="${t}">${fmtTime(t)}</option>`).join('');
+  }
+
+  document.getElementById('multiAddForm').style.display='';
+  document.getElementById('multiAddPreview').style.display='none';
+  document.getElementById('multiAddPreview').innerHTML='';
+  document.getElementById('multiAddPreviewBtn').style.display='';
+  document.getElementById('multiAddCommitBtn').style.display='none';
+  document.getElementById('multiAddBackBtn').style.display='none';
+
+  document.querySelectorAll('#multiAddDays .multiadd-day').forEach(d=>d.classList.remove('on'));
+
+  const customRows = document.getElementById('multiAddCustomRows');
+  if(customRows) customRows.innerHTML = '';
+
+  addMultiAddCustomRow();
+
+  document.getElementById('multiAddOverlay').classList.add('open');
+}
+
+function closeMultiAdd(){
+  document.getElementById('multiAddOverlay').classList.remove('open');
+  multiAddGenerated = [];
+}
+
+function toggleMultiAddDay(el){
+  el.classList.toggle('on');
+}
+
+function addMultiAddCustomRow(date='', start='', end=''){
+  const wrap = document.getElementById('multiAddCustomRows');
+  if(!wrap) return;
+
+  const row = document.createElement('div');
+  row.className = 'multiadd-custom-row';
+  row.innerHTML = `
+    <input class="form-input ma_custom_date" placeholder="MM/DD/YYYY" value="${escForm(date)}">
+    <input class="form-input ma_custom_start" list="timeListMA" placeholder="Start" value="${escForm(start)}">
+    <input class="form-input ma_custom_end" list="timeListMA" placeholder="End" value="${escForm(end)}">
+    <button type="button" class="multiadd-remove" onclick="this.closest('.multiadd-custom-row').remove()">×</button>
+  `;
+
+  wrap.appendChild(row);
+}
+
+function collectMultiAddCustomRows(){
+  return Array.from(document.querySelectorAll('#multiAddCustomRows .multiadd-custom-row'))
+    .map(row => ({
+      date: row.querySelector('.ma_custom_date')?.value.trim() || '',
+      start: row.querySelector('.ma_custom_start')?.value.trim() || '',
+      end: row.querySelector('.ma_custom_end')?.value.trim() || ''
+    }))
+    .filter(row => row.date || row.start || row.end);
+}
+
+function isValidMDY(dateStr){
+  if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateStr)) return false;
+  const [mo,dy,yr] = dateStr.split('/').map(Number);
+  const d = new Date(yr, mo - 1, dy);
+  return d.getFullYear() === yr && d.getMonth() === mo - 1 && d.getDate() === dy;
+}
+
+function addDays(dateObj, days){
+  const d = new Date(dateObj);
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+function collectMultiAddBase(){
+  return {
+    title: document.getElementById('ma_title').value.trim(),
+    mand: document.getElementById('ma_mand').value,
+    group: document.getElementById('ma_group').value.trim() || 'All Students',
+    location: document.getElementById('ma_location').value.trim(),
+    calYear: document.getElementById('ma_calyear').value,
+    mCal: document.getElementById('ma_mcal').value,
+    category: document.getElementById('ma_cat').value.trim() || 'Session',
+    block: document.getElementById('ma_block').value.trim(),
+    presenter: document.getElementById('ma_presenter').value.trim(),
+    info: document.getElementById('ma_info').value.trim(),
+    start: document.getElementById('ma_start').value.trim(),
+    end: document.getElementById('ma_end').value.trim(),
+    startDate: document.getElementById('ma_startdate').value.trim(),
+    endDate: document.getElementById('ma_enddate').value.trim(),
+    days: Array.from(document.querySelectorAll('#multiAddDays .multiadd-day.on')).map(el=>Number(el.dataset.day)),
+    customRows: collectMultiAddCustomRows()
+  };
+}
+
+function makeMultiAddEvent(base, dateStr, start, end, source){
+  const weekNum = weekNumFromDate(dateStr);
+
+  return {
+    title: base.title,
+    date: dateStr,
+    start,
+    end,
+    category: base.category,
+    block: base.block,
+    weekNum,
+    week: weekNum ? weekNameFor(weekNum) : '',
+    desc: base.title,
+    calYear: base.calYear,
+    mCal: base.mCal,
+    mand: base.mand,
+    group: base.group,
+    location: base.location,
+    info: base.info,
+    presenter: base.presenter,
+    _id: null,
+    _source: source
+  };
+}
+
+function previewMultiAdd(){
+  const base = collectMultiAddBase();
+
+  if(!base.title){showToast('⚠️ Session Name is required.');return;}
+  if(!base.start || !base.end){showToast('⚠️ Pattern start and end times are required.');return;}
+  if(timeToMinutes(base.start) >= timeToMinutes(base.end)){showToast('⚠️ Pattern end time must be after start time.');return;}
+
+  const hasPattern = base.startDate || base.endDate || base.days.length;
+  const hasCustom = base.customRows.length > 0;
+
+  if(!hasPattern && !hasCustom){
+    showToast('⚠️ Add a repeating pattern, a custom date, or both.');
+    return;
+  }
+
+  const generated = [];
+
+  if(hasPattern){
+    if(!base.startDate || !base.endDate){
+      showToast('⚠️ Pattern Start Date and End Date are required when using Repeat On.');
+      return;
+    }
+
+    if(!isValidMDY(base.startDate) || !isValidMDY(base.endDate)){
+      showToast('⚠️ Pattern dates must be valid MM/DD/YYYY dates.');
+      return;
+    }
+
+    if(!base.days.length){
+      showToast('⚠️ Select at least one weekday for the repeating pattern, or clear the pattern dates.');
+      return;
+    }
+
+    const startDate = parseMDY(base.startDate);
+    const endDate = parseMDY(base.endDate);
+
+    if(startDate > endDate){
+      showToast('⚠️ Pattern End Date must be after Pattern Start Date.');
+      return;
+    }
+
+    for(let d = new Date(startDate); d <= endDate; d = addDays(d, 1)){
+      if(!base.days.includes(d.getDay())) continue;
+
+      generated.push(makeMultiAddEvent(base, formatMDY(d), base.start, base.end, 'Pattern'));
+    }
+  }
+
+  for(const row of base.customRows){
+    if(!row.date || !row.start || !row.end){
+      showToast('⚠️ Each custom row must have date, start, and end — or be fully blank.');
+      return;
+    }
+
+    if(!isValidMDY(row.date)){
+      showToast(`⚠️ Custom date ${row.date} is not a valid MM/DD/YYYY date.`);
+      return;
+    }
+
+    if(timeToMinutes(row.start) >= timeToMinutes(row.end)){
+      showToast(`⚠️ Custom row ${row.date} has an end time before its start time.`);
+      return;
+    }
+
+    generated.push(makeMultiAddEvent(base, row.date, row.start, row.end, 'Custom'));
+  }
+
+  const seen = new Set();
+  multiAddGenerated = generated.filter(ev => {
+    const key = `${ev.date}|${ev.start}|${ev.end}|${ev.title}`;
+    if(seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  if(!multiAddGenerated.length){
+    showToast('⚠️ No events were generated.');
+    return;
+  }
+
+  const duplicateWarnings = multiAddGenerated.filter(newEv =>
+    EVENTS.some(existing =>
+      existing.date === newEv.date &&
+      existing.start === newEv.start &&
+      existing.end === newEv.end &&
+      existing.title === newEv.title
+    )
+  );
+
+  let html = `
+    <div class="multiadd-preview-title">${multiAddGenerated.length} event${multiAddGenerated.length!==1?'s':''} will be created</div>
+    ${duplicateWarnings.length ? `<div style="font-size:12px;color:#f05c6e;margin-bottom:8px">⚠️ ${duplicateWarnings.length} possible duplicate${duplicateWarnings.length!==1?'s':''} found based on same title/date/time.</div>` : ''}
+    <div class="multiadd-preview-list">
+  `;
+
+  multiAddGenerated
+    .sort((a,b) => parseMDY(a.date) - parseMDY(b.date) || timeToMinutes(a.start) - timeToMinutes(b.start))
+    .forEach(ev=>{
+      html += `
+        <div class="multiadd-preview-item">
+          <strong>${escForm(ev.title)}</strong>
+          <div class="multiadd-preview-meta">${escForm(ev.date)} · ${escForm(ev.start)}–${escForm(ev.end)} · ${escForm(ev.mCal)} · ${escForm(ev.category)} · ${escForm(ev._source || '')}</div>
+        </div>
+      `;
+    });
+
+  html += `</div>`;
+
+  document.getElementById('multiAddPreview').innerHTML = html;
+  document.getElementById('multiAddForm').style.display='none';
+  document.getElementById('multiAddPreview').style.display='';
+  document.getElementById('multiAddPreviewBtn').style.display='none';
+  document.getElementById('multiAddCommitBtn').style.display='';
+  document.getElementById('multiAddCommitBtn').textContent=`Create ${multiAddGenerated.length} Event${multiAddGenerated.length!==1?'s':''}`;
+  document.getElementById('multiAddCommitBtn').disabled=false;
+  document.getElementById('multiAddBackBtn').style.display='';
+}
+
+function backToMultiAddForm(){
+  document.getElementById('multiAddForm').style.display='';
+  document.getElementById('multiAddPreview').style.display='none';
+  document.getElementById('multiAddPreviewBtn').style.display='';
+  document.getElementById('multiAddCommitBtn').style.display='none';
+  document.getElementById('multiAddBackBtn').style.display='none';
+}
+
+async function commitMultiAdd(){
+  if(!multiAddGenerated.length){showToast('⚠️ Preview events first.');return;}
+
+  const btn = document.getElementById('multiAddCommitBtn');
+  btn.textContent = 'Saving to GitHub...';
+  btn.disabled = true;
+
+  try{
+    EVENTS = await fetchLatestEventsFromGitHub();
+
+        multiAddGenerated.forEach(ev=>{
+      ev._id = generateUniqueId(EVENTS.concat(multiAddGenerated));
+
+      const {_source, ...cleanEv} = ev;
+      EVENTS.push(cleanEv);
+    });
+
+    await saveEventsToGitHub();
+
+    addLog('added',{
+      title:`${multiAddGenerated.length} events (multi-add)`,
+      date:multiAddGenerated[0].date,
+      start:multiAddGenerated[0].start,
+      end:multiAddGenerated[0].end,
+      category:'Multi-Add'
+    });
+
+    showToast(`✅ ${multiAddGenerated.length} events added — live for everyone!`);
+    closeMultiAdd();
+
+    WEEKS = buildWeeks();
+    buildWeekDrawer();
+    updateTabCounts();
+    render();
+  }catch(err){
+    showToast('❌ '+err.message);
+    btn.textContent = `Create ${multiAddGenerated.length} Event${multiAddGenerated.length!==1?'s':''}`;
+    btn.disabled = false;
   }
 }
 
