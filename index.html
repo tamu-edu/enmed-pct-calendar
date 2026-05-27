@@ -815,6 +815,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <label class="yr-check-label" data-mc="Student Affairs" onclick="toggleMCal('Student Affairs')">
         <div class="yr-check-box"></div>Student Affairs
       </label>
+
     </div>
     
     <button class="yr-check-label" id="regenICSBtn" type="button" onclick="regenerateAllICSFeeds()" style="display:none">
@@ -1037,6 +1038,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
             <option value="M1" selected>M1</option>
             <option value="M2">M2</option>
             <option value="Student Affairs">Student Affairs</option>
+            <option value="Program-Wide">Program-Wide</option>
           </select>
         </div>
       </div>
@@ -1221,6 +1223,12 @@ const ICS_FILE_M0 = 'calendar-m0.ics';
 const ICS_FILE_M1 = 'calendar-m1.ics';
 const ICS_FILE_M2 = 'calendar-m2.ics';
 const ICS_FILE_SA = 'calendar-student-affairs.ics';
+const PROGRAM_WIDE_MCAL = 'Program-Wide';
+const PROGRAM_WIDE_TARGETS = ['M0', 'M1', 'M2'];
+
+function isProgramWideEvent(e){
+  return e && e.mCal === PROGRAM_WIDE_MCAL;
+}
 
 function ghHeaders(){
   const h={'Accept':'application/vnd.github.v3+json'};
@@ -2053,7 +2061,7 @@ function mCalTextColor(e){
   if(mc === 'M1') return '#163B6B';
   if(mc === 'M2') return '#1D5223';
 
-  return '#333333';
+  return '#8C3F52';
 }
 
 function renderList(){
@@ -2217,12 +2225,13 @@ function formHTML(e,isEdit){
       <option value="2038" ${(e&&e.calYear==='2038')?'selected':''}>2038</option>
     </select></div>
 
-    <div class="form-group"><label class="form-label">Class *</label><select class="form-select" id="ff_mcal">
-      <option value="M0" ${(e&&e.mCal==='M0')?'selected':''}>M0 — Pre-Matriculation</option>
-      <option value="M1" ${(!e||e.mCal==='M1')?'selected':''}>M1</option>
-      <option value="M2" ${(e&&e.mCal==='M2')?'selected':''}>M2</option>
-       <option value="Student Affairs" ${(e&&e.mCal==='Student Affairs')?'selected':''}>Student Affairs</option>
-    </select></div>
+   <div class="form-group"><label class="form-label">Class *</label><select class="form-select" id="ff_mcal">
+    <option value="M0" ${(e&&e.mCal==='M0')?'selected':''}>M0 — Pre-Matriculation</option>
+    <option value="M1" ${(!e||e.mCal==='M1')?'selected':''}>M1</option>
+    <option value="M2" ${(e&&e.mCal==='M2')?'selected':''}>M2</option>
+    <option value="Student Affairs" ${(e&&e.mCal==='Student Affairs')?'selected':''}>Student Affairs</option>
+    <option value="Program-Wide" ${(e&&isProgramWideEvent(e))?'selected':''}>Program-Wide</option>
+</select></div>
   </div>
 
   <div class="form-group"><label class="form-label">Date * (MM/DD/YYYY)</label><input class="form-input" id="ff_date" placeholder="MM/DD/YYYY" value="${escForm(e?e.date:(prefillDate||''))}"></div>
@@ -2589,6 +2598,7 @@ function updateTabCounts(){
 // ── MCAL COLOR ────────────────────────────────────────────────
 function mCalColor(e){
   const m=e.mCal||'M1';
+  if(isProgramWideEvent(e))return'#E56B6F';
   if(m==='M0')return'#E65100';
   if(m==='M2')return'#2E7D32';
   if(m==='Student Affairs')return'#6A1B9A';
@@ -2606,15 +2616,29 @@ function filteredEvents(){
     const catOk=currentFilter==='All'||e.category===currentFilter;
     const evYear=String(e.calYear||'2029');
     const evMCal=e.mCal||'M1';
+    const programWide=isProgramWideEvent(e);
     // Visibility check (student mode)
-    if(!isFacultyMode){
+    // Program-Wide events are not controlled by one cohort/class visibility key.
+    if(!isFacultyMode && !programWide){
       const key=evYear+'-'+evMCal;
       if(calendarVisibility[key]===false)return false;
     }
-    // Year sidebar filter
-    const yrOk=selectedYears.has('All')||selectedYears.has(evYear);
-    // M-cal header filter
-    const mcOk=selectedMCals.has('All')||selectedMCals.has(evMCal);
+
+    // Year sidebar filter.
+    // Program-Wide events should show regardless of selected cohort year.
+    const yrOk=programWide || selectedYears.has('All') || selectedYears.has(evYear);
+
+    // M-cal header filter.
+    // Program-Wide events should show with All, M0, M1, or M2.
+    // They should NOT show when someone filters only Student Affairs.
+    const mcOk=
+      selectedMCals.has('All') ||
+      selectedMCals.has(evMCal) ||
+      (
+        programWide &&
+        [...selectedMCals].some(mc => PROGRAM_WIDE_TARGETS.includes(mc))
+      );
+
     return catOk&&yrOk&&mcOk&&blockOk;
   });
 }
@@ -3039,7 +3063,7 @@ function makeMultiAddEvent(base, dateStr, start, end, source){
     date: dateStr,
     start,
     end,
-    category: base.category,
+    category: base.mCal === PROGRAM_WIDE_MCAL ? 'Events' : base.category,
     block: base.block,
     weekNum,
     week: weekNum ? weekNameFor(weekNum) : '',
@@ -3352,7 +3376,7 @@ function parseBulkRows(rows,colIdx){
     // Validate
     const errs=[];
     if(!title)errs.push('Missing session name');
-    if(!['M0','M1','M2'].includes(mCal))errs.push(`Invalid class: "${mCal}" — use M0, M1, or M2`);
+    if(!['M0','M1','M2','Student Affairs','Program-Wide'].includes(mCal))errs.push(`Invalid class: "${mCal}" — use M0, M1, M2, Student Affairs, or Program-Wide`);
     if(!['2029','2030','2031','2032','2033','2034','2035','2036','2037','2038'].includes(calYear))errs.push(`Invalid cohort year: "${calYear}" — use 2029–2038`);
     if(!/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr))errs.push(`Invalid date: "${dateStr}"`);
     if(!/^\d{2}:\d{2}$/.test(start))errs.push(`Invalid start time: "${start}"`);
@@ -3477,7 +3501,7 @@ async function saveForm(){
     date,
     start,
     end,
-    category:cat,
+    category: mCal === PROGRAM_WIDE_MCAL ? 'Events' : cat,
     block,
     weekNum,
     week:weekNum ? weekNameFor(weekNum) : '',
@@ -3615,12 +3639,13 @@ const lines = [
 
   EVENTS.forEach(e => {
   if (
-  mCalFilter &&
-  !(
-    e.mCal === mCalFilter ||
-    (mCalFilter === 'Student Affairs' && e.mCal === 'SA')
-  )
-) return;
+    mCalFilter &&
+    !(
+      e.mCal === mCalFilter ||
+      (mCalFilter === 'Student Affairs' && e.mCal === 'SA') ||
+      (isProgramWideEvent(e) && PROGRAM_WIDE_TARGETS.includes(mCalFilter))
+    )
+  ) return;
   if (!e.date || !e.start || !e.end || !e.title) return;
 
   const startMin = timeToMinutes(e.start);
