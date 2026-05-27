@@ -951,22 +951,24 @@ async function loadEvents(){
   document.getElementById('calView').innerHTML='<div style="text-align:center;padding:60px 20px"><div class="spinner"></div><p style="color:var(--muted)">Loading from GitHub...</p></div>';
   try{
     // Use raw content URL — no auth needed, no CORS issues
-    const rawUrl=`https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${DATA_FILE}?t=${Date.now()}`;
-    // Show the URL being fetched so we can debug
-    setStatus('loading',`Fetching: ${rawUrl}`);
-    let r;
-    try{ r=await fetch(rawUrl); }
-    catch(fetchErr){ throw new Error(`Network error — check internet connection. (${fetchErr.message})`); }
-    if(!r.ok) throw new Error(`GitHub returned ${r.status} for events.json — URL: ${rawUrl}`);
+   if (CFG.token) {
+  setStatus('loading', 'Fetching latest events through GitHub API...');
+  EVENTS = await fetchEventsFromGitHubAPI();
+} else {
+  const rawUrl = `https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${DATA_FILE}?t=${Date.now()}`;
+  setStatus('loading', `Fetching: ${rawUrl}`);
 
-    EVENTS=await r.json();
-    // Also get SHA for future updates (needs token)
-    if(CFG.token){
-      try{
-        const meta=await fetch(`https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}`,{headers:ghHeaders()});
-        if(meta.ok){const d=await meta.json();ghFileSha=d.sha;}
-      }catch(e){}
-    }
+  let r;
+  try {
+    r = await fetch(rawUrl, { cache: 'no-store' });
+  } catch (fetchErr) {
+    throw new Error(`Network error — check internet connection. (${fetchErr.message})`);
+  }
+
+  if (!r.ok) throw new Error(`GitHub returned ${r.status} for events.json — URL: ${rawUrl}`);
+
+  EVENTS = await r.json();
+}
     setStatus('live',`Live — ${EVENTS.length} events`);
     document.getElementById('lastSync').textContent='Last sync: '+new Date().toLocaleTimeString();
     WEEKS=buildWeeks();
@@ -1017,10 +1019,7 @@ async function fetchLatestGitHubSha(){
 }
 
 async function fetchLatestEventsFromGitHub(){
-  const rawUrl=`https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${DATA_FILE}?t=${Date.now()}`;
-  const r=await fetch(rawUrl);
-  if(!r.ok) throw new Error(`Could not fetch latest ${DATA_FILE} before saving.`);
-  return await r.json();
+  return await fetchEventsFromGitHubAPI();
 }
 
 async function fetchEventsFromGitHubAPI(){
