@@ -10902,7 +10902,7 @@
     "_id": "81dc9079-0141-4323-adb9-a2c0f4339c33"
   },
   {
-    "title": "[MAND] Introduction Boot Camp",
+    "title": "Introduction Boot Camp",
     "date": "07/02/2026",
     "start": "12:00",
     "end": "13:00",
@@ -10910,7 +10910,7 @@
     "block": "",
     "weekNum": 6,
     "week": "Week 6",
-    "desc": "[MAND] Introduction Boot Camp",
+    "desc": "Introduction Boot Camp",
     "calYear": "2029",
     "mCal": "M1",
     "mand": "Yes",
