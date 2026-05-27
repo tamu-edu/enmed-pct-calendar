@@ -11033,5 +11033,24 @@
     "info": "",
     "presenter": "",
     "_id": "ef4ed73f-c955-4338-a53d-bceecea13f97"
+  },
+  {
+    "title": "Mass Casualty Day",
+    "date": "11/20/2026",
+    "start": "06:30",
+    "end": "13:00",
+    "category": "BLACKOUT",
+    "block": "Mass Casualty Day",
+    "weekNum": 26,
+    "week": "Week 26",
+    "desc": "Mass Casualty Day",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "b94cf5c3-d0fb-4393-99d2-29a5d6abccd4"
   }
 ]
