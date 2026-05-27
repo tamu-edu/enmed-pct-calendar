@@ -11014,5 +11014,24 @@
     "info": "",
     "presenter": "",
     "_id": "b94cf5c3-d0fb-4393-99d2-29a5d6abccd4"
+  },
+  {
+    "title": "Black Out Day",
+    "date": "11/10/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "BLACKOUT",
+    "block": "Social History Simulation OSCE",
+    "weekNum": 25,
+    "week": "Week 25",
+    "desc": "Black Out Day",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "e6daf0a1-35a2-424e-8ce3-2cab3ac666da"
   }
 ]
