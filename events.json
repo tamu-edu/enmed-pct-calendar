@@ -3914,25 +3914,6 @@
     "presenter": ""
   },
   {
-    "title": "Exam ",
-    "date": "11/19/2026",
-    "start": "01:00",
-    "end": "04:00",
-    "category": "Session",
-    "block": "Endo/ Repro",
-    "weekNum": 5,
-    "week": "Week 5",
-    "desc": "Exam ",
-    "calYear": "2029",
-    "mCal": "M2",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
-    "_id": "12051226_21",
-    "info": "",
-    "presenter": ""
-  },
-  {
     "title": "Blackout Day",
     "date": "11/19/2026",
     "start": "07:00",
