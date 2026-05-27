@@ -10957,5 +10957,24 @@
     "info": "",
     "presenter": "",
     "_id": "e5425229-1fce-423a-94aa-6a3313a5854b"
+  },
+  {
+    "title": "Black Out Day",
+    "date": "07/22/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "Session",
+    "block": "M1 Orientation Day",
+    "weekNum": 9,
+    "week": "Week 9",
+    "desc": "Black Out Day",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "b436703c-9b4a-47f0-90d7-1b5be349e5b2"
   }
 ]
