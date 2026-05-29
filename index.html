@@ -394,12 +394,6 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .yr-check-label[data-yr="2038"].checked .yr-check-box{border-color:#558B2F;background:#558B2F}
 .yr-check-label[data-yr="2038"].checked .yr-check-box::after{background:white}
 .mcal-divider{width:1px;height:26px;background:var(--border);margin:0 2px;flex-shrink:0}
-/* M1/M2 sub-filter */
-.m-sub-row{display:none;gap:6px;padding:8px 0 10px;border-bottom:1px solid var(--border);margin-bottom:10px;align-items:center;flex-wrap:wrap}
-.m-sub-row.visible{display:flex}
-.m-sub-btn{padding:5px 16px;border-radius:20px;border:1px solid var(--border);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;background:transparent;color:var(--muted);transition:all .12s}
-.m-sub-btn:hover{color:var(--text);border-color:var(--muted2)}
-.m-sub-btn.active{color:white;border-color:transparent}
 /* Visibility toggle in faculty panel */
 .vis-toggle{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12px;cursor:pointer;border-bottom:1px solid var(--border)}
 .vis-toggle:last-child{border-bottom:none}
@@ -621,16 +615,6 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
   .multiadd-custom-row{grid-template-columns:1fr}
   .multiadd-remove{width:100%}
 }
-.multiadd-days{display:flex;gap:6px;flex-wrap:wrap}
-.multiadd-day{padding:6px 10px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);font-size:12px;cursor:pointer;user-select:none}
-.multiadd-day.on{background:var(--maroon);border-color:var(--maroon);color:white}
-.multiadd-note{font-size:11px;color:var(--muted2);line-height:1.5;margin-top:4px}
-.multiadd-preview-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px}
-.multiadd-preview-list{max-height:220px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:11px}
-.multiadd-preview-item{padding:8px 10px;border-bottom:1px solid var(--border)}
-.multiadd-preview-item:last-child{border-bottom:none}
-.multiadd-preview-meta{color:var(--muted2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px}
-
 
 /* BLOCK FILTER DROPDOWN */
 .block-filter-select{width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;outline:none;transition:border-color .15s}
@@ -646,8 +630,6 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 .form-input[rows]{font-family:'DM Sans',sans-serif;font-size:12px}
 .m-val[style*="pre-wrap"]{font-size:12px;color:var(--muted);background:var(--surface2);padding:8px 10px;border-radius:6px;border:1px solid var(--border);margin-top:2px}
 
-
-.m-sub-btn[data-m="M0"].active{background:#E65100 !important;border-color:#E65100 !important;color:white !important}
 
 
 /* MCAL FILTER CHECKS */
@@ -870,11 +852,17 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       </div>
     </div>
     <div class="fp-footer">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Bulk tools preview changes before committing them to GitHub.</div>
-        <button class="btn-full" onclick="openMultiAdd()" style="background:var(--maroon);color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">➕ Multi-Add Session</button>
-        <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
-        <button class="btn-full" onclick="enterBulkSelect()" style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">&#9745; Select &amp; Delete Events</button>  
-      </div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Bulk tools preview changes before committing them to GitHub.</div>
+    <button class="btn-full" onclick="openMultiAdd()" style="background:var(--maroon);color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">➕ Multi-Add Session</button>
+    <button class="btn-full" onclick="enterBulkSelect()" style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">&#9745; Select &amp; Delete Events</button>
+    <div class="bulk-bar" id="bulkBar">
+      <div class="bulk-bar-count" id="bulkBarCount">Click events to select</div>
+      <button class="bulk-bar-all" type="button" onclick="bulkToggleAll()">Select All</button>
+      <button class="bulk-bar-btn" id="bulkBarDel" type="button" onclick="bulkDeleteSelected()">Delete Selected</button>
+      <button class="bulk-bar-cancel" type="button" onclick="exitBulkSelect()">Cancel</button>
+    <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
+  </div>
+</div>
   </div>
 </div>
 
@@ -1175,15 +1163,11 @@ const CAT_COLOR = {
 const CATS_LIST=["SDL","Orientation","TBL","CBL","ITDE","EXAM","Workshop","LC Small Groups","BLACKOUT", "Session", "Lab", "Seminar", "Clinic","Review Session", "Office Hours","Events","Announcements"]
 const DEFAULT_START_HOUR = 7;
 const DEFAULT_END_HOUR = 19;
-const HOURS=[
-  '6 AM','7 AM','8 AM','9 AM','10 AM','11 AM','12 PM',
-  '1 PM','2 PM','3 PM','4 PM','5 PM','6 PM', '7 PM'
-];
 const DAYS=['Mon','Tue','Wed','Thu','Fri'];
 
+// year filter handled by selectedYears Set; class filter handled by selectedMCals Set
 let CFG={}, EVENTS=[], WEEKS=[];
 let currentWeekIdx=0, currentFilter='All', currentView='month';
-// year filter now handled by selectedYears Set + currentMSub
 let currentMonth=new Date().getMonth(), currentMonthYear=new Date().getFullYear();
 let isFacultyMode=false, editingId=null, prefillDate='', prefillHour='';
 let pendingDeleteId='', sessionLog=[];
@@ -1274,13 +1258,8 @@ async function loadEvents(){
     WEEKS=buildWeeks();
     buildWeekDrawer();
     updateTabCounts();
-    // Auto-navigate month view to the month where events actually exist
-    if(EVENTS.length){
-      const sorted=[...EVENTS].sort((a,b)=>a.date.localeCompare(b.date));
-      const first=sorted[0].date; // MM/DD/YYYY
-      const parts=first.split('/');
-      if(parts.length===3){currentMonth=parseInt(parts[0])-1;currentMonthYear=parseInt(parts[2]);}
-    }
+    // Auto-navigate month view to the current date
+        goToHomeDate();
     render();
   }catch(err){
     setStatus('offline','Error: '+err.message.substring(0,60));
@@ -1536,7 +1515,6 @@ function buildWeekDrawer(){
 function jumpToWeek(i){currentWeekIdx=i;if(i>=0)weekToMonth(i);buildWeekDrawer();render();}
 function prevWeek(){if(currentWeekIdx>0){currentWeekIdx--;weekToMonth(currentWeekIdx);buildWeekDrawer();render();}}
 function nextWeek(){if(currentWeekIdx<WEEKS.length-1){currentWeekIdx++;weekToMonth(currentWeekIdx);buildWeekDrawer();render();}}
-function setSidebarBlock(el,block){} // legacy stub
 let currentBlockFilter='All';
 function setBlockFilter(block){
   currentBlockFilter=block;
@@ -1578,7 +1556,6 @@ function populateBlockDropdown(){
   });
 }
 function setSidebarCat(el,cat){currentFilter=cat;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));const ch=document.querySelector(`.filter-chip[data-cat="${cat}"]`);if(ch)ch.classList.add('active');render();}
-function setFilter(el,cat){currentFilter=cat;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');render();}
 function setView(v,btn){
   const prev=currentView;
   currentView=v;
@@ -1685,8 +1662,7 @@ function render(){
   // ── Month view ──────────────────────────────────────────────
   if(currentView==='month'){
     const filtEvs=filteredEvents();
-    const mLabel=currentMSub&&currentMSub!=='All'?' · '+currentMSub:'';
-    document.getElementById('toolbarSub').textContent=`${filtEvs.length} event${filtEvs.length!==1?'s':''} shown · ${selectedYears.has('All')?'All Years':[...selectedYears].sort().join(', ')}${mLabel}`;
+    document.getElementById('toolbarSub').textContent=`${filtEvs.length} event${filtEvs.length!==1?'s':''} shown · ${selectedYears.has('All')?'All Years':[...selectedYears].sort().join(', ')}`;
     const wn=document.querySelector('.week-nav');if(wn)wn.style.display='none';
     renderChangeLog();renderMonth();return;
   }
@@ -2086,7 +2062,7 @@ function renderList(){
       const ej = JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
       const catColL = CAT_COLOR[normalizeCategory(e.category)] || col;
       const blockLabel = e.block ? `${e.block} · ` : '';
-      html+=`<div class="event list-event ${ec}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 5px,${col}18 5px)" onclick="handleEventClick(event,${ej})">
+      html+=`<div class="event list-event ${ec}" id="bev_${e._id}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 5px,${col}18 5px)" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:${textCol};white-space:nowrap;min-width:90px">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
         <div style="flex:1"><div class="ev-tag" style="color:${catColL}">${blockLabel}${e.category}</div><div style="font-size:13px;font-weight:500;color:${col}">${displayTitle(e)}</div></div>
         ${isFacultyMode?`<div style="display:flex;gap:5px;flex-shrink:0">
@@ -2286,47 +2262,16 @@ const YEAR_COLORS={'2029':'#C62828','2030':'#1565C0','2031':'#2E7D32','2032':'#6
 
 let selectedYears=new Set(['All']);
 let selectedMCals=new Set(['All']); // M0/M1/M2/Student Affairs
-let currentMSub='M1';
 
 // Calendar visibility (faculty controlled, stored in localStorage)
 let calendarVisibility={};
 
-// Returns the correct default M sub for a year (skips hidden ones in student mode)
-function defaultMSub(yr){
-  if(isFacultyMode)return'M1';
-  const m1vis=calendarVisibility[yr+'-M1']!==false;
-  const m2vis=calendarVisibility[yr+'-M2']!==false;
-  if(m1vis)return'M1';
-  if(m2vis)return'M2';
-  return'M1'; // fallback
-}
 function loadVisibility(){
   try{const v=localStorage.getItem('enmed_cal_vis');if(v)calendarVisibility=JSON.parse(v);}catch(e){}
   COHORT_YEARS.forEach(y=>['M0','M1','M2'].forEach(m=>{
     const key=y+'-'+m;
     if(calendarVisibility[key]===undefined)calendarVisibility[key]=true;
   }));
-}
-function saveVisibility(){
-  localStorage.setItem('enmed_cal_vis',JSON.stringify(calendarVisibility));
-  showToast('✅ Visibility saved — students will see updated calendars.');
-  const btn=document.getElementById('visBtn');
-  if(btn){btn.textContent='✅ Saved!';setTimeout(()=>btn.textContent='Save Visibility',2000);}
-  // Re-evaluate currentMSub in case the active class was just hidden
-  if(!selectedYears.has('All')&&selectedYears.size===1){
-    const yr=[...selectedYears][0];
-    if(currentMSub!=='M0'&&calendarVisibility[yr+'-'+currentMSub]===false)currentMSub=defaultMSub(yr);
-  }
-  updateYearUI();
-  updateYearTabBadges();
-  updateTitle();
-  render();
-}
-
-function toggleVisibility(key,el){
-  calendarVisibility[key]=!calendarVisibility[key];
-  el.classList.toggle('on',calendarVisibility[key]);
-  el.querySelector('span:last-child').textContent=calendarVisibility[key]?'Visible':'Hidden';
 }
 
 
@@ -2363,63 +2308,7 @@ function updateMCalUI(){
     el.classList.toggle('checked', checked);
   });
 }
-function toggleYear(yr){
-  if(yr==='All'){
-    selectedYears=new Set(['All']);
-    currentMSub='M1'; // All years — default M1
-  } else {
-    selectedYears.delete('All');
-    if(selectedYears.has(yr)){
-      selectedYears.delete(yr);
-      if(selectedYears.size===0){selectedYears=new Set(['All']);currentMSub='M1';}
-    } else {
-      selectedYears.add(yr);
-      if(COHORT_YEARS.every(y=>selectedYears.has(y)))selectedYears=new Set(['All']);
-      // Default to M1 when selecting a year
-      if(currentMSub==='All'||(!isFacultyMode&&calendarVisibility[yr+'-'+currentMSub]===false))currentMSub=defaultMSub(yr);
-    }
-  }
-  updateYearUI();updateTitle();render();
-}
-function setMSub(el,m){
-  // True radio — clicking active does nothing
-  if(currentMSub===m)return;
-  currentMSub=m;
-  // Force all buttons off then activate only clicked one
-  document.querySelectorAll('.m-sub-btn').forEach(b=>{
-    b.classList.remove('active');
-    b.style.background='';b.style.borderColor='';b.style.color='';
-  });
-  el.classList.add('active');
-  // Apply year color to active button
-  if(selectedYears.size===1&&!selectedYears.has('All')){
-    const col=YEAR_COLORS[[...selectedYears][0]]||'#888';
-    el.style.background=col;el.style.borderColor=col;el.style.color='white';
-  }
-  updateYearTabBadges();
-  updateTitle();
-  render();
-}
 
-// Show M1/M2 badge next to each year tab based on currentMSub
-function updateYearTabBadges(){
-  document.querySelectorAll('.yr-check-label[data-yr]').forEach(el=>{
-    const yr=el.dataset.yr;
-    // Remove old badge
-    const old=el.querySelector('.yr-tab-badge');if(old)old.remove();
-    if(yr==='All')return;
-    // Show badge on all checked year tabs
-    if(el.classList.contains('checked')){
-      const col=YEAR_COLORS[yr]||'#888';
-      const m=currentMSub&&currentMSub!=='All'?currentMSub:'M1';
-      const badge=document.createElement('span');
-      badge.className='yr-tab-badge';
-      badge.textContent=m;
-      badge.style.cssText=`font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;background:${col};color:white;margin-left:4px;letter-spacing:.3px`;
-      el.appendChild(badge);
-    }
-  });
-}
 
 function populateYearDropdown(){
   const sel=document.getElementById('yearFilterSelect');
@@ -2448,15 +2337,12 @@ function setYearSidebar(yr){
   if(yr === 'Student Affairs' || yr === 'SA'){
     selectedYears = new Set(['All']);
     selectedMCals = new Set(['Student Affairs']);
-    currentMSub = 'M1';
   } else if(yr === 'All'){
     selectedYears = new Set(['All']);
     selectedMCals = new Set(['All']);
-    currentMSub = 'M1';
   } else {
     selectedYears = new Set([yr]);
     selectedMCals = new Set(['All']);
-    currentMSub = defaultMSub(yr);
   }
 
   const sel=document.getElementById('yearFilterSelect');
@@ -2473,54 +2359,26 @@ function setYearSidebar(yr){
   render();
 }
 function updateYearUI(){
-  // Show/hide year tabs based on visibility settings (student mode only)
-  document.querySelectorAll('.yr-check-label').forEach(el=>{
+  document.querySelectorAll('.yr-check-label[data-yr]').forEach(el=>{
     const yr=el.dataset.yr;
+
     if(!isFacultyMode && yr!=='All'){
-      const anyVisible=calendarVisibility[yr+'-M0']!==false||calendarVisibility[yr+'-M1']!==false||calendarVisibility[yr+'-M2']!==false;
+      const anyVisible =
+        calendarVisibility[yr+'-M0']!==false ||
+        calendarVisibility[yr+'-M1']!==false ||
+        calendarVisibility[yr+'-M2']!==false;
+
       el.style.display=anyVisible?'':'none';
     } else {
       el.style.display='';
     }
-    const checked=selectedYears.has('All')?yr==='All':(yr!=='All'&&selectedYears.has(yr));
+
+    const checked=selectedYears.has('All')
+      ? yr==='All'
+      : selectedYears.has(yr);
+
     el.classList.toggle('checked',checked);
   });
-  updateYearTabBadges();
-  // Show/hide M1/M2 sub-buttons based on visibility (student mode only)
-  const single=selectedYears.size===1&&!selectedYears.has('All');
-  document.querySelectorAll('.m-sub-btn').forEach(b=>{
-    const m=b.dataset.m;
-    if(!isFacultyMode && single && m!=='All'){
-      const yr=[...selectedYears][0];
-      b.style.display=calendarVisibility[yr+'-'+m]!==false?'':'none';
-    } else {
-      b.style.display='';
-    }
-  });
-  const sub=document.getElementById('mSubRow');
-  if(single){
-    sub.classList.add('visible');
-    const yr=[...selectedYears][0];
-    const col=YEAR_COLORS[yr]||'#888';
-    sub.style.borderColor=col+'44';
-    // Auto-correct currentMSub if the selected one is hidden for this year
-    if(currentMSub==='All'||(!isFacultyMode&&calendarVisibility[yr+'-'+currentMSub]===false)){
-      currentMSub=defaultMSub(yr);
-    }
-    document.querySelectorAll('.m-sub-btn').forEach(b=>{
-      const isActive=b.dataset.m===currentMSub;
-      b.classList.toggle('active',isActive);
-      if(isActive){b.style.background=col;b.style.borderColor=col;b.style.color='white';}
-      else{b.style.background='';b.style.borderColor='';b.style.color='';}
-      // Hide M sub-button if hidden in student mode
-      if(!isFacultyMode){
-        b.style.display=(b.dataset.m==='M0'?calendarVisibility[yr+'-M0']!==false:calendarVisibility[yr+'-'+b.dataset.m]!==false)?'':'none';
-      } else {b.style.display='';}
-    });
-  } else {
-    sub.classList.remove('visible');
-    document.querySelectorAll('.m-sub-btn').forEach(b=>{b.style.background='';b.style.borderColor='';b.style.color='';});
-  }
 }
 function updateTitle(){
   const t=document.getElementById('toolbarTitle');if(!t)return;
@@ -2542,9 +2400,15 @@ function updateTitle(){
 
 // ── TODAY BUTTON ──────────────────────────────────────────────
 function goToToday(){
-  const t=new Date();
-  currentMonth=t.getMonth();currentMonthYear=t.getFullYear();
-  if(currentView!=='month'){currentView='month';document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.vt-btn')[0].classList.add('active');document.getElementById('weekDrawer').style.display='none';}
+  goToHomeDate();
+
+  if(currentView !== 'month'){
+    currentView = 'month';
+    document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.vt-btn')[0].classList.add('active');
+    document.getElementById('weekDrawer').style.display = 'none';
+  }
+
   render();
 }
 
@@ -2604,12 +2468,7 @@ function mCalColor(e){
   if(m==='Student Affairs')return'#6A1B9A';
   return'#1565C0';
 }
-function yearColor(yr){return YEAR_COLORS[String(yr)]||'#500000';}
-function yearClass(ev){
-  const yr=String(ev.calYear||'2028');
-  const idx=COHORT_YEARS.indexOf(yr);
-  return['yr1','yr2','yr3','yrs','yr1','yr2'][idx]||'yr1';
-}
+
 function filteredEvents(){
   return EVENTS.filter(e=>{
     const blockOk=currentBlockFilter==='All'||(e.block||'')===currentBlockFilter;
@@ -2807,6 +2666,33 @@ function monthToWeek(mo,yr){
     }
   }
   return best>=0?best:(currentWeekIdx>=0?currentWeekIdx:0);
+}
+function homeDate(){
+  const d = new Date();
+  const day = d.getDay();
+
+  // If Saturday, jump to Monday.
+  if(day === 6) d.setDate(d.getDate() + 2);
+
+  // If Sunday, jump to Monday.
+  if(day === 0) d.setDate(d.getDate() + 1);
+
+  return d;
+}
+
+function goToHomeDate(){
+  const d = homeDate();
+
+  currentMonth = d.getMonth();
+  currentMonthYear = d.getFullYear();
+
+  const homeDateStr = formatMDY(d);
+  const homeWeekNum = weekNumFromDate(homeDateStr);
+  const idx = WEEKS.findIndex(w => w.num === homeWeekNum);
+
+  currentWeekIdx = idx >= 0 ? idx : monthToWeek(currentMonth, currentMonthYear);
+
+  buildWeekDrawer();
 }
 function prevMonth(){currentMonth--;if(currentMonth<0){currentMonth=11;currentMonthYear--;}currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);buildWeekDrawer();render();}
 function nextMonth(){currentMonth++;if(currentMonth>11){currentMonth=0;currentMonthYear++;}currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);buildWeekDrawer();render();}
@@ -3779,42 +3665,6 @@ async function copySyncUrl(url){
   showToast('Copied calendar link');
 }
 
-async function regenerateICSFromJSON(){
-  try {
-    showToast('Regenerating calendar.ics...');
-
-    await loadEvents();
-
-    const icsContent = buildICS();
-
-    await saveTextFileToGitHub(
-      ICS_FILE,
-      icsContent,
-      'Regenerate calendar ICS from events.json'
-    );
-
-    showToast('calendar.ics regenerated from events.json');
-
-  } catch (err) {
-    console.error(err);
-    showToast('Failed to regenerate ICS: ' + err.message);
-  }
-}
-
-function exportICS(){
-  function toIcsDt(d,t){
-  const [mo,dy,yr] = d.split('/').map(Number);
-  const [hr,mn] = t.split(':').map(Number);
-
-  return `${yr}${String(mo).padStart(2,'0')}${String(dy).padStart(2,'0')}T${String(hr).padStart(2,'0')}${String(mn).padStart(2,'0')}00`;
-}
-  function esc(s){return(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');}
-  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//CO2028//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:M1 Calendar'];
-  EVENTS.forEach((e,i)=>{lines.push('BEGIN:VEVENT',`UID:co2028-${i}@cal`,`DTSTART:${toIcsDt(e.date,e.start)}`,`DTEND:${toIcsDt(e.date,e.end)}`,`SUMMARY:${esc(e.title)}`,`CATEGORIES:${esc(e.category)}`,'STATUS:CONFIRMED','END:VEVENT');});
-  lines.push('END:VCALENDAR');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\r\n')],{type:'text/calendar'}));a.download='CO2028_Calendar.ics';a.click();
-  showToast('✅ Downloaded — open to import into Outlook');
-}
 
 // ── TOAST ─────────────────────────────────────────────────────
 function showToast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t);}t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0';},4500);}
