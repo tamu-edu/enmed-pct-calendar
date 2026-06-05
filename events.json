@@ -10142,15 +10142,15 @@
     "_id": "1779207901085"
   },
   {
-    "title": "Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
+    "title": "Complete H&POSCE CHECK-IN",
     "date": "08/25/2026",
     "start": "12:50",
     "end": "13:00",
-    "category": "exam check-in",
+    "category": "Exam Check-In",
     "block": "POM 3",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
+    "desc": "Complete H&POSCE CHECK-IN",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
