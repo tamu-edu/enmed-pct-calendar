@@ -10755,7 +10755,7 @@
     "start": "07:00",
     "end": "07:30",
     "category": "BLACKOUT",
-    "block": "",
+    "block": "FOM / MGA",
     "weekNum": 12,
     "week": "Week 12",
     "desc": "Blackout Day",
