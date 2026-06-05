@@ -11071,5 +11071,24 @@
     "info": "",
     "presenter": "",
     "_id": "625e0162-851f-4f22-b9b0-2c14d01128e1"
+  },
+  {
+    "title": "NBME Exam Check-In",
+    "date": "10/16/2026",
+    "start": "12:45",
+    "end": "12:55",
+    "category": "Exam Check-In",
+    "block": "",
+    "weekNum": 21,
+    "week": "Week 21",
+    "desc": "NBME Exam Check-In",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "4th Fl Room 409",
+    "info": "",
+    "presenter": "",
+    "_id": "70fe4713-23b5-41d5-b4ab-6166df4ab281"
   }
 ]
