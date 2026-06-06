@@ -130,7 +130,7 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .cal-row.event-crossed-line{
   border-bottom-color:rgba(0,0,0,.06);
 }
-.cal-time{padding:0px 6px 0px 6px;font-size:10px;color:var(--muted2);border-right:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace;display:flex;align-items:flex-start;justify-content:flex-end; transform:translateY(-6px)}
+.cal-time{padding:0px 6px 0px 6px;font-size:10px;color:var(--muted2);border-right:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace;display:flex;align-items:flex-start;justify-content:flex-end; transform:translateY(-2px)}
 .cal-cell{border-right:1px solid var(--border);padding:3px;position:relative;height:52px;min-height:52px;overflow:visible}
 .cal-cell:last-child{border-right:none}
 .faculty-mode .cal-cell:hover .add-slot-btn{display:flex}
@@ -435,6 +435,30 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .mg-cell.today-cell .mg-date{background:var(--accent);color:white}
 .mg-event{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;margin-bottom:2px;cursor:pointer;white-space:normal;overflow-wrap:anywhere;word-break:break-word;overflow:hidden;text-overflow:clip;line-height:1.25;border-left:3px solid;max-width:100%;min-width:0}
 .mg-event:hover{opacity:.85;transform:translateX(1px)}
+.mg-event{position:relative;padding-right:38px}
+.month-event-controls{
+  display:none;
+  position:absolute;
+  top:2px;
+  right:2px;
+  gap:2px;
+  z-index:5;
+}
+.faculty-mode .mg-event:hover .month-event-controls{display:flex}
+.month-event-ctrl{
+  width:16px;
+  height:16px;
+  border-radius:4px;
+  border:none;
+  font-size:9px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.35);
+  color:white;
+}
+.month-event-ctrl:hover{background:var(--accent)}
 .mg-more{
   font-size:9px;
   color:var(--accent);
@@ -574,7 +598,94 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .bulk-btn-primary{background:var(--maroon);color:white}
 .bulk-btn-primary:hover{background:var(--maroon-dk)}
 .bulk-btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.bulk-note{font-size:12px;color:var(--muted);line-height:1.5}
+.bulk-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:10px 0 6px}
+.bulk-tabs{display:flex;flex-direction:column;gap:7px;padding:10px}
+.bulk-tab-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);font-size:12px}
+.bulk-summary{padding:12px;line-height:1.5}
+.bulk-summary ul{margin:6px 0 10px 18px}
+.bulk-pill{display:inline-block;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:800;margin-right:5px}
+.bulk-pill.ok{background:rgba(62,207,142,.12);color:#137a46}
+.bulk-pill.warn{background:rgba(247,161,79,.16);color:#8a4a00}
+.bulk-pill.err{background:rgba(240,92,110,.12);color:#b00020}
+.bulk-preview tr.warn td{background:rgba(247,161,79,.08);color:#6b3a00}
 .bulk-btn-cancel{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.bulk-row-actions{
+  display:flex;
+  gap:5px;
+  align-items:center;
+  white-space:nowrap;
+}
+
+.bulk-action-bubble{
+  width:24px;
+  height:24px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .12s;
+}
+
+.bulk-action-bubble:hover{
+  transform:translateY(-1px);
+  box-shadow:0 2px 8px rgba(0,0,0,.16);
+}
+
+.bulk-action-edit{
+  color:#1565C0;
+  border-color:rgba(21,101,192,.35);
+  background:rgba(21,101,192,.08);
+}
+
+.bulk-action-ignore{
+  color:#b00020;
+  border-color:rgba(240,92,110,.35);
+  background:rgba(240,92,110,.08);
+}
+
+.bulk-action-include{
+  color:#137a46;
+  border-color:rgba(62,207,142,.35);
+  background:rgba(62,207,142,.1);
+}
+
+.bulk-preview tr.ignored td{
+  background:rgba(120,120,120,.12) !important;
+  color:var(--muted2) !important;
+  opacity:.72;
+  text-decoration:none;
+}
+
+.bulk-preview tr.ignored td:nth-child(6){
+  text-decoration:line-through;
+}
+
+.bulk-tab-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 0;
+}
+
+.bulk-tab-tool-btn{
+  padding:6px 10px;
+  border-radius:7px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
 
 /* MULTI-ADD */
 #multiAddOverlay .bulk-box{
@@ -645,14 +756,117 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 .yr-check-label[data-mc="Student Affairs"].checked .yr-check-box{border-color:#6A1B9A;background:#6A1B9A}
 .yr-check-label .yr-check-box::after{background:white}
 
+/* LIST SCHEDULE FINDER */
+.list-finder{
+  max-width:920px;
+  margin-bottom:18px;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--surface);
+}
+
+.list-finder-title{
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+.list-finder-sub{
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:12px;
+  line-height:1.4;
+}
+
+.list-filter-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:10px;
+}
+
+.list-filter-control label{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  color:var(--muted2);
+  margin-bottom:4px;
+}
+
+.list-filter-control select,
+.list-filter-control input{
+  width:100%;
+  padding:7px 10px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+}
+
+.list-custom-range{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+
+.list-finder-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+  font-size:12px;
+  color:var(--muted);
+}
+
+.list-reset-btn{
+  padding:6px 10px;
+  border-radius:7px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  cursor:pointer;
+}
+
 /* BULK SELECT */
-.bulk-bar{display:none;align-items:center;gap:10px;padding:10px 14px;background:rgba(240,92,110,.08);border:1px solid rgba(240,92,110,.3);border-radius:8px;margin-bottom:10px}
+.bulk-bar{
+  display:none;
+  align-items:stretch;
+  gap:8px;
+  padding:10px 14px;
+  background:rgba(240,92,110,.08);
+  border:1px solid rgba(240,92,110,.3);
+  border-radius:8px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
 .bulk-bar.on{display:flex}
-.bulk-bar-count{font-size:12px;font-weight:700;color:#f05c6e;flex:1;min-width:120px}
+.bulk-bar-count{
+  font-size:12px;
+  font-weight:700;
+  color:#f05c6e;
+  flex:1 1 100%;
+  min-width:0;
+}
 .bulk-bar-btn{padding:7px 16px;border-radius:7px;border:none;background:#f05c6e;color:white;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
 .bulk-bar-btn:disabled{opacity:.5}
 .bulk-bar-all{padding:7px 16px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
 .bulk-bar-cancel{padding:7px 14px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer}
+.bulk-bar-all,
+.bulk-bar-btn,
+.bulk-bar-cancel{
+  flex:1 1 auto;
+  min-width:0;
+}
 .ev-sel{outline:2px solid #f05c6e !important;opacity:1 !important}
 .mg-event.ev-sel{outline:2px solid #f05c6e}
 </style>
@@ -855,13 +1069,14 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
   <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Bulk tools preview changes before committing them to GitHub.</div>
     <button class="btn-full" onclick="openMultiAdd()" style="background:var(--maroon);color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">➕ Multi-Add Session</button>
     <button class="btn-full" onclick="enterBulkSelect()" style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">&#9745; Select &amp; Delete Events</button>
-    <div class="bulk-bar" id="bulkBar">
-      <div class="bulk-bar-count" id="bulkBarCount">Click events to select</div>
-      <button class="bulk-bar-all" type="button" onclick="bulkToggleAll()">Select All</button>
-      <button class="bulk-bar-btn" id="bulkBarDel" type="button" onclick="bulkDeleteSelected()">Delete Selected</button>
-      <button class="bulk-bar-cancel" type="button" onclick="exitBulkSelect()">Cancel</button>
-    <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
-  </div>
+<div class="bulk-bar" id="bulkBar">
+  <div class="bulk-bar-count" id="bulkBarCount">Click events to select</div>
+  <button class="bulk-bar-all" type="button" onclick="bulkToggleAll()">Select All</button>
+  <button class="bulk-bar-btn" id="bulkBarDel" type="button" onclick="bulkDeleteSelected()">Delete Selected</button>
+  <button class="bulk-bar-cancel" type="button" onclick="exitBulkSelect()">Cancel</button>
+</div>
+
+<button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
 </div>
   </div>
 </div>
@@ -957,8 +1172,8 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
     </div>
     <div id="bulkPreview" class="bulk-preview" style="display:none"></div>
     <div class="bulk-actions">
-      <button class="bulk-btn bulk-btn-primary" id="bulkAddBtn" style="display:none" onclick="bulkAddAll()">✅ Add All Valid Events</button>
-      <button class="bulk-btn bulk-btn-cancel" onclick="closeBulkUpload()">Cancel</button>
+      <button class="bulk-btn bulk-btn-primary" id="bulkAddBtn" style="display:none" onclick="bulkPrimaryAction()">Continue</button>
+      <button class="bulk-btn bulk-btn-cancel" id="bulkCancelBtn" onclick="bulkCancelAction()">Cancel</button>
     </div>
   </div>
 </div>
@@ -1167,11 +1382,22 @@ const DAYS=['Mon','Tue','Wed','Thu','Fri'];
 
 // year filter handled by selectedYears Set; class filter handled by selectedMCals Set
 let CFG={}, EVENTS=[], WEEKS=[];
-let currentWeekIdx=0, currentFilter='All', currentView='month';
+let currentWeekIdx=0, currentFilter='All', currentBlockFilter='All', currentView='month';
 let currentMonth=new Date().getMonth(), currentMonthYear=new Date().getFullYear();
 let isFacultyMode=false, editingId=null, prefillDate='', prefillHour='';
 let pendingDeleteId='', sessionLog=[];
 let ghFileSha=''; // GitHub file SHA needed for updates
+
+let listFilters = {
+  scope: 'all',
+  start: '',
+  end: '',
+  mcal: 'All',
+  course: 'All',
+  group: 'All',
+  category: 'All',
+  mand: 'All'
+};
 
 // ── CONFIG ────────────────────────────────────────────────────
 function loadConfig(){
@@ -1494,10 +1720,32 @@ function buildWeeks(){
 }
 
 function buildWeekDrawer(){
-  document.getElementById('weekDrawer').style.display=currentView==='month'?'none':'';
+  const drawer = document.getElementById('weekDrawer');
+
+  if(currentView === 'list'){
+    drawer.innerHTML = '';
+    drawer.style.display = 'none';
+    return;
+  }
+
+  drawer.style.display = '';
+
+  if(currentView === 'month'){
+    const yr = parseMDY(WEEK_ONE_MONDAY).getFullYear();
+    const monthNames = ['May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    drawer.innerHTML = monthNames.map((name, offset)=>{
+      const monthIndex = offset + 4; // May = 4, December = 11
+      const active = currentMonth === monthIndex && currentMonthYear === yr;
+
+      return `<button class="wk-btn${active ? ' active' : ''}" style="${active ? 'background:var(--accent);border-color:var(--accent)' : ''}" onclick="jumpToMonth(${monthIndex},${yr})">${name}</button>`;
+    }).join('');
+
+    return;
+  }
 
   const allBtn=currentView==='list'?`<button class="wk-btn${currentWeekIdx===-1?' active':''}" style="${currentWeekIdx===-1?'background:var(--accent);border-color:var(--accent)':''}" onclick="jumpToWeek(-1)">All Weeks</button>`:'';
-  document.getElementById('weekDrawer').innerHTML=allBtn+WEEKS.map((w,i)=>{
+  drawer.innerHTML=allBtn+WEEKS.map((w,i)=>{
   const col=BLOCK_COLOR[w.block]||'#7a829a';
   const start = new Date(w.startDate);
   const end = new Date(w.endDate);
@@ -1512,21 +1760,40 @@ function buildWeekDrawer(){
   return `<button class="wk-btn${i===currentWeekIdx?' active':''}" style="${i===currentWeekIdx?'background:'+col+';border-color:'+col:''}" onclick="jumpToWeek(${i})">${lbl}</button>`;
   }).join('');
 }
-function jumpToWeek(i){currentWeekIdx=i;if(i>=0)weekToMonth(i);buildWeekDrawer();render();}
-function prevWeek(){if(currentWeekIdx>0){currentWeekIdx--;weekToMonth(currentWeekIdx);buildWeekDrawer();render();}}
-function nextWeek(){if(currentWeekIdx<WEEKS.length-1){currentWeekIdx++;weekToMonth(currentWeekIdx);buildWeekDrawer();render();}}
-let currentBlockFilter='All';
-function setBlockFilter(block){
-  currentBlockFilter=block;
-  // Update dot color next to heading
-  const sel=document.getElementById('blockFilterSelect');
-  if(sel){
-    const col=block!=='All'?(BLOCK_COLOR[block]||'#7a829a'):'';
-    sel.style.borderColor=col||'var(--border)';
-    sel.style.boxShadow=col?`0 0 0 2px ${col}33`:'none';
-  }
+
+function jumpToMonth(monthIndex, year){
+  currentMonth = monthIndex;
+  currentMonthYear = year;
+  currentWeekIdx = monthToWeek(currentMonth,currentMonthYear);
+  buildWeekDrawer();
   render();
 }
+
+function jumpToWeek(i){
+  currentWeekIdx = i;
+  if(i >= 0) weekToMonth(i);
+  buildWeekDrawer();
+  render();
+}
+
+function prevWeek(){
+  if(currentWeekIdx > 0){
+    currentWeekIdx--;
+    weekToMonth(currentWeekIdx);
+    buildWeekDrawer();
+    render();
+  }
+}
+
+function nextWeek(){
+  if(currentWeekIdx < WEEKS.length - 1){
+    currentWeekIdx++;
+    weekToMonth(currentWeekIdx);
+    buildWeekDrawer();
+    render();
+  }
+}
+
 function populateBlockDropdown(){
   const sel=document.getElementById('blockFilterSelect');
   if(!sel||sel.options.length>1)return;
@@ -1559,21 +1826,37 @@ function setSidebarCat(el,cat){currentFilter=cat;document.querySelectorAll('.fil
 function setView(v,btn){
   const prev=currentView;
   currentView=v;
+
   document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
+
   const isMonth=v==='month';
-  document.getElementById('weekDrawer').style.display=isMonth?'none':'';
-  const wn=document.querySelector('.week-nav');if(wn)wn.style.display=isMonth?'none':'';
-  // Sync position when switching views
+  const isList=v==='list';
+
+  const drawer=document.getElementById('weekDrawer');
+  if(drawer)drawer.style.display=isList?'none':'';
+
+  const wn=document.querySelector('.week-nav');
+  if(wn)wn.style.display=(isMonth||isList)?'none':'';
+
+  const tc=document.querySelector('.toolbar-controls');
+  if(tc)tc.style.display=isList?'none':'';
+
   if(prev==='month'&&!isMonth){
-    // Coming FROM month → find matching week
     currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);
   } else if(prev!=='month'&&isMonth){
-    // Coming TO month → sync month from current week
     weekToMonth(currentWeekIdx);
   }
-  buildWeekDrawer();render();
+
+  buildWeekDrawer();
+  render();
 }
+
+function setBlockFilter(block){
+  currentBlockFilter = block || 'All';
+  render();
+}
+
 function updateFpViewBtns(v){
   const wb=document.getElementById('fpWeekBtn');
   const lb=document.getElementById('fpListBtn');
@@ -1667,8 +1950,23 @@ function render(){
     renderChangeLog();renderMonth();return;
   }
 
-  // ── Week / List view ─────────────────────────────────────────
-  const wn=document.querySelector('.week-nav');if(wn)wn.style.display='';
+  // ── List view / Schedule Finder ───────────────────────────────
+    if(currentView==='list'){
+      const wn=document.querySelector('.week-nav');
+      if(wn)wn.style.display='none';
+
+      document.getElementById('weekLabel').textContent='Schedule Finder';
+      document.getElementById('weekDates').textContent='';
+      document.getElementById('blockPill').textContent='';
+      document.getElementById('toolbarSub').textContent='Filtered list view';
+
+      renderChangeLog();
+      renderList();
+      return;
+    }
+
+    // ── Week view ─────────────────────────────────────────────────
+    const wn=document.querySelector('.week-nav');if(wn)wn.style.display='';
 
   // All Weeks mode (list only)
   if(currentWeekIdx===-1){
@@ -2030,6 +2328,331 @@ function normalizeCategory(cat){
     .replace(/\s+/g,'');
 }
 
+function escapeHtml(v){
+  return String(v ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+function normalizeListKey(value){
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[\u2010-\u2015]/g,'-')
+    .replace(/&/g,' and ')
+    .replace(/[^a-z0-9]+/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function titleCaseListLabel(value){
+  return String(value || '')
+    .toLowerCase()
+    .replace(/\b[a-z]/g, ch => ch.toUpperCase());
+}
+
+function normalizeCourseBlockLabel(block){
+  let s = String(block || '').trim().replace(/\s+/g,' ');
+  if(!s) return '';
+
+  s = s.replace(/\s+Week\s+\d+.*$/i,'');
+  s = s.replace(/\s+Full$/i,'');
+  return s.trim();
+}
+
+function listDisplayLabel(field,value){
+  const raw = String(value || '').trim();
+  const key = normalizeListKey(raw);
+  if(!key) return '';
+
+  if(field === 'mcal'){
+    if(key === 'm0') return 'M0';
+    if(key === 'm1') return 'M1';
+    if(key === 'm2') return 'M2';
+    if(key === 'student affairs') return 'Student Affairs';
+    if(key === 'program wide') return 'Program-Wide';
+    return raw;
+  }
+
+  if(field === 'course'){
+    return normalizeCourseBlockLabel(raw);
+  }
+
+  if(field === 'group'){
+    if(key === 'all' || key === 'all student' || key === 'all students') return 'All Students';
+
+    const groupMatch = key.match(/^group\s+([a-z0-9]+)$/);
+    if(groupMatch) return `Group ${groupMatch[1].toUpperCase()}`;
+
+    return titleCaseListLabel(key);
+  }
+
+  if(field === 'category'){
+    if(key === 'exam check in' || key === 'exam checkin') return 'Exam Check-In';
+    if(key === 'blackout') return 'Blackout';
+    if(key === 'tbl') return 'TBL';
+    if(key === 'cbl') return 'CBL';
+    if(key === 'cbse') return 'CBSE';
+    if(key === 'itde') return 'ITDE';
+    if(key === 'sdl') return 'SDL';
+    return titleCaseListLabel(key);
+  }
+
+  return raw;
+}
+
+function listFilterValue(field,value){
+  return normalizeListKey(listDisplayLabel(field,value));
+}
+
+function parseListDate(value){
+  if(!value) return null;
+
+  const v = String(value).trim();
+
+  if(/^\d{4}-\d{2}-\d{2}$/.test(v)){
+    const [y,m,d] = v.split('-').map(Number);
+    return new Date(y,m-1,d);
+  }
+
+  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(v)){
+    return parseMDY(v);
+  }
+
+  return null;
+}
+
+function dateToInputValue(dateObj){
+  if(!dateObj || Number.isNaN(dateObj.getTime())) return '';
+
+  return `${dateObj.getFullYear()}-${String(dateObj.getMonth()+1).padStart(2,'0')}-${String(dateObj.getDate()).padStart(2,'0')}`;
+}
+
+function listVisibleEvents(){
+  return EVENTS.filter(e=>{
+    if(isFacultyMode) return true;
+    if(isProgramWideEvent(e)) return true;
+
+    const evYear = String(e.calYear || '2029');
+    const evMCal = e.mCal || 'M1';
+
+    return calendarVisibility[evYear + '-' + evMCal] !== false;
+  });
+}
+
+function getListScopeRange(){
+  if(listFilters.scope === 'month'){
+    return {
+      start: new Date(currentMonthYear,currentMonth,1),
+      end: new Date(currentMonthYear,currentMonth + 1,0)
+    };
+  }
+
+  if(listFilters.scope === 'week'){
+    const w = currentWeekIdx >= 0 ? WEEKS[currentWeekIdx] : null;
+    if(!w) return {start:null,end:null};
+
+    return {
+      start: parseMDY(w.startDate),
+      end: parseMDY(w.endDate)
+    };
+  }
+
+  if(listFilters.scope === 'custom'){
+    return {
+      start: parseListDate(listFilters.start),
+      end: parseListDate(listFilters.end)
+    };
+  }
+
+  return {start:null,end:null};
+}
+
+function eventInListScope(e){
+  const range = getListScopeRange();
+
+  if(!range.start && !range.end) return true;
+
+  const d = parseMDY(e.date);
+
+  if(range.start && d < range.start) return false;
+  if(range.end && d > range.end) return false;
+
+  return true;
+}
+
+function listScopedEvents(){
+  return listVisibleEvents().filter(eventInListScope);
+}
+
+function listOptionEntries(field,events){
+  const map = new Map();
+
+  events.forEach(e=>{
+    let raw = '';
+
+    if(field === 'mcal') raw = e.mCal || 'M1';
+    if(field === 'course') raw = e.block || '';
+    if(field === 'group') raw = e.group || 'All Students';
+    if(field === 'category') raw = e.category || '';
+
+    const label = listDisplayLabel(field,raw);
+    const key = normalizeListKey(label);
+
+    if(label && key && !map.has(key)){
+      map.set(key,label);
+    }
+  });
+
+  const entries = [...map.entries()].map(([value,label])=>({value,label}));
+
+  if(field === 'mcal'){
+    const order = ['program wide','m0','m1','m2','student affairs'];
+    return entries.sort((a,b)=>{
+      const ai = order.indexOf(a.value);
+      const bi = order.indexOf(b.value);
+      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi) || a.label.localeCompare(b.label);
+    });
+  }
+
+  return entries.sort((a,b)=>a.label.localeCompare(b.label));
+}
+
+function listSelectOptions(field,events){
+  return [
+    `<option value="All"${listFilters[field] === 'All' ? ' selected' : ''}>All</option>`,
+    ...listOptionEntries(field,events).map(o =>
+      `<option value="${escapeHtml(o.value)}"${listFilters[field] === o.value ? ' selected' : ''}>${escapeHtml(o.label)}</option>`
+    )
+  ].join('');
+}
+
+function listEventMatchesFilters(e){
+  if(listFilters.mcal !== 'All' && listFilterValue('mcal',e.mCal || 'M1') !== listFilters.mcal) return false;
+  if(listFilters.course !== 'All' && listFilterValue('course',e.block || '') !== listFilters.course) return false;
+  if(listFilters.group !== 'All' && listFilterValue('group',e.group || 'All Students') !== listFilters.group) return false;
+  if(listFilters.category !== 'All' && listFilterValue('category',e.category || '') !== listFilters.category) return false;
+
+  const mandKey = normalizeListKey(e.mand || 'No');
+
+  if(listFilters.mand === 'mandatory' && mandKey !== 'yes') return false;
+  if(listFilters.mand === 'optional' && mandKey === 'yes') return false;
+
+  return true;
+}
+
+function filteredListEvents(){
+  return listScopedEvents().filter(listEventMatchesFilters);
+}
+
+function setListFilter(field,value){
+  listFilters[field] = value;
+
+  if(field === 'scope' && value !== 'custom'){
+    listFilters.start = '';
+    listFilters.end = '';
+  }
+
+  render();
+}
+
+function resetListFilters(){
+  listFilters = {
+    scope: 'all',
+    start: '',
+    end: '',
+    mcal: 'All',
+    course: 'All',
+    group: 'All',
+    category: 'All',
+    mand: 'All'
+  };
+
+  render();
+}
+
+function renderListFinder(resultCount,scopeCount){
+  const scoped = listScopedEvents();
+  const customStyle = listFilters.scope === 'custom' ? '' : 'display:none';
+
+  return `
+    <div class="list-finder">
+      <div class="list-finder-title">Schedule Finder</div>
+      <div class="list-finder-sub">Choose a date range, then apply any optional filters. These filters only affect List view.</div>
+
+      <div class="list-filter-grid">
+        <div class="list-filter-control">
+          <label>Date Range</label>
+          <select onchange="setListFilter('scope',this.value)">
+            <option value="all"${listFilters.scope === 'all' ? ' selected' : ''}>Entire Calendar</option>
+            <option value="month"${listFilters.scope === 'month' ? ' selected' : ''}>Current Month</option>
+            <option value="week"${listFilters.scope === 'week' ? ' selected' : ''}>Current Week</option>
+            <option value="custom"${listFilters.scope === 'custom' ? ' selected' : ''}>Custom Date Range</option>
+          </select>
+        </div>
+
+        <div class="list-filter-control">
+          <label>Calendar / Cohort</label>
+          <select onchange="setListFilter('mcal',this.value)">
+            ${listSelectOptions('mcal',scoped)}
+          </select>
+        </div>
+
+        <div class="list-filter-control">
+          <label>Course / Block</label>
+          <select onchange="setListFilter('course',this.value)">
+            ${listSelectOptions('course',scoped)}
+          </select>
+        </div>
+
+        <div class="list-filter-control">
+          <label>Group</label>
+          <select onchange="setListFilter('group',this.value)">
+            ${listSelectOptions('group',scoped)}
+          </select>
+        </div>
+
+        <div class="list-filter-control">
+          <label>Event Type</label>
+          <select onchange="setListFilter('category',this.value)">
+            ${listSelectOptions('category',scoped)}
+          </select>
+        </div>
+
+        <div class="list-filter-control">
+          <label>Attendance</label>
+          <select onchange="setListFilter('mand',this.value)">
+            <option value="All"${listFilters.mand === 'All' ? ' selected' : ''}>All</option>
+            <option value="mandatory"${listFilters.mand === 'mandatory' ? ' selected' : ''}>Mandatory</option>
+            <option value="optional"${listFilters.mand === 'optional' ? ' selected' : ''}>Optional</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="list-custom-range" style="${customStyle}">
+        <div class="list-filter-control">
+          <label>Start Date</label>
+          <input type="date" value="${escapeHtml(listFilters.start)}" onchange="setListFilter('start',this.value)">
+        </div>
+
+        <div class="list-filter-control">
+          <label>End Date</label>
+          <input type="date" value="${escapeHtml(listFilters.end)}" onchange="setListFilter('end',this.value)">
+        </div>
+      </div>
+
+      <div class="list-finder-footer">
+        <strong>${resultCount} event${resultCount === 1 ? '' : 's'} shown</strong>
+        <span>${scopeCount} event${scopeCount === 1 ? '' : 's'} in selected scope</span>
+        <button class="list-reset-btn" type="button" onclick="resetListFilters()">Reset Filters</button>
+      </div>
+    </div>
+  `;
+}
+
 function mCalTextColor(e){
   const mc = String(e.mCal || '').trim();
 
@@ -2041,39 +2664,57 @@ function mCalTextColor(e){
 }
 
 function renderList(){
-  const w = currentWeekIdx >= 0 ? WEEKS[currentWeekIdx] : null;
+  const scopedEvents = listScopedEvents();
 
-  const evs = (
-    currentWeekIdx === -1
-      ? filteredEvents()
-      : filteredEvents().filter(e => weekNumFromDate(e.date) === w.num)
-  ).sort((a,b) =>
+  const evs = filteredListEvents().sort((a,b) =>
     parseMDY(a.date) - parseMDY(b.date) ||
     timeToMinutes(a.start) - timeToMinutes(b.start)
   );
-  if(!evs.length){document.getElementById('calView').innerHTML=`<div class="empty-state"><div class="big">📭</div><p>No events found.</p></div>`;return;}
-  const byDate={};evs.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
-  let html='<div style="max-width:700px">';
-  Object.keys(byDate).sort().forEach(date=>{
+
+  let html = renderListFinder(evs.length,scopedEvents.length);
+
+  if(!evs.length){
+    document.getElementById('calView').innerHTML =
+      html + `<div class="empty-state"><div class="big">📭</div><p>No events found.</p></div>`;
+    return;
+  }
+
+  const byDate = {};
+  evs.forEach(e=>{
+    if(!byDate[e.date]) byDate[e.date] = [];
+    byDate[e.date].push(e);
+  });
+
+  html += '<div style="max-width:900px">';
+
+  Object.keys(byDate).sort((a,b)=>parseMDY(a)-parseMDY(b)).forEach(date=>{
     html+=`<div style="margin-bottom:22px"><div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">${fmtDate(date)}</div>`;
+
     byDate[date].forEach(e=>{
       const col = mCalColor(e), ec = evClass(e);
       const textCol = mCalTextColor(e);
       const ej = JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
       const catColL = CAT_COLOR[normalizeCategory(e.category)] || col;
-      const blockLabel = e.block ? `${e.block} · ` : '';
+      const courseLabel = listDisplayLabel('course',e.block || '');
+      const blockLabel = courseLabel ? `${courseLabel} · ` : '';
+
       html+=`<div class="event list-event ${ec}" id="bev_${e._id}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 5px,${col}18 5px)" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:${textCol};white-space:nowrap;min-width:90px">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
-        <div style="flex:1"><div class="ev-tag" style="color:${catColL}">${blockLabel}${e.category}</div><div style="font-size:13px;font-weight:500;color:${col}">${displayTitle(e)}</div></div>
+        <div style="flex:1">
+          <div class="ev-tag" style="color:${catColL}">${escapeHtml(blockLabel)}${escapeHtml(listDisplayLabel('category',e.category))}</div>
+          <div style="font-size:13px;font-weight:500;color:${col}">${escapeHtml(displayTitle(e))}</div>
+        </div>
         ${isFacultyMode?`<div style="display:flex;gap:5px;flex-shrink:0">
           <button class="ev-ctrl-btn ev-edit-btn" style="width:28px;height:28px" onclick="openEditForm(event,${ej})">✎</button>
           <button class="ev-ctrl-btn ev-del-btn" style="width:28px;height:28px" onclick="confirmDelete(event,'${e._id}')">✕</button>
         </div>`:''}
       </div>`;
     });
+
     html+='</div>';
   });
-  document.getElementById('calView').innerHTML=html+'</div>';
+
+  document.getElementById('calView').innerHTML = html + '</div>';
 }
 
 // ── INTERACTIONS ──────────────────────────────────────────────
@@ -2406,7 +3047,7 @@ function goToToday(){
     currentView = 'month';
     document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.vt-btn')[0].classList.add('active');
-    document.getElementById('weekDrawer').style.display = 'none';
+    buildWeekDrawer();
   }
 
   render();
@@ -2432,13 +3073,31 @@ function handleSearch(q){
   res.classList.add('open');
 }
 function closeSearch(){document.getElementById('searchResults').classList.remove('open');}
+
 function jumpToEvent(e){
   document.getElementById('searchInput').value='';
   closeSearch();
-  // Navigate to that month
+
   const parts=e.date.split('/');
-  if(parts.length===3){currentMonth=parseInt(parts[0])-1;currentMonthYear=parseInt(parts[2]);}
-  if(currentView!=='month'){currentView='month';document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.vt-btn')[0].classList.add('active');document.getElementById('weekDrawer').style.display='none';}
+  if(parts.length===3){
+    currentMonth=parseInt(parts[0])-1;
+    currentMonthYear=parseInt(parts[2]);
+
+    const eventWeekNum = weekNumFromDate(e.date);
+    const eventWeekIdx = WEEKS.findIndex(w => w.num === eventWeekNum);
+
+    if(eventWeekIdx >= 0){
+      currentWeekIdx = eventWeekIdx;
+    }
+  }
+
+  if(currentView!=='month'){
+    currentView='month';
+    document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.vt-btn')[0].classList.add('active');
+  }
+
+  buildWeekDrawer();
   render();
   setTimeout(()=>openModal(e),300);
 }
@@ -2545,7 +3204,13 @@ function renderMonth(){
         const catC = CAT_COLOR[normalizeCategory(e.category)] || col;
         const ej=JSON.stringify(e).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
         const monthBlockLabel = e.block ? `${e.block}<br>` : '';
-        return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),handleEventClick(event,${ej}))">${monthBlockLabel}${displayTitle(e)}</div>`;
+        return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),${isFacultyMode ? `openEditForm(event,${ej})` : `handleEventClick(event,${ej})`})">
+          ${monthBlockLabel}${displayTitle(e)}
+          ${isFacultyMode?`<div class="month-event-controls">
+            <button class="month-event-ctrl" title="Edit session" onclick="openEditForm(event,${ej})">✎</button>
+            <button class="month-event-ctrl" title="Delete session" onclick="confirmDelete(event,'${e._id}')">✕</button>
+          </div>`:''}
+        </div>`;
       }).join('')}
       ${more>0?`<div class="mg-more" onclick="openMonthMore(event,'${ds}')">+${more} more</div>`:''}
       ${isFacultyMode?`<button class="mg-add-btn" onclick="openAddForm('${ds}','08:00');event.stopPropagation()">+</button>`:''}
@@ -2596,12 +3261,16 @@ function openMonthMore(ev,dateStr){
       const blockLabel=e.block ? `${escForm(e.block)} · ` : '';
 
       return `
-        <div class="month-popout-event" onclick="event.stopPropagation();closeMonthMore();handleEventClick(event,${ej})">
+        <div class="month-popout-event" onclick="event.stopPropagation();closeMonthMore();${isFacultyMode ? `openEditForm(event,${ej})` : `handleEventClick(event,${ej})`}">
           <div class="month-popout-time">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
           <div class="month-popout-main">
             <div class="month-popout-cat" style="color:${catCol}">${blockLabel}${escForm(e.category||'Session')}</div>
             <div class="month-popout-name">${escForm(displayTitle(e))}</div>
           </div>
+          ${isFacultyMode?`<div style="display:flex;gap:4px;flex-shrink:0">
+            <button class="month-event-ctrl" title="Edit session" onclick="event.stopPropagation();closeMonthMore();openEditForm(event,${ej})">✎</button>
+            <button class="month-event-ctrl" title="Delete session" onclick="event.stopPropagation();closeMonthMore();confirmDelete(event,'${e._id}')">✕</button>
+          </div>`:''}
         </div>
       `;
     }).join('')}
@@ -2633,39 +3302,54 @@ function parseDateParts(dateStr){
   const p=dateStr.split('/');
   return{mo:parseInt(p[0])-1, dy:parseInt(p[1]), yr:parseInt(p[2])};
 }
-// Sync month view FROM a week index
-function weekToMonth(weekIdx){
-  if(weekIdx<0||weekIdx>=WEEKS.length)return;
-  const w=WEEKS[weekIdx];
-  // Use first event date in this week
-  const evs=EVENTS.filter(e=>e.weekNum===w.num).sort((a,b)=>a.date.localeCompare(b.date));
-  if(evs.length){
-    const p=parseDateParts(evs[0].date);
-    currentMonth=p.mo; currentMonthYear=p.yr;
+
+function weekDatesAt(weekIdx){
+  const w = WEEKS[weekIdx];
+  if(!w) return [];
+
+  if(w.dates && w.dates.length){
+    return w.dates;
   }
+
+  if(w.num){
+    return datesForWeekNum(w.num);
+  }
+
+  return [];
 }
-// Sync week index FROM a month/year — find first week with events in that month
-function monthToWeek(mo,yr){
-  // Score each week: prefer weeks that have events in this exact month+year
-  let best=-1;
-  for(let i=0;i<WEEKS.length;i++){
-    const w=WEEKS[i];
-    const hasMatch=EVENTS.some(e=>{
-      if(e.weekNum!==w.num)return false;
-      const p=parseDateParts(e.date);
-      return p.mo===mo && p.yr===yr;
-    });
-    if(hasMatch){best=i;break;} // take first matching week
+
+function weekContainsMonth(weekIdx, mo, yr){
+  return weekDatesAt(weekIdx).some(ds=>{
+    const p = parseDateParts(ds);
+    return p.mo === mo && p.yr === yr;
+  });
+}
+
+// Sync month view FROM a week index.
+// Uses the middle weekday so split weeks map to the month they mostly belong to.
+function weekToMonth(weekIdx){
+  if(weekIdx < 0 || weekIdx >= WEEKS.length) return;
+
+  const dates = weekDatesAt(weekIdx);
+  if(!dates.length) return;
+
+  const anchorDate = dates[2] || dates[0];
+  const p = parseDateParts(anchorDate);
+
+  currentMonth = p.mo;
+  currentMonthYear = p.yr;
+}
+
+// Sync week index FROM a month/year.
+// Finds the first week whose actual Mon–Fri dates touch that month.
+function monthToWeek(mo, yr){
+  const exact = WEEKS.findIndex((w, i)=>weekContainsMonth(i, mo, yr));
+
+  if(exact >= 0){
+    return exact;
   }
-  // Fallback: find nearest week by year only
-  if(best===-1){
-    for(let i=0;i<WEEKS.length;i++){
-      const w=WEEKS[i];
-      const hasYear=EVENTS.some(e=>e.weekNum===w.num&&parseDateParts(e.date).yr===yr);
-      if(hasYear){best=i;break;}
-    }
-  }
-  return best>=0?best:(currentWeekIdx>=0?currentWeekIdx:0);
+
+  return currentWeekIdx >= 0 ? currentWeekIdx : 0;
 }
 function homeDate(){
   const d = new Date();
@@ -3134,223 +3818,1188 @@ async function commitMultiAdd(){
 }
 
 // ── BULK UPLOAD ───────────────────────────────────────────────
-let bulkParsed = [];
+// Round 1: workbook parsing, tab selection, header validation, duplicate/conflict detection.
+// This round intentionally does NOT save anything to GitHub.
+
+let bulkWorkbook = null;
+let bulkSelectedSheets = [];
+let bulkPrimaryMode = '';
+let bulkState = emptyBulkState();
+
+function emptyBulkState(){
+  return {
+    skippedTabs: [],
+    readyRows: [],
+    partialRows: [],
+    duplicateRows: [],
+    conflictRows: [],
+    skippedRows: [],
+    ignoredRows: [],
+    allRows: []
+  };
+}
 
 function openBulkUpload(){
   if(!isFacultyMode){showToast('⚠️ Enter Edit mode first.');return;}
-  bulkParsed=[];
+
+  bulkWorkbook = null;
+  bulkSelectedSheets = [];
+  bulkPrimaryMode = '';
+  bulkState = emptyBulkState();
+
+  document.getElementById('bulkPreview').innerHTML = '';
   document.getElementById('bulkPreview').style.display='none';
   document.getElementById('bulkStats').style.display='none';
   document.getElementById('bulkAddBtn').style.display='none';
+  document.getElementById('bulkAddBtn').disabled=false;
+  document.getElementById('bulkAddBtn').textContent='Continue';
+  setBulkCancelText('Cancel');
   document.getElementById('bulkFile').value='';
   document.getElementById('bulkOverlay').classList.add('open');
 }
+
 function closeBulkUpload(){
   document.getElementById('bulkOverlay').classList.remove('open');
 }
+
+function bulkCancelAction(){
+  if(bulkPrimaryMode === 'backToBulkSummary'){
+    renderBulkRoundOneSummary();
+    return;
+  }
+
+  closeBulkUpload();
+}
+
+function setBulkCancelText(text){
+  const btn = document.getElementById('bulkCancelBtn');
+  if(btn) btn.textContent = text;
+}
+
 function handleBulkDrop(e){
   e.preventDefault();
   document.getElementById('bulkDrop').classList.remove('drag');
   const f=e.dataTransfer.files[0];
   if(f)handleBulkFile(f);
 }
+
 function handleBulkFile(file){
   if(!file)return;
+
   const reader=new FileReader();
+
   reader.onload=function(e){
     try{
       const data=new Uint8Array(e.target.result);
-      const wb=XLSX.read(data,{type:'array',cellDates:true,cellNF:false,cellFormula:false});
-      const ws=wb.Sheets['Events']||wb.Sheets[wb.SheetNames[0]];
-      // Read from row 8 (index 7) - skip title, subtitle, header, notes, samples
-      // Read header row (row 3, index 2) to map columns dynamically
-      const allRows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-      // Find header row (contains 'Session Name' or 'MAND')
-      let headerRow=2; // default row 3 (0-indexed)
-      for(let i=0;i<Math.min(5,allRows.length);i++){
-        const r=allRows[i].join(' ').toLowerCase();
-        if(r.includes('session name')||r.includes('mand')){headerRow=i;break;}
+      bulkWorkbook=XLSX.read(data,{type:'array',cellDates:true,cellNF:false,cellFormula:false});
+
+      if(!bulkWorkbook.SheetNames || !bulkWorkbook.SheetNames.length){
+        throw new Error('This workbook does not contain any tabs.');
       }
-      const headers=allRows[headerRow].map(h=>String(h||'').toLowerCase().trim());
-      // Map column names to indices
-      const colIdx={};
-      headers.forEach((h,i)=>{
-        if(h.includes('mand'))colIdx.mand=i;
-        else if(h.includes('session name')||h.includes('session name'))colIdx.title=i;
-        else if(h.includes('group'))colIdx.group=i;
-        else if(h.includes('location'))colIdx.location=i;
-        else if(h.includes('cohort')||h.includes('year'))colIdx.calYear=i;
-        else if(h.includes('class'))colIdx.mCal=i;
-        else if(h.includes('date'))colIdx.date=i;
-        else if(h.includes('start'))colIdx.start=i;
-        else if(h.includes('end'))colIdx.end=i;
-        else if(h.includes('category'))colIdx.category=i;
-        else if(h.includes('block')||h.includes('course'))colIdx.block=i;
-        else if(h.includes('week'))colIdx.week=i;
-        else if(h.includes('presenter'))colIdx.presenter=i;
-        else if(h.includes('additional')||h.includes('info')||h.includes('note'))colIdx.notes=i;
-      });
-      // Data starts after header + note row
-      const dataRows=allRows.slice(headerRow+2).filter(r=>r.some(v=>v!==''));
-      parseBulkRows(dataRows,colIdx);
-    }catch(err){showToast('❌ Could not read file: '+err.message);}
+
+      if(bulkWorkbook.SheetNames.length === 1){
+        bulkSelectedSheets = [bulkWorkbook.SheetNames[0]];
+        processBulkSelectedSheets();
+      } else {
+        renderBulkSheetSelector();
+      }
+    }catch(err){
+      showToast('❌ Could not read file: '+err.message);
+      renderBulkMessage(
+        'Workbook could not be read',
+        `<p>${escBulk(err.message)}</p>`
+      );
+    }
   };
+
   reader.readAsArrayBuffer(file);
 }
-function parseBulkRows(rows,colIdx){
-  // Default column indices (new template format)
-  const ci=colIdx||{};
-  const gi=(name,def)=>ci[name]!==undefined?ci[name]:def;
-  bulkParsed=[];
-  const BLK_LIST=BLOCKS_LIST;
 
-  rows.forEach((row,i)=>{
-    if(!row[0]&&!row[5]&&!row[7])return; // skip fully empty rows
-    const mand=String(row[gi('mand',0)]||'No').trim()||'No';
-    const title=String(row[gi('title',1)]||'').trim();
-    const group=String(row[gi('group',2)]||'').trim();
-    const location=String(row[gi('location',3)]||'').trim();
-    const calYear=String(row[gi('calYear',4)]||'').trim();
-    const mCal=String(row[gi('mCal',5)]||'M1').trim();
-    const presenter=String(row[gi('presenter',12)]||'').trim();
-    const notes=String(row[gi('notes',13)]||'').trim();
-    
-    // Date parsing — handle Excel serial numbers and string dates
-    let dateStr='';
-    const rawDate=row[gi('date',6)];
-    if(rawDate instanceof Date){
-      const mo=String(rawDate.getMonth()+1).padStart(2,'0');
-      const dy=String(rawDate.getDate()).padStart(2,'0');
-      const yr=rawDate.getFullYear();
-      dateStr=`${mo}/${dy}/${yr}`;
-    } else if(typeof rawDate==='number'){
-      const d=XLSX.SSF.parse_date_code(rawDate);
-      dateStr=`${String(d.m).padStart(2,'0')}/${String(d.d).padStart(2,'0')}/${d.y}`;
-    } else {
-      dateStr=String(rawDate||'').trim();
-      // Handle ISO format: 2026-05-26 or 2026-05-26T00:00:00
-      if(dateStr.match(/^\d{4}-\d{2}-\d{2}/)){
-        const p=dateStr.split('T')[0].split('-');
-        dateStr=`${p[1]}/${p[2]}/${p[0]}`;
-      }
-      // Normalize M/D/YYYY → MM/DD/YYYY
-      else if(dateStr && !dateStr.match(/^\d{2}\//)){
-        const dp=dateStr.split('/');
-        if(dp.length===3)dateStr=`${dp[0].padStart(2,'0')}/${dp[1].padStart(2,'0')}/${dp[2]}`;
-      }
-    }
+function renderBulkSheetSelector(){
+  const preview=document.getElementById('bulkPreview');
+  const sheetRows = bulkWorkbook.SheetNames.map((name,i)=>`
+    <label class="bulk-tab-row">
+      <input type="checkbox" class="bulkSheetCheck" value="${escBulk(name)}">
+      <span>${escBulk(name)}</span>
+    </label>
+  `).join('');
 
-    // Time parsing
-    function parseTime(v){
-      if(!v)return'';
-      if(v instanceof Date)return`${String(v.getHours()).padStart(2,'0')}:${String(v.getMinutes()).padStart(2,'0')}`;
-      if(typeof v==='number'){const h=Math.floor(v*24);const m=Math.round((v*24-h)*60);return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;}
-      const ts=String(v).trim();
-      // Normalize H:MM → HH:MM
-      if(ts.match(/^\d:\d{2}$/))return'0'+ts;
-      return ts;
-    }
-    const start=parseTime(row[gi('start',7)]);
-    const end=parseTime(row[gi('end',8)]);
-    const category=String(row[gi('category',9)]||'Mandatory').trim();
-    const block=String(row[gi('block',10)]||'').trim();
-    const manualWeekNum=parseInt(row[gi('week',11)])||null;
-    const derivedWeekNum = /^\d{2}\/\d{2}\/\d{4}$/.test(dateStr)
-      ? weekNumFromDate(dateStr)
-      : manualWeekNum;
+  preview.innerHTML = `
+    <div class="bulk-summary">
+      <div class="bulk-section-title">Select tabs to import</div>
+      <div class="bulk-note">This workbook has multiple tabs. Tabs start unselected so non-calendar tabs are not imported accidentally.</div>
 
-    // Validate
-    const errs=[];
-    if(!title)errs.push('Missing session name');
-    if(!['M0','M1','M2','Student Affairs','Program-Wide'].includes(mCal))errs.push(`Invalid class: "${mCal}" — use M0, M1, M2, Student Affairs, or Program-Wide`);
-    if(!['2029','2030','2031','2032','2033','2034','2035','2036','2037','2038'].includes(calYear))errs.push(`Invalid cohort year: "${calYear}" — use 2029–2038`);
-    if(!/^\d{2}\/\d{2}\/\d{4}$/.test(dateStr))errs.push(`Invalid date: "${dateStr}"`);
-    if(!/^\d{2}:\d{2}$/.test(start))errs.push(`Invalid start time: "${start}"`);
-    if(!/^\d{2}:\d{2}$/.test(end))errs.push(`Invalid end time: "${end}"`);
-    if(start&&end&&start>=end)errs.push('Start must be before end');
-    // Category is optional — warn but don't block if not in list
-if(category && typeof CATS_LIST!=='undefined' && !CATS_LIST.includes(category))errs.push(`Unknown category: "${category}" — check spelling or leave blank`);
+      <div class="bulk-tab-tools">
+        <button class="bulk-tab-tool-btn" type="button" onclick="setBulkSheetChecks(true)">Select All Tabs</button>
+        <button class="bulk-tab-tool-btn" type="button" onclick="setBulkSheetChecks(false)">Deselect All Tabs</button>
+      </div>
 
-    bulkParsed.push({
-      _id: generateUniqueId(EVENTS.concat(bulkParsed)),
-      title,mand,group,location,mCal,calYear,presenter, info: notes, notes,
-      date:dateStr,start,end,
-      category:(typeof CATS_LIST!=='undefined'&&CATS_LIST.includes(category))?category:(category||'Session'),
-      block:BLK_LIST.includes(block)?block:blockFromWeek(derivedWeekNum||28),
-      weekNum:derivedWeekNum,
-      week:weekNameFor(derivedWeekNum),
-      desc:title,
-      _errors:errs,_valid:errs.filter(e=>!e.includes('Unknown category')&&!e.includes('defaulting')).length===0
-    });
-  });
+      <div class="bulk-tabs">${sheetRows}</div>
+      <div class="bulk-note">Tabs missing required headers will be skipped and reported. They will not stop the other selected tabs from being checked.</div>
+    </div>
+  `;
 
-  renderBulkPreview();
+  preview.style.display='';
+  document.getElementById('bulkStats').style.display='none';
+
+  bulkPrimaryMode = 'selectSheets';
+  const btn=document.getElementById('bulkAddBtn');
+  btn.style.display='';
+  btn.disabled=false;
+  btn.textContent='Continue with Selected Tabs';
 }
-function renderBulkPreview(){
-  const valid=bulkParsed.filter(r=>r._valid).length;
-  const errors=bulkParsed.filter(r=>!r._valid).length;
-  document.getElementById('bulkTotal').textContent=bulkParsed.length;
-  document.getElementById('bulkValid').textContent=valid;
-  document.getElementById('bulkErrors').textContent=errors;
-  document.getElementById('bulkStats').style.display='flex';
-  document.getElementById('bulkAddBtn').style.display=valid>0?'':'none';
-  document.getElementById('bulkAddBtn').textContent=`✅ Add ${valid} Valid Event${valid!==1?'s':''}`;
 
-  if(!bulkParsed.length){
-    document.getElementById('bulkPreview').style.display='none';
-    showToast('⚠️ No data rows found. Make sure you are using the EnMed template.');
+function setBulkSheetChecks(checked){
+  document.querySelectorAll('.bulkSheetCheck').forEach(cb=>{
+    cb.checked = checked;
+  });
+}
+
+function bulkPrimaryAction(){
+  if(bulkPrimaryMode === 'selectSheets'){
+    bulkSelectedSheets = [...document.querySelectorAll('.bulkSheetCheck:checked')].map(cb=>cb.value);
+
+    if(!bulkSelectedSheets.length){
+      showToast('⚠️ Select at least one tab to continue.');
+      return;
+    }
+
+    processBulkSelectedSheets();
     return;
   }
-  const cols=['MAND','Session Name','Group','Location','Year','Class','Date','Start','End','Category','Block','Week','Presenter','Notes','Errors'];
-  let tbl=`<table><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
-  bulkParsed.forEach(r=>{
-    const cls=r._valid?'ok':'err';
-    const errText=r._errors.join('; ')||'✓';
+
+  if(bulkPrimaryMode === 'backToBulkSummary'){
+    renderBulkRoundOneSummary();
+    return;
+  }
+
+  if(bulkPrimaryMode === 'uploadEligible'){
+    renderBulkUploadGate();
+    return;
+  }
+
+  showToast('No save yet. This pass only previews the upload workflow.');
+}
+
+function processBulkSelectedSheets(){
+  bulkState = emptyBulkState();
+
+  bulkSelectedSheets.forEach(sheetName => {
+    const ws = bulkWorkbook.Sheets[sheetName];
+
+    if(!ws){
+      bulkState.skippedTabs.push({
+        sheetName,
+        reason: 'Tab could not be read.'
+      });
+      return;
+    }
+
+    const rows = XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+    parseBulkSheetRows(sheetName, rows);
+  });
+
+  renderBulkRoundOneSummary();
+}
+
+function parseBulkSheetRows(sheetName, rows){
+  const headerInfo = findBulkHeaderInfo(rows);
+
+  if(!headerInfo){
+    bulkState.skippedTabs.push({
+      sheetName,
+      reason: 'Could not find a header row containing [MAND]. Required headers are: [MAND], Session Name, Class, Date, Start Time, End Time.'
+    });
+    return;
+  }
+
+  const missingHeaders = requiredBulkFields()
+    .filter(field => headerInfo.colIdx[field.key] === undefined)
+    .map(field => field.label);
+
+  if(missingHeaders.length){
+    bulkState.skippedTabs.push({
+      sheetName,
+      reason: `Missing required header(s): ${missingHeaders.join(', ')}. Required headers are: [MAND], Session Name, Class, Date, Start Time, End Time.`
+    });
+    return;
+  }
+
+  let startRowIdx = headerInfo.headerRowIdx + 1;
+
+  const exampleRowIdx = rows.findIndex((row, idx) => {
+    if(idx <= headerInfo.headerRowIdx) return false;
+    const mandVal = cellString(row[headerInfo.colIdx.mand]).toLowerCase();
+    return mandVal === 'yes or no';
+  });
+
+  if(exampleRowIdx !== -1){
+    startRowIdx = exampleRowIdx + 1;
+  }
+
+  for(let i=startRowIdx;i<rows.length;i++){
+    const row = rows[i];
+
+    if(rowIsEmpty(row)){
+      bulkState.ignoredRows.push({sheetName,rowNum:i+1,reason:'Blank row'});
+      continue;
+    }
+
+    const parsed = buildBulkEventFromRow(sheetName, i + 1, row, headerInfo.colIdx);
+
+    if(!looksLikeBulkSessionRow(parsed)){
+      bulkState.ignoredRows.push({sheetName,rowNum:i+1,reason:'Row does not look like a session'});
+      continue;
+    }
+
+    const missing = missingRequiredBulkValues(parsed);
+    const invalid = invalidBulkValues(parsed);
+    parsed._issues = [...missing, ...invalid];
+
+    if(parsed._issues.length){
+      parsed._status = 'partial';
+      bulkState.partialRows.push(parsed);
+      bulkState.allRows.push(parsed);
+      continue;
+    }
+
+    const duplicateMatch = findBulkDuplicate(parsed, EVENTS);
+    if(duplicateMatch){
+      parsed._status = 'duplicate';
+      parsed._duplicateMatch = duplicateMatch;
+      bulkState.duplicateRows.push(parsed);
+      bulkState.allRows.push(parsed);
+      continue;
+    }
+
+    const conflictMatch = findBulkConflict(parsed, EVENTS.concat(bulkState.readyRows));
+    if(conflictMatch){
+      parsed._status = 'conflict';
+      parsed._conflictMatch = conflictMatch;
+      bulkState.conflictRows.push(parsed);
+      bulkState.allRows.push(parsed);
+      continue;
+    }
+
+    parsed._status = 'ready';
+    bulkState.readyRows.push(parsed);
+    bulkState.allRows.push(parsed);
+  }
+}
+
+function findBulkHeaderInfo(rows){
+  for(let r=0;r<rows.length;r++){
+    const colIdx = {};
+    rows[r].forEach((cell,c)=>{
+      const key = bulkHeaderKey(cell);
+      if(key) colIdx[key] = c;
+    });
+
+    if(colIdx.mand !== undefined){
+      return {headerRowIdx:r,colIdx};
+    }
+  }
+
+  return null;
+}
+
+function requiredBulkFields(){
+  return [
+    {key:'mand',label:'[MAND]'},
+    {key:'title',label:'Session Name'},
+    {key:'mCal',label:'Class'},
+    {key:'date',label:'Date'},
+    {key:'start',label:'Start Time'},
+    {key:'end',label:'End Time'}
+  ];
+}
+
+function bulkHeaderKey(value){
+  const h = String(value || '')
+    .toLowerCase()
+    .replace(/\*/g,'')
+    .replace(/\([^)]*\)/g,'')
+    .replace(/\s+/g,' ')
+    .trim();
+
+  if(!h) return '';
+
+  if(h === '[mand]' || h.includes('mand')) return 'mand';
+  if(h.includes('session name')) return 'title';
+  if(h.includes('group assigned') || h === 'group' || h.includes('group')) return 'group';
+  if(h.includes('session location') || h === 'location' || h.includes('location')) return 'location';
+  if(h.includes('cohort year') || h === 'cohort' || h === 'year') return 'calYear';
+  if(h === 'class' || h.includes('class')) return 'mCal';
+  if(h === 'date' || h.startsWith('date ')) return 'date';
+  if(h.includes('start time') || h === 'start') return 'start';
+  if(h.includes('end time') || h === 'end') return 'end';
+  if(h.includes('category')) return 'category';
+  if(h.includes('block') || h.includes('course')) return 'block';
+  if(h.includes('week number')) return 'weekNum';
+  if(h.includes('presenter')) return 'presenter';
+  if(h.includes('additional') || h.includes('information') || h.includes('info') || h.includes('note')) return 'info';
+  if(h === 'id') return 'spreadsheetId';
+
+  return '';
+}
+
+function buildBulkEventFromRow(sheetName,rowNum,row,colIdx){
+  const get = key => colIdx[key] === undefined ? '' : row[colIdx[key]];
+
+  const event = {
+    title: cellString(get('title')),
+    date: normalizeBulkDate(get('date')),
+    start: normalizeBulkTime(get('start')),
+    end: normalizeBulkTime(get('end')),
+    category: cellString(get('category')),
+    block: cellString(get('block')),
+    weekNum: '',
+    week: '',
+    desc: '',
+    calYear: cellString(get('calYear')),
+    mCal: cellString(get('mCal')),
+    mand: normalizeBulkMand(get('mand')),
+    group: cellString(get('group')),
+    location: cellString(get('location')),
+    _id: '',
+    info: cellString(get('info')),
+    presenter: cellString(get('presenter')),
+
+    _sheetName: sheetName,
+    _rowNum: rowNum,
+    _spreadsheetId: cellString(get('spreadsheetId')),
+    _issues: [],
+    _status: '',
+    _ignored: false
+  };
+
+  return event;
+}
+
+function looksLikeBulkSessionRow(event){
+  return !!(
+    event.title ||
+    event.date ||
+    event.start ||
+    event.end ||
+    event.mCal ||
+    event.mand ||
+    event.category ||
+    event.block ||
+    event.group ||
+    event.location
+  );
+}
+
+function missingRequiredBulkValues(event){
+  const missing = [];
+
+  if(!event.mand) missing.push('Missing [MAND]');
+  if(!event.title) missing.push('Missing Session Name');
+  if(!event.mCal) missing.push('Missing Class');
+  if(!event.date) missing.push('Missing Date');
+  if(!event.start) missing.push('Missing Start Time');
+  if(!event.end) missing.push('Missing End Time');
+
+  return missing;
+}
+
+function invalidBulkValues(event){
+  const issues = [];
+
+  if(event.mand && !['Yes','No'].includes(event.mand)){
+    issues.push('[MAND] must be Yes or No');
+  }
+
+  if(event.mCal && !['M0','M1','M2','Student Affairs','Program-Wide'].includes(event.mCal)){
+    issues.push(`Class must be M0, M1, M2, Student Affairs, or Program-Wide`);
+  }
+
+  if(event.date && !/^\d{2}\/\d{2}\/\d{4}$/.test(event.date)){
+    issues.push('Date must be MM/DD/YYYY');
+  }
+
+    const startIssue = bulkTimeIssue(event.start,'Start Time');
+    if(startIssue) issues.push(startIssue);
+
+    const endIssue = bulkTimeIssue(event.end,'End Time');
+    if(endIssue) issues.push(endIssue);
+
+  if(event.start && event.end && /^\d{2}:\d{2}$/.test(event.start) && /^\d{2}:\d{2}$/.test(event.end)){
+    if(timeToMinutes(event.start) >= timeToMinutes(event.end)){
+      issues.push('Start Time must be before End Time');
+    }
+  }
+
+  return issues;
+}
+
+function findBulkDuplicate(uploaded, existingEvents){
+  return existingEvents.find(existing =>
+    normCompare(existing.title) === normCompare(uploaded.title) &&
+    normCompare(existing.mand) === normCompare(uploaded.mand) &&
+    normCompare(existing.mCal) === normCompare(uploaded.mCal) &&
+    normCompare(existing.date) === normCompare(uploaded.date) &&
+    normCompare(existing.start) === normCompare(uploaded.start) &&
+    normCompare(existing.end) === normCompare(uploaded.end) &&
+    normCompare(existing.category) === normCompare(uploaded.category)
+  ) || null;
+}
+
+function findBulkConflict(uploaded, comparisonEvents){
+  const uploadedStart = timeToMinutes(uploaded.start);
+  const uploadedEnd = timeToMinutes(uploaded.end);
+  const uploadedGroup = normalizeBulkGroup(uploaded.group);
+
+  if(!Number.isFinite(uploadedStart) || !Number.isFinite(uploadedEnd)) return null;
+
+  return comparisonEvents.find(existing => {
+    if(!existing || existing === uploaded) return false;
+    if(normCompare(existing.mCal) !== normCompare(uploaded.mCal)) return false;
+    if(normCompare(existing.date) !== normCompare(uploaded.date)) return false;
+    if(normalizeBulkGroup(existing.group) !== uploadedGroup) return false;
+
+    const existingStart = timeToMinutes(existing.start);
+    const existingEnd = timeToMinutes(existing.end);
+
+    if(!Number.isFinite(existingStart) || !Number.isFinite(existingEnd)) return false;
+
+    return uploadedStart < existingEnd && uploadedEnd > existingStart;
+  }) || null;
+}
+
+function normalizeBulkGroup(group){
+  const g = cellString(group);
+  return normCompare(g || 'All Students');
+}
+
+function normalizeBulkMand(value){
+  const v = cellString(value).toLowerCase();
+
+  if(v === 'yes') return 'Yes';
+  if(v === 'no') return 'No';
+  if(v === 'yes or no') return 'Yes or No';
+
+  return cellString(value);
+}
+
+function normalizeBulkDate(value){
+  if(value instanceof Date){
+    return formatMDY(value);
+  }
+
+  if(typeof value === 'number'){
+    const d = XLSX.SSF.parse_date_code(value);
+    if(d) return `${String(d.m).padStart(2,'0')}/${String(d.d).padStart(2,'0')}/${d.y}`;
+  }
+
+  let s = cellString(value);
+
+  if(!s) return '';
+
+  if(/^\d{4}-\d{2}-\d{2}/.test(s)){
+    const p = s.split('T')[0].split('-');
+    return `${p[1]}/${p[2]}/${p[0]}`;
+  }
+
+  const mdy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(mdy){
+    return `${mdy[1].padStart(2,'0')}/${mdy[2].padStart(2,'0')}/${mdy[3]}`;
+  }
+
+  return s;
+}
+
+function normalizeBulkTime(value){
+  if(value instanceof Date){
+    return `${String(value.getHours()).padStart(2,'0')}:${String(value.getMinutes()).padStart(2,'0')}`;
+  }
+
+  if(typeof value === 'number'){
+    const totalMinutes = Math.round(value * 24 * 60);
+    const h = Math.floor(totalMinutes / 60) % 24;
+    const m = totalMinutes % 60;
+    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+  }
+
+  let s = cellString(value);
+  if(!s) return '';
+
+  const ampm = s.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i);
+  if(ampm){
+    let h = Number(ampm[1]);
+    const m = Number(ampm[2] || 0);
+    const p = ampm[3].toUpperCase();
+
+    if(h < 1 || h > 12 || m < 0 || m > 59) return s;
+
+    if(p === 'PM' && h !== 12) h += 12;
+    if(p === 'AM' && h === 12) h = 0;
+
+    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+  }
+
+  const plain = s.match(/^(\d{1,2})(?::(\d{2}))?$/);
+  if(plain){
+    const h = Number(plain[1]);
+    const m = Number(plain[2] || 0);
+
+    if(h < 0 || h > 23 || m < 0 || m > 59) return s;
+
+    // Safe assumptions:
+    // 6:00–11:59 means morning.
+    // 12:00–23:59 is already unambiguous 24-hour time.
+    if(h >= 6 && h <= 23){
+      return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    }
+
+    // 0:00–5:59 is too risky for this calendar.
+    // Leave it unnormalized so validation flags it as partial.
+    return s;
+  }
+
+  return s;
+}
+
+function bulkTimeIssue(value,label){
+  if(!value) return '';
+
+  if(!/^\d{2}:\d{2}$/.test(value)){
+    return `${label} is ambiguous or invalid. Use formats like 7 PM, 7:00 PM, 07:00, or 19:00. Afternoon times must include PM or use 24-hour time.`;
+  }
+
+  const [h,m] = value.split(':').map(Number);
+
+  if(!Number.isFinite(h) || !Number.isFinite(m) || h < 0 || h > 23 || m < 0 || m > 59){
+    return `${label} must be a real time. Use HH:MM, AM/PM, or 24-hour time.`;
+  }
+
+  if(h < 6){
+    return `${label} is before 6:00 AM and will not import. Use AM/PM or 24-hour time and confirm the time is intentional.`;
+  }
+
+  return '';
+}
+
+function renderBulkRoundOneSummary(){
+  rebuildBulkBucketsFromAllRows();
+
+  const totalFlagged = bulkState.partialRows.length + bulkState.duplicateRows.length + bulkState.conflictRows.length;
+  const totalConsidered = bulkState.allRows.length;
+  const uploadableRows = getBulkUploadableRows();
+
+  document.getElementById('bulkTotal').textContent = totalConsidered;
+  document.getElementById('bulkValid').textContent = bulkState.readyRows.length;
+  document.getElementById('bulkErrors').textContent = totalFlagged + bulkState.skippedTabs.length;
+  document.getElementById('bulkStats').style.display='flex';
+
+  const btn=document.getElementById('bulkAddBtn');
+  btn.style.display='';
+  btn.disabled = uploadableRows.length === 0;
+  btn.textContent = `Upload Eligible Sessions (${uploadableRows.length})`;
+  bulkPrimaryMode = 'uploadEligible';
+  setBulkCancelText('Cancel Upload');
+
+  const skippedHtml = bulkState.skippedTabs.length
+    ? `<div class="bulk-section-title">Skipped tabs</div><ul>${bulkState.skippedTabs.map(t=>`<li><strong>${escBulk(t.sheetName)}</strong>: ${escBulk(t.reason)}</li>`).join('')}</ul>`
+    : `<div class="bulk-section-title">Skipped tabs</div><p>None.</p>`;
+
+  const summaryHtml = `
+    <div class="bulk-summary">
+      <div class="bulk-section-title">Bulk upload preview</div>
+      <p>
+        <span class="bulk-pill ok">${bulkState.readyRows.length} ready</span>
+        <span class="bulk-pill err">${bulkState.partialRows.length} partial — blocked</span>
+        <span class="bulk-pill warn">${bulkState.duplicateRows.length} possible duplicates</span>
+        <span class="bulk-pill warn">${bulkState.conflictRows.length} possible conflicts</span>
+        <span class="bulk-pill warn">${bulkState.ignoredRows.length} ignored</span>
+        <span class="bulk-pill err">${bulkState.skippedTabs.length} skipped tabs</span>
+      </p>
+
+      <div class="bulk-tab-tools">
+        <button class="bulk-tab-tool-btn" type="button" onclick="renderBulkStatusReview('partial')">Resolve Partials (${bulkState.partialRows.length})</button>
+        <button class="bulk-tab-tool-btn" type="button" onclick="renderBulkStatusReview('conflict')">Resolve Conflicts (${bulkState.conflictRows.length})</button>
+        <button class="bulk-tab-tool-btn" type="button" onclick="renderBulkStatusReview('duplicate')">Resolve Duplicates (${bulkState.duplicateRows.length})</button>
+      </div>
+
+      ${skippedHtml}
+
+      <div class="bulk-note">
+        No events have been added. Ready rows are eligible for upload. Duplicate and conflict rows can be included or ignored. Partial rows cannot be uploaded unless repaired.
+      </div>
+    </div>
+  `;
+
+  renderBulkParsedTable(summaryHtml);
+}
+
+function renderBulkParsedTable(summaryHtml, displayRows = bulkState.allRows){
+  const cols=['Actions','Status','Tab','Row','MAND','Session Name','Group','Location','Class','Date','Start','End','Category','Block','Issues'];
+  let tbl=`${summaryHtml}<table><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
+
+  displayRows.forEach((r)=>{
+    const i = bulkState.allRows.indexOf(r);
+    const cls = r._ignored ? 'ignored' : (r._status === 'ready' ? 'ok' : (r._status === 'partial' ? 'err' : 'warn'));
+    const issueText = bulkIssueText(r);
+    const toggleIcon = r._ignored ? '↩' : '⦸';
+    const toggleTitle = r._ignored ? 'Include this session in upload' : "Ignore and Don't Upload this session";
+    let statusText = r._ignored ? `${r._status} — ignored` : r._status;
+
+    if(!r._ignored && r._status === 'partial'){
+      statusText = '⚠ partial — will not upload';
+    }
 
     tbl+=`<tr class="${cls}">
-      <td>${r.mand || 'No'}</td>
-      <td>${r.title.substring(0,35)}</td>
-      <td>${r.group || ''}</td>
-      <td>${r.location.substring(0,20)}</td>
-      <td>${r.calYear || ''}</td>
-      <td>${r.mCal || ''}</td>
-      <td>${r.date || ''}</td>
-      <td>${r.start || ''}</td>
-      <td>${r.end || ''}</td>
-      <td>${r.category || ''}</td>
-      <td>${r.block || ''}</td>
-      <td>${r.weekNum || ''}</td>
-      <td>${r.presenter || ''}</td>
-      <td>${r.notes || r.info || ''}</td>
-      <td style="color:${r._valid?'#3ecf8e':'#f05c6e'}">${errText}</td>
+      <td>
+        <div class="bulk-row-actions">
+          <button class="bulk-action-bubble bulk-action-edit" type="button" title="Edit this imported session" onclick="openBulkRowEditor(${i})">✎</button>
+          <button class="bulk-action-bubble ${r._ignored ? 'bulk-action-include' : 'bulk-action-ignore'}" type="button" title="${escBulk(toggleTitle)}" onclick="toggleBulkRowImport(${i})">${toggleIcon}</button>
+        </div>
+      </td>
+      <td>${escBulk(statusText)}</td>
+      <td>${escBulk(r._sheetName)}</td>
+      <td>${escBulk(r._rowNum)}</td>
+      <td>${escBulk(r.mand)}</td>
+      <td>${escBulk(r.title)}</td>
+      <td>${escBulk(r.group)}</td>
+      <td>${escBulk(r.location)}</td>
+      <td>${escBulk(r.mCal)}</td>
+      <td>${escBulk(r.date)}</td>
+      <td>${escBulk(r.start)}</td>
+      <td>${escBulk(r.end)}</td>
+      <td>${escBulk(r.category)}</td>
+      <td>${escBulk(r.block)}</td>
+      <td>${issueText}</td>
     </tr>`;
-
   });
+
   tbl+='</table>';
+
   document.getElementById('bulkPreview').innerHTML=tbl;
   document.getElementById('bulkPreview').style.display='';
 }
-async function bulkAddAll(){
-  const valid=bulkParsed.filter(r=>r._valid);
-  if(!valid.length)return;
+
+function toggleBulkRowImport(i){
+  const row = bulkState.allRows[i];
+
+  if(!row){
+    showToast('⚠️ Could not find that imported row.');
+    return;
+  }
+
+  row._ignored = !row._ignored;
+
+  if(!row._ignored){
+    reclassifyBulkEditedRow(row);
+  }
+
+  rebuildBulkBucketsFromAllRows();
+  renderBulkRoundOneSummary();
+}
+
+function openBulkRowEditor(i){
+  const row = bulkState.allRows[i];
+
+  if(!row){
+    showToast('⚠️ Could not find that imported row.');
+    return;
+  }
+
+  const preview=document.getElementById('bulkPreview');
+
+  preview.innerHTML = `
+    <div class="bulk-summary">
+      <div class="bulk-section-title">Edit Imported Session</div>
+      <div class="bulk-note">
+        Editing this row will recheck required fields, date/time validity, duplicate status, and conflicts after you save.
+      </div>
+    </div>
+
+    <div class="bulk-summary">
+      <div class="bulk-section-title">${escBulk(row._sheetName)} row ${escBulk(row._rowNum)}</div>
+
+      ${bulkRowEditInput(i,'mand','[MAND]',row.mand)}
+      ${bulkRowEditInput(i,'title','Session Name',row.title)}
+      ${bulkRowEditInput(i,'mCal','Class',row.mCal)}
+      ${bulkRowEditInput(i,'date','Date',row.date)}
+      ${bulkRowEditInput(i,'start','Start Time',row.start)}
+      ${bulkRowEditInput(i,'end','End Time',row.end)}
+      ${bulkRowEditInput(i,'category','Category',row.category)}
+      ${bulkRowEditInput(i,'block','Block/Course',row.block)}
+      ${bulkRowEditInput(i,'group','Group Assigned',row.group)}
+      ${bulkRowEditInput(i,'location','Session Location',row.location)}
+      ${bulkRowEditInput(i,'calYear','Cohort Year',row.calYear)}
+      ${bulkRowEditInput(i,'presenter','Presenter',row.presenter)}
+      ${bulkRowEditTextarea(i,'info','Additional Information',row.info)}
+
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <button class="bulk-btn bulk-btn-primary" type="button" onclick="saveBulkRowEdit(${i})">Save Edit</button>
+        <button class="bulk-btn bulk-btn-cancel" type="button" onclick="renderBulkRoundOneSummary()">Cancel</button>
+      </div>
+    </div>
+  `;
+
+  preview.style.display='';
+
   const btn=document.getElementById('bulkAddBtn');
-  btn.textContent='Saving to GitHub...';btn.disabled=true;
-  try{
-    EVENTS = await fetchLatestEventsFromGitHub();
-    valid.forEach(ev => {
-      const {_errors, _valid, ...clean} = ev;
-      EVENTS.push(clean);
-    });
-    await saveEventsToGitHub();
-    addLog('added',{title:`${valid.length} events (bulk)`,date:'',start:'',end:'',category:'Bulk'});
-    showToast(`✅ ${valid.length} events added — live for everyone!`);
-    closeBulkUpload();
-    WEEKS=buildWeeks();buildWeekDrawer();updateTabCounts();render();
-  }catch(err){
-    showToast('❌ '+err.message);
-    btn.textContent='✅ Add Valid Events';btn.disabled=false;
+  btn.style.display='';
+  btn.disabled=false;
+  btn.textContent='Back to Summary';
+  bulkPrimaryMode = 'backToBulkSummary';
+  setBulkCancelText('Back to Preview');
+}
+
+function bulkRowEditInput(i,key,label,value){
+  return `
+    <div class="form-group">
+      <label class="form-label">${escBulk(label)}</label>
+      <input class="form-input bulkRowEditInput" data-row="${i}" data-key="${escBulk(key)}" value="${escBulk(value)}" onkeydown="if(event.key==='Enter'){event.preventDefault();saveBulkRowEdit(${i});}">
+    </div>
+  `;
+}
+
+function bulkRowEditTextarea(i,key,label,value){
+  return `
+    <div class="form-group">
+      <label class="form-label">${escBulk(label)}</label>
+      <textarea class="form-input bulkRowEditInput" data-row="${i}" data-key="${escBulk(key)}" rows="3" style="resize:vertical;min-height:70px">${escBulk(value)}</textarea>
+    </div>
+  `;
+}
+
+function saveBulkRowEdit(i){
+  const row = bulkState.allRows[i];
+
+  if(!row){
+    showToast('⚠️ Could not find that imported row.');
+    renderBulkRoundOneSummary();
+    return;
+  }
+
+  document.querySelectorAll(`.bulkRowEditInput[data-row="${i}"]`).forEach(input=>{
+    const key=input.dataset.key;
+    row[key]=input.value.trim();
+  });
+
+  row.mand = normalizeBulkMand(row.mand);
+  row.date = normalizeBulkDate(row.date);
+  row.start = normalizeBulkTime(row.start);
+  row.end = normalizeBulkTime(row.end);
+
+  if(!row._ignored){
+    reclassifyBulkEditedRow(row);
+  }
+
+  rebuildBulkBucketsFromAllRows();
+  renderBulkRoundOneSummary();
+}
+
+function renderBulkPartialRepair(){
+  const preview=document.getElementById('bulkPreview');
+
+  if(!bulkState.partialRows.length){
+    showToast('✅ No partial rows to repair.');
+    renderBulkRoundOneSummary();
+    return;
+  }
+
+  const rowsHtml = bulkState.partialRows.map((r,i)=>`
+    <div class="bulk-summary" style="border-bottom:1px solid var(--border)">
+      <div class="bulk-section-title">Partial Row ${i+1} — ${escBulk(r._sheetName)} row ${escBulk(r._rowNum)}</div>
+      <div class="bulk-note" style="margin-bottom:10px;color:#8a4a00">
+        ${escBulk((r._issues || []).join('; '))}
+      </div>
+
+      ${bulkRepairInput(i,'mand','[MAND]',r.mand)}
+      ${bulkRepairInput(i,'title','Session Name',r.title)}
+      ${bulkRepairInput(i,'mCal','Class',r.mCal)}
+      ${bulkRepairInput(i,'date','Date',r.date)}
+      ${bulkRepairInput(i,'start','Start Time',r.start)}
+      ${bulkRepairInput(i,'end','End Time',r.end)}
+      ${bulkRepairInput(i,'category','Category',r.category)}
+      ${bulkRepairInput(i,'block','Block/Course',r.block)}
+      ${bulkRepairInput(i,'group','Group Assigned',r.group)}
+      ${bulkRepairInput(i,'location','Session Location',r.location)}
+      ${bulkRepairInput(i,'calYear','Cohort Year',r.calYear)}
+      ${bulkRepairInput(i,'presenter','Presenter',r.presenter)}
+      ${bulkRepairTextarea(i,'info','Additional Information',r.info)}
+
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="bulk-btn bulk-btn-primary" type="button" onclick="saveBulkPartialEdit(${i})">Save Repair</button>
+        <button class="bulk-btn bulk-btn-cancel" type="button" onclick="skipBulkPartialRow(${i})">Ignore and Don't Upload</button>
+      </div>
+    </div>
+  `).join('');
+
+  preview.innerHTML = `
+    <div class="bulk-summary">
+      <div class="bulk-section-title">Repair Partial Rows</div>
+      <div class="bulk-note">
+        Fix missing or invalid fields below. Repaired rows will be rechecked. If they become valid, they will move out of Partial.
+      </div>
+    </div>
+    ${rowsHtml}
+  `;
+
+  preview.style.display='';
+
+  const btn=document.getElementById('bulkAddBtn');
+  btn.style.display='';
+  btn.disabled=false;
+  btn.textContent='Back to Summary';
+  bulkPrimaryMode = 'backToBulkSummary';
+  setBulkCancelText('Back to Preview');
+}
+
+function bulkRepairInput(i,key,label,value){
+  return `
+    <div class="form-group">
+      <label class="form-label">${escBulk(label)}</label>
+      <input class="form-input bulkRepairInput" data-row="${i}" data-key="${escBulk(key)}" value="${escBulk(value)}" onkeydown="if(event.key==='Enter'){event.preventDefault();saveBulkPartialEdit(${i});}">
+    </div>
+  `;
+}
+
+function bulkRepairTextarea(i,key,label,value){
+  return `
+    <div class="form-group">
+      <label class="form-label">${escBulk(label)}</label>
+      <textarea class="form-input bulkRepairInput" data-row="${i}" data-key="${escBulk(key)}" rows="3" style="resize:vertical;min-height:70px">${escBulk(value)}</textarea>
+    </div>
+  `;
+}
+
+function saveBulkPartialEdit(i){
+  const row = bulkState.partialRows[i];
+
+  if(!row){
+    showToast('⚠️ Could not find that partial row.');
+    renderBulkRoundOneSummary();
+    return;
+  }
+
+  document.querySelectorAll(`.bulkRepairInput[data-row="${i}"]`).forEach(input=>{
+    const key=input.dataset.key;
+    row[key]=input.value.trim();
+  });
+
+  row.mand = normalizeBulkMand(row.mand);
+  row.date = normalizeBulkDate(row.date);
+  row.start = normalizeBulkTime(row.start);
+  row.end = normalizeBulkTime(row.end);
+
+  reclassifyBulkEditedRow(row);
+  rebuildBulkBucketsFromAllRows();
+
+  if(bulkState.partialRows.length){
+    renderBulkPartialRepair();
+  } else {
+    renderBulkRoundOneSummary();
   }
 }
+
+function skipBulkPartialRow(i){
+  const row = bulkState.partialRows[i];
+
+  if(!row){
+    showToast('⚠️ Could not find that partial row.');
+    renderBulkRoundOneSummary();
+    return;
+  }
+
+  row._ignored = true;
+  row._issues = ["Ignored and not uploaded by user during partial-row review"];
+  rebuildBulkBucketsFromAllRows();
+
+  if(bulkState.partialRows.length){
+    renderBulkPartialRepair();
+  } else {
+    renderBulkRoundOneSummary();
+  }
+}
+
+function reclassifyBulkEditedRow(row){
+  const missing = missingRequiredBulkValues(row);
+  const invalid = invalidBulkValues(row);
+  row._issues = [...missing, ...invalid];
+  row._duplicateMatch = null;
+  row._conflictMatch = null;
+
+  if(row._issues.length){
+    row._status = 'partial';
+    return;
+  }
+
+  const duplicateMatch = findBulkDuplicate(row, EVENTS);
+  if(duplicateMatch){
+    row._status = 'duplicate';
+    row._duplicateMatch = duplicateMatch;
+    return;
+  }
+
+  const comparisonRows = bulkState.allRows.filter(r =>
+    r !== row &&
+    !r._ignored &&
+    r._status === 'ready'
+  );
+
+  const conflictMatch = findBulkConflict(row, EVENTS.concat(comparisonRows));
+  if(conflictMatch){
+    row._status = 'conflict';
+    row._conflictMatch = conflictMatch;
+    return;
+  }
+
+  row._status = 'ready';
+}
+
+function rebuildBulkBucketsFromAllRows(){
+  bulkState.readyRows = [];
+  bulkState.partialRows = [];
+  bulkState.duplicateRows = [];
+  bulkState.conflictRows = [];
+  bulkState.skippedRows = [];
+  bulkState.ignoredRows = [];
+
+  bulkState.allRows.forEach(r=>{
+    if(r._ignored){
+      bulkState.ignoredRows.push(r);
+      return;
+    }
+
+    if(r._status === 'ready') bulkState.readyRows.push(r);
+    else if(r._status === 'partial') bulkState.partialRows.push(r);
+    else if(r._status === 'duplicate') bulkState.duplicateRows.push(r);
+    else if(r._status === 'conflict') bulkState.conflictRows.push(r);
+    else if(r._status === 'skipped') bulkState.skippedRows.push(r);
+  });
+}
+
+function bulkIssueText(r){
+  if(r._status === 'ready') return '✓';
+
+    if(r._status === 'partial'){
+      return '⚠ ' + escBulk(r._issues.join('; '));
+    }
+
+  if(r._status === 'duplicate'){
+    return `Possible duplicate of existing event: ${escBulk(r._duplicateMatch.title || '')}`;
+  }
+
+  if(r._status === 'conflict'){
+    return `Possible overlap with: ${escBulk(r._conflictMatch.title || '')} (${escBulk(r._conflictMatch.start || '')}–${escBulk(r._conflictMatch.end || '')})`;
+  }
+
+  return '';
+}
+
+function renderBulkMessage(title,bodyHtml){
+  const preview=document.getElementById('bulkPreview');
+  preview.innerHTML = `
+    <div class="bulk-summary">
+      <div class="bulk-section-title">${escBulk(title)}</div>
+      ${bodyHtml}
+    </div>
+  `;
+  preview.style.display='';
+  document.getElementById('bulkStats').style.display='none';
+  document.getElementById('bulkAddBtn').style.display='none';
+}
+
+function getBulkUploadableRows(){
+  return bulkState.allRows.filter(r =>
+    !r._ignored &&
+    ['ready','duplicate','conflict'].includes(r._status)
+  );
+}
+
+function renderBulkStatusReview(status){
+  rebuildBulkBucketsFromAllRows();
+
+  const labelMap = {
+    partial: 'Partial Rows',
+    conflict: 'Possible Conflicts',
+    duplicate: 'Possible Duplicates'
+  };
+
+  const rows = bulkState.allRows.filter(r => !r._ignored && r._status === status);
+
+  if(!rows.length){
+    showToast(`✅ No ${labelMap[status] || status} to review.`);
+    renderBulkRoundOneSummary();
+    return;
+  }
+
+  const summaryHtml = `
+    <div class="bulk-summary">
+      <div class="bulk-section-title">Resolve ${escBulk(labelMap[status] || status)}</div>
+      <div class="bulk-note">
+        Use the edit bubble to change a row, or the ignore/include bubble to remove or restore it for this upload.
+        ${status === 'partial' ? 'Partial rows cannot be uploaded unless repaired.' : 'Included rows will remain eligible for upload in this preview pass.'}
+      </div>
+    </div>
+  `;
+
+  renderBulkParsedTable(summaryHtml, rows);
+
+  const btn=document.getElementById('bulkAddBtn');
+  btn.style.display='';
+  btn.disabled=false;
+  btn.textContent='Back to Summary';
+  bulkPrimaryMode = 'backToBulkSummary';
+  setBulkCancelText('Back to Preview');
+}
+
+function renderBulkUploadGate(){
+  rebuildBulkBucketsFromAllRows();
+
+  const uploadableRows = getBulkUploadableRows();
+  const partialCount = bulkState.partialRows.length;
+  const duplicateCount = bulkState.duplicateRows.length;
+  const conflictCount = bulkState.conflictRows.length;
+
+  const warningHtml = `
+    <div class="bulk-summary">
+      <div class="bulk-section-title">Upload Eligible Sessions</div>
+
+      <p>
+        <span class="bulk-pill ok">${uploadableRows.length} eligible</span>
+        <span class="bulk-pill warn">${partialCount} partial excluded</span>
+        <span class="bulk-pill warn">${duplicateCount} duplicate warnings</span>
+        <span class="bulk-pill warn">${conflictCount} conflict warnings</span>
+        <span class="bulk-pill warn">${bulkState.ignoredRows.length} ignored</span>
+      </p>
+
+      <div class="bulk-note">
+        Eligible sessions will be written to events.json in one GitHub save. ICS feeds will regenerate after the save completes.
+      </div>
+
+      <div class="bulk-note" style="margin-top:10px;color:#8a4a00">
+        Partial rows are not eligible for upload. Duplicate and conflict rows are eligible only if they have not been ignored.
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button class="bulk-btn bulk-btn-primary" id="bulkCommitBtn" type="button" onclick="commitBulkUpload()">Confirm Upload</button>
+        <button class="bulk-btn bulk-btn-cancel" type="button" onclick="renderBulkRoundOneSummary()">Back to Summary</button>
+      </div>
+    </div>
+  `;
+
+  renderBulkParsedTable(warningHtml, uploadableRows);
+
+  const btn=document.getElementById('bulkAddBtn');
+  btn.style.display='';
+  btn.disabled=false;
+  btn.textContent='Back to Summary';
+  bulkPrimaryMode = 'backToBulkSummary';
+  setBulkCancelText('Back to Preview');
+}
+
+async function commitBulkUpload(){
+  rebuildBulkBucketsFromAllRows();
+
+  const uploadableRows = getBulkUploadableRows();
+
+  if(!uploadableRows.length){
+    showToast('⚠️ No eligible sessions to upload.');
+    return;
+  }
+
+  const btn = document.getElementById('bulkCommitBtn');
+  if(btn){
+    btn.textContent = 'Saving to GitHub...';
+    btn.disabled = true;
+  }
+
+  try{
+    EVENTS = await fetchLatestEventsFromGitHub();
+
+    const pendingEvents = uploadableRows.map(row => cleanBulkRowForSave(row));
+
+    pendingEvents.forEach(ev=>{
+      ev._id = generateUniqueId(EVENTS.concat(pendingEvents));
+      EVENTS.push(ev);
+    });
+
+    await saveEventsToGitHub();
+
+    addLog('added',{
+      title:`${pendingEvents.length} events (bulk upload)`,
+      date:pendingEvents[0].date,
+      start:pendingEvents[0].start,
+      end:pendingEvents[0].end,
+      category:'Bulk Upload'
+    });
+
+    showToast(`✅ ${pendingEvents.length} sessions uploaded — live for everyone!`);
+
+    bulkWorkbook = null;
+    bulkSelectedSheets = [];
+    bulkPrimaryMode = '';
+    bulkState = emptyBulkState();
+
+    closeBulkUpload();
+
+    WEEKS = buildWeeks();
+    buildWeekDrawer();
+    updateTabCounts();
+    render();
+    }catch(err){
+    const msg = String(err && err.message ? err.message : err);
+    showToast('❌ '+msg);
+
+    if(btn){
+      if(msg.includes('Another save happened at the same time')){
+        btn.textContent = 'Confirm Upload';
+        btn.disabled = false;
+      } else {
+        btn.textContent = 'Reload before retrying';
+        btn.disabled = true;
+      }
+    }
+  }
+}
+
+function cleanBulkRowForSave(row){
+  const {
+    _sheetName,
+    _rowNum,
+    _spreadsheetId,
+    _issues,
+    _status,
+    _ignored,
+    _duplicateMatch,
+    _conflictMatch,
+    ...clean
+  } = row;
+
+  clean.weekNum = clean.date ? weekNumFromDate(clean.date) : '';
+  clean.week = clean.weekNum ? `Week ${clean.weekNum}` : '';
+
+  return clean;
+}
+
+function cellString(value){
+  return String(value ?? '').replace(/\s+/g,' ').trim();
+}
+
+function rowIsEmpty(row){
+  return !row || row.every(cell => cellString(cell) === '');
+}
+
+function normCompare(value){
+  return cellString(value).toLowerCase();
+}
+
+function escBulk(v){
+  return String(v ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
 
 async function saveForm(){
   const title=document.getElementById('ff_title').value.trim();
