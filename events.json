@@ -7860,8 +7860,8 @@
     "end": "12:00:00",
     "category": "Session",
     "block": "GI",
-    "weekNum": 1,
-    "week": "1",
+    "weekNum": 18,
+    "week": "Week 18",
     "desc": "Active Learning",
     "calYear": "2029",
     "mCal": "M2",
@@ -7870,7 +7870,7 @@
     "location": "2nd Flr Rm 216 EnMed Twr",
     "_id": "6051226_1",
     "info": "Pathology of the Oral Cavity, Pathology of the Esophagus, Pathology of the Stomach",
-    "presenter": ""
+    "presenter": "Dr. Hughes"
   },
   {
     "title": "Active Learning",
