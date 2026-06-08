@@ -8044,25 +8044,6 @@
     "presenter": ""
   },
   {
-    "title": "Active Learning",
-    "date": "10/14/2026",
-    "start": "10:00:00",
-    "end": "11:00:00",
-    "category": "Session",
-    "block": "GI",
-    "weekNum": 1,
-    "week": "4",
-    "desc": "Active Learning",
-    "calYear": "2029",
-    "mCal": "M2",
-    "mand": "No",
-    "group": "All Students",
-    "location": "2nd Flr Rm 216 EnMed Twr",
-    "_id": "6051226_11",
-    "info": "Pharmacology",
-    "presenter": "Dr. Rogers"
-  },
-  {
     "title": "Exam Review",
     "date": "10/14/2026",
     "start": "10:00:00",
