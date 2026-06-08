@@ -9268,25 +9268,6 @@
     "presenter": "Dr. Meyer"
   },
   {
-    "title": "Histology Lab",
-    "date": "08/03/2026",
-    "start": "10:00:00",
-    "end": "11:00:00",
-    "category": "Lab",
-    "block": "FoM I",
-    "weekNum": 1,
-    "week": "1",
-    "desc": "Histology Lab",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "No",
-    "group": "All Students",
-    "location": "2nd Flr Rm 212 A/B EnMed Twr",
-    "_id": "2051226_4",
-    "info": "Epithelium and connective tissue",
-    "presenter": "Dr. Meyer"
-  },
-  {
     "title": "Active Learning",
     "date": "08/07/2026",
     "start": "08:00:00",
