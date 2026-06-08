@@ -7955,8 +7955,8 @@
     "end": "12:00:00",
     "category": "Session",
     "block": "GI",
-    "weekNum": 1,
-    "week": "3",
+    "weekNum": 20,
+    "week": "Week 20",
     "desc": "Active Learning",
     "calYear": "2029",
     "mCal": "M2",
@@ -7965,7 +7965,7 @@
     "location": "2nd Flr Rm 216 EnMed Twr",
     "_id": "6051226_6",
     "info": "Pathology of the Liver I, Pathology of the Liver II, Pathology of the Gall Bladder and Biliary Tract",
-    "presenter": ""
+    "presenter": "Dr. Hughes"
   },
   {
     "title": "Active Learning",
