@@ -11261,5 +11261,24 @@
     "_id": "c6a1e529-05b5-4d56-8189-39b5e4ed66ac",
     "info": "",
     "presenter": ""
+  },
+  {
+    "title": "Active Learning",
+    "date": "09/28/2026",
+    "start": "11:00",
+    "end": "12:00",
+    "category": "Session",
+    "block": "GI",
+    "weekNum": 19,
+    "week": "Week 19",
+    "desc": "Active Learning",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "",
+    "location": "2nd Flr Rm 216 EnMed Twr",
+    "info": "Pharmacology",
+    "presenter": "Dr. Rogers",
+    "_id": "16ccd663-75e4-4ccc-b188-ab8f597662d3"
   }
 ]
