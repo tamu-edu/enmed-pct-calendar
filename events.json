@@ -7876,11 +7876,11 @@
     "title": "Active Learning",
     "date": "09/28/2026",
     "start": "09:00:00",
-    "end": "12:00:00",
+    "end": "11:00:00",
     "category": "Session",
     "block": "GI",
-    "weekNum": 1,
-    "week": "2",
+    "weekNum": 19,
+    "week": "Week 19",
     "desc": "Active Learning",
     "calYear": "2029",
     "mCal": "M2",
@@ -7889,7 +7889,7 @@
     "location": "2nd Flr Rm 216 EnMed Twr",
     "_id": "6051226_2",
     "info": "Pathology of Lower GI",
-    "presenter": ""
+    "presenter": "Dr. Paolini"
   },
   {
     "title": "TBL",
