@@ -9311,7 +9311,7 @@
     "start": "10:00:00",
     "end": "11:30:00",
     "category": "TBL",
-    "block": "MGA, FOM",
+    "block": "MGA, FOM I",
     "weekNum": 12,
     "week": "Week 12",
     "desc": "TBL",
