@@ -1,4 +1,23 @@
 [
+    {
+    "title": "Taco Tuesday Testing Session",
+    "date": "07/06/2026",
+    "start": "8:30",
+    "end": "17:30",
+    "category": "Orientation",
+    "block": "",
+    "weekNum": "",
+    "week": "",
+    "desc": "",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Flr Rm 216 EnMed Twr",
+    "_id": "05212026_6542",
+    "info": "",
+    "presenter": "Ross. Sara Ross."
+  },
   {
     "title": "ITDE 613 Orientation",
     "date": "07/06/2026",
