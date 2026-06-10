@@ -3249,25 +3249,6 @@
     "presenter": "Dr. Meyer, Dr. Omole, Dr. Priya"
   },
   {
-    "title": "EXAM (Written)",
-    "date": "11/06/2026",
-    "start": "08:00",
-    "end": "12:00",
-    "category": "Exam",
-    "block": "MGA",
-    "weekNum": 24,
-    "week": "Week 24",
-    "desc": "EXAM (Written)",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
-    "_id": "10051226_79",
-    "info": "",
-    "presenter": "Dr. Meyer, Dr.Omole"
-  },
-  {
     "title": "Active Learning",
     "date": "07/08/2026",
     "start": "09:00",
