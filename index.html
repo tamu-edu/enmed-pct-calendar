@@ -1222,7 +1222,6 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <button class="nav-btn" onclick="prevWeek()">‹</button>
       <button class="nav-btn" onclick="nextWeek()">›</button>
       <span class="week-label" id="weekLabel">—</span>
-      <span class="block-pill" id="blockPill"></span>
       <span class="week-dates" id="weekDates"></span>
     </div>
     <div id="calView"><div style="text-align:center;padding:60px 20px"><div class="spinner"></div><p style="color:var(--muted)">Loading events...</p></div></div>
@@ -1246,12 +1245,15 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
         <div id="fpForm"><div style="text-align:center;padding:30px 0;color:var(--muted)"><div style="font-size:28px;margin-bottom:10px">👆</div><div style="font-size:12px;line-height:1.6">Click an event to edit,<br>or click a time slot to add,<br>or press <strong style="color:var(--gold)">+ Add Event</strong> above.</div></div></div>
       </div>
       <div class="fp-section">
-        <div class="fp-section-title">Recent Changes <span id="changeCount" style="color:var(--muted2);font-size:9px;font-family:monospace"></span></div>
-        <div id="changeLog"><div style="font-size:11px;color:var(--muted2);padding:8px 0">No changes this session.</div></div>
+        <div class="fp-section-title">Pending Changes <span id="changeCount" style="color:var(--muted2);font-size:9px;font-family:monospace"></span></div>
+        <div id="changeLog"><div style="font-size:11px;color:var(--muted2);padding:8px 0">No pending changes.</div></div>
       </div>
     </div>
     <div class="fp-footer">
-  <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Bulk tools preview changes before committing them to GitHub.</div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Manual edits are staged here before committing to GitHub.</div>
+      <button class="btn-full" id="reviewPendingBtn" onclick="openPendingReview()" style="background:var(--gray-dk);color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-top:0">
+        Review &amp; Submit Changes
+      </button>
     <button class="btn-full" onclick="openMultiAdd()" style="background:var(--maroon);color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">➕ Multi-Add Session</button>
     <button class="btn-full" onclick="enterBulkSelect()" style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">&#9745; Select &amp; Delete Events</button>
 <div class="bulk-bar" id="bulkBar">
@@ -1359,6 +1361,23 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
     <div class="bulk-actions">
       <button class="bulk-btn bulk-btn-primary" id="bulkAddBtn" style="display:none" onclick="bulkPrimaryAction()">Continue</button>
       <button class="bulk-btn bulk-btn-cancel" id="bulkCancelBtn" onclick="bulkCancelAction()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- PENDING CHANGE REVIEW MODAL -->
+<div class="bulk-overlay" id="pendingReviewOverlay" onclick="if(event.target.id==='pendingReviewOverlay')closePendingReview()">
+  <div class="bulk-box">
+    <div class="bulk-title">
+      <span>Review &amp; Submit Changes</span>
+      <button class="modal-close" onclick="closePendingReview()">✕</button>
+    </div>
+
+    <div id="pendingReviewBody" class="bulk-preview" style="display:none"></div>
+
+    <div class="bulk-actions">
+      <button class="bulk-btn bulk-btn-primary" id="pendingSubmitBtn" onclick="submitPendingChanges()">Submit Changes to GitHub</button>
+      <button class="bulk-btn bulk-btn-cancel" onclick="closePendingReview()">Back to Edit</button>
     </div>
   </div>
 </div>
@@ -1514,7 +1533,32 @@ async function loadCatalog(){
     const r = await fetch('session_catalog.json');
     if(r.ok) SESSION_CATALOG = await r.json();
   } catch(e){ console.warn('Catalog unavailable'); }
-}const BLOCKS_LIST=["POM I", "POM I Week 1", "POM I Week 2", "POM I Week 3", "POM I Week 4", "POM I Week 5", "POM I Week 6", "POM I Week 7", "POM I Week 8", "POM I Week 9", "POM I Week 10", "POM I Week 11", "POM I Week 12", "POM I Week 13", "POM I Week 14", "POM I Week 15", "POM I Week 16", "POM I Week 17", "POM I Week 19", "POM I Week 20", "POM 2 Full", "POM 2 Week 1", "POM 2 Week 2", "POM 2 Week 3", "POM 2 Week 4", "POM 2 Week 5", "POM 3", "PoM3 Week 1", "PoM3 Week 2", "PoM3 Week 3", "PoM3 Week 4", "PoM3 Week 5", "PoM3 Week 6", "PoM3 Week 7", "PoM3 Week 8", "PoM3 Week 9", "PoM3 Week 10", "PoM3 Week 11", "PoM3 Week 12", "PoM3 Week 13", "PoM3 Week 14", "PoM3 Week 15", "PoM3 Week 16", "PoM3 Week 17", "PoM3 Week 18", "PoM3 Week 19", "PoM3 Week 20", "PoM3 Week 21", "TTC", "MSGR", "Pre-Matriculation Week 1", "Pre-Matriculation Week 2", "Pre-Matriculation Week 3", "Pre-Matriculation Week 4", "Pre-Matriculation Week 5", "Pre-Matriculation Week 6", "Pre-Matriculation Week 7", "ITDE 611 Week 1", "ITDE 611 Week 2", "ITDE 611 Week 3", "ITDE 611 Week 4", "ITDE 611 Week 5", "ITDE 611 Week 6", "ITDE 611 Week 7", "ITDE 611 Week 8", "ITDE 611 Week 9", "ITDE 611 Week 10", "ITDE 611 Week 11", "ITDE 611 Week 12", "ITDE 611 Week 13", "ITDE 611 Week 14", "ITDE 611 Week 15", "ITDE 611 Week 16", "ITDE 611 Week 17", "ITDE 611 Week 18", "ITDE 611 Week 19", "ITDE 611 Week 20", "Semester 1", "Semester 2", "ITDE 612 Week 1", "ITDE 612 Week 2", "ITDE 612 Week 3", "ITDE 612 Week 4", "ITDE 612 Week 5", "ITDE 612 Week 6", "ITDE 612 Week 7", "ITDE 612 Week 8", "ITDE 612 Week 9", "ITDE 612 Week 10", "ITDE 612 Week 11", "ITDE 612 Week 12", "ITDE 612 Week 13", "ITDE 612 Week 14", "ITDE 612 Week 15", "ITDE 612 Week 16", "ITDE 612 Week 17", "ITDE 612 Week 18", "ITDE 612 Week 19", "ITDE 612 Week 20", "ITDE 614 Week 1", "ITDE 614 Week 2", "ITDE 614 Week 3", "ITDE 614 Week 4", "ITDE 614 Week 5", "ITDE 614 Week 6", "ITDE 614 Week 7", "ITDE 614 Week 8", "ITDE 614 Week 9", "ITDE 614 Week 10", "ITDE 614 Week 11", "ITDE 614 Week 12", "ITDE 614 Week 13", "ITDE 614 Week 14", "ITDE 614 Week 15", "ITDE 614 Week 16", "ITDE 614 Week 17", "ITDE 614 Week 18", "ITDE 614 Week 19", "ITDE 614 Week 20", "Semester 3", "MGA Week 0", "MGA Week 1", "MGA Week 2", "MGA Week 3", "MGA Week 4", "MGA Week 5", "MGA Week 6", "MGA Week 7", "MGA Week 8", "MGA Week 9", "MGA Week 10", "MGA Week 11", "MGA Week 12", "MGA Week 13", "MGA Week 14", "MGA Week 15", "FOM I Week 0", "FOM I Week 1", "FOM I Week 3", "FOM I Week 4", "FOM I Week 5", "FOM I Week 6", "FOM I Week 7", "FOM I Week 8", "FOM I Week 9", "FOM I Week 10", "FOM I Week 11", "FOM I Week 12", "FOM I Week 13", "FOM I Week 14", "FOM I Week 15", "FOM 2 Week 0", "FOM 2 Week 1", "FOM 2 Week 2", "FOM 2 Week 3", "FOM 2 Week 4", "FOM 2 Week 5", "Semester 2 Week 1 (Remediation)", "Neuro Week 1", "Neuro Week 2", "Neuro Week 3", "Neuro Week 4", "Neuro Week 5", "Neuro Week 6", "Neuro Week 7", "Neuro Week 8", "ID Week 1", "ID Week 2", "ID Week 3", "ID Week 4", "ID Week 5", "ID Week 6", "ID Week 7", "CV Week 1", "CV Week 2", "CV Week 3", "CV Week 4", "CV Week 5", "Semester 2 Week 22 (Remediation)", "Heme Week 1", "Heme Week 2", "Heme Week 3", "Heme Week 4", "Resp Week 1", "Resp Week 2", "Resp Week 3", "Resp Week 4", "Renal Week 1", "Renal Week 2", "Renal Week 3", "Renal Week 4", "GI Week 1", "GI Week 2", "GI Week 3", "GI Week 4", "Endo Week 1", "Endo Week 2", "Endo Week 3", "Endo Week 4", "Endo Week 5", "MSK Week 1", "MSK Week 2", "MSK Week 3", "EBM Week 1", "EBM Week 2", "ITDE 613 Week 1", "ITDE 613 Week 2", "ITDE 613 Week 3", "ITDE 613 Week 4", "ITDE 613 Week 5", "ITDE 613 Week 6", "ITDE 613 Week 7", "ITDE 613 Week 8", "ITDE 613 Week 9", "ITDE 613 Week 10", "ITDE 613 Week 11", "ITDE 613 Week 12", "ITDE 613 Week 13", "ITDE 613 Week 14", "ITDE 613 Week 15", "ITDE 613 Week 16", "ITDE 613 Week 17", "ITDE 613 Week 18", "ITDE 613 Week 19", "ITDE 613 Week 20", "ITDE 613 Week 21", "ITDE 613 Week 22", "ITDE 613 Week 23", "Heme/Onc", "Respiratory", "Renal", "GI", "Endocrinology", "MSK", "Break"];
+}
+const BLOCKS_LIST = [
+  "POM I",
+  "POM 2",
+  "POM 3",
+  "TTC",
+  "MSGR",
+  "Pre-Matriculation",
+  "ITDE 611",
+  "ITDE 612",
+  "ITDE 613",
+  "ITDE 614",
+  "MGA",
+  "FOM I",
+  "FOM II",
+  "Neuro",
+  "ID",
+  "CV",
+  "Heme/Onc",
+  "Respiratory",
+  "Renal",
+  "GI",
+  "Endo/Repro",
+  "MSK",
+  "EBM"
+];
 const BLOCK_COLOR=(()=>{
   const c={};
   // Color families per course
@@ -1569,6 +1613,7 @@ let currentWeekIdx=0, currentFilter='All', currentBlockFilter='All', currentView
 let currentMonth=new Date().getMonth(), currentMonthYear=new Date().getFullYear();
 let isFacultyMode=false, editingId=null, prefillDate='', prefillHour='';
 let pendingDeleteId='', sessionLog=[];
+let pendingChanges = [];
 let ghFileSha=''; // GitHub file SHA needed for updates
 
 let listFilters = {
@@ -2143,7 +2188,6 @@ function render(){
 
       document.getElementById('weekLabel').textContent='Schedule Finder';
       document.getElementById('weekDates').textContent='';
-      document.getElementById('blockPill').textContent='';
       document.getElementById('toolbarSub').textContent='Filtered list view';
 
       renderChangeLog();
@@ -2159,7 +2203,6 @@ function render(){
     const allEvs=filteredEvents();
     document.getElementById('weekLabel').textContent='All Events';
     document.getElementById('weekDates').textContent='';
-    document.getElementById('blockPill').textContent='';
     document.getElementById('toolbarSub').textContent=`${allEvs.length} event${allEvs.length!==1?'s':''} shown`;
     renderChangeLog();
     renderList();
@@ -2171,8 +2214,6 @@ function render(){
   const w=WEEKS[currentWeekIdx];
   const col=BLOCK_COLOR[w.block]||'#7a829a';
   document.getElementById('weekLabel').textContent=`Week ${w.num}`;
-  const pill=document.getElementById('blockPill');
-  pill.textContent=w.block;pill.style.background=col+'22';pill.style.color=col;pill.style.border='1px solid '+col+'55';
 
   // Date range from actual events
   const weekEvs=EVENTS.filter(e=>weekNumFromDate(e.date)===w.num).sort((a,b)=>a.date.localeCompare(b.date));
@@ -3854,7 +3895,6 @@ function renderMonth(){
   // update week nav visibility
   document.getElementById('weekDates').textContent='';
   document.getElementById('weekLabel').textContent='';
-  document.getElementById('blockPill').textContent='';
 }
 
 function closeMonthMore(){
@@ -4126,25 +4166,33 @@ function bulkToggleEvent(id){
   }
   updateBulkBar();
 }
-async function bulkDeleteSelected(){
-  if(!selectedIds.size){showToast('Select at least one event.');return;}
-  const n=selectedIds.size;
-  if(!confirm('Delete '+n+' event'+(n!==1?'s':'')+'? This cannot be undone.'))return;
-  const delBtn=document.getElementById('bulkBarDel');
-  delBtn.textContent='Deleting...';delBtn.disabled=true;
-  const backup=[...EVENTS];
-  try{
-    EVENTS = await fetchLatestEventsFromGitHub();
-    EVENTS = EVENTS.filter(e => !selectedIds.has(e._id));
-    await saveEventsToGitHub();
-    showToast('Deleted '+n+' event'+(n!==1?'s':'')+'!');
-    exitBulkSelect();
-    WEEKS=buildWeeks();buildWeekDrawer();updateTabCounts();render();
-  }catch(err){
-    EVENTS=backup;
-    showToast('Error: '+err.message);
-    delBtn.textContent='Delete Selected';delBtn.disabled=false;
+function bulkDeleteSelected(){
+  if(!selectedIds.size){
+    showToast('Select at least one event.');
+    return;
   }
+
+  const ids = Array.from(selectedIds);
+  const eventsToDelete = ids
+    .map(id =>
+      pendingChanges.find(c => c.event && c.event._id === id)?.event ||
+      EVENTS.find(e => e._id === id)
+    )
+    .filter(Boolean);
+
+  if(!eventsToDelete.length){
+    showToast('No matching events found.');
+    return;
+  }
+
+  eventsToDelete.forEach(e => {
+    stageChange('deleted', e, e);
+  });
+
+  showToast(`🗑 ${eventsToDelete.length} delete${eventsToDelete.length !== 1 ? 's' : ''} added to pending changes.`);
+
+  exitBulkSelect();
+  openPendingReview();
 }
 
 // ── MULTI-ADD ─────────────────────────────────────────────────
@@ -4396,7 +4444,7 @@ function previewMultiAdd(){
   document.getElementById('multiAddPreview').style.display='';
   document.getElementById('multiAddPreviewBtn').style.display='none';
   document.getElementById('multiAddCommitBtn').style.display='';
-  document.getElementById('multiAddCommitBtn').textContent=`Create ${multiAddGenerated.length} Event${multiAddGenerated.length!==1?'s':''}`;
+  document.getElementById('multiAddCommitBtn').textContent=`Add ${multiAddGenerated.length} Event${multiAddGenerated.length!==1?'s':''} to Pending Changes`;
   document.getElementById('multiAddCommitBtn').disabled=false;
   document.getElementById('multiAddBackBtn').style.display='';
 }
@@ -4409,45 +4457,23 @@ function backToMultiAddForm(){
   document.getElementById('multiAddBackBtn').style.display='none';
 }
 
-async function commitMultiAdd(){
-  if(!multiAddGenerated.length){showToast('⚠️ Preview events first.');return;}
-
-  const btn = document.getElementById('multiAddCommitBtn');
-  btn.textContent = 'Saving to GitHub...';
-  btn.disabled = true;
-
-  try{
-    EVENTS = await fetchLatestEventsFromGitHub();
-
-        multiAddGenerated.forEach(ev=>{
-      ev._id = generateUniqueId(EVENTS.concat(multiAddGenerated));
-
-      const {_source, ...cleanEv} = ev;
-      EVENTS.push(cleanEv);
-    });
-
-    await saveEventsToGitHub();
-
-    addLog('added',{
-      title:`${multiAddGenerated.length} events (multi-add)`,
-      date:multiAddGenerated[0].date,
-      start:multiAddGenerated[0].start,
-      end:multiAddGenerated[0].end,
-      category:'Multi-Add'
-    });
-
-    showToast(`✅ ${multiAddGenerated.length} events added — live for everyone!`);
-    closeMultiAdd();
-
-    WEEKS = buildWeeks();
-    buildWeekDrawer();
-    updateTabCounts();
-    render();
-  }catch(err){
-    showToast('❌ '+err.message);
-    btn.textContent = `Create ${multiAddGenerated.length} Event${multiAddGenerated.length!==1?'s':''}`;
-    btn.disabled = false;
+function commitMultiAdd(){
+  if(!multiAddGenerated.length){
+    showToast('⚠️ Preview events first.');
+    return;
   }
+
+  multiAddGenerated.forEach(ev => {
+    const {_source, ...cleanEv} = ev;
+    cleanEv._id = generateUniqueId(pendingEventPool().concat(multiAddGenerated));
+    stageChange('added', cleanEv, null);
+  });
+
+  const count = multiAddGenerated.length;
+
+  showToast(`✦ ${count} multi-add event${count!==1?'s':''} added to pending changes.`);
+  closeMultiAdd();
+  openPendingReview();
 }
 
 // ── BULK UPLOAD ───────────────────────────────────────────────
@@ -5633,6 +5659,300 @@ function escBulk(v){
     .replace(/'/g,'&#39;');
 }
 
+function pendingChangeLabel(type){
+  if(type === 'added') return 'Added';
+  if(type === 'edited') return 'Edited';
+  if(type === 'deleted') return 'Deleted';
+  return 'Changed';
+}
+
+function pendingChangeIcon(type){
+  if(type === 'added') return '✦';
+  if(type === 'edited') return '✎';
+  if(type === 'deleted') return '✕';
+  return '•';
+}
+
+function pendingChangeClass(type){
+  if(type === 'added') return 'change-added';
+  if(type === 'edited') return 'change-edited';
+  if(type === 'deleted') return 'change-deleted';
+  return '';
+}
+
+function cloneEventForPending(e){
+  return cleanEventForSave({...e});
+}
+
+function pendingEventPool(){
+  return [
+    ...EVENTS,
+    ...pendingChanges
+      .filter(c => c.type === 'added' && c.event)
+      .map(c => c.event)
+  ];
+}
+
+function stageChange(type,event,original=null){
+  const ev = cloneEventForPending(event);
+
+  if(!ev._id){
+    ev._id = generateUniqueId(pendingEventPool());
+  }
+
+  const existingIndex = pendingChanges.findIndex(c => c.event && c.event._id === ev._id);
+  const existingChange = existingIndex >= 0 ? pendingChanges[existingIndex] : null;
+
+  const baseChange = {
+    type,
+    event: ev,
+    original: original ? cloneEventForPending(original) : null,
+    _ignored: false,
+    ts: new Date().toLocaleTimeString()
+  };
+
+  if(type === 'added'){
+    if(existingIndex >= 0){
+      pendingChanges[existingIndex] = {
+        ...existingChange,
+        type: 'added',
+        event: ev,
+        _ignored: false,
+        ts: new Date().toLocaleTimeString()
+      };
+    } else {
+      pendingChanges.unshift(baseChange);
+    }
+  }
+
+  if(type === 'edited'){
+    const alreadyAdded = pendingChanges.findIndex(c => c.type === 'added' && c.event && c.event._id === ev._id);
+
+    if(alreadyAdded >= 0){
+      pendingChanges[alreadyAdded] = {
+        ...pendingChanges[alreadyAdded],
+        event: ev,
+        _ignored: false,
+        ts: new Date().toLocaleTimeString()
+      };
+    } else if(existingIndex >= 0){
+      pendingChanges[existingIndex] = {
+        ...existingChange,
+        type: 'edited',
+        event: ev,
+        original: existingChange.original || cloneEventForPending(original || {}),
+        _ignored: false,
+        ts: new Date().toLocaleTimeString()
+      };
+    } else {
+      pendingChanges.unshift(baseChange);
+    }
+  }
+
+  if(type === 'deleted'){
+    if(existingChange && existingChange.type === 'added'){
+      pendingChanges = pendingChanges.filter(c => !(c.event && c.event._id === ev._id));
+    } else {
+      pendingChanges = pendingChanges.filter(c => !(c.event && c.event._id === ev._id));
+      pendingChanges.unshift({
+        type: 'deleted',
+        event: ev,
+        original: cloneEventForPending(original || ev),
+        _ignored: false,
+        ts: new Date().toLocaleTimeString()
+      });
+    }
+  }
+
+  renderChangeLog();
+  render();
+}
+
+function togglePendingChange(index){
+  const change = pendingChanges[index];
+
+  if(!change){
+    showToast('⚠️ Could not find that pending change.');
+    return;
+  }
+
+  change._ignored = !change._ignored;
+
+  renderChangeLog();
+  renderPendingReview();
+  render();
+}
+
+function removePendingChange(index){
+  togglePendingChange(index);
+}
+
+function editPendingChange(index){
+  const change = pendingChanges[index];
+  if(!change || change.type === 'deleted') return;
+
+  closePendingReview();
+  openEditForm(null, change.event);
+}
+
+function openPendingReview(){
+  renderPendingReview();
+  document.getElementById('pendingReviewOverlay').classList.add('open');
+}
+
+function closePendingReview(){
+  document.getElementById('pendingReviewOverlay').classList.remove('open');
+}
+
+function renderPendingReview(){
+  const body = document.getElementById('pendingReviewBody');
+  const submitBtn = document.getElementById('pendingSubmitBtn');
+
+  const activeChanges = pendingChanges.filter(c => !c._ignored);
+  const addedCount = activeChanges.filter(c => c.type === 'added').length;
+  const editedCount = activeChanges.filter(c => c.type === 'edited').length;
+  const deletedCount = activeChanges.filter(c => c.type === 'deleted').length;
+  const ignoredCount = pendingChanges.filter(c => c._ignored).length;
+
+  if(!pendingChanges.length){
+    body.innerHTML = `
+      <div class="bulk-summary">
+        <div class="bulk-section-title">No Pending Changes</div>
+        <div class="bulk-note">Add, edit, or delete an event first. Changes will appear here before they are submitted to GitHub.</div>
+      </div>
+    `;
+    body.style.display = '';
+    submitBtn.disabled = true;
+    return;
+  }
+
+  submitBtn.disabled = !activeChanges.length;
+
+  const summaryHtml = `
+    <div class="bulk-summary">
+      <div class="bulk-section-title">Review Pending Calendar Changes</div>
+
+      <p>
+        <span class="bulk-pill ok">${addedCount} added</span>
+        <span class="bulk-pill warn">${editedCount} edited</span>
+        <span class="bulk-pill err">${deletedCount} deleted</span>
+        <span class="bulk-pill warn">${ignoredCount} ignored</span>
+      </p>
+
+      <div class="bulk-note">
+        These in-calendar changes have not been committed yet. Use the edit bubble to revise a change, or the ignore/include bubble to exclude a change before submitting.
+      </div>
+    </div>
+  `;
+
+  const cols = ['Actions','Change','MAND','Session Name','Group','Location','Class','Date','Start','End','Category','Block','Updated'];
+  let tbl = `${summaryHtml}<table><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
+
+  pendingChanges.forEach((c,i)=>{
+    const e = c.event || {};
+    const cls = c._ignored ? 'ignored' : (c.type === 'deleted' ? 'err' : (c.type === 'edited' ? 'warn' : 'ok'));
+    const toggleIcon = c._ignored ? '↩' : '⦸';
+    const toggleTitle = c._ignored ? 'Include this change in submit' : "Ignore and Don't Commit this change";
+    const statusText = `${pendingChangeIcon(c.type)} ${pendingChangeLabel(c.type)}${c._ignored ? ' — ignored' : ''}`;
+
+    tbl += `
+      <tr class="${cls}">
+        <td>
+          <div class="bulk-row-actions">
+            ${c.type !== 'deleted' ? `
+              <button class="bulk-action-bubble bulk-action-edit" type="button" title="Edit this pending change" onclick="editPendingChange(${i})">✎</button>
+            ` : ''}
+            <button class="bulk-action-bubble ${c._ignored ? 'bulk-action-include' : 'bulk-action-ignore'}" type="button" title="${escBulk(toggleTitle)}" onclick="togglePendingChange(${i})">${toggleIcon}</button>
+          </div>
+        </td>
+        <td>${escBulk(statusText)}</td>
+        <td>${escBulk(e.mand || '')}</td>
+        <td>${escBulk(e.title || '')}</td>
+        <td>${escBulk(e.group || '')}</td>
+        <td>${escBulk(e.location || '')}</td>
+        <td>${escBulk(e.mCal || '')}</td>
+        <td>${escBulk(e.date || '')}</td>
+        <td>${escBulk(e.start || '')}</td>
+        <td>${escBulk(e.end || '')}</td>
+        <td>${escBulk(e.category || '')}</td>
+        <td>${escBulk(e.block || '')}</td>
+        <td>${escBulk(c.ts || '')}</td>
+      </tr>
+    `;
+  });
+
+  tbl += '</table>';
+
+  body.innerHTML = tbl;
+  body.style.display = '';
+}
+
+async function submitPendingChanges(){
+  const activeChanges = pendingChanges.filter(c => !c._ignored);
+
+  if(!activeChanges.length){
+    showToast('⚠️ No included pending changes to submit.');
+    return;
+  }
+
+  const btn = document.getElementById('pendingSubmitBtn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  try{
+    EVENTS = await fetchLatestEventsFromGitHub();
+
+    activeChanges.forEach(change => {
+      const ev = cloneEventForPending(change.event);
+
+      if(change.type === 'added'){
+        if(EVENTS.some(e => e._id === ev._id)){
+          ev._id = generateUniqueId(EVENTS);
+        }
+
+        EVENTS.push(ev);
+        addLog('added', ev);
+      }
+
+      if(change.type === 'edited'){
+        const i = EVENTS.findIndex(e => e._id === ev._id);
+
+        if(i < 0){
+          throw new Error(`Original event not found for "${ev.title}". Refresh and try again.`);
+        }
+
+        EVENTS[i] = ev;
+        addLog('edited', ev);
+      }
+
+      if(change.type === 'deleted'){
+        EVENTS = EVENTS.filter(e => e._id !== ev._id);
+        addLog('deleted', ev);
+      }
+    });
+
+    await saveEventsToGitHub();
+
+    const confirmedEvents = await fetchEventsFromGitHubAPI();
+    EVENTS = confirmedEvents;
+
+    pendingChanges = [];
+    closePendingReview();
+
+    WEEKS = buildWeeks();
+    buildWeekDrawer();
+    updateTabCounts();
+    render();
+
+    showToast('✅ Pending changes submitted to GitHub.');
+  }catch(err){
+    showToast('❌ '+err.message);
+  }
+
+  btn.textContent = 'Submit Changes to GitHub';
+  btn.disabled = false;
+}
+
 
 async function saveForm(){
   const title=document.getElementById('ff_title').value.trim();
@@ -5648,12 +5968,12 @@ async function saveForm(){
   if(!start||!end){showToast('⚠️ Start and end times are required.');return;}
   if(timeToMinutes(start)>=timeToMinutes(end)){showToast('⚠️ End time must be after start time.');return;}
 
-  const btn=document.getElementById('saveBtn');
   const isEditing=!!editingId;
-  btn.textContent='Saving to GitHub...';
-  btn.disabled=true;
-
-  const existing=editingId ? (EVENTS.find(e=>e._id===editingId)||{}) : {};
+  const existing=editingId ? (
+    pendingChanges.find(c => c.event && c.event._id === editingId)?.event ||
+    EVENTS.find(e=>e._id===editingId) ||
+    {}
+  ) : {};
 
   const calYear=document.getElementById('ff_calyear').value;
   const mCal=document.getElementById('ff_mcal').value;
@@ -5684,51 +6004,14 @@ async function saveForm(){
     _id: editingId || existing._id || null
   };
 
-  try{
-  EVENTS = await fetchLatestEventsFromGitHub();
-    if (!ev._id) {
-  ev._id = generateUniqueId(EVENTS);
-}
-    if(isEditing){
-      const i=EVENTS.findIndex(e=>e._id===editingId);
-
-      if(i<0){
-        throw new Error('Original event not found. Refresh and try again.');
-    }
-
-  EVENTS[i]=ev;
-} else {
-  EVENTS.push(ev);
-}
-
-    await saveEventsToGitHub();
-
-    const confirmedEvents = await fetchEventsFromGitHubAPI();
-    const confirmed = confirmedEvents.some(x => x._id === ev._id);
-
-    if(!confirmed){
-      throw new Error('GitHub API save completed, but the event was not found in events.json.');
-    }
-
-EVENTS = confirmedEvents;
-WEEKS = buildWeeks();
-buildWeekDrawer();
-render();
-    addLog(editingId?'edited':'added',ev);
-    showToast(editingId?'✅ Event updated — live for everyone!':'✅ Event added — live for everyone!');
-    closeForm();
-    WEEKS=buildWeeks();
-    buildWeekDrawer();
-    render();
-  }catch(err){
-  if(!isEditing){
-    EVENTS = EVENTS.filter(x => x._id !== ev._id);
-    render();
+  if(!ev._id){
+    ev._id = generateUniqueId(pendingEventPool());
   }
-  showToast('❌ '+err.message);
-  btn.textContent=isEditing?'💾 Save Changes':'➕ Add Event';
-  btn.disabled=false;
-}
+
+  stageChange(isEditing ? 'edited' : 'added', ev, existing);
+
+  showToast(isEditing ? '✎ Edit added to pending changes.' : '✦ Event added to pending changes.');
+  closeForm();
 }
 
 // ── DELETE ────────────────────────────────────────────────────
@@ -5742,29 +6025,66 @@ function confirmDelete(ev,id){
   document.getElementById('confirmYes').onclick=()=>{doDelete();document.getElementById('confirmOverlay').classList.remove('open');};
   document.getElementById('confirmOverlay').classList.add('open');
 }
-async function doDelete(){
-  const e=EVENTS.find(e=>e._id===pendingDeleteId);if(!e)return;
-  const btn=document.getElementById('confirmYes');btn.textContent='Deleting...';btn.disabled=true;
-  try{
-    EVENTS = await fetchLatestEventsFromGitHub();
-    EVENTS = EVENTS.filter(ev => ev._id !== pendingDeleteId);
-    await saveEventsToGitHub();
-    addLog('deleted',e);showToast('🗑 Deleted — live for everyone!');
-    closeForm();WEEKS=buildWeeks();buildWeekDrawer();render();
-  }catch(err){
-    EVENTS.push(e); // rollback
-    showToast('❌ '+err.message);
+function doDelete(){
+  const e =
+    pendingChanges.find(c => c.event && c.event._id === pendingDeleteId)?.event ||
+    EVENTS.find(e => e._id === pendingDeleteId);
+
+  if(!e) return;
+
+  stageChange('deleted', e, e);
+
+  showToast('🗑 Delete added to pending changes.');
+  closeForm();
+
+  pendingDeleteId = '';
+
+  const btn = document.getElementById('confirmYes');
+  if(btn){
+    btn.textContent = 'Delete';
+    btn.disabled = false;
   }
-  btn.textContent='Delete';btn.disabled=false;
 }
 
 // ── CHANGE LOG ────────────────────────────────────────────────
-function addLog(type,e){sessionLog.unshift({type,title:e.title,date:e.date,start:e.start,end:e.end,cat:e.category,ts:new Date().toLocaleTimeString()});}
+function addLog(type,e){
+  sessionLog.unshift({
+    type,
+    title:e.title,
+    date:e.date,
+    start:e.start,
+    end:e.end,
+    cat:e.category,
+    ts:new Date().toLocaleTimeString()
+  });
+}
+
 function renderChangeLog(){
   if(!isFacultyMode)return;
-  document.getElementById('changeCount').textContent=sessionLog.length?`(${sessionLog.length})`:'';
-  if(!sessionLog.length){document.getElementById('changeLog').innerHTML='<div style="font-size:11px;color:var(--muted2);padding:8px 0">No changes this session.</div>';return;}
-  document.getElementById('changeLog').innerHTML=sessionLog.slice(0,8).map(e=>`<div class="change-item change-${e.type}"><div class="ch-type">${e.type==='added'?'✦ Added':e.type==='edited'?'✎ Edited':'✕ Deleted'}</div><div class="ch-title">${e.title.substring(0,45)}</div><div class="ch-meta">${e.date} · ${fmtTime(e.start)}–${fmtTime(e.end)} · ${e.cat} · ${e.ts}</div></div>`).join('');
+
+  const countEl = document.getElementById('changeCount');
+  const logEl = document.getElementById('changeLog');
+  const reviewBtn = document.getElementById('reviewPendingBtn');
+
+  if(countEl) countEl.textContent = pendingChanges.length ? `(${pendingChanges.length})` : '';
+  if(reviewBtn) reviewBtn.disabled = !pendingChanges.length;
+
+  if(!pendingChanges.length){
+    logEl.innerHTML='<div style="font-size:11px;color:var(--muted2);padding:8px 0">No pending changes.</div>';
+    return;
+  }
+
+  logEl.innerHTML = pendingChanges.slice(0,8).map((c,i)=>`
+    <div class="change-item ${pendingChangeClass(c.type)}">
+      <div class="ch-type">${pendingChangeIcon(c.type)} ${pendingChangeLabel(c.type)}</div>
+      <div class="ch-title">${escBulk((c.event.title || '').substring(0,45))}</div>
+      <div class="ch-meta">${escBulk(c.event.date || '')} · ${escBulk(c.event.start || '')}–${escBulk(c.event.end || '')} · ${escBulk(c.event.category || '')} · ${escBulk(c.ts || '')}</div>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        ${c.type !== 'deleted' ? `<button class="list-reset-btn" type="button" onclick="editPendingChange(${i})">Edit</button>` : ''}
+        <button class="list-reset-btn" type="button" onclick="removePendingChange(${i})">Remove</button>
+      </div>
+    </div>
+  `).join('');
 }
 
 // ── ICS EXPORT ────────────────────────────────────────────────
