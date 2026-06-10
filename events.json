@@ -2432,15 +2432,15 @@
     "presenter": "Dr. Meyer, Dr. Omole"
   },
   {
-    "title": "Exam Check-in",
+    "title": "EXAM Check-in",
     "date": "09/11/2026",
     "start": "07:45",
     "end": "7:55",
     "category": "Exam Check-In",
-    "block": "MGA/FOM I",
+    "block": "MGA, FOM",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "Exam Check-in",
+    "desc": "EXAM Check-in",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
