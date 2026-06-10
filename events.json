@@ -2456,7 +2456,7 @@
     "start": "08:00",
     "end": "12:00",
     "category": "EXAM",
-    "block": "MGA, FOM",
+    "block": "MGA, FOM I",
     "weekNum": 16,
     "week": "Week 16",
     "desc": "EXAM (Written)",
