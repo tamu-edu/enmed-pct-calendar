@@ -785,6 +785,66 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
   gap:10px;
 }
 
+.list-date-row{
+  display:grid;
+  grid-template-columns:minmax(180px,260px);
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.list-main-filter-row{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(140px,1fr));
+  gap:10px;
+}
+
+@media(max-width:900px){
+  .list-main-filter-row{
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  }
+}
+
+.list-search-row{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:8px;
+  align-items:end;
+  margin-top:10px;
+}
+
+.list-search-row .list-filter-control{
+  min-width:0;
+}
+
+.list-search-btn{
+  padding:7px 14px;
+  border-radius:8px;
+  border:1px solid var(--accent);
+  background:var(--accent);
+  color:white;
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.list-search-clear{
+  padding:7px 10px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  cursor:pointer;
+}
+
+@media(max-width:700px){
+  .list-search-row{
+    grid-template-columns:1fr;
+  }
+}
+
 .list-filter-control label{
   display:block;
   font-size:10px;
@@ -1326,10 +1386,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       </div>
 
       <div class="multiadd-grid">
-        <div class="form-group">
-          <label class="form-label">Group Assigned</label>
-          <input class="form-input" id="ma_group" placeholder="All Students">
-        </div>
+        <div class="form-group" id="ma_groupPickerWrap"></div>
         <div class="form-group">
           <label class="form-label">Session Location</label>
           <input class="form-input" id="ma_location" placeholder="Room 216">
@@ -1456,7 +1513,7 @@ const BLOCK_COLOR=(()=>{
   const c={};
   // Color families per course
   const groups=[
-    {prefix:['POM I','POM 2','POM 3','PoM3'],col:'#E53935'},
+    {prefix:['POM I','POM II','POM III','POM 2','POM 3','PoM3'],col:'#E53935'},
     {prefix:['TTC','MSGR'],col:'#8E24AA'},
     {prefix:['Pre-Matriculation'],col:'#F4511E'},
     {prefix:['ITDE 611'],col:'#00897B'},
@@ -1465,7 +1522,7 @@ const BLOCK_COLOR=(()=>{
     {prefix:['ITDE 614'],col:'#00ACC1'},
     {prefix:['Semester'],col:'#43A047'},
     {prefix:['MGA'],col:'#6D4C41'},
-    {prefix:['FOM I','FOM 2'],col:'#F9A825'},
+    {prefix:['FOM I','FOM 1','FOM II','FOM 2'],col:'#F9A825'},
     {prefix:['Neuro'],col:'#7B1FA2'},
     {prefix:['ID '],col:'#C62828'},
     {prefix:['CV '],col:'#AD1457'},
@@ -1516,7 +1573,8 @@ let listFilters = {
   course: [],
   group: [],
   category: [],
-  mand: []
+  mand: [],
+  presenter: ''
 };
 
 let openListDropdowns = new Set();
@@ -2477,12 +2535,68 @@ function titleCaseListLabel(value){
 }
 
 function normalizeCourseBlockLabel(block){
-  let s = String(block || '').trim().replace(/\s+/g,' ');
+  let s = String(block || '')
+    .trim()
+    .replace(/[\u2010-\u2015]/g,'-')
+    .replace(/\s*\/\s*/g,'/')
+    .replace(/\s+/g,' ');
+
   if(!s) return '';
 
   s = s.replace(/\s+Week\s+\d+.*$/i,'');
   s = s.replace(/\s+Full$/i,'');
-  return s.trim();
+
+  const canonicalCourse = {
+    fom: 'FOM',
+    pom: 'POM',
+    mga: 'MGA',
+    itde: 'ITDE',
+    ebm: 'EBM',
+    msk: 'MSK',
+    endo: 'Endo',
+    renal: 'Renal',
+    resp: 'Respiratory',
+    respiratory: 'Respiratory',
+    heme: 'Heme',
+    hem: 'Heme',
+    gi: 'GI'
+  };
+
+  function normalizeOne(part){
+    let p = String(part || '').trim().replace(/\s+/g,' ');
+    if(!p) return '';
+
+    p = p.replace(/\bF0M\b/ig,'FOM');
+    p = p.replace(/\bG\s+I\b/ig,'GI');
+    p = p.replace(/\bPoM\b/ig,'POM');
+
+    // Preserve class-year labels. These are not course numbers.
+    p = p.replace(/\bM\s+I\b/ig,'M I');
+    p = p.replace(/\bM\s+II\b/ig,'M II');
+    p = p.replace(/\bM1\b/ig,'M1');
+    p = p.replace(/\bM2\b/ig,'M2');
+
+    const numbered = p.match(/^(FOM|POM)\s*(1|2|I|II|3|III)\b(.*)$/i);
+    if(numbered){
+      const baseKey = numbered[1].toLowerCase();
+      const base = canonicalCourse[baseKey] || numbered[1].toUpperCase();
+      const n = numbered[2].toLowerCase();
+      const numeral = ['1','i'].includes(n) ? 'I' : ['2','ii'].includes(n) ? 'II' : '3';
+      const rest = numbered[3] || '';
+      return `${base} ${numeral}${rest}`.trim();
+    }
+
+    const key = p.toLowerCase();
+    if(canonicalCourse[key]) return canonicalCourse[key];
+
+    return p;
+  }
+
+  return s
+    .split('/')
+    .map(normalizeOne)
+    .filter(Boolean)
+    .join('/');
 }
 
 function listDisplayLabel(field,value){
@@ -2504,15 +2618,12 @@ function listDisplayLabel(field,value){
   }
 
   if(field === 'group'){
-    if(key === 'all' || key === 'all student' || key === 'all students') return 'All Students';
-
-    const groupMatch = key.match(/^group\s+([a-z0-9]+)$/);
-    if(groupMatch) return `Group ${groupMatch[1].toUpperCase()}`;
-
-    return titleCaseListLabel(key);
-  }
+  return normalizeGroupLabel(raw);
+}
 
   if(field === 'category'){
+    if(key === 'all m1 students') return 'All M1 Students';
+    if(key === 'last day') return 'Last Day';
     if(key === 'exam check in' || key === 'exam checkin') return 'Exam Check-In';
     if(key === 'blackout') return 'Blackout';
     if(key === 'tbl') return 'TBL';
@@ -2520,6 +2631,10 @@ function listDisplayLabel(field,value){
     if(key === 'cbse') return 'CBSE';
     if(key === 'itde') return 'ITDE';
     if(key === 'sdl') return 'SDL';
+    if(key === 'ebm') return 'EBM';
+    if(key === 'msk') return 'MSK';
+    if(key === 'gi') return 'GI';
+
     return titleCaseListLabel(key);
   }
 
@@ -2546,6 +2661,85 @@ function cleanBlockString(block){
 
 function blockDisplay(block){
   return cleanBlockString(block);
+}
+
+function isCourseBlockLabel(label){
+  const key = normalizeListKey(label);
+
+  const allowed = new Set([
+    'cbse',
+    'ebm',
+    'endo',
+    'endo repro',
+    'fom i',
+    'fom ii',
+    'fom mga',
+    'gi',
+    'heme onc',
+    'itde 611',
+    'itde 613',
+    'mga',
+    'mga fom i',
+    'msk',
+    'msk ebm',
+    'pom 3',
+    'pom i',
+    'pre matriculation',
+    'renal',
+    'respiratory'
+  ]);
+
+  return allowed.has(key);
+}
+
+function groupTokens(group){
+  const raw = String(group || '').trim();
+  if(!raw) return [];
+
+  if(normalizeListKey(raw) === 'all students') return ['All Students'];
+
+  const normalized = raw
+    .replace(/&/g, ',')
+    .replace(/\band\b/gi, ',')
+    .replace(/\//g, ',')
+    .replace(/\+/g, ',')
+    .replace(/;/g, ',');
+
+  return normalized
+    .split(',')
+    .map(v => v.trim())
+    .filter(Boolean)
+    .map(normalizeGroupLabel)
+    .filter(Boolean);
+}
+
+function normalizeGroupLabel(group){
+  const raw = String(group || '').trim();
+  const key = normalizeListKey(raw);
+
+  if(!key) return '';
+  if(key === 'all' || key === 'all student' || key === 'all students') return 'All Students';
+
+  const groupMatch = key.match(/^(?:groups?\s*)?([a-z0-9]+)$/);
+  if(groupMatch) return `Group ${groupMatch[1].toUpperCase()}`;
+
+  return titleCaseListLabel(key);
+}
+
+function cleanGroupString(group){
+  const tokens = groupTokens(group);
+
+  if(tokens.some(t => normalizeListKey(t) === 'all students')){
+    return 'All Students';
+  }
+
+  return tokens
+    .filter((v,i,arr) => arr.findIndex(x => normalizeListKey(x) === normalizeListKey(v)) === i)
+    .join(', ');
+}
+
+function groupDisplay(group){
+  return cleanGroupString(group) || 'All Students';
 }
 
 function renderBlockTokens(inputId, targetId){
@@ -2652,12 +2846,16 @@ function listOptionEntries(field,events){
 
     if(field === 'mcal') raws = [e.mCal || 'M1'];
     if(field === 'course') raws = blockTokens(e.block);
-    if(field === 'group') raws = [e.group || 'All Students'];
+    if(field === 'group') raws = groupTokens(e.group || 'All Students');
     if(field === 'category') raws = [e.category || ''];
 
     raws.forEach(raw=>{
       const label = listDisplayLabel(field,raw);
       const key = normalizeListKey(label);
+
+      if(field === 'course' && !isCourseBlockLabel(label)){
+        return;
+      }
 
       if(label && key && !map.has(key)){
         map.set(key,label);
@@ -2717,15 +2915,23 @@ function listEventMatchesMulti(field,eventValue){
   const selected = selectedListValues(field);
   if(!selected.length) return true;
 
-  if(field === 'course'){
-    return selected.some(selectedKey =>
-      blockTokens(eventValue).some(block =>
-        listFilterValue('course', block) === selectedKey
-      )
-    );
-  }
+if(field === 'course'){
+  return selected.some(selectedKey =>
+    blockTokens(eventValue).some(block =>
+      listFilterValue('course', block) === selectedKey
+    )
+  );
+}
 
-  return selected.includes(listFilterValue(field,eventValue));
+if(field === 'group'){
+  return selected.some(selectedKey =>
+    groupTokens(eventValue).some(group =>
+      listFilterValue('group', group) === selectedKey
+    )
+  );
+}
+
+return selected.includes(listFilterValue(field,eventValue));
 }
 
 function listEventMatchesFilters(e){
@@ -2733,6 +2939,12 @@ function listEventMatchesFilters(e){
   if(!listEventMatchesMulti('course',e.block || '')) return false;
   if(!listEventMatchesMulti('group',e.group || 'All Students')) return false;
   if(!listEventMatchesMulti('category',e.category || '')) return false;
+
+  const presenterQuery = String(listFilters.presenter || '').trim().toLowerCase();
+  if(presenterQuery){
+    const presenterText = String(e.presenter || '').toLowerCase();
+    if(!presenterText.includes(presenterQuery)) return false;
+  }
 
   const mandKey = normalizeListKey(e.mand || 'No');
 
@@ -2759,6 +2971,17 @@ function setListFilter(field,value){
     listFilters.end = '';
   }
 
+  render();
+}
+
+function applyPresenterFilter(){
+  const input = document.getElementById('presenterFilterInput');
+  listFilters.presenter = input ? input.value.trim() : '';
+  render();
+}
+
+function clearPresenterFilter(){
+  listFilters.presenter = '';
   render();
 }
 
@@ -2805,7 +3028,8 @@ function resetListFilters(){
     course: [],
     group: [],
     category: [],
-    mand: []
+    mand: [],
+    presenter: ''
   };
 
   render();
@@ -2836,6 +3060,81 @@ function renderListMultiFilter(field,label,events){
       </div>
     </details>
   `;
+}
+
+function renderGroupMultiPicker(id, value){
+  const selected = new Set(groupTokens(value || 'All Students').map(g => listFilterValue('group', g)));
+  const options = groupPickerOptions();
+
+  const label = selected.size
+    ? options.filter(o => selected.has(o.value)).map(o => o.label).join(', ')
+    : 'All Students';
+
+  return `
+    <details class="list-multi-filter form-group-picker">
+      <summary>
+        <span>
+          <strong>Group Assigned</strong>
+          <em id="${id}_label">${escapeHtml(label)}</em>
+        </span>
+      </summary>
+      <div class="list-check-menu">
+        ${options.map(o => `
+          <label class="list-check-option">
+            <input
+              type="checkbox"
+              value="${escapeHtml(o.value)}"
+              data-label="${escapeHtml(o.label)}"
+              ${selected.has(o.value) ? 'checked' : ''}
+              onchange="updateGroupPickerValue('${id}')"
+            >
+            <span>${escapeHtml(o.label)}</span>
+          </label>
+        `).join('')}
+      </div>
+    </details>
+    <input type="hidden" id="${id}" value="${escapeHtml(cleanGroupString(value || 'All Students'))}">
+  `;
+}
+
+function groupPickerOptions(){
+  const map = new Map();
+
+  EVENTS.forEach(e=>{
+    groupTokens(e.group || 'All Students').forEach(g=>{
+      const label = normalizeGroupLabel(g);
+      const value = listFilterValue('group', label);
+      if(label && value && !map.has(value)) map.set(value,label);
+    });
+  });
+
+  ['All Students','Group A','Group B','Group C','Group D'].forEach(label=>{
+    const value = listFilterValue('group', label);
+    if(!map.has(value)) map.set(value,label);
+  });
+
+  return [...map.entries()]
+    .map(([value,label])=>({value,label}))
+    .sort((a,b)=>{
+      if(a.value === 'all students') return -1;
+      if(b.value === 'all students') return 1;
+      return a.label.localeCompare(b.label);
+    });
+}
+
+function updateGroupPickerValue(id){
+  const wrap = document.getElementById(id)?.previousElementSibling;
+  if(!wrap) return;
+
+  const checked = Array.from(wrap.querySelectorAll('input[type="checkbox"]:checked'));
+  const labels = checked.map(cb => cb.dataset.label).filter(Boolean);
+
+  const clean = cleanGroupString(labels.join(', ')) || 'All Students';
+
+  document.getElementById(id).value = clean;
+
+  const labelEl = document.getElementById(`${id}_label`);
+  if(labelEl) labelEl.textContent = clean;
 }
 
 function renderAttendanceMultiFilter(){
@@ -2883,22 +3182,53 @@ function renderListFinder(resultCount,scopeCount){
       <div class="list-finder-title">Schedule Finder</div>
       <div class="list-finder-sub">Choose a date range, then apply any optional filters. Multiple values inside the same filter use OR logic; different filters combine together.</div>
 
-      <div class="list-filter-grid">
+      <div class="list-date-row">
         <div class="list-filter-control">
           <label>Date Range</label>
           <select onchange="setListFilter('scope',this.value)">
-            <option value="all"${listFilters.scope === 'all' ? ' selected' : ''}>Entire Calendar</option>
-            <option value="month"${listFilters.scope === 'month' ? ' selected' : ''}>Current Month</option>
-            <option value="week"${listFilters.scope === 'week' ? ' selected' : ''}>Current Week</option>
-            <option value="custom"${listFilters.scope === 'custom' ? ' selected' : ''}>Custom Date Range</option>
+            <option value="all" ${listFilters.scope==='all'?'selected':''}>Entire Calendar</option>
+            <option value="thisWeek" ${listFilters.scope==='thisWeek'?'selected':''}>This Week</option>
+            <option value="nextWeek" ${listFilters.scope==='nextWeek'?'selected':''}>Next Week</option>
+            <option value="thisMonth" ${listFilters.scope==='thisMonth'?'selected':''}>This Month</option>
+            <option value="custom" ${listFilters.scope==='custom'?'selected':''}>Custom Range</option>
           </select>
         </div>
+      </div>
 
+        <div class="list-main-filter-row">
         ${renderListMultiFilter('mcal','Calendar / Cohort',scoped)}
         ${renderListMultiFilter('course','Course / Block',scoped)}
         ${renderListMultiFilter('group','Group',scoped)}
         ${renderListMultiFilter('category','Event Type',scoped)}
         ${renderAttendanceMultiFilter()}
+      </div>
+
+      <div class="list-search-row">
+        <div class="list-filter-control">
+          <label>Faculty / Presenter</label>
+          <input
+            id="presenterFilterInput"
+            value="${escapeHtml(listFilters.presenter || '')}"
+            placeholder="Search presenter name"
+            onkeydown="if(event.key === 'Enter'){event.preventDefault();applyPresenterFilter();}"
+          >
+        </div>
+
+        <button
+          type="button"
+          class="list-search-btn"
+          onclick="applyPresenterFilter()"
+        >
+          Search
+        </button>
+
+        <button
+          type="button"
+          class="list-search-clear"
+          onclick="clearPresenterFilter()"
+        >
+          Clear
+        </button>
       </div>
 
       <div class="list-custom-range" style="${customStyle}">
@@ -3092,7 +3422,9 @@ function formHTML(e,isEdit){
 
   <div class="form-group"><label class="form-label">Session Name *</label><input class="form-input" id="ff_title" value="${escForm(e?e.title:'')}" placeholder="e.g. Blackout Day, Active Learning, TBL"></div>
 
-  <div class="form-group"><label class="form-label">Group Assigned</label><input class="form-input" id="ff_group" value="${escForm(e&&e.group?e.group:'')}" placeholder="e.g. Group A, All Students"></div>
+  <div class="form-group">
+  ${renderGroupMultiPicker('ff_group', e&&e.group ? e.group : 'All Students')}
+</div>
 
   <div class="form-group"><label class="form-label">Session Location</label><input class="form-input" id="ff_location" value="${escForm(e&&e.location?e.location:'')}" placeholder="e.g. Room 212 A/B, EnMed Tower"></div>
 
@@ -3831,6 +4163,10 @@ function openMultiAdd(){
   document.getElementById('multiAddBackBtn').style.display='none';
 
   document.querySelectorAll('#multiAddDays .multiadd-day').forEach(d=>d.classList.remove('on'));
+  const maGroupWrap = document.getElementById('ma_groupPickerWrap');
+  if(maGroupWrap){
+    maGroupWrap.innerHTML = renderGroupMultiPicker('ma_group','All Students');
+  }
 
   const customRows = document.getElementById('multiAddCustomRows');
   if(customRows) customRows.innerHTML = '';
@@ -3893,7 +4229,7 @@ function collectMultiAddBase(){
   return {
     title: document.getElementById('ma_title').value.trim(),
     mand: document.getElementById('ma_mand').value,
-    group: document.getElementById('ma_group').value.trim() || 'All Students',
+    group: cleanGroupString(document.getElementById('ma_group').value) || 'All Students',
     location: document.getElementById('ma_location').value.trim(),
     calYear: document.getElementById('ma_calyear').value,
     mCal: document.getElementById('ma_mcal').value,
@@ -5310,7 +5646,7 @@ async function saveForm(){
   const calYear=document.getElementById('ff_calyear').value;
   const mCal=document.getElementById('ff_mcal').value;
   const mand=document.getElementById('ff_mand').value;
-  const group=document.getElementById('ff_group').value.trim();
+  const group=cleanGroupString(document.getElementById('ff_group').value) || 'All Students';
   const location=document.getElementById('ff_location').value.trim();
   const info=document.getElementById('ff_info').value.trim();
   const presenter=document.getElementById('ff_presenter').value.trim();
