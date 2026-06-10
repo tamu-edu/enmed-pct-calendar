@@ -11318,5 +11318,24 @@
     "info": "",
     "presenter": "Dr. Meyer, Dr. Omole",
     "_id": "3ab06a16-394b-4500-bad9-da74356a6cce"
+  },
+  {
+    "title": "{MAND] EXAM Check-In",
+    "date": "08/28/2026",
+    "start": "12:45",
+    "end": "12:55",
+    "category": "Exam Check-In",
+    "block": "MGA Week 4",
+    "weekNum": 14,
+    "week": "Week 14",
+    "desc": "{MAND] EXAM Check-In",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "MITIE",
+    "info": "",
+    "presenter": "Dr. Meyer, Dr. Omole",
+    "_id": "dce80876-89da-48ef-abab-d99fe6a404ec"
   }
 ]
