@@ -9800,15 +9800,15 @@
     "presenter": "Dr. Priya, Dr. Omole, Dr. Meyer"
   },
   {
-    "title": "Exam (Written)",
+    "title": "EXAM (Written)",
     "date": "11/06/2026",
     "start": "08:00:00",
     "end": "12:00:00",
     "category": "Exam",
-    "block": "MGA/FOM I",
+    "block": "MGA, FOM I",
     "weekNum": 24,
     "week": "Week 24",
-    "desc": "Exam (Written)",
+    "desc": "EXAM (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
