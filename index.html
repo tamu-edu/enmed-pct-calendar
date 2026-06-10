@@ -1387,7 +1387,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
       <div class="form-group">
         <label class="form-label">Block(s)</label>
-        <input class="form-input" id="ma_block" list="blockListMA" placeholder="Optional; separate multiple blocks with commas">
+        <input class="form-input" id="ma_block" list="blockListMA" placeholder="Optional; separate blocks with commas">
       </div>
 
       <div class="form-group">
@@ -3098,7 +3098,7 @@ function formHTML(e,isEdit){
     <datalist id="categoryList">${catOptions}</datalist>
     <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}" id="catLabel">${escForm(defCat)}</span></div></div>
 
-  <div class="form-group"><label class="form-label">Block(s)</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; Separate multiple blocks with commas e.g. MGA, FOM I">
+  <div class="form-group"><label class="form-label">Block(s)</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; Separate blocks with commas e.g. MGA, FOM I">
     <datalist id="blockList">${blockOptions}</datalist>
     <div class="color-preview"><div class="color-dot" id="blockDot" style="background:${BLOCK_COLOR[defBlock]||'#7a829a'}"></div><span style="font-size:11px;color:${BLOCK_COLOR[defBlock]||'#7a829a'}" id="blockLabel">${escForm(defBlock)}</span></div></div>
 
