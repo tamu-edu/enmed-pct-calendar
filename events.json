@@ -2261,7 +2261,7 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
-    "title": "NBME Exam",
+    "title": "NBME EXAM",
     "date": "08/28/2026",
     "start": "13:00",
     "end": "17:00",
@@ -2269,7 +2269,7 @@
     "block": "MGA",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "NBME Exam",
+    "desc": "NBME EXAM",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
