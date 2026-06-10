@@ -11299,5 +11299,24 @@
     "info": "",
     "presenter": "",
     "_id": "c5f1a352-8c27-4e1e-8f35-72de93895497"
+  },
+  {
+    "title": "[MAND] EXAM Check-in",
+    "date": "11/06/2026",
+    "start": "07:45",
+    "end": "07:55",
+    "category": "Exam Check-In",
+    "block": "MGA Week 14",
+    "weekNum": 24,
+    "week": "Week 24",
+    "desc": "[MAND] EXAM Check-in",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "Dr. Meyer, Dr. Omole",
+    "_id": "3ab06a16-394b-4500-bad9-da74356a6cce"
   }
 ]
