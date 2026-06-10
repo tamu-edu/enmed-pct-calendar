@@ -1386,8 +1386,8 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <div class="multiadd-note">Custom rows are combined with the repeating pattern in the same preview.</div>
 
       <div class="form-group">
-        <label class="form-label">Block</label>
-        <input class="form-input" id="ma_block" list="blockListMA" placeholder="Optional; can be blank">
+        <label class="form-label">Block(s)</label>
+        <input class="form-input" id="ma_block" list="blockListMA" placeholder="Optional; separate multiple blocks with commas">
       </div>
 
       <div class="form-group">
@@ -2394,7 +2394,7 @@ dates.forEach(ds => {
 
         const catCol = CAT_COLOR[normalizeCategory(e.category)] || mcalCol;
 
-const blockLabel = e.block ? `${e.block} · ` : '';
+const blockLabel = blockDisplay(e.block) ? `${blockDisplay(e.block)} · ` : '';
         html+=`<div class="event week-event ${ec}${hasCheckInRibbon ? ' has-checkin-ribbon' : ''}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:${eventLeft};width:${eventWidth};z-index:${eventZ};background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${mcalCol}18 5px);color:${textCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
           ${checkInRibbonHtml}
           <div class="ev-tag" style="color:${catCol}">${blockLabel}${e.category}</div>
@@ -2503,6 +2503,28 @@ function listFilterValue(field,value){
   return normalizeListKey(listDisplayLabel(field,value));
 }
 
+function blockTokens(block){
+  return String(block || '')
+    .split(',')
+    .map(v => v.trim())
+    .filter(Boolean);
+}
+
+function cleanBlockString(block){
+  return blockTokens(block)
+    .map(v => normalizeCourseBlockLabel(v))
+    .filter((v,i,arr) => arr.findIndex(x => normalizeListKey(x) === normalizeListKey(v)) === i)
+    .join(', ');
+}
+
+function blockDisplay(block){
+  return cleanBlockString(block);
+}
+
+function eventHasBlock(e, selectedBlockKey){
+  return blockTokens(e.block).some(b => listFilterValue('course', b) === selectedBlockKey);
+}
+
 function parseListDate(value){
   if(!value) return null;
 
@@ -2587,19 +2609,21 @@ function listOptionEntries(field,events){
   const map = new Map();
 
   events.forEach(e=>{
-    let raw = '';
+    let raws = [];
 
-    if(field === 'mcal') raw = e.mCal || 'M1';
-    if(field === 'course') raw = e.block || '';
-    if(field === 'group') raw = e.group || 'All Students';
-    if(field === 'category') raw = e.category || '';
+    if(field === 'mcal') raws = [e.mCal || 'M1'];
+    if(field === 'course') raws = blockTokens(e.block);
+    if(field === 'group') raws = [e.group || 'All Students'];
+    if(field === 'category') raws = [e.category || ''];
 
-    const label = listDisplayLabel(field,raw);
-    const key = normalizeListKey(label);
+    raws.forEach(raw=>{
+      const label = listDisplayLabel(field,raw);
+      const key = normalizeListKey(label);
 
-    if(label && key && !map.has(key)){
-      map.set(key,label);
-    }
+      if(label && key && !map.has(key)){
+        map.set(key,label);
+      }
+    });
   });
 
   const entries = [...map.entries()].map(([value,label])=>({value,label}));
@@ -2653,6 +2677,14 @@ function listOptionCheckboxes(field,events){
 function listEventMatchesMulti(field,eventValue){
   const selected = selectedListValues(field);
   if(!selected.length) return true;
+
+  if(field === 'course'){
+    return selected.some(selectedKey =>
+      blockTokens(eventValue).some(block =>
+        listFilterValue('course', block) === selectedKey
+      )
+    );
+  }
 
   return selected.includes(listFilterValue(field,eventValue));
 }
@@ -2926,7 +2958,7 @@ function openModal(e){
   document.getElementById('modalBar').style.background=`linear-gradient(to bottom,${catColModal} 0%,${catColModal} 50%,${col} 50%,${col} 100%)`;
   document.getElementById('modalCat').style.color=col;
   document.getElementById('modalTitle').textContent=displayTitle(e);
-  const blockText = e.block == null ? '' : String(e.block).trim();
+  const blockText = blockDisplay(e.block);
   document.getElementById('modalCat').textContent=`${e.mCal||'M1'}${blockText ? ' · ' + blockText : ''} · ${e.category}`;
   document.getElementById('modalCat').style.color=col;
   document.getElementById('modalDate').textContent=`${fmtDate(e.date)}, ${fmtTime(e.start)} – ${fmtTime(e.end)}`;
@@ -3066,7 +3098,7 @@ function formHTML(e,isEdit){
     <datalist id="categoryList">${catOptions}</datalist>
     <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}" id="catLabel">${escForm(defCat)}</span></div></div>
 
-  <div class="form-group"><label class="form-label">Block</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; can be blank">
+  <div class="form-group"><label class="form-label">Block(s)</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; Separate multiple blocks with commas e.g. MGA, FOM I">
     <datalist id="blockList">${blockOptions}</datalist>
     <div class="color-preview"><div class="color-dot" id="blockDot" style="background:${BLOCK_COLOR[defBlock]||'#7a829a'}"></div><span style="font-size:11px;color:${BLOCK_COLOR[defBlock]||'#7a829a'}" id="blockLabel">${escForm(defBlock)}</span></div></div>
 
@@ -3328,7 +3360,9 @@ function mCalColor(e){
 
 function filteredEvents(){
   return EVENTS.filter(e=>{
-    const blockOk=currentBlockFilter==='All'||(e.block||'')===currentBlockFilter;
+    const blockOk =
+      currentBlockFilter === 'All' ||
+      eventHasBlock(e, listFilterValue('course', currentBlockFilter));
     const catOk=currentFilter==='All'||e.category===currentFilter;
     const evYear=String(e.calYear||'2029');
     const evMCal=e.mCal||'M1';
@@ -3811,7 +3845,7 @@ function collectMultiAddBase(){
     calYear: document.getElementById('ma_calyear').value,
     mCal: document.getElementById('ma_mcal').value,
     category: document.getElementById('ma_cat').value.trim() || 'Session',
-    block: document.getElementById('ma_block').value.trim(),
+    block: cleanBlockString(document.getElementById('ma_block').value),
     presenter: document.getElementById('ma_presenter').value.trim(),
     info: document.getElementById('ma_info').value.trim(),
     start: document.getElementById('ma_start').value.trim(),
@@ -5205,7 +5239,7 @@ async function saveForm(){
   const start=document.getElementById('ff_start').value.trim();
   const end=document.getElementById('ff_end').value.trim();
   const cat=document.getElementById('ff_cat').value.trim();
-  const block=document.getElementById('ff_block').value.trim();
+  const block=cleanBlockString(document.getElementById('ff_block').value);
 
   const weekNum = weekNumFromDate(date);
 
@@ -5396,7 +5430,7 @@ const lines = [
       `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
       `DTSTART;TZID=America/Chicago:${toIcsDt(e.date, e.start)}`,
       `DTEND;TZID=America/Chicago:${toIcsDt(e.date, e.end)}`,
-      `SUMMARY:${esc(`${e.mand === 'Yes' ? '[MAND] ' : ''}${e.title}${e.block ? ' - ' + e.block : ''}`)}`,
+      `SUMMARY:${esc(`${e.mand === 'Yes' ? '[MAND] ' : ''}${e.title}${blockDisplay(e.block) ? ' - ' + blockDisplay(e.block) : ''}`)}`,
       `DESCRIPTION:${esc([
          e.mand ? `Mandatory: ${e.mand}` : '',
          e.group ? `Group: ${e.group}` : '',
