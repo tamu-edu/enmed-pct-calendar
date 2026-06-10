@@ -837,6 +837,99 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
   cursor:pointer;
 }
 
+.list-multi-filter{
+  position:relative;
+}
+
+.list-multi-filter summary{
+  list-style:none;
+  width:100%;
+  padding:7px 10px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  cursor:pointer;
+  min-height:34px;
+}
+
+.list-multi-filter summary::-webkit-details-marker{
+  display:none;
+}
+
+.list-multi-filter summary span{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  min-width:0;
+}
+
+.list-multi-filter summary strong{
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  color:var(--muted2);
+}
+
+.list-multi-filter summary em{
+  font-style:normal;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  color:var(--text);
+}
+
+.list-check-menu{
+  position:absolute;
+  top:calc(100% + 4px);
+  left:0;
+  right:0;
+  z-index:450;
+  max-height:240px;
+  overflow-y:auto;
+  padding:6px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--surface);
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+
+.list-check-option{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:6px 7px;
+  border-radius:6px;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.list-check-option:hover{
+  background:var(--surface2);
+}
+
+.list-check-option input{
+  width:auto;
+}
+
+.list-clear-mini{
+  width:100%;
+  padding:6px 7px;
+  margin-bottom:4px;
+  border-radius:6px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  color:var(--muted);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  text-align:left;
+}
+
 /* BULK SELECT */
 .bulk-bar{
   display:none;
@@ -1392,12 +1485,14 @@ let listFilters = {
   scope: 'all',
   start: '',
   end: '',
-  mcal: 'All',
-  course: 'All',
-  group: 'All',
-  category: 'All',
-  mand: 'All'
+  mcal: [],
+  course: [],
+  group: [],
+  category: [],
+  mand: []
 };
+
+let openListDropdowns = new Set();
 
 // ── CONFIG ────────────────────────────────────────────────────
 function loadConfig(){
@@ -2521,25 +2616,62 @@ function listOptionEntries(field,events){
   return entries.sort((a,b)=>a.label.localeCompare(b.label));
 }
 
-function listSelectOptions(field,events){
-  return [
-    `<option value="All"${listFilters[field] === 'All' ? ' selected' : ''}>All</option>`,
-    ...listOptionEntries(field,events).map(o =>
-      `<option value="${escapeHtml(o.value)}"${listFilters[field] === o.value ? ' selected' : ''}>${escapeHtml(o.label)}</option>`
-    )
-  ].join('');
+function selectedListValues(field){
+  return Array.isArray(listFilters[field]) ? listFilters[field] : [];
+}
+
+function listFilterIsAll(field){
+  return selectedListValues(field).length === 0;
+}
+
+function listMultiSelectLabel(field){
+  const vals = selectedListValues(field);
+
+  if(!vals.length) return 'All';
+
+  const scoped = listScopedEvents();
+  const labelMap = new Map(
+    listOptionEntries(field,scoped).map(o => [o.value,o.label])
+  );
+
+  return vals
+    .map(v => labelMap.get(v) || v)
+    .join(', ');
+}
+
+function listOptionCheckboxes(field,events){
+  const selected = new Set(selectedListValues(field));
+
+  return listOptionEntries(field,events).map(o => `
+    <label class="list-check-option">
+      <input type="checkbox" ${selected.has(o.value) ? 'checked' : ''} onchange="toggleListFilterValue('${field}','${escapeHtml(o.value)}',this.checked)">
+      <span>${escapeHtml(o.label)}</span>
+    </label>
+  `).join('');
+}
+
+function listEventMatchesMulti(field,eventValue){
+  const selected = selectedListValues(field);
+  if(!selected.length) return true;
+
+  return selected.includes(listFilterValue(field,eventValue));
 }
 
 function listEventMatchesFilters(e){
-  if(listFilters.mcal !== 'All' && listFilterValue('mcal',e.mCal || 'M1') !== listFilters.mcal) return false;
-  if(listFilters.course !== 'All' && listFilterValue('course',e.block || '') !== listFilters.course) return false;
-  if(listFilters.group !== 'All' && listFilterValue('group',e.group || 'All Students') !== listFilters.group) return false;
-  if(listFilters.category !== 'All' && listFilterValue('category',e.category || '') !== listFilters.category) return false;
+  if(!listEventMatchesMulti('mcal',e.mCal || 'M1')) return false;
+  if(!listEventMatchesMulti('course',e.block || '')) return false;
+  if(!listEventMatchesMulti('group',e.group || 'All Students')) return false;
+  if(!listEventMatchesMulti('category',e.category || '')) return false;
 
   const mandKey = normalizeListKey(e.mand || 'No');
 
-  if(listFilters.mand === 'mandatory' && mandKey !== 'yes') return false;
-  if(listFilters.mand === 'optional' && mandKey === 'yes') return false;
+  if(selectedListValues('mand').length){
+    const selected = selectedListValues('mand');
+    const isMandatory = mandKey === 'yes';
+
+    if(isMandatory && !selected.includes('mandatory')) return false;
+    if(!isMandatory && !selected.includes('optional')) return false;
+  }
 
   return true;
 }
@@ -2559,19 +2691,116 @@ function setListFilter(field,value){
   render();
 }
 
+function toggleListFilterValue(field,value,checked){
+  const current = new Set(selectedListValues(field));
+
+  if(checked){
+    current.add(value);
+  } else {
+    current.delete(value);
+  }
+
+  listFilters[field] = [...current];
+
+  openListDropdowns.add(field);
+
+  render();
+}
+
+function clearListFilter(field){
+  listFilters[field] = [];
+
+  openListDropdowns.add(field);
+
+  render();
+}
+
+function closeListDropdowns(){
+  if(!openListDropdowns.size) return;
+
+  openListDropdowns.clear();
+
+  document.querySelectorAll('.list-multi-filter[open]').forEach(el=>{
+    el.removeAttribute('open');
+  });
+}
+
 function resetListFilters(){
   listFilters = {
     scope: 'all',
     start: '',
     end: '',
-    mcal: 'All',
-    course: 'All',
-    group: 'All',
-    category: 'All',
-    mand: 'All'
+    mcal: [],
+    course: [],
+    group: [],
+    category: [],
+    mand: []
   };
 
   render();
+}
+
+function renderListMultiFilter(field,label,events){
+  return `
+    <details
+      class="list-multi-filter"
+      ${openListDropdowns.has(field) ? 'open' : ''}
+      ontoggle="
+        if(this.open){
+          openListDropdowns.add('${field}');
+        }else{
+          openListDropdowns.delete('${field}');
+        }
+      "
+    >
+      <summary>
+        <span>
+          <strong>${escapeHtml(label)}</strong>
+          <em>${escapeHtml(listMultiSelectLabel(field))}</em>
+        </span>
+      </summary>
+      <div class="list-check-menu">
+        <button type="button" class="list-clear-mini" onclick="clearListFilter('${field}')">All</button>
+        ${listOptionCheckboxes(field,events)}
+      </div>
+    </details>
+  `;
+}
+
+function renderAttendanceMultiFilter(){
+  const selected = new Set(selectedListValues('mand'));
+
+  return `
+    <details
+      class="list-multi-filter"
+      ${openListDropdowns.has('mand') ? 'open' : ''}
+      ontoggle="
+        if(this.open){
+          openListDropdowns.add('mand');
+        }else{
+          openListDropdowns.delete('mand');
+        }
+      "
+    >
+      <summary>
+        <span>
+          <strong>Attendance</strong>
+          <em>${selected.size ? [...selected].map(v => v === 'mandatory' ? 'Mandatory' : 'Optional').join(', ') : 'All'}</em>
+        </span>
+      </summary>
+      <div class="list-check-menu">
+        <button type="button" class="list-clear-mini" onclick="clearListFilter('mand')">All</button>
+        <label class="list-check-option">
+          <input type="checkbox" ${selected.has('mandatory') ? 'checked' : ''} onchange="toggleListFilterValue('mand','mandatory',this.checked)">
+          <span>Mandatory</span>
+        </label>
+        <label class="list-check-option">
+          <input type="checkbox" ${selected.has('optional') ? 'checked' : ''} onchange="toggleListFilterValue('mand','optional',this.checked)">
+          <span>Optional</span>
+        </label>
+      </div>
+    </details>
+  `;
 }
 
 function renderListFinder(resultCount,scopeCount){
@@ -2581,7 +2810,7 @@ function renderListFinder(resultCount,scopeCount){
   return `
     <div class="list-finder">
       <div class="list-finder-title">Schedule Finder</div>
-      <div class="list-finder-sub">Choose a date range, then apply any optional filters. These filters only affect List view.</div>
+      <div class="list-finder-sub">Choose a date range, then apply any optional filters. Multiple values inside the same filter use OR logic; different filters combine together.</div>
 
       <div class="list-filter-grid">
         <div class="list-filter-control">
@@ -2594,42 +2823,11 @@ function renderListFinder(resultCount,scopeCount){
           </select>
         </div>
 
-        <div class="list-filter-control">
-          <label>Calendar / Cohort</label>
-          <select onchange="setListFilter('mcal',this.value)">
-            ${listSelectOptions('mcal',scoped)}
-          </select>
-        </div>
-
-        <div class="list-filter-control">
-          <label>Course / Block</label>
-          <select onchange="setListFilter('course',this.value)">
-            ${listSelectOptions('course',scoped)}
-          </select>
-        </div>
-
-        <div class="list-filter-control">
-          <label>Group</label>
-          <select onchange="setListFilter('group',this.value)">
-            ${listSelectOptions('group',scoped)}
-          </select>
-        </div>
-
-        <div class="list-filter-control">
-          <label>Event Type</label>
-          <select onchange="setListFilter('category',this.value)">
-            ${listSelectOptions('category',scoped)}
-          </select>
-        </div>
-
-        <div class="list-filter-control">
-          <label>Attendance</label>
-          <select onchange="setListFilter('mand',this.value)">
-            <option value="All"${listFilters.mand === 'All' ? ' selected' : ''}>All</option>
-            <option value="mandatory"${listFilters.mand === 'mandatory' ? ' selected' : ''}>Mandatory</option>
-            <option value="optional"${listFilters.mand === 'optional' ? ' selected' : ''}>Optional</option>
-          </select>
-        </div>
+        ${renderListMultiFilter('mcal','Calendar / Cohort',scoped)}
+        ${renderListMultiFilter('course','Course / Block',scoped)}
+        ${renderListMultiFilter('group','Group',scoped)}
+        ${renderListMultiFilter('category','Event Type',scoped)}
+        ${renderAttendanceMultiFilter()}
       </div>
 
       <div class="list-custom-range" style="${customStyle}">
@@ -5322,11 +5520,16 @@ document.addEventListener('click',ev=>{
   if(!ev.target.closest('#monthMorePopout') && !ev.target.closest('.mg-more')){
     closeMonthMore();
   }
+
+  if(currentView === 'list' && !ev.target.closest('.list-multi-filter')){
+    closeListDropdowns();
+  }
 });
 
 document.addEventListener('keydown',ev=>{
   if(ev.key==='Escape'){
     closeMonthMore();
+    closeListDropdowns();
     document.getElementById('modalOverlay').classList.remove('open');
     document.getElementById('confirmOverlay').classList.remove('open');
     document.getElementById('syncLinksModal').classList.remove('open');
