@@ -9762,7 +9762,7 @@
     "presenter": "Dr. Meyer and Dr. Slivkoff"
   },
   {
-    "title": "TBL #5",
+    "title": "TBL",
     "date": "11/04/2026",
     "start": "10:00:00",
     "end": "11:30:00",
@@ -9770,7 +9770,7 @@
     "block": "MGA, FOM I",
     "weekNum": 24,
     "week": "Week 24",
-    "desc": "TBL #5",
+    "desc": "TBL",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
