@@ -2470,7 +2470,7 @@
     "presenter": "Dr. Meyer, Dr. Omole, Dr. Priya"
   },
   {
-    "title": "NBME Exam",
+    "title": "NBME EXAM",
     "date": "09/11/2026",
     "start": "13:00",
     "end": "17:00",
@@ -2478,7 +2478,7 @@
     "block": "MGA",
     "weekNum": 16,
     "week": "Week 16",
-    "desc": "NBME Exam",
+    "desc": "NBME EXAM",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
