@@ -559,6 +559,16 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .sr-meta{font-size:10px;color:var(--muted2);margin-top:2px}
 .today-btn{padding:6px 14px;border-radius:8px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
 .today-btn:hover{background:var(--accent);color:white}
+.sync-primary-btn{
+  font-weight:800;
+  background:var(--accent);
+  color:white;
+}
+
+.sync-primary-btn:hover{
+  background:var(--maroon-dk);
+  color:white;
+}
 
 /* EVENT COUNT BADGES ON TABS */
 .yr-count{font-size:9px;font-weight:600;opacity:.75;margin-left:4px;font-family:'DM Mono',monospace}
@@ -1161,16 +1171,14 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
         <button class="vt-btn" onclick="setView('list',this)">List</button>
       </div>
     </div>
-    <div class="week-drawer" id="weekDrawer"></div>
-    <!-- TOOLBAR CONTROLS -->
-    <div class="toolbar-controls">
-      <div class="search-wrap">
-        <span class="search-icon">🔍</span>
-        <input class="search-input" id="searchInput" placeholder="Search sessions..." oninput="handleSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
-        <div class="search-results" id="searchResults"></div>
+    
+    <!-- PRIMARY ACTIONS -->
+      <div class="toolbar-controls" id="primaryActions">
+        <button class="today-btn sync-primary-btn" onclick="openSyncLinksModal()">Calendar Sync Options</button>
       </div>
-      <button class="today-btn" onclick="goToToday()">Today</button>
-    </div>
+
+      <!-- MONTH / WEEK NAVIGATION MOVES HERE -->
+      <div class="week-drawer" id="weekDrawer"></div>
 
     <!-- CALENDAR FILTER: M0 / M1 / M2 / Student Affairs -->
     <div class="year-checks" id="calFilterRow" style="margin-bottom:10px">
@@ -1196,9 +1204,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
     <button class="yr-check-label" id="regenICSBtn" type="button" onclick="regenerateAllICSFeeds()" style="display:none">
   Regenerate ICS Feeds
 </button>
-<button class="yr-check-label" type="button" onclick="openSyncLinksModal()">
-  Google Sync Links
-</button>
+
 
     <!-- COLOR LEGEND -->
 <div class="legend-row" id="colorLegend">
@@ -2014,13 +2020,13 @@ function setView(v,btn){
   const isList=v==='list';
 
   const drawer=document.getElementById('weekDrawer');
-  if(drawer)drawer.style.display=isList?'none':'';
+  if(drawer)drawer.style.display = isList ? 'none' : '';
 
   const wn=document.querySelector('.week-nav');
   if(wn)wn.style.display=(isMonth||isList)?'none':'';
 
-  const tc=document.querySelector('.toolbar-controls');
-  if(tc)tc.style.display=isList?'none':'';
+  const primary=document.getElementById('primaryActions');
+  if(primary)primary.style.display='';
 
   if(prev==='month'&&!isMonth){
     currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);
@@ -3180,7 +3186,7 @@ function renderListFinder(resultCount,scopeCount){
   return `
     <div class="list-finder">
       <div class="list-finder-title">Schedule Finder</div>
-      <div class="list-finder-sub">Choose a date range, then apply any optional filters. Multiple values inside the same filter use OR logic; different filters combine together.</div>
+      <div class="list-finder-sub">Choose a date range, then apply any optional filters.</div>
 
       <div class="list-date-row">
         <div class="list-filter-control">
@@ -3194,7 +3200,13 @@ function renderListFinder(resultCount,scopeCount){
           </select>
         </div>
       </div>
-
+      <div class="toolbar-controls" style="margin-bottom:12px">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" id="searchInput" placeholder="Search sessions by title..." oninput="handleSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </div>
         <div class="list-main-filter-row">
         ${renderListMultiFilter('mcal','Calendar / Cohort',scoped)}
         ${renderListMultiFilter('course','Course / Block',scoped)}
@@ -5974,7 +5986,7 @@ initApp();
   <div class="modal">
     <div class="modal-header">
       <div class="modal-title">
-        Google Calendar Sync Links
+        External Calendar Sync Links
       </div>
 
       <button class="modal-close"
@@ -5994,7 +6006,7 @@ initApp();
 
       <br>
 
-Google Calendar may take up to 24–48 hours to refresh subscribed ICS calendars. Refresh intervals are controlled by Google and are outside of TAMU’s control.
+External calendars (e.g. Google Calendar, Outlook, Apple) may take up to 24–48 hours to refresh subscribed ICS calendars. Refresh intervals are controlled by the calendar and are outside of TAMU’s control.
 
 <br><br>
 
