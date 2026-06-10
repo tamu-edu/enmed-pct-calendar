@@ -962,6 +962,32 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 }
 .ev-sel{outline:2px solid #f05c6e !important;opacity:1 !important}
 .mg-event.ev-sel{outline:2px solid #f05c6e}
+
+.block-token-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-top:6px;
+}
+
+.block-token{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:3px 8px;
+  border-radius:999px;
+  background:rgba(80,0,0,.08);
+  border:1px solid rgba(80,0,0,.18);
+  color:var(--maroon);
+  font-size:11px;
+  font-weight:700;
+}
+
+.block-token-empty{
+  font-size:11px;
+  color:var(--muted2);
+}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
@@ -1387,7 +1413,8 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
       <div class="form-group">
         <label class="form-label">Block(s)</label>
-        <input class="form-input" id="ma_block" list="blockListMA" placeholder="Optional; separate blocks with commas">
+        <input class="form-input" id="ma_block" list="blockListMA" placeholder="Optional; separate blocks with commas" oninput="renderBlockTokens('ma_block','ma_blockTokens')">
+        <div class="block-token-row" id="ma_blockTokens"><span class="block-token-empty">No block selected</span></div>
       </div>
 
       <div class="form-group">
@@ -2521,6 +2548,18 @@ function blockDisplay(block){
   return cleanBlockString(block);
 }
 
+function renderBlockTokens(inputId, targetId){
+  const input = document.getElementById(inputId);
+  const target = document.getElementById(targetId);
+  if(!input || !target) return;
+
+  const tokens = blockTokens(input.value).map(v => normalizeCourseBlockLabel(v)).filter(Boolean);
+
+  target.innerHTML = tokens.length
+    ? tokens.map(t => `<span class="block-token">${escapeHtml(t)}</span>`).join('')
+    : `<span class="block-token-empty">No block selected</span>`;
+}
+
 function eventHasBlock(e, selectedBlockKey){
   return blockTokens(e.block).some(b => listFilterValue('course', b) === selectedBlockKey);
 }
@@ -3098,9 +3137,10 @@ function formHTML(e,isEdit){
     <datalist id="categoryList">${catOptions}</datalist>
     <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}" id="catLabel">${escForm(defCat)}</span></div></div>
 
-  <div class="form-group"><label class="form-label">Block(s)</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; Separate blocks with commas e.g. MGA, FOM I">
+  <div class="form-group"><label class="form-label">Block(s)</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; separate blocks with commas">
     <datalist id="blockList">${blockOptions}</datalist>
-    <div class="color-preview"><div class="color-dot" id="blockDot" style="background:${BLOCK_COLOR[defBlock]||'#7a829a'}"></div><span style="font-size:11px;color:${BLOCK_COLOR[defBlock]||'#7a829a'}" id="blockLabel">${escForm(defBlock)}</span></div></div>
+    <div class="block-token-row" id="ff_blockTokens"></div>
+    <div class="color-preview"><div class="color-dot" id="blockDot" style="background:${BLOCK_COLOR[blockTokens(defBlock)[0]]||'#7a829a'}"></div><span style="font-size:11px;color:${BLOCK_COLOR[blockTokens(defBlock)[0]]||'#7a829a'}" id="blockLabel">${escForm(blockDisplay(defBlock)||'No block selected')}</span></div></div>
 
   <div class="form-group"><label class="form-label">Presenter(s)</label><input class="form-input" id="ff_presenter" value="${escForm(e?(e.presenter||''):'')}" placeholder="e.g. Dr. Smith, Dr. Jones"></div>
 
@@ -3117,9 +3157,21 @@ function formHTML(e,isEdit){
 </div>`;
 }
 function updateCatPreview(){const v=document.getElementById('ff_cat').value,col=CAT_COLOR[v]||'#4a5168';document.getElementById('catDot').style.background=col;document.getElementById('catLabel').textContent=v;document.getElementById('catLabel').style.color=col;}
-function updateBlockPreview(){const v=document.getElementById('ff_block').value,col=BLOCK_COLOR[v]||'#7a829a';document.getElementById('blockDot').style.background=col;document.getElementById('blockLabel').textContent=v;document.getElementById('blockLabel').style.color=col;}
-function openAddForm(date,hour){if(!isFacultyMode)return;loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
-function openEditForm(ev,e){if(ev)ev.stopPropagation();loadCatalog();editingId=e._id;document.getElementById('fpSub').textContent='Editing: '+e.title.substring(0,30);document.getElementById('fpForm').innerHTML=formHTML(e,true);injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
+function updateBlockPreview(){
+  const v = document.getElementById('ff_block').value;
+  const tokens = blockTokens(v);
+  const first = tokens[0] || '';
+  const col = BLOCK_COLOR[first] || '#7a829a';
+
+  document.getElementById('blockDot').style.background = col;
+  document.getElementById('blockLabel').textContent = blockDisplay(v) || 'No block selected';
+  document.getElementById('blockLabel').style.color = col;
+
+  renderBlockTokens('ff_block','ff_blockTokens');
+}
+
+function openAddForm(date,hour){if(!isFacultyMode)return;loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);updateBlockPreview();injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
+function openEditForm(ev,e){if(ev)ev.stopPropagation();loadCatalog();editingId=e._id;document.getElementById('fpSub').textContent='Editing: '+e.title.substring(0,30);document.getElementById('fpForm').innerHTML=formHTML(e,true);updateBlockPreview();injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
 function closeForm(){editingId=null;document.getElementById('fpForm').innerHTML='<div style="text-align:center;padding:30px 0;color:var(--muted)"><div style="font-size:28px;margin-bottom:10px">👆</div><div style="font-size:12px;line-height:1.6">Click an event to edit,<br>or a time slot to add,<br>or press <strong style="color:var(--gold)">+ Add Event</strong>.</div></div>';document.getElementById('fpSub').textContent='Click an event to edit · Click a slot to add';}
 
 
@@ -3786,6 +3838,7 @@ function openMultiAdd(){
   addMultiAddCustomRow();
 
   document.getElementById('multiAddOverlay').classList.add('open');
+  renderBlockTokens('ma_block','ma_blockTokens');
 }
 
 function closeMultiAdd(){
