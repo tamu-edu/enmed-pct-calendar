@@ -9786,7 +9786,7 @@
     "start": "10:00:00",
     "end": "11:30:00",
     "category": "TBL",
-    "block": "MGA/FoM I",
+    "block": "MGA, FOM I",
     "weekNum": 24,
     "week": "Week 24",
     "desc": "TBL #5",
