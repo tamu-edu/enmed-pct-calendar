@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "semesters": [
+    {
+      "id": "summer-fall-2026",
+      "name": "Summer/Fall 2026",
+      "status": "published",
+      "file": "test_events.json",
+      "boundaryMode": "months",
+      "startMonth": 5,
+      "endMonth": 12,
+      "year": 2026
+    }
+  ]
+}
