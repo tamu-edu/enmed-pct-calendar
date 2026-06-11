@@ -11508,5 +11508,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "7e50dae6-321c-4526-ba2a-d76a7aa0c578"
+  },
+  {
+    "title": "UE MSK & Neuro Optional Open Lab",
+    "date": "10/14/2026",
+    "start": "13:00",
+    "end": "15:00",
+    "category": "Open Lab",
+    "block": "POM I",
+    "weekNum": 21,
+    "week": "Week 21",
+    "desc": "UE MSK & Neuro Optional Open Lab",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "If Needed",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "ad7f5842-355d-4b67-a0d6-3a4df3da5466"
   }
 ]
