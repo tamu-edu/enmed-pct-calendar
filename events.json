@@ -11356,5 +11356,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "ad100b56-6b73-4ab0-ac1f-0df0163ae2c2"
+  },
+  {
+    "title": "Practice OSCE",
+    "date": "07/29/2026",
+    "start": "10:00",
+    "end": "12:00",
+    "category": "Session",
+    "block": "POM I",
+    "weekNum": 10,
+    "week": "Week 10",
+    "desc": "Practice OSCE",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "4th Flr SIM Center 404 EnMed Twr",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "d35116d7-c977-475a-a0c6-9e3648eadf76"
   }
 ]
