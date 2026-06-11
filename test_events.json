@@ -11204,5 +11204,24 @@
     "info": "",
     "presenter": "",
     "_id": "c5f1a352-8c27-4e1e-8f35-72de93895497"
+  },
+  {
+    "title": "test",
+    "date": "06/04/2026",
+    "start": "08:00",
+    "end": "09:00",
+    "category": "Session",
+    "block": "",
+    "weekNum": 2,
+    "week": "Week 2",
+    "desc": "test",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "8600b98b-ad4c-4220-bef1-4c4a2919b1a3"
   }
 ]
