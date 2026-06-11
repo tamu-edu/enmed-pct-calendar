@@ -11375,5 +11375,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "d35116d7-c977-475a-a0c6-9e3648eadf76"
+  },
+  {
+    "title": "Vital Signs Check-off",
+    "date": "07/29/2026",
+    "start": "10:00",
+    "end": "12:00",
+    "category": "Workshop",
+    "block": "POM I",
+    "weekNum": 10,
+    "week": "Week 10",
+    "desc": "Vital Signs Check-off",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "3rd Flr SIM Ctr 304 EnMed Twr",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "d2a24b9d-8f07-429c-bb0b-05711047e2f2"
   }
 ]
