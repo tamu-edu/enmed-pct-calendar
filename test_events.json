@@ -11204,43 +11204,5 @@
     "info": "",
     "presenter": "",
     "_id": "c5f1a352-8c27-4e1e-8f35-72de93895497"
-  },
-  {
-    "title": "Test",
-    "date": "01/12/2027",
-    "start": "08:00",
-    "end": "09:00",
-    "category": "Session",
-    "block": "",
-    "weekNum": 34,
-    "week": "Week 34",
-    "desc": "Test",
-    "calYear": "2029",
-    "mCal": "M1",
-    "mand": "No",
-    "group": "All Students",
-    "location": "",
-    "info": "",
-    "presenter": "",
-    "_id": "a1e993dd-a41d-4e4a-9ef8-6eb291864146"
-  },
-  {
-    "title": "test2",
-    "date": "01/12/2028",
-    "start": "08:00",
-    "end": "09:00",
-    "category": "Session",
-    "block": "",
-    "weekNum": 86,
-    "week": "Week 86",
-    "desc": "test2",
-    "calYear": "2029",
-    "mCal": "M1",
-    "mand": "No",
-    "group": "All Students",
-    "location": "",
-    "info": "",
-    "presenter": "",
-    "_id": "ad375731-8445-480a-8801-ea99e735bb80"
   }
 ]
