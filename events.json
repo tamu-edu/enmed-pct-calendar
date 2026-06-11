@@ -11413,5 +11413,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "e0010c6b-c196-458a-91cf-3e763d4ce649"
+  },
+  {
+    "title": "HEE Optional Open Lab",
+    "date": "08/13/2026",
+    "start": "10:00",
+    "end": "12:00",
+    "category": "Open Lab",
+    "block": "POM I",
+    "weekNum": 12,
+    "week": "Week 12",
+    "desc": "HEE Optional Open Lab",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "If Needed",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "5324267e-9b4e-45db-8341-c8dbfd5f8c94"
   }
 ]
