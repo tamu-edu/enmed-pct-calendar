@@ -11546,5 +11546,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "140fe6d2-c1b6-4766-8e22-df653e3d54eb"
+  },
+  {
+    "title": "Final head-to-toe Open Lab 1",
+    "date": "11/09/2026",
+    "start": "13:00",
+    "end": "15:00",
+    "category": "Open Lab",
+    "block": "POM I",
+    "weekNum": 25,
+    "week": "Week 25",
+    "desc": "Final head-to-toe Open Lab 1",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "If Needed",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "4a2c6268-0caa-467e-b12a-a5c1026f6dbf"
   }
 ]
