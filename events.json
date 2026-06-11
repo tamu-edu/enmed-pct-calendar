@@ -2071,15 +2071,15 @@
     "presenter": ""
   },
   {
-    "title": "Unit 1 Exam (Written)",
+    "title": "EXAM (Written)",
     "date": "08/14/2026",
     "start": "09:00",
     "end": "12:00",
     "category": "EXAM",
-    "block": "MGA, F0M I",
+    "block": "MGA, FOM I",
     "weekNum": 12,
     "week": "Week 12",
-    "desc": "Unit 1 Exam (Written)",
+    "desc": "EXAM (Written)",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
