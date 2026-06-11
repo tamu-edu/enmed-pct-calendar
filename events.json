@@ -11401,7 +11401,7 @@
     "start": "15:00",
     "end": "17:00",
     "category": "Workshop",
-    "block": "",
+    "block": "POM I",
     "weekNum": 25,
     "week": "Week 25",
     "desc": "Comprehensive OSCE Simulation Open Lab",
@@ -11409,9 +11409,9 @@
     "mCal": "M1",
     "mand": "Yes",
     "group": "Group B",
-    "location": "",
+    "location": "3rd Floor SIM Center 305",
     "info": "Please see Canvas for student group assignments and additional information.",
-    "presenter": "",
+    "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "e0010c6b-c196-458a-91cf-3e763d4ce649"
   }
 ]
