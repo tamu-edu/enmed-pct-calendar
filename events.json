@@ -11337,5 +11337,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "LC Leaders",
     "_id": "ee40ae0c-49fd-4d6a-9379-c8b6514571f3"
+  },
+  {
+    "title": "Procedural Skills: Vital Signs Workshop",
+    "date": "07/28/2026",
+    "start": "15:00",
+    "end": "17:00",
+    "category": "Session",
+    "block": "POM I",
+    "weekNum": 10,
+    "week": "Week 10",
+    "desc": "Procedural Skills: Vital Signs Workshop",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "3rd Flr SIM Ctr 304 EnMed Twr",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "ad100b56-6b73-4ab0-ac1f-0df0163ae2c2"
   }
 ]
