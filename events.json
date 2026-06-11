@@ -11394,5 +11394,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "d2a24b9d-8f07-429c-bb0b-05711047e2f2"
+  },
+  {
+    "title": "Comprehensive OSCE Simulation Open Lab",
+    "date": "11/12/2026",
+    "start": "15:00",
+    "end": "17:00",
+    "category": "Workshop",
+    "block": "",
+    "weekNum": 25,
+    "week": "Week 25",
+    "desc": "Comprehensive OSCE Simulation Open Lab",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "",
+    "_id": "e0010c6b-c196-458a-91cf-3e763d4ce649"
   }
 ]
