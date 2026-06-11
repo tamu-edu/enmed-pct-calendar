@@ -11299,24 +11299,5 @@
     "info": "",
     "presenter": "Dr. Meyer, Dr. Omole",
     "_id": "dce80876-89da-48ef-abab-d99fe6a404ec"
-  },
-  {
-    "title": "TEST EVENT",
-    "date": "12/02/2026",
-    "start": "08:00",
-    "end": "09:00",
-    "category": "Session",
-    "block": "POM I",
-    "weekNum": 28,
-    "week": "Week 28",
-    "desc": "TEST EVENT",
-    "calYear": "2029",
-    "mCal": "M1",
-    "mand": "No",
-    "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
-    "info": "",
-    "presenter": "Kisha Allen",
-    "_id": "d24d2c2d-e5a4-4153-b571-f40aae880fb1"
   }
 ]
