@@ -11451,5 +11451,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "a46f8ef2-beba-468f-a6ab-cdbc5d2e618c"
+  },
+  {
+    "title": "CV Optional Lab",
+    "date": "09/09/2026",
+    "start": "13:00",
+    "end": "15:00",
+    "category": "Open Lab",
+    "block": "POM I",
+    "weekNum": 16,
+    "week": "Week 16",
+    "desc": "CV Optional Lab",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "If Needed",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "f3020924-d3de-4a76-8d0b-6a3da6c73a97"
   }
 ]
