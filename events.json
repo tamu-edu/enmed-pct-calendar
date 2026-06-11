@@ -11318,5 +11318,24 @@
     "info": "",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "83c0fd4a-9af3-4e2d-8491-39d09e760a50"
+  },
+  {
+    "title": "LC Leader Introduction & Roundtable",
+    "date": "07/28/2026",
+    "start": "15:00",
+    "end": "17:00",
+    "category": "Session",
+    "block": "POM I",
+    "weekNum": 10,
+    "week": "Week 10",
+    "desc": "LC Leader Introduction & Roundtable",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "2nd Flr Rm 212 A/B EnMed Twr",
+    "info": "",
+    "presenter": "LC Leaders",
+    "_id": "ee40ae0c-49fd-4d6a-9379-c8b6514571f3"
   }
 ]
