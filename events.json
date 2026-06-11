@@ -11470,5 +11470,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "f3020924-d3de-4a76-8d0b-6a3da6c73a97"
+  },
+  {
+    "title": "Abd Optional Open Lab",
+    "date": "09/22/2026",
+    "start": "08:00",
+    "end": "10:00",
+    "category": "Open Lab",
+    "block": "POM I",
+    "weekNum": 18,
+    "week": "Week 18",
+    "desc": "Abd Optional Open Lab",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "If Needed",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "a25e4a79-f533-44c6-b33d-106f48803ff3"
   }
 ]
