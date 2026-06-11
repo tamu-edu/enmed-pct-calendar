@@ -11489,5 +11489,24 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "a25e4a79-f533-44c6-b33d-106f48803ff3"
+  },
+  {
+    "title": "Midpoint Optional Open Lab",
+    "date": "09/24/2026",
+    "start": "10:00",
+    "end": "12:00",
+    "category": "Open Lab",
+    "block": "POM I",
+    "weekNum": 18,
+    "week": "Week 18",
+    "desc": "Midpoint Optional Open Lab",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "If Needed",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "7e50dae6-321c-4526-ba2a-d76a7aa0c578"
   }
 ]
