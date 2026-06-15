@@ -11964,5 +11964,24 @@
     "info": "",
     "presenter": "",
     "_id": "1b8a0c29-ffbe-466d-99bc-cd3ed1f95507"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "07/06/2026",
+    "start": "07:00",
+    "end": "7:30",
+    "category": "BLACKOUT",
+    "block": "All M2 Students",
+    "weekNum": 7,
+    "week": "Week 7",
+    "desc": "Blackout Day",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "2ed25fbc-e8d1-4559-9227-ebc04ef21dd0"
   }
 ]
