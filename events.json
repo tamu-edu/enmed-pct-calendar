@@ -11584,5 +11584,43 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "8b954fe6-3baf-42a5-b42e-d131c4f1325d"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "12/03/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "BLACKOUT",
+    "block": "FOM II",
+    "weekNum": 28,
+    "week": "Week 28",
+    "desc": "Blackout Day",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "b6f3cc25-d0f4-4344-9b9d-acbc859c4be1"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "12/17/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "category": "BLACKOUT",
+    "block": "FOM II",
+    "weekNum": 30,
+    "week": "Week 30",
+    "desc": "Blackout Day",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "37f0157e-38b0-49da-ab8d-6162dda000ad"
   }
 ]
