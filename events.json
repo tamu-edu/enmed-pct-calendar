@@ -7536,7 +7536,7 @@
     "start": "15:00:00",
     "end": "17:00:00",
     "category": "Workshop",
-    "block": "Respiratory",
+    "block": "Respiratory, ITDE 613",
     "weekNum": 13,
     "week": "Week 13",
     "desc": "Pulmonary Medicine Workshop",
