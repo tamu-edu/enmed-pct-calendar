@@ -11926,5 +11926,24 @@
     "info": "",
     "presenter": "",
     "_id": "ba3a2e96-aa7b-462f-8245-9ade8c69a1f3"
+  },
+  {
+    "title": "Pulmonary Medicine Workshop",
+    "date": "08/17/2026",
+    "start": "08:00",
+    "end": "09:00",
+    "category": "Workshop",
+    "block": "ITDE 613",
+    "weekNum": 13,
+    "week": "Week 13",
+    "desc": "Pulmonary Medicine Workshop",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "MITIE",
+    "info": "",
+    "presenter": "",
+    "_id": "2a2009ef-19a4-47df-a730-a1afbeda7f0b"
   }
 ]
