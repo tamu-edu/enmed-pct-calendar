@@ -11987,5 +11987,24 @@
     "info": "",
     "presenter": "",
     "_id": "2ed25fbc-e8d1-4559-9227-ebc04ef21dd0"
+  },
+  {
+    "title": "[MAND] PoM 3 Final OSCE (CHECK-IN 7:50AM)",
+    "date": "11/23/2026",
+    "start": "07:50",
+    "end": "08:00",
+    "category": "exam check-in",
+    "block": "",
+    "weekNum": 27,
+    "week": "Week 27",
+    "desc": "[MAND] PoM 3 Final OSCE (CHECK-IN 7:50AM)",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "229b1d9d-6e13-404c-ac64-600015324907"
   }
 ]
