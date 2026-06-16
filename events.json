@@ -5639,17 +5639,19 @@
     "mand": "Yes",
     "title": "PoM 3 Final OSCE Remediation and/or Makeup (Projected)",
     "group": "Assigned Students Only",
-    "location": "4th Flr SIM Ctr Rm 404, EnMed Twr",
+    "location": "4th Flr SIM Ctr Rm 404, Discovery Tower",
     "calYear": "2029",
     "mCal": "M2",
     "date": "12/08/2026",
     "start": "13:00",
     "end": "15:00",
     "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 20,
+    "block": "POM 3",
+    "weekNum": 29,
     "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas"
+    "info": "Additional info, please see Canvas",
+    "week": "Week 29",
+    "desc": "PoM 3 Final OSCE Remediation and/or Makeup (Projected)"
   },
   {
     "_id": "11051226_93",
