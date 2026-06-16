@@ -10167,8 +10167,8 @@
   {
     "title": "Focused H&P OSCE (FHP OSCEs) CHECK-IN 12:50 PM-1:00 PM",
     "date": "10/20/2026",
-    "start": "12:50PM",
-    "end": "13:00PM",
+    "start": "12:50",
+    "end": "13:00",
     "category": "exam check-in",
     "block": "POM 3",
     "weekNum": 22,
