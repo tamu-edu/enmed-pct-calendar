@@ -5658,17 +5658,19 @@
     "mand": "Yes",
     "title": "FHP OSCE Remediation Tentative**",
     "group": "Assigned Students Only",
-    "location": "3rd Flr SIM Ctr Rm 305, EnMed Twr",
+    "location": "3rd Flr SIM Ctr Rm 305, Discovery Tower",
     "calYear": "2029",
     "mCal": "M2",
     "date": "12/08/2026",
     "start": "13:00",
     "end": "15:00",
     "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 20,
+    "block": "POM 3",
+    "weekNum": 29,
     "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas"
+    "info": "Additional info, please see Canvas",
+    "week": "Week 29",
+    "desc": "FHP OSCE Remediation Tentative**"
   },
   {
     "title": "Asynchronous Modules 1-12 Open",
