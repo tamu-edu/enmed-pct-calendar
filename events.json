@@ -2377,7 +2377,7 @@
   {
     "title": "MITIE Lab Dissection",
     "date": "09/04/2026",
-    "start": "13:00",
+    "start": "13:30",
     "end": "15:30",
     "category": "Lab",
     "block": "MGA",
@@ -2391,7 +2391,7 @@
     "location": "MITIE",
     "_id": "10051226_31",
     "info": "Posterior abdominal wall",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Meyer and Dr.Omole"
   },
   {
     "title": "Active Learning",
@@ -9424,7 +9424,7 @@
     "presenter": "Dr. Priya, Dr. Meyer, Dr. Omole and Dr. Peterson"
   },
   {
-    "title": "Exam Check-In",
+    "title": "Written Exam Check-In",
     "date": "08/28/2026",
     "start": "07:45:00",
     "end": "07:55:00",
@@ -9432,7 +9432,7 @@
     "block": "MGA, FOM I",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "Exam Check-In",
+    "desc": "Written Exam Check-In",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
