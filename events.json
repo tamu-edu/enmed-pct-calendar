@@ -12006,5 +12006,43 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "",
     "_id": "229b1d9d-6e13-404c-ac64-600015324907"
+  },
+  {
+    "title": "Practical Exam Check-In",
+    "date": "10/16/2026",
+    "start": "12:45 PM",
+    "end": "12:55 PM",
+    "category": "Session",
+    "block": "MGA, FOM I",
+    "weekNum": 21,
+    "week": "Week 21",
+    "desc": "Practical Exam Check-In",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "_id": "5cee647b-ff19-42e3-a718-57f54492bf4c"
+  },
+  {
+    "title": "Practical Exam Check-in",
+    "date": "09/25/2026",
+    "start": "12:45 PM",
+    "end": "12:55 PM",
+    "category": "Session",
+    "block": "MGA, FOM I",
+    "weekNum": 18,
+    "week": "Week 18",
+    "desc": "Practical Exam Check-in",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "_id": "65b7da32-36d3-4262-839d-c76be5d657e5"
   }
 ]
