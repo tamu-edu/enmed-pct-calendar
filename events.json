@@ -2052,7 +2052,7 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
-    "title": "EXAM Check-in",
+    "title": "Written Exam Check-in",
     "date": "08/14/2026",
     "start": "08:45",
     "end": "08:55",
@@ -2060,7 +2060,7 @@
     "block": "MGA, FOM I",
     "weekNum": 12,
     "week": "Week 12",
-    "desc": "EXAM Check-in",
+    "desc": "Written Exam Check-in",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -2071,7 +2071,7 @@
     "presenter": ""
   },
   {
-    "title": "EXAM (Written)",
+    "title": "Written Exam",
     "date": "08/14/2026",
     "start": "09:00",
     "end": "12:00",
@@ -2079,7 +2079,7 @@
     "block": "MGA, FOM I",
     "weekNum": 12,
     "week": "Week 12",
-    "desc": "EXAM (Written)",
+    "desc": "Written Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
