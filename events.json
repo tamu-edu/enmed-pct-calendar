@@ -2144,7 +2144,7 @@
     "location": "MITIE",
     "_id": "10051226_15",
     "info": "Heart and mediastinum",
-    "presenter": "Dr. Meyer, Dr.Omole"
+    "presenter": "Dr. Hughes, Dr. Omole"
   },
   {
     "title": "Active Learning",
@@ -10045,7 +10045,7 @@
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "location": "MITIE",
     "info": "",
     "presenter": "Dr. Meyer, Dr.Omole",
     "_id": "1779207901085"
@@ -12021,7 +12021,7 @@
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "location": "MITIE",
     "info": "",
     "presenter": "",
     "_id": "5cee647b-ff19-42e3-a718-57f54492bf4c"
@@ -12040,7 +12040,7 @@
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
-    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "location": "MITIE",
     "info": "",
     "presenter": "",
     "_id": "65b7da32-36d3-4262-839d-c76be5d657e5"
