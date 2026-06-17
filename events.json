@@ -1954,7 +1954,7 @@
     "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_4",
     "info": "Thoracic wall; Deep back",
-    "presenter": "Dr.Omole"
+    "presenter": "Dr. Omole"
   },
   {
     "title": "Active Learning",
@@ -1973,7 +1973,7 @@
     "location": "2nd Flr Room 212 A/B, EnMed Twr",
     "_id": "10051226_5",
     "info": "Basic concepts of embryology; Introduction to radiology",
-    "presenter": "Omole & Wilson"
+    "presenter": "Dr. Wilson"
   },
   {
     "title": "Active Learning",
@@ -2242,7 +2242,7 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
-    "title": "Exam (Written)",
+    "title": "Written Exam",
     "date": "08/28/2026",
     "start": "08:00",
     "end": "12:00",
@@ -2250,7 +2250,7 @@
     "block": "MGA, FOM I",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "Exam (Written)",
+    "desc": "Written Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -2261,7 +2261,7 @@
     "presenter": "Dr. Meyer, Dr.Omole"
   },
   {
-    "title": "NBME EXAM",
+    "title": "Practical Exam",
     "date": "08/28/2026",
     "start": "13:00",
     "end": "17:00",
@@ -2269,7 +2269,7 @@
     "block": "MGA",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "NBME EXAM",
+    "desc": "Practical Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -9421,10 +9421,10 @@
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "2051226_16",
     "info": "",
-    "presenter": "Dr. Priya, Dr. Meyer, and Dr. Peterson"
+    "presenter": "Dr. Priya, Dr. Meyer, Dr. Omole and Dr. Peterson"
   },
   {
-    "title": "EXAM Check-In",
+    "title": "Exam Check-In",
     "date": "08/28/2026",
     "start": "07:45:00",
     "end": "07:55:00",
@@ -9432,7 +9432,7 @@
     "block": "MGA, FOM I",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "EXAM Check-In",
+    "desc": "Exam Check-In",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -11286,7 +11286,7 @@
     "_id": "c5f1a352-8c27-4e1e-8f35-72de93895497"
   },
   {
-    "title": "[MAND] NBME EXAM Check-In",
+    "title": "[MAND] Practical Exam Check-In",
     "date": "08/28/2026",
     "start": "12:45",
     "end": "12:55",
@@ -11294,7 +11294,7 @@
     "block": "MGA",
     "weekNum": 14,
     "week": "Week 14",
-    "desc": "[MAND] NBME EXAM Check-In",
+    "desc": "[MAND] Practical Exam Check-In",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
