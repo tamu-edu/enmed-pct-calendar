@@ -12139,5 +12139,24 @@
     "info": "",
     "presenter": "",
     "_id": "02c01833-e2af-4b59-9bdd-22288b0df863"
+  },
+  {
+    "title": "FHP OSCE Retake",
+    "date": "11/11/2026",
+    "start": "13:00",
+    "end": "17:00",
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 25,
+    "week": "Week 25",
+    "desc": "FHP OSCE Retake",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "ac48d336-0c85-4103-a59f-8bf19383cf85"
   }
 ]
