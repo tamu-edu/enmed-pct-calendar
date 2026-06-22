@@ -7014,12 +7014,12 @@
     "start": "13:00",
     "end": "16:00",
     "category": "Workshop",
-    "block": "PoM 1",
-    "weekNum": 16,
-    "week": "Week 16",
+    "block": "POM I",
+    "weekNum": 25,
+    "week": "Week 25",
     "desc": "Ultrasound Integration Workshop",
     "presenter": "Dr. Yeh, Dr. Monga",
-    "info": "Additional info, please see Canvas"
+    "info": "Additional info, please see Canvas (LC Leaders Dunbar, Fattakov,,Iyer)"
   },
   {
     "_id": "1051226_64",
