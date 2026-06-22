@@ -12158,5 +12158,24 @@
     "info": "",
     "presenter": "",
     "_id": "ac48d336-0c85-4103-a59f-8bf19383cf85"
+  },
+  {
+    "title": "FHP OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
+    "date": "11/10/2026",
+    "start": "12:50",
+    "end": "13:00",
+    "category": "exam check-in",
+    "block": "POM 3",
+    "weekNum": 25,
+    "week": "Week 25",
+    "desc": "FHP OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "23139351-b4da-4f1d-be8f-720ca364bbe3"
   }
 ]
