@@ -12044,5 +12044,24 @@
     "info": "",
     "presenter": "",
     "_id": "65b7da32-36d3-4262-839d-c76be5d657e5"
+  },
+  {
+    "title": "Complete H&P OSCE Retake (Assigned Students Only)",
+    "date": "09/09/2026",
+    "start": "13:00",
+    "end": "17:00",
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 16,
+    "week": "Week 16",
+    "desc": "Complete H&P OSCE Retake (Assigned Students Only)",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "11f790b4-96fd-43d9-a461-05fbdb9395ab"
   }
 ]
