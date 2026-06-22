@@ -12122,7 +12122,7 @@
     "_id": "b8587443-7592-450d-9c4e-466aca877502"
   },
   {
-    "title": "FHP OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
+    "title": "FHP OSCE Retake",
     "date": "11/10/2026",
     "start": "13:00",
     "end": "17:00",
@@ -12130,7 +12130,7 @@
     "block": "POM 3",
     "weekNum": 25,
     "week": "Week 25",
-    "desc": "FHP OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
+    "desc": "FHP OSCE Retake",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
