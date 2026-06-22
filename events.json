@@ -12063,5 +12063,24 @@
     "info": "",
     "presenter": "",
     "_id": "11f790b4-96fd-43d9-a461-05fbdb9395ab"
+  },
+  {
+    "title": "Complete H&P OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
+    "date": "09/09/2026",
+    "start": "12:50",
+    "end": "13:00",
+    "category": "exam check-in",
+    "block": "POM 3",
+    "weekNum": 16,
+    "week": "Week 16",
+    "desc": "Complete H&P OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "8bf27ede-96eb-4d34-bd4c-e9316a029564"
   }
 ]
