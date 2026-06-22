@@ -5656,7 +5656,7 @@
   {
     "_id": "11051226_93",
     "mand": "Yes",
-    "title": "FHP OSCE Remediation Tentative**",
+    "title": "FHP OSCE Retake Tentative**",
     "group": "Assigned Students Only",
     "location": "3rd Flr SIM Ctr Rm 305, Discovery Tower",
     "calYear": "2029",
@@ -5664,13 +5664,13 @@
     "date": "12/08/2026",
     "start": "15:00",
     "end": "17:00",
-    "category": "Session",
+    "category": "exam",
     "block": "POM 3",
     "weekNum": 29,
     "presenter": "Dr. Caplan",
     "info": "Additional info, please see Canvas",
     "week": "Week 29",
-    "desc": "FHP OSCE Remediation Tentative**"
+    "desc": "FHP OSCE Retake Tentative**"
   },
   {
     "title": "Asynchronous Modules 1-12 Open",
