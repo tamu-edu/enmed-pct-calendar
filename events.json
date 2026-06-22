@@ -12082,5 +12082,24 @@
     "info": "",
     "presenter": "",
     "_id": "8bf27ede-96eb-4d34-bd4c-e9316a029564"
+  },
+  {
+    "title": "Complete H&P OSCE Retake",
+    "date": "10/07/2026",
+    "start": "13:00",
+    "end": "17:00",
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 20,
+    "week": "Week 20",
+    "desc": "Complete H&P OSCE Retake",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "SIM 404, EnMed Tower",
+    "info": "",
+    "presenter": "",
+    "_id": "d8e39990-271d-4a44-a0f0-3d62e0552048"
   }
 ]
