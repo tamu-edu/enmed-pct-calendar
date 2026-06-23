@@ -7090,7 +7090,7 @@
     "start": "08:00",
     "end": "12:00",
     "category": "Session",
-    "block": "MGA, FOM I, POM I, ITDE",
+    "block": "MGA, FOM I, POM I, ITDE 611",
     "weekNum": 25,
     "week": "Week 25",
     "desc": "Clinical Cadaver Integration Presentation {Blackout Day}",
