@@ -11955,7 +11955,7 @@
     "date": "09/25/2026",
     "start": "12:45 PM",
     "end": "12:55 PM",
-    "category": "Session",
+    "category": "Exam Check-In",
     "block": "MGA, FOM I",
     "weekNum": 18,
     "week": "Week 18",
@@ -11966,7 +11966,7 @@
     "group": "All Students",
     "location": "MITIE",
     "info": "",
-    "presenter": "",
+    "presenter": "Dr. Meyer, Dr. Omole",
     "_id": "65b7da32-36d3-4262-839d-c76be5d657e5"
   },
   {
