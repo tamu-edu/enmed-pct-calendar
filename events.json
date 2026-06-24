@@ -11934,8 +11934,8 @@
   {
     "title": "Practical Exam Check-In",
     "date": "10/16/2026",
-    "start": "12:45 PM",
-    "end": "12:55 PM",
+    "start": "12:45",
+    "end": "12:55",
     "category": "Session",
     "block": "MGA, FOM I",
     "weekNum": 21,
