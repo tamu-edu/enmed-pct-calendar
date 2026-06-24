@@ -2983,7 +2983,7 @@
     "presenter": ""
   },
   {
-    "title": "Practical Exam",
+    "title": "NBME Exam",
     "date": "10/16/2026",
     "start": "13:00",
     "end": "17:00",
@@ -2991,7 +2991,7 @@
     "block": "MGA",
     "weekNum": 21,
     "week": "Week 21",
-    "desc": "Practical Exam",
+    "desc": "NBME Exam",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
@@ -11932,7 +11932,7 @@
     "_id": "229b1d9d-6e13-404c-ac64-600015324907"
   },
   {
-    "title": "Practical Exam Check-In",
+    "title": "NBME Exam Check-In",
     "date": "10/16/2026",
     "start": "12:45",
     "end": "12:55",
@@ -11940,7 +11940,7 @@
     "block": "MGA, FOM I",
     "weekNum": 21,
     "week": "Week 21",
-    "desc": "Practical Exam Check-In",
+    "desc": "NBME Exam Check-In",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
