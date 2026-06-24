@@ -11953,9 +11953,9 @@
   {
     "title": "Practical Exam Check-in",
     "date": "09/25/2026",
-    "start": "12:45 PM",
-    "end": "12:55 PM",
-    "category": "Exam Check-In",
+    "start": "12:45",
+    "end": "12:55",
+    "category": "Session",
     "block": "MGA, FOM I",
     "weekNum": 18,
     "week": "Week 18",
@@ -11966,7 +11966,7 @@
     "group": "All Students",
     "location": "MITIE",
     "info": "",
-    "presenter": "Dr. Meyer, Dr. Omole",
+    "presenter": "",
     "_id": "65b7da32-36d3-4262-839d-c76be5d657e5"
   },
   {
