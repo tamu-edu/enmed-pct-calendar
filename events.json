@@ -12143,8 +12143,8 @@
   {
     "title": "Vimedix Ultrasound Simulation Demo",
     "date": "07/21/2026",
-    "start": "0900",
-    "end": "1100",
+    "start": "09:00",
+    "end": "11:00",
     "category": "Session",
     "block": "",
     "weekNum": 9,
