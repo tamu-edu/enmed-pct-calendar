@@ -10,6 +10,16 @@
       "startMonth": 5,
       "endMonth": 12,
       "year": 2026
+    },
+    {
+      "id": "spring-2027",
+      "name": "Spring 2027",
+      "status": "draft",
+      "file": "test_events_spring-2027.json",
+      "boundaryMode": "months",
+      "startMonth": 1,
+      "endMonth": 5,
+      "year": 2027
     }
   ]
 }
