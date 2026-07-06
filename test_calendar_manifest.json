@@ -4,7 +4,7 @@
     {
       "id": "summer-fall-2026",
       "name": "Summer/Fall 2026",
-      "status": "published",
+      "status": "active"
       "file": "test_events.json",
       "boundaryMode": "months",
       "startMonth": 5,
