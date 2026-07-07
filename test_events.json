@@ -10543,8 +10543,8 @@
   {
     "title": "Blackout Day",
     "date": "05/26/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "00:00",
+    "end": "23:59",
     "category": "BLACKOUT",
     "block": "Pre-Matriculation",
     "weekNum": 1,
@@ -10557,13 +10557,14 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "1779393751324"
+    "_id": "1779393751324",
+    "allDay": true
   },
   {
     "title": "Blackout Day",
     "date": "05/27/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "00:00",
+    "end": "23:59",
     "category": "BLACKOUT",
     "block": "Pre-Matriculation",
     "weekNum": 1,
@@ -10576,7 +10577,8 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "1779465968752"
+    "_id": "1779465968752",
+    "allDay": true
   },
   {
     "title": "Blackout Day",
@@ -10733,8 +10735,8 @@
   {
     "title": "Black Out Day",
     "date": "07/21/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "00:00",
+    "end": "23:59",
     "category": "BLACKOUT",
     "block": "M1 Orientation Day",
     "weekNum": 9,
@@ -10747,7 +10749,8 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "e5425229-1fce-423a-94aa-6a3313a5854b"
+    "_id": "e5425229-1fce-423a-94aa-6a3313a5854b",
+    "allDay": true
   },
   {
     "title": "Black Out Day",
@@ -10809,8 +10812,8 @@
   {
     "title": "Black Out Day",
     "date": "07/22/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "00:00",
+    "end": "23:59",
     "category": "BLACKOUT",
     "block": "M1 Orientation Day",
     "weekNum": 9,
@@ -10823,7 +10826,8 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "ef4ed73f-c955-4338-a53d-bceecea13f97"
+    "_id": "ef4ed73f-c955-4338-a53d-bceecea13f97",
+    "allDay": true
   },
   {
     "title": "Mass Casualty Day",
