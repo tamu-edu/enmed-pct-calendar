@@ -6014,20 +6014,21 @@
     "_id": "1051226_10",
     "mand": "Yes",
     "title": "Blackout Day",
-    "group": "",
+    "group": "All Students",
     "location": "",
     "calYear": "2030",
-    "mCal": "",
+    "mCal": "M0",
     "date": "07/30/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "",
+    "end": "",
     "category": "BLACKOUT",
-    "block": "POM 1",
-    "weekNum": 1,
-    "week": "Week 1",
+    "block": "POM I",
+    "weekNum": 10,
+    "week": "Week 10",
     "desc": "Blackout Day",
     "presenter": "",
-    "info": ""
+    "info": "",
+    "allDay": true
   },
   {
     "_id": "1051226_11",
@@ -10602,10 +10603,10 @@
   {
     "title": "Blackout Day",
     "date": "08/14/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "",
+    "end": "",
     "category": "BLACKOUT",
-    "block": "FOM / MGA",
+    "block": "FOM/MGA",
     "weekNum": 12,
     "week": "Week 12",
     "desc": "Blackout Day",
@@ -10616,7 +10617,8 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "1779759583433"
+    "_id": "1779759583433",
+    "allDay": true
   },
   {
     "title": "[MAND] M1 Orientation Day",
@@ -10716,8 +10718,8 @@
   {
     "title": "Black Out Day",
     "date": "07/20/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "",
+    "end": "",
     "category": "BLACKOUT",
     "block": "M1 Orientation Day",
     "weekNum": 9,
@@ -10730,7 +10732,8 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "6195d187-cc55-416a-9559-2c15971545bd"
+    "_id": "6195d187-cc55-416a-9559-2c15971545bd",
+    "allDay": true
   },
   {
     "title": "Black Out Day",
@@ -10755,8 +10758,8 @@
   {
     "title": "Black Out Day",
     "date": "07/23/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "",
+    "end": "",
     "category": "BLACKOUT",
     "block": "M1 Orientation Day",
     "weekNum": 9,
@@ -10769,7 +10772,8 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "a97ff922-cf37-4324-a07d-715461e74bf0"
+    "_id": "a97ff922-cf37-4324-a07d-715461e74bf0",
+    "allDay": true
   },
   {
     "title": "2030 White Coat Ceremony Day",
@@ -10793,8 +10797,8 @@
   {
     "title": "Black Out Day",
     "date": "07/24/2026",
-    "start": "07:00",
-    "end": "07:30",
+    "start": "",
+    "end": "",
     "category": "BLACKOUT",
     "block": "White Coat Ceremony",
     "weekNum": 9,
@@ -10807,7 +10811,8 @@
     "location": "",
     "info": "",
     "presenter": "",
-    "_id": "4fef13f5-6369-4b75-90ad-3a08e4fae763"
+    "_id": "4fef13f5-6369-4b75-90ad-3a08e4fae763",
+    "allDay": true
   },
   {
     "title": "Black Out Day",
@@ -11227,5 +11232,45 @@
     "info": "",
     "presenter": "",
     "_id": "8600b98b-ad4c-4220-bef1-4c4a2919b1a3"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "10/30/2026",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "BLACKOUT",
+    "block": "Endo/Repro",
+    "weekNum": 23,
+    "week": "Week 23",
+    "desc": "Blackout Day",
+    "calYear": "",
+    "mCal": "M0",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "1efc6d9b-6c06-4667-bf9c-4b55230aa911"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "10/30/2026",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "BLACKOUT",
+    "block": "Endo/Repro",
+    "weekNum": 23,
+    "week": "Week 23",
+    "desc": "Blackout Day",
+    "calYear": "",
+    "mCal": "M0",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "4ae66721-0fe3-4708-9c99-0a858c9c8ea7"
   }
 ]
