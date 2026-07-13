@@ -762,8 +762,6 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 .yr-check-label[data-mc="M1"].checked .yr-check-box{border-color:#1565C0;background:#1565C0}
 .yr-check-label[data-mc="M2"].checked{border-color:#2E7D32;color:#2E7D32;background:rgba(46,125,50,.07)}
 .yr-check-label[data-mc="M2"].checked .yr-check-box{border-color:#2E7D32;background:#2E7D32}
-.yr-check-label[data-mc="Student Affairs"].checked{border-color:#6A1B9A;color:#6A1B9A;background:rgba(106,27,154,.07)}
-.yr-check-label[data-mc="Student Affairs"].checked .yr-check-box{border-color:#6A1B9A;background:#6A1B9A}
 .yr-check-label .yr-check-box::after{background:white}
 
 /* LIST SCHEDULE FINDER */
@@ -1438,7 +1436,6 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
             <option value="M0">M0 — Pre-Matriculation</option>
             <option value="M1" selected>M1</option>
             <option value="M2">M2</option>
-            <option value="Student Affairs">Student Affairs</option>
             <option value="Program-Wide">Program-Wide</option>
           </select>
         </div>
@@ -1862,7 +1859,6 @@ async function saveEventsToGitHub(){
   await saveTextFileToGitHub(ICS_FILE_M0, buildICS({ mCal: 'M0' }), 'Update M0 calendar ICS feed');
   await saveTextFileToGitHub(ICS_FILE_M1, buildICS({ mCal: 'M1' }), 'Update M1 calendar ICS feed');
   await saveTextFileToGitHub(ICS_FILE_M2, buildICS({ mCal: 'M2' }), 'Update M2 calendar ICS feed');
-  await saveTextFileToGitHub(ICS_FILE_SA, buildICS({ mCal: 'Student Affairs' }), 'Update Student Affairs calendar ICS feed');
 }
 
 // ── INIT ──────────────────────────────────────────────────────
@@ -2652,7 +2648,6 @@ function listDisplayLabel(field,value){
     if(key === 'm0') return 'M0';
     if(key === 'm1') return 'M1';
     if(key === 'm2') return 'M2';
-    if(key === 'student affairs') return 'Student Affairs';
     if(key === 'program wide') return 'Program-Wide';
     return raw;
   }
@@ -2910,7 +2905,7 @@ function listOptionEntries(field,events){
   const entries = [...map.entries()].map(([value,label])=>({value,label}));
 
   if(field === 'mcal'){
-    const order = ['program wide','m0','m1','m2','student affairs'];
+    const order = ['program wide','m0','m1','m2'];
     return entries.sort((a,b)=>{
       const ai = order.indexOf(a.value);
       const bi = order.indexOf(b.value);
@@ -3497,7 +3492,6 @@ function formHTML(e,isEdit){
     <option value="M0" ${(e&&e.mCal==='M0')?'selected':''}>M0 — Pre-Matriculation</option>
     <option value="M1" ${(!e||e.mCal==='M1')?'selected':''}>M1</option>
     <option value="M2" ${(e&&e.mCal==='M2')?'selected':''}>M2</option>
-    <option value="Student Affairs" ${(e&&e.mCal==='Student Affairs')?'selected':''}>Student Affairs</option>
     <option value="Program-Wide" ${(e&&isProgramWideEvent(e))?'selected':''}>Program-Wide</option>
 </select></div>
   </div>
@@ -3566,7 +3560,7 @@ const COHORT_YEARS=['2029','2030','2031','2032','2033','2034','2035','2036','203
 const YEAR_COLORS={'2029':'#C62828','2030':'#1565C0','2031':'#2E7D32','2032':'#6A1B9A','2033':'#BF360C','2034':'#00695C','2035':'#4527A0','2036':'#E65100','2037':'#00838F','2038':'#558B2F'};
 
 let selectedYears=new Set(['All']);
-let selectedMCals=new Set(['All']); // M0/M1/M2/Student Affairs
+let selectedMCals=new Set(['All']); // M0/M1/M2
 
 // Calendar visibility (faculty controlled, stored in localStorage)
 let calendarVisibility={};
@@ -3580,7 +3574,7 @@ function loadVisibility(){
 }
 
 
-// ── MCAL FILTER (M0/M1/M2/Student Affairs) ───────────────────
+// ── MCAL FILTER (M0/M1/M2) ───────────────────
 function toggleMCal(mc){
   if(mc==='All'){
     selectedMCals=new Set(['All']);
@@ -3620,10 +3614,6 @@ function populateYearDropdown(){
   if(!sel)return;
   // Remove all except first "All" option
   while(sel.options.length>1)sel.remove(1);
-  // Add Student Affairs as first option
-  const saOpt=document.createElement('option');
-  saOpt.value='Student Affairs';saOpt.textContent='Student Affairs';
-  sel.appendChild(saOpt);
   COHORT_YEARS.forEach(yr=>{
     // In student mode: skip years where both M1 and M2 are hidden
     if(!isFacultyMode){
