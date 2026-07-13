@@ -1180,7 +1180,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <!-- MONTH / WEEK NAVIGATION MOVES HERE -->
       <div class="week-drawer" id="weekDrawer"></div>
 
-    <!-- CALENDAR FILTER: M0 / M1 / M2 / Student Affairs -->
+    <!-- CALENDAR FILTER: M0 / M1 / M2 -->
     <div class="year-checks" id="calFilterRow" style="margin-bottom:10px">
       <label class="yr-check-label checked" data-mc="All" onclick="toggleMCal('All')">
         <div class="yr-check-box"></div>All
@@ -1194,9 +1194,6 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       </label>
       <label class="yr-check-label" data-mc="M2" onclick="toggleMCal('M2')">
         <div class="yr-check-box"></div>M2
-      </label>
-      <label class="yr-check-label" data-mc="Student Affairs" onclick="toggleMCal('Student Affairs')">
-        <div class="yr-check-box"></div>Student Affairs
       </label>
 
     </div>
@@ -6206,8 +6203,7 @@ function openSyncLinksModal(){
     ['Full Calendar', 'calendar.ics'],
     ['M0 Calendar', 'calendar-m0.ics'],
     ['M1 Calendar', 'calendar-m1.ics'],
-    ['M2 Calendar', 'calendar-m2.ics'],
-    ['Student Affairs Calendar', 'calendar-student-affairs.ics']
+    ['M2 Calendar', 'calendar-m2.ics']
   ];
 
   document.getElementById('syncLinksList').innerHTML =
