@@ -119,6 +119,37 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 
 /* CALENDAR */
 .cal-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:640px}
+.all-day-row{
+  display:grid;
+  grid-template-columns:64px repeat(5,1fr);
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+
+.all-day-label{
+  padding:8px 6px;
+  font-size:10px;
+  color:var(--muted2);
+  border-right:1px solid var(--border);
+  text-align:right;
+  font-family:'DM Mono',monospace;
+}
+
+.all-day-cell{
+  min-height:38px;
+  padding:5px;
+  border-right:1px solid var(--border);
+}
+
+.all-day-cell:last-child{border-right:none}
+
+.all-day-event{
+  min-height:auto;
+  padding:5px 8px;
+  margin-bottom:4px;
+  border-radius:6px;
+  font-size:11px;
+}
 .cal-header{display:grid;grid-template-columns:64px repeat(5,1fr);background:var(--surface2);border-bottom:1px solid var(--border)}
 .ch-cell{padding:10px 8px;text-align:center;border-right:1px solid var(--border)}
 .ch-cell:last-child{border-right:none}
@@ -877,9 +908,16 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
 .list-custom-range{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr 1fr auto;
   gap:10px;
   margin-top:10px;
+  align-items:end;
+}
+
+@media(max-width:700px){
+  .list-custom-range{
+    grid-template-columns:1fr;
+  }
 }
 
 .list-finder-footer{
@@ -1161,24 +1199,31 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
   <div class="main">
     <div class="toolbar">
       <div class="toolbar-left">
-        <div class="toolbar-title" id="toolbarTitle">EnMed Calendar</div>
-        <div class="toolbar-sub" id="toolbarSub">Loading...</div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="toolbar-title" id="toolbarTitle">EnMed Calendar [In-Progress: Spring 2027]</div>
+        <button class="today-btn sync-primary-btn" onclick="openSyncLinksModal()" style="padding:6px 12px;font-size:12px">
+          📅 Calendar Sync*
+        </button>
       </div>
+      <div class="toolbar-sub" id="toolbarSub">Loading...</div>
+    </div>
       <div class="view-toggle">
-        <button class="vt-btn active" onclick="setView('month',this)">Month</button><button class="vt-btn" onclick="setView('week',this)">Week</button>
+        <button class="vt-btn" onclick="setView('month',this)">Month</button><button class="vt-btn active" onclick="setView('week',this)">Week</button>
         <button class="vt-btn" onclick="setView('list',this)">List</button>
       </div>
     </div>
     
-    <!-- PRIMARY ACTIONS -->
-      <div class="toolbar-controls" id="primaryActions">
-        <button class="today-btn sync-primary-btn" onclick="openSyncLinksModal()">Calendar Sync Options</button>
-      </div>
+    <!-- Semester files are storage partitions, not calendar views.
+        Hidden placeholders remain so legacy render calls do not fail. -->
+    <div id="semesterModeBanner" style="display:none"></div>
+
+    <div id="semesterSelect" style="display:none"></div>
+    <span id="semesterStatusBadge" style="display:none"></span>
 
       <!-- MONTH / WEEK NAVIGATION MOVES HERE -->
       <div class="week-drawer" id="weekDrawer"></div>
 
-    <!-- CALENDAR FILTER: M0 / M1 / M2 -->
+    <!-- CALENDAR FILTER: M0 / M1 / M2  -->
     <div class="year-checks" id="calFilterRow" style="margin-bottom:10px">
       <label class="yr-check-label checked" data-mc="All" onclick="toggleMCal('All')">
         <div class="yr-check-box"></div>All
@@ -1193,6 +1238,13 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <label class="yr-check-label" data-mc="M2" onclick="toggleMCal('M2')">
         <div class="yr-check-box"></div>M2
       </label>
+
+      <span
+        style="margin-left:12px;font-size:10px;color:var(--muted2);line-height:1.4;align-self:center;"
+      >
+        * Subscribed calendars (Google, Outlook, Apple, etc.) may take 24–48 hours to reflect updates. Refresh timing is controlled by your calendar provider.
+      </span>
+      
 
     </div>
     
@@ -1210,7 +1262,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
   <span class="legend-item"><span class="legend-dot" style="background:#7F1D1D"></span>Exams</span>
   <span class="legend-item"><span class="legend-dot" style="background:#C58B00"></span>Exam Check-Ins</span>
   <span class="legend-item"><span class="legend-dot" style="background:#111111"></span>Blackout Days</span>
-  <span class="legend-item"><span class="legend-dot" style="background:#cfa3d8"></span>Events</span>
+  <span class="legend-item"><span class="legend-dot" style="background:#E56B6F"></span>Events</span>
 </div>
 
     <div class="week-nav">
@@ -1259,6 +1311,9 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 </div>
 
 <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
+<button class="btn-full" onclick="openAdvancedSettings()" style="background:var(--surface2);color:var(--accent);padding:10px;border-radius:8px;border:1px solid var(--accent);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-top:10px">
+  Semester Editor
+</button>
 </div>
   </div>
 </div>
@@ -1452,7 +1507,15 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
         </div>
       </div>
 
-      <div class="multiadd-grid">
+      <div class="form-group">
+        <label class="form-label" style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0">
+          <input type="checkbox" id="ma_allDay" onchange="toggleAllDayTimeFields('ma')">
+          All-day event
+        </label>
+        <div class="multiadd-note">All generated sessions will export as informational all-day bars.</div>
+      </div>
+
+      <div class="multiadd-grid" id="ma_timeWrap">
         <div class="form-group">
           <label class="form-label">Start Time *</label>
           <input class="form-input" id="ma_start" list="timeListMA" value="08:00">
@@ -1603,11 +1666,14 @@ const DAYS=['Mon','Tue','Wed','Thu','Fri'];
 
 // year filter handled by selectedYears Set; class filter handled by selectedMCals Set
 let CFG={}, EVENTS=[], WEEKS=[];
-let currentWeekIdx=0, currentFilter='All', currentBlockFilter='All', currentView='month';
+let currentWeekIdx=0, currentFilter='All', currentBlockFilter='All', currentView='week';
+let weekIdxBeforeMonth = 0;
+let monthChangedWhileInMonth = false;
 let currentMonth=new Date().getMonth(), currentMonthYear=new Date().getFullYear();
 let isFacultyMode=false, editingId=null, prefillDate='', prefillHour='';
 let pendingDeleteId='', sessionLog=[];
 let pendingChanges = [];
+let semesterWarningEvent = null;
 let ghFileSha=''; // GitHub file SHA needed for updates
 
 let listFilters = {
@@ -1653,13 +1719,30 @@ function openConfig(){
 
 // ── GITHUB API ────────────────────────────────────────────────
 const DATA_FILE = 'events.json';
+const MANIFEST_FILE = 'calendar_manifest.json';
 const ICS_FILE = 'calendar.ics';
 const ICS_FILE_M0 = 'calendar-m0.ics';
 const ICS_FILE_M1 = 'calendar-m1.ics';
 const ICS_FILE_M2 = 'calendar-m2.ics';
-const ICS_FILE_SA = 'calendar-student-affairs.ics';
 const PROGRAM_WIDE_MCAL = 'Program-Wide';
 const PROGRAM_WIDE_TARGETS = ['M0', 'M1', 'M2'];
+
+let CALENDAR_MANIFEST = null;
+
+/*
+  Normal calendar operation always uses the combined timeline.
+  Semester IDs are retained on events for storage routing only.
+*/
+let CURRENT_SEMESTER_VIEW_ID = '';
+localStorage.removeItem('enmed_semester_view_id');
+
+const SEMESTER_VIEW_ACTIVE = '__active__';
+
+const SEMESTER_STATUS = {
+  ACTIVE: 'active',
+  DRAFT: 'draft',
+  ARCHIVED: 'archived'
+};
 
 function isProgramWideEvent(e){
   return e && e.mCal === PROGRAM_WIDE_MCAL;
@@ -1684,38 +1767,34 @@ function generateUniqueId(events){
 async function loadEvents(){
   setStatus('loading','Loading events...');
   document.getElementById('calView').innerHTML='<div style="text-align:center;padding:60px 20px"><div class="spinner"></div><p style="color:var(--muted)">Loading from GitHub...</p></div>';
+
   try{
-    // Use raw content URL — no auth needed, no CORS issues
-   if (CFG.token) {
-  setStatus('loading', 'Fetching latest events through GitHub API...');
-  EVENTS = await fetchEventsFromGitHubAPI();
-} else {
-  const rawUrl = `https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${DATA_FILE}?t=${Date.now()}`;
-  setStatus('loading', `Fetching: ${rawUrl}`);
+    await loadCalendarManifest();
 
-  let r;
-  try {
-    r = await fetch(rawUrl, { cache: 'no-store' });
-  } catch (fetchErr) {
-    throw new Error(`Network error — check internet connection. (${fetchErr.message})`);
-  }
+    const semesters = visibleSemesters();
 
-  if (!r.ok) throw new Error(`GitHub returned ${r.status} for events.json — URL: ${rawUrl}`);
+    if(!semesters.length){
+      EVENTS = [];
+      setStatus('live','No visible semesters');
+    } else {
+      setStatus('loading', `Fetching ${semesters.length} semester file${semesters.length!==1?'s':''}...`);
+      EVENTS = await fetchEventsForSemesters(semesters);
+      const label = currentSemesterViewLabel();
+      setStatus('live',`${label} — ${EVENTS.length} events`);
+    }
 
-  EVENTS = await r.json();
-}
-    setStatus('live',`Live — ${EVENTS.length} events`);
+    renderSemesterSelector();
     document.getElementById('lastSync').textContent='Last sync: '+new Date().toLocaleTimeString();
+
     WEEKS=buildWeeks();
     buildWeekDrawer();
     updateTabCounts();
-    // Auto-navigate month view to the current date
-        goToHomeDate();
+    goToHomeDate();
     render();
   }catch(err){
     setStatus('offline','Error: '+err.message.substring(0,60));
     showToast('❌ '+err.message);
-    document.getElementById('calView').innerHTML=`<div class="empty-state"><div class="big">❌</div><p>${err.message}</p><p style="margin-top:10px;font-size:11px">Make sure <strong>events.json</strong> exists in your GitHub repo.</p></div>`;
+    document.getElementById('calView').innerHTML=`<div class="empty-state"><div class="big">❌</div><p>${err.message}</p><p style="margin-top:10px;font-size:11px">Make sure semester JSON files exist in your GitHub repo.</p></div>`;
   }
 }
 
@@ -1728,41 +1807,2012 @@ function cleanEventForSave(e){
     _layoutIndex,
     _layoutCols,
     _attachedCheckIn,
+    _semesterId,
+    _sourceFile,
     ...clean
   } = e;
 
   return clean;
 }
 
-async function fetchLatestGitHubSha(){
-  const meta = await fetch(
-    `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}?ref=main`,
-    { headers: ghHeaders() }
-  );
+async function loadCalendarManifest(){
+  try{
+    if(CFG.token){
+      const r = await fetch(
+        `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${MANIFEST_FILE}?ref=main&t=${Date.now()}`,
+        { headers: ghHeaders() }
+      );
 
-  if(!meta.ok){
-    throw new Error('Could not get latest file SHA from GitHub. Check your token.');
+      if(!r.ok) throw new Error(`GitHub returned ${r.status} for ${MANIFEST_FILE}`);
+
+      const d = await r.json();
+      const text = decodeURIComponent(escape(atob(d.content.replace(/\n/g, ''))));
+      CALENDAR_MANIFEST = JSON.parse(text);
+      renderSemesterSelector();
+      return CALENDAR_MANIFEST;
+    }
+
+    const rawUrl = `https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${MANIFEST_FILE}?t=${Date.now()}`;
+    const r = await fetch(rawUrl, { cache: 'no-store' });
+
+    if(!r.ok) throw new Error(`GitHub returned ${r.status} for ${MANIFEST_FILE}`);
+
+    CALENDAR_MANIFEST = await r.json();
+    renderSemesterSelector();
+    return CALENDAR_MANIFEST;
+  }catch(e){
+    console.warn('Manifest load failed; using single-file fallback.', e);
+    CALENDAR_MANIFEST = null;
+    return null;
   }
-
-  const d = await meta.json();
-  return d.sha;
 }
 
-const fetchLatestEventsFromGitHub = fetchEventsFromGitHubAPI;
+function allSemesters(){
+  return CALENDAR_MANIFEST?.semesters || [];
+}
 
-async function fetchEventsFromGitHubAPI(){
+function activeSemesters(){
+  return allSemesters().filter(s => s.status === SEMESTER_STATUS.ACTIVE && s.file);
+}
+
+function draftSemesters(){
+  return allSemesters().filter(s => s.status === SEMESTER_STATUS.DRAFT && s.file);
+}
+
+function archivedSemesters(){
+  return allSemesters().filter(s => s.status === SEMESTER_STATUS.ARCHIVED && s.file);
+}
+
+function writableSemesters(){
+  return isFacultyMode
+    ? activeSemesters().concat(draftSemesters())
+    : activeSemesters();
+}
+
+function visibleSemesters(){
+  if(!CALENDAR_MANIFEST){
+    return [{
+      id: 'fallback',
+      name: 'Fallback Events',
+      status: SEMESTER_STATUS.ACTIVE,
+      file: DATA_FILE
+    }];
+  }
+
+  /*
+    Students see all published storage files as one calendar.
+    Faculty see published and draft storage files as one editing
+    timeline. Archived files never enter normal calendar operation.
+  */
+  return isFacultyMode
+    ? activeSemesters().concat(draftSemesters())
+    : activeSemesters();
+}
+
+function semesterById(id){
+  return allSemesters().find(s => s.id === id && s.file) || null;
+}
+
+function semesterIsActive(semester){
+  return semester?.status === SEMESTER_STATUS.ACTIVE;
+}
+
+function semesterIsDraft(semester){
+  return semester?.status === SEMESTER_STATUS.DRAFT;
+}
+
+function semesterIsArchived(semester){
+  return semester?.status === SEMESTER_STATUS.ARCHIVED;
+}
+
+function singleSemesterViewIsActive(){
+  return !!CURRENT_SEMESTER_VIEW_ID;
+}
+
+function currentSingleSemester(){
+  return CURRENT_SEMESTER_VIEW_ID ? semesterById(CURRENT_SEMESTER_VIEW_ID) : null;
+}
+
+function semesterIsEditable(semester){
+  return !!semester && !semesterIsArchived(semester);
+}
+
+function canEditActiveSemester(){
+  return isFacultyMode;
+}
+
+function canRegenerateICS(){
+  return isFacultyMode;
+}
+
+function semesterStatusLabel(status){
+  if(status === SEMESTER_STATUS.ACTIVE) return 'Active';
+  if(status === SEMESTER_STATUS.DRAFT) return 'Draft';
+  if(status === SEMESTER_STATUS.ARCHIVED) return 'Archived';
+  return status || 'Unknown';
+}
+
+function currentSemesterViewLabel(){
+  return isFacultyMode
+    ? 'Calendar Editing'
+    : 'Calendar';
+}
+
+function renderSemesterModeBanner(){
+  const banner = document.getElementById('semesterModeBanner');
+  if(!banner) return;
+
+  if(!CURRENT_SEMESTER_VIEW_ID){
+    banner.style.display = 'none';
+    banner.innerHTML = '';
+    return;
+  }
+
+  const semester = semesterById(CURRENT_SEMESTER_VIEW_ID);
+  const isArchived = semesterIsArchived(semester);
+  const isDraft = semesterIsDraft(semester);
+
+  banner.style.display = '';
+  banner.style.borderColor = isArchived ? 'rgba(240,92,110,.35)' : 'rgba(247,161,79,.45)';
+  banner.style.background = isArchived ? 'rgba(240,92,110,.08)' : 'rgba(247,161,79,.12)';
+  banner.style.color = isArchived ? '#b00020' : '#8a4a00';
+
+  banner.innerHTML = `
+    Viewing ${isDraft ? 'draft' : isArchived ? 'archived' : 'single'} semester: ${escapeHtml(semester?.name || semester?.id || 'Semester')}
+    ${isArchived ? ' · Read-only' : ''}
+    <button type="button" onclick="changeSemester('${SEMESTER_VIEW_ACTIVE}')" style="margin-left:10px;padding:4px 8px;border-radius:7px;border:1px solid rgba(0,0,0,.12);background:white;color:inherit;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:800;cursor:pointer">
+      Return to Active Calendar
+    </button>
+  `;
+}
+
+function renderSemesterSelector(){
+  const select =
+    document.getElementById('semesterSelect');
+
+  const badge =
+    document.getElementById('semesterStatusBadge');
+
+  const banner =
+    document.getElementById('semesterModeBanner');
+/*
+  if(select){
+    select.innerHTML = `
+      <option value="${SEMESTER_VIEW_ACTIVE}">
+        Combined Calendar
+      </option>
+    `;
+
+    select.value = SEMESTER_VIEW_ACTIVE;
+  }
+
+  if(badge){
+    badge.textContent = '';
+  }
+
+  if(banner){
+    banner.style.display = 'none';
+    banner.innerHTML = '';
+  }
+    */
+}
+
+function changeSemester(){
+  CURRENT_SEMESTER_VIEW_ID = '';
+  localStorage.removeItem('enmed_semester_view_id');
+
+  pendingChanges = [];
+  editingId = null;
+
+  closeForm();
+  loadEvents();
+}
+
+
+function legacySemesterDateBounds(semester){
+  if(!semester) return null;
+
+  if(semester.boundaryMode === 'custom'){
+    if(!semester.startDate || !semester.endDate) return null;
+
+    return {
+      start: parseMDY(semester.startDate),
+      end: parseMDY(semester.endDate),
+      label: `${semester.startDate} – ${semester.endDate}`
+    };
+  }
+
+  if(semester.boundaryMode === 'months'){
+    const year = Number(semester.year);
+    const startMonth = Number(semester.startMonth);
+    const endMonth = Number(semester.endMonth);
+
+    if(!year || !startMonth || !endMonth) return null;
+
+    const start = new Date(year, startMonth - 1, 1);
+    const end = new Date(year, endMonth, 0);
+
+    return {
+      start,
+      end,
+      label: `${start.toLocaleDateString('en-US',{
+        month:'short',
+        day:'numeric',
+        year:'numeric'
+      })} – ${end.toLocaleDateString('en-US',{
+        month:'short',
+        day:'numeric',
+        year:'numeric'
+      })}`
+    };
+  }
+
+  return null;
+}
+
+function semesterClassBounds(semester, mCal){
+  if(!semester || !mCal) return null;
+
+  const configuredBounds =
+    semester.classBounds?.[mCal];
+
+  if(
+    configuredBounds?.startDate &&
+    configuredBounds?.endDate
+  ){
+    const start = parseMDY(
+      configuredBounds.startDate
+    );
+
+    const end = parseMDY(
+      configuredBounds.endDate
+    );
+
+    if(
+      start instanceof Date &&
+      end instanceof Date &&
+      !Number.isNaN(start.getTime()) &&
+      !Number.isNaN(end.getTime())
+    ){
+      return {
+        start,
+        end,
+        label:
+          `${configuredBounds.startDate} – ` +
+          `${configuredBounds.endDate}`
+      };
+    }
+  }
+
+  /*
+    Backward compatibility for preexisting semesters that
+    still use boundaryMode/year/startMonth/endMonth or
+    universal startDate/endDate fields.
+  */
+  return legacySemesterDateBounds(semester);
+}
+
+function semesterClassBoundsFieldsHTML(
+  mCal,
+  label,
+  prefix = 'newSemester',
+  startValue = '',
+  endValue = ''
+){
+  return `
+    <div class="change-item" style="margin-bottom:12px">
+      <div class="ch-type">${escapeHtml(mCal)}</div>
+      <div class="ch-title">${escapeHtml(label)} boundaries</div>
+
+      <div class="form-row" style="margin-top:10px">
+        <div class="form-group">
+          <label class="form-label">Start Date</label>
+          <input
+            class="form-input"
+            id="${escapeHtml(prefix)}${mCal}Start"
+            value="${escapeHtml(startValue)}"
+            placeholder="MM/DD/YYYY"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">End Date</label>
+          <input
+            class="form-input"
+            id="${escapeHtml(prefix)}${mCal}End"
+            value="${escapeHtml(endValue)}"
+            placeholder="MM/DD/YYYY"
+          >
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function collectSemesterClassBounds(prefix){
+  const classBounds = {};
+
+  for(const mCal of PROGRAM_WIDE_TARGETS){
+    const startInput = document.getElementById(`${prefix}${mCal}Start`);
+    const endInput = document.getElementById(`${prefix}${mCal}End`);
+
+    const startDate = startInput?.value.trim() || '';
+    const endDate = endInput?.value.trim() || '';
+
+    const hasStart = !!startDate;
+    const hasEnd = !!endDate;
+
+    if(hasStart !== hasEnd){
+      throw new Error(
+        `${mCal} must have both a start date and an end date.`
+      );
+    }
+
+    if(!hasStart && !hasEnd){
+      continue;
+    }
+
+    if(!isValidMDY(startDate) || !isValidMDY(endDate)){
+      throw new Error(
+        `${mCal} dates must use MM/DD/YYYY.`
+      );
+    }
+
+    const start = parseMDY(startDate);
+    const end = parseMDY(endDate);
+
+    if(start > end){
+      throw new Error(
+        `${mCal} start date must be on or before its end date.`
+      );
+    }
+
+    classBounds[mCal] = {
+      startDate,
+      endDate
+    };
+  }
+
+  if(!Object.keys(classBounds).length){
+    throw new Error(
+      'Enter boundaries for at least one class.'
+    );
+  }
+
+  return classBounds;
+}
+
+function classBoundsForDisplay(semester, mCal){
+  const explicit = semester?.classBounds?.[mCal];
+
+  if(explicit?.startDate && explicit?.endDate){
+    return {
+      startDate: explicit.startDate,
+      endDate: explicit.endDate
+    };
+  }
+
+  /*
+    Legacy semesters do not yet have classBounds.
+    Pre-populate all three class fields with the old shared range,
+    allowing the user to convert the semester through the interface.
+  */
+  const legacy = legacySemesterDateBounds(semester);
+
+  if(!legacy) {
+    return {
+      startDate: '',
+      endDate: ''
+    };
+  }
+
+  return {
+    startDate: formatMDY(legacy.start),
+    endDate: formatMDY(legacy.end)
+  };
+}
+
+function dateRangesOverlap(startA, endA, startB, endB){
+  return startA <= endB && startB <= endA;
+}
+
+function semesterBoundsOverlapProblems(
+  proposedBounds,
+  excludeSemesterId = ''
+){
+  const problems = [];
+
+  const otherWritableSemesters = allSemesters().filter(semester =>
+    semester.id !== excludeSemesterId &&
+    semester.status !== SEMESTER_STATUS.ARCHIVED
+  );
+
+  for(const mCal of PROGRAM_WIDE_TARGETS){
+    const proposed = proposedBounds[mCal];
+
+    if(!proposed) continue;
+
+    const proposedStart = parseMDY(proposed.startDate);
+    const proposedEnd = parseMDY(proposed.endDate);
+
+    for(const semester of otherWritableSemesters){
+      const other = semesterClassBounds(semester, mCal);
+
+      if(!other) continue;
+
+      if(
+        dateRangesOverlap(
+          proposedStart,
+          proposedEnd,
+          other.start,
+          other.end
+        )
+      ){
+        problems.push({
+          mCal,
+          semester,
+          proposedStart: proposed.startDate,
+          proposedEnd: proposed.endDate,
+          otherStart: formatMDY(other.start),
+          otherEnd: formatMDY(other.end)
+        });
+      }
+    }
+  }
+
+  return problems;
+}
+
+function semesterOverlapErrorMessage(problem){
+  return (
+    `${problem.mCal} overlaps with ` +
+    `"${problem.semester.name || problem.semester.id}". ` +
+    `Proposed: ${problem.proposedStart}–${problem.proposedEnd}; ` +
+    `existing: ${problem.otherStart}–${problem.otherEnd}.`
+  );
+}
+
+function eventFitsProposedSemesterBounds(event, classBounds){
+  if(!event?.date || !event?.mCal) return false;
+
+  const d = parseMDY(event.date);
+
+  if(
+    !(d instanceof Date) ||
+    Number.isNaN(d.getTime())
+  ){
+    return false;
+  }
+
+  if(event.mCal === PROGRAM_WIDE_MCAL){
+    const configuredBounds = PROGRAM_WIDE_TARGETS
+      .map(mCal => classBounds[mCal])
+      .filter(Boolean)
+      .map(bounds => ({
+        start: parseMDY(bounds.startDate),
+        end: parseMDY(bounds.endDate)
+      }));
+
+    if(!configuredBounds.length) return false;
+
+    const overallStart = new Date(
+      Math.min(...configuredBounds.map(bounds =>
+        bounds.start.getTime()
+      ))
+    );
+
+    const overallEnd = new Date(
+      Math.max(...configuredBounds.map(bounds =>
+        bounds.end.getTime()
+      ))
+    );
+
+    return d >= overallStart && d <= overallEnd;
+  }
+
+  const bounds = classBounds[event.mCal];
+
+  if(!bounds) return false;
+
+  const start = parseMDY(bounds.startDate);
+  const end = parseMDY(bounds.endDate);
+
+  return d >= start && d <= end;
+}
+
+async function fetchRawSemesterEvents(semester){
+  if(!semester?.file){
+    throw new Error('Semester has no event file.');
+  }
+
+  const taggedEvents = await fetchEventsFile(
+    semester.file,
+    semester
+  );
+
+  return taggedEvents;
+}
+
+function semesterDateBounds(semester){
+  if(!semester) return null;
+
+  const classBounds = PROGRAM_WIDE_TARGETS
+    .map(mCal => semesterClassBounds(semester, mCal))
+    .filter(bounds => bounds?.start && bounds?.end);
+
+  if(!classBounds.length){
+    return legacySemesterDateBounds(semester);
+  }
+
+  const start = new Date(
+    Math.min(...classBounds.map(bounds => bounds.start.getTime()))
+  );
+
+  const end = new Date(
+    Math.max(...classBounds.map(bounds => bounds.end.getTime()))
+  );
+
+  return {
+    start,
+    end,
+    label: `${start.toLocaleDateString('en-US',{
+      month:'short',
+      day:'numeric',
+      year:'numeric'
+    })} – ${end.toLocaleDateString('en-US',{
+      month:'short',
+      day:'numeric',
+      year:'numeric'
+    })}`
+  };
+}
+
+function dateInSemester(dateStr, semester, mCal){
+  if(!dateStr || !semester) return false;
+
+  const d = parseMDY(dateStr);
+
+  if(!(d instanceof Date) || Number.isNaN(d.getTime())){
+    return false;
+  }
+
+  /*
+    Program-Wide events belong to the semester's overall union.
+    Regular class events use that class's own boundary.
+  */
+  const bounds = mCal === PROGRAM_WIDE_MCAL
+    ? semesterDateBounds(semester)
+    : semesterClassBounds(semester, mCal);
+
+  if(!bounds) return false;
+
+  return d >= bounds.start && d <= bounds.end;
+}
+
+function matchingSemestersForEvent(e, candidates = writableSemesters()){
+  if(!e?.date || !e?.mCal) return [];
+
+  return candidates.filter(semester =>
+    dateInSemester(e.date, semester, e.mCal)
+  );
+}
+
+function programWideSemesterClassCount(
+  dateStr,
+  semester
+){
+  return PROGRAM_WIDE_TARGETS.filter(
+    mCal =>
+      dateInSemester(
+        dateStr,
+        semester,
+        mCal
+      )
+  ).length;
+}
+
+function programWideStorageSemester(
+  event,
+  candidates = writableSemesters()
+){
+  if(
+    !event?.date ||
+    !isProgramWideEvent(event)
+  ){
+    return null;
+  }
+
+  const ranked = candidates
+    .map(semester => {
+      const classCount =
+        programWideSemesterClassCount(
+          event.date,
+          semester
+        );
+
+      const overallBounds =
+        semesterDateBounds(semester);
+
+      return {
+        semester,
+        classCount,
+        overallStart:
+          overallBounds?.start?.getTime() ||
+          Number.NEGATIVE_INFINITY
+      };
+    })
+    /*
+      A Program-Wide event must fall inside at least one
+      configured class boundary. A broad min-to-max semester
+      span by itself is not enough.
+    */
+    .filter(candidate =>
+      candidate.classCount > 0
+    )
+    .sort((a,b) =>
+      b.classCount - a.classCount ||
+      b.overallStart - a.overallStart ||
+      String(a.semester.id).localeCompare(
+        String(b.semester.id)
+      )
+    );
+
+  return ranked[0]?.semester || null;
+}
+
+function automaticSemesterForEvent(
+  event,
+  candidates = writableSemesters()
+){
+  if(isProgramWideEvent(event)){
+    return programWideStorageSemester(
+      event,
+      candidates
+    );
+  }
+
+  const matches =
+    matchingSemestersForEvent(
+      event,
+      candidates
+    );
+
+  return matches.length === 1
+    ? matches[0]
+    : null;
+}
+
+function semesterForEvent(e, candidates = writableSemesters()){
+  if(!e) return null;
+
+  /*
+    Existing events remain assigned to their current source file
+    unless the editor explicitly chooses another semester.
+
+    This remains true even when the event's current date or class
+    falls outside the configured semester boundaries. Otherwise,
+    a malformed event could become impossible to open and correct.
+
+    Archived semesters remain excluded because they are not part
+    of the writable candidate list.
+  */
+  if(e._semesterId){
+    const sourceSemester = candidates.find(
+      semester => semester.id === e._semesterId
+    );
+
+    if(sourceSemester){
+      return sourceSemester;
+    }
+  }
+
+  /*
+    When working inside one explicitly selected Draft/semester,
+    use that selected semester if the event fits it.
+  */
+  const selectedSemester = currentSingleSemester();
+
+  if(
+    selectedSemester &&
+    candidates.some(semester => semester.id === selectedSemester.id) &&
+    dateInSemester(e.date, selectedSemester, e.mCal)
+  ){
+    return selectedSemester;
+  }
+
+  if(isProgramWideEvent(e)){
+    return programWideStorageSemester(
+      e,
+      candidates
+    );
+  }
+
+  const matches =
+    matchingSemestersForEvent(
+      e,
+      candidates
+    );
+
+  /*
+    A class-specific event must have exactly one match.
+    Returning null for multiple matches avoids silently putting
+    an event into the wrong file.
+  */
+  return matches.length === 1
+    ? matches[0]
+    : null;
+}
+
+function eventTargetSemester(e, candidates = writableSemesters()){
+  return semesterForEvent(e, candidates);
+}
+
+function fileForEvent(e, candidates = writableSemesters()){
+  return semesterForEvent(e, candidates)?.file || '';
+}
+
+function storedFileForEvent(
+  event,
+  candidates = writableSemesters()
+){
+  if(!event){
+    return '';
+  }
+
+  if(event._sourceFile){
+    return event._sourceFile;
+  }
+
+  if(event._semesterId){
+    const sourceSemester =
+      candidates.find(semester =>
+        semester.id === event._semesterId
+      ) ||
+      semesterById(event._semesterId);
+
+    if(sourceSemester?.file){
+      return sourceSemester.file;
+    }
+  }
+
+  return fileForEvent(
+    event,
+    candidates
+  );
+}
+
+function routeEditedEventByDateAndClass(
+  event,
+  original
+){
+  if(!event) return event;
+
+  const dateChanged =
+    !!original &&
+    event.date !== original.date;
+
+  const classChanged =
+    !!original &&
+    event.mCal !== original.mCal;
+
+  /*
+    An ordinary edit that does not change Date or Class keeps
+    the event in its current physical JSON file.
+  */
+  if(
+    original &&
+    !dateChanged &&
+    !classChanged
+  ){
+    return event;
+  }
+
+  /*
+    New events, and existing events whose Date or Class changed,
+    must be routed from their current Date/Class values.
+  */
+  const destination =
+    automaticSemesterForEvent(event);
+
+  if(destination){
+    return {
+      ...event,
+      _semesterId: destination.id,
+      _sourceFile: destination.file
+    };
+  }
+
+  /*
+    Do not retain the event's former semester when the changed
+    Date/Class has no unique automatic destination.
+
+    Clearing these fields allows the warning workflow to stop
+    the save instead of silently writing the event back into its
+    old JSON file.
+  */
+  return {
+    ...event,
+    _semesterId: null,
+    _sourceFile: ''
+  };
+}
+
+function tagEventsWithSource(events, semester, file){
+  return events.map(e => ({
+    ...e,
+    _semesterId: semester?.id || null,
+    _sourceFile: file
+  }));
+}
+
+function eventCanBeEdited(e){
+  if(!canEditActiveSemester()) return false;
+  if(!e) return false;
+
+  /*
+    An existing event may be opened for correction based on its
+    physical source semester, even when its date/class is currently
+    outside that semester's configured boundaries.
+  */
+  if(e._semesterId){
+    const sourceSemester = semesterById(e._semesterId);
+
+    return !!sourceSemester &&
+      !semesterIsArchived(sourceSemester);
+  }
+
+  /*
+    Unsourced events still require a valid writable destination.
+  */
+  const semester = eventTargetSemester(e);
+
+  return !!semester &&
+    !semesterIsArchived(semester);
+}
+
+function eventInVisibleSemesters(e){
+  return visibleSemesters().some(semester =>
+    dateInSemester(e?.date, semester, e?.mCal)
+  );
+}
+
+function logActiveSemesterBounds(){
+  const visible = visibleSemesters();
+
+  console.log('Visible semester files:', visible.map(semester => ({
+    id: semester.id,
+    name: semester.name,
+    status: semester.status,
+    file: semester.file,
+    M0: semesterClassBounds(semester, 'M0')?.label || 'Not configured',
+    M1: semesterClassBounds(semester, 'M1')?.label || 'Not configured',
+    M2: semesterClassBounds(semester, 'M2')?.label || 'Not configured'
+  })));
+
+  const unrouted = EVENTS.filter(e => !eventInVisibleSemesters(e));
+
+  if(unrouted.length){
+    console.warn('Events outside visible class boundaries:', unrouted.map(e => ({
+      id: e._id,
+      date: e.date,
+      class: e.mCal,
+      title: e.title,
+      semesterId: e._semesterId,
+      sourceFile: e._sourceFile
+    })));
+  }
+}
+
+function activeSemesterWarningMessage(dateStr, mCal){
+  const classLabel =
+    mCal || 'selected class';
+
+  return (
+    `No semester storage exists for ${classLabel} ` +
+    `on ${dateStr}. Correct the event date or create/edit ` +
+    `a semester that includes this date.`
+  );
+}
+
+function openSemesterBoundsWarning(eventCandidate){
+  const dateStr =
+    eventCandidate?.date || '';
+
+  const mCal =
+    eventCandidate?.mCal || '';
+
+  const classLabel =
+    mCal || 'Unknown class';
+
+  const matches =
+    isProgramWideEvent(eventCandidate)
+      ? []
+      : matchingSemestersForEvent(
+          eventCandidate
+        );
+
+  const programWideOwner =
+    isProgramWideEvent(eventCandidate)
+      ? programWideStorageSemester(
+          eventCandidate
+        )
+      : null;
+
+  const isOverlap =
+    !isProgramWideEvent(eventCandidate) &&
+    matches.length > 1;
+
+  const title =
+    document.getElementById(
+      'semesterWarningTitle'
+    );
+
+  const summary =
+    document.getElementById(
+      'semesterWarningSummary'
+    );
+
+  const result =
+    document.getElementById(
+      'semesterWarningSemester'
+    );
+
+  if(title){
+    title.textContent =
+      isOverlap
+        ? 'Semester Dates Overlap'
+        : 'No Semester Storage for This Date';
+  }
+
+  if(summary){
+    summary.textContent =
+      isOverlap
+        ? (
+            `This ${classLabel} event matches more than one ` +
+            `semester. Correct the overlapping ${classLabel} ` +
+            `date ranges before saving.`
+          )
+        : (
+            `No semester currently includes ${classLabel} ` +
+            `on ${dateStr}. Correct the event date or create/edit ` +
+            `semester storage for this date.`
+          );
+  }
+
+  if(result){
+    result.textContent =
+      programWideOwner
+        ? (
+            `This Program-Wide event will be stored in ` +
+            `${programWideOwner.name || programWideOwner.id}.`
+          )
+        : isOverlap
+          ? (
+              `${matches.length} writable semesters match ` +
+              `${classLabel} on ${dateStr}.`
+            )
+          : (
+              `No writable semester matches ` +
+              `${classLabel} on ${dateStr}.`
+            );
+  }
+
+  document
+    .getElementById('semesterWarningBounds')
+    .textContent =
+      writableSemesters()
+        .map(semester => {
+          const bounds =
+            mCal === PROGRAM_WIDE_MCAL
+              ? semesterDateBounds(semester)
+              : semesterClassBounds(
+                  semester,
+                  mCal
+                );
+
+          return (
+            `${semester.name || semester.id}: ` +
+            `${
+              bounds?.label ||
+              `${classLabel} not configured`
+            }`
+          );
+        })
+        .join(' | ');
+
+  document
+    .getElementById('semesterWarningDate')
+    .textContent = dateStr || 'No date entered';
+
+  document
+    .getElementById('semesterWarningOverlay')
+    .classList
+    .add('open');
+}
+
+
+function returnToSemesterWarningEventForm(){
+  closeSemesterBoundsWarning();
+
+  showToast(
+    'Correct the event date or class, then save again.'
+  );
+}
+
+function closeSemesterBoundsWarning(){
+  document
+    .getElementById('semesterWarningOverlay')
+    .classList
+    .remove('open');
+}
+
+
+async function openAdvancedSettings(){
+  if(!requireSemesterAdmin()) return;
+
+  try{
+    await loadCalendarManifest();
+    renderAdvancedSettings();
+    document.getElementById('advancedSettingsOverlay').classList.add('open');
+  }catch(err){
+    showToast('❌ Could not open Semester Editor: ' + err.message);
+  }
+}
+
+function closeAdvancedSettings(){
+  document.getElementById('advancedSettingsOverlay').classList.remove('open');
+}
+
+function openSemesterEditorFromWarning(){
+  closeSemesterBoundsWarning();
+  openAdvancedSettings();
+}
+
+function renderAdvancedSettings(){
+  const body =
+    document.getElementById('advancedSettingsBody');
+
+  if(!body) return;
+
+  if(!CALENDAR_MANIFEST){
+    body.innerHTML = `
+      <div class="modal-info-box">
+        <div class="modal-info-title">
+          Semester storage unavailable
+        </div>
+
+        <div class="modal-info-text">
+          The calendar is using single-file fallback mode.
+          Semester storage requires ${MANIFEST_FILE}.
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
+  const semesters = allSemesters();
+
+  body.innerHTML = `
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px">
+      Semesters divide calendar data into manageable JSON files.
+      Set up each storage period once; events are then assigned
+      automatically from their date and class.
+    </div>
+
+    <div>
+      <div class="fp-section-title">
+        Storage Periods
+      </div>
+
+      ${
+        semesters.length
+          ? semesters
+              .map(semesterSettingsCardHTML)
+              .join('')
+          : `
+            <div class="multiadd-note">
+              No semester storage periods exist yet.
+            </div>
+          `
+      }
+    </div>
+
+    <div style="margin-top:24px">
+      <div class="fp-section-title">
+        Create Next Semester
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Semester Name *
+        </label>
+
+        <input
+          class="form-input"
+          id="newSemesterName"
+          placeholder="Spring 2027"
+        >
+      </div>
+
+      <div class="multiadd-note" style="margin-bottom:14px">
+        Enter the date range for each class included in this
+        storage period. Date ranges for the same class cannot
+        overlap another Active or Draft semester.
+      </div>
+
+      ${semesterClassBoundsFieldsHTML(
+        'M0',
+        'Pre-Matriculation'
+      )}
+
+      ${semesterClassBoundsFieldsHTML(
+        'M1',
+        'M1'
+      )}
+
+      ${semesterClassBoundsFieldsHTML(
+        'M2',
+        'M2'
+      )}
+
+      <button
+        class="btn-full"
+        onclick="createDraftSemesterFromSettings()"
+        style="background:var(--maroon);color:white"
+      >
+        Create Semester Draft
+      </button>
+
+      <div class="multiadd-note">
+        This creates one blank JSON file. It remains hidden
+        from students until activated.
+      </div>
+    </div>
+  `;
+}
+
+function semesterSettingsCardHTML(s){
+  const isDraft =
+    semesterIsDraft(s);
+
+  const isActive =
+    semesterIsActive(s);
+
+  const isArchived =
+    semesterIsArchived(s);
+
+  const statusText =
+    isDraft
+      ? 'Draft'
+      : isActive
+        ? 'Active'
+        : 'Archived';
+
+  return `
+    <div class="change-item" style="margin-bottom:10px">
+      <div class="ch-type">
+        ${escapeHtml(statusText)}
+      </div>
+
+      <div class="ch-title">
+        ${escapeHtml(s.name || s.id)}
+      </div>
+
+      <div class="ch-meta">
+        File: ${escapeHtml(s.file || '—')}<br>
+        M0: ${escapeHtml(
+          semesterClassBounds(s, 'M0')?.label ||
+          'Not included'
+        )}<br>
+        M1: ${escapeHtml(
+          semesterClassBounds(s, 'M1')?.label ||
+          'Not included'
+        )}<br>
+        M2: ${escapeHtml(
+          semesterClassBounds(s, 'M2')?.label ||
+          'Not included'
+        )}
+      </div>
+
+      ${
+        !isArchived
+          ? `
+            <button
+              class="btn-full"
+              onclick="openSemesterEdit('${escapeHtml(s.id)}')"
+              style="background:#1565C0;color:white;margin-top:10px"
+            >
+              Edit Dates
+            </button>
+          `
+          : `
+            <div class="multiadd-note" style="margin-top:10px">
+              Archived JSON is retained as a read-only record.
+            </div>
+          `
+      }
+
+      ${
+        isDraft
+          ? `
+            <button
+              class="btn-full"
+              onclick="publishDraftSemester('${escapeHtml(s.id)}')"
+              style="background:#137a46;color:white"
+            >
+              Activate Semester
+            </button>
+
+            <button
+              class="btn-full"
+              onclick="deleteSemester('${escapeHtml(s.id)}')"
+              style="background:#b00020;color:white"
+            >
+              Delete Draft
+            </button>
+          `
+          : ''
+      }
+
+      ${
+        isActive
+          ? `
+            <button
+              class="btn-full"
+              onclick="archiveSemester('${escapeHtml(s.id)}')"
+              style="background:rgba(240,92,110,.12);color:#b00020;border:1px solid rgba(240,92,110,.3)"
+            >
+              Archive Semester
+            </button>
+          `
+          : ''
+      }
+    </div>
+  `;
+}
+
+function openSemesterEdit(id){
+  const semester = semesterById(id);
+
+  if(!semester){
+    showToast('Semester not found.');
+    return;
+  }
+
+  if(semesterIsArchived(semester)){
+    showToast(
+      'Archived semester files are read-only.'
+    );
+
+    return;
+  }
+
+  const body =
+    document.getElementById('advancedSettingsBody');
+
+  if(!body) return;
+
+  const m0 = classBoundsForDisplay(semester, 'M0');
+  const m1 = classBoundsForDisplay(semester, 'M1');
+  const m2 = classBoundsForDisplay(semester, 'M2');
+
+  body.innerHTML = `
+    <div class="fp-section-title">
+      Edit Semester
+    </div>
+
+    <div class="modal-info-box">
+      <div class="modal-info-title">
+        ${escapeHtml(semesterStatusLabel(semester.status))}
+      </div>
+
+      <div class="modal-info-text">
+        File: ${escapeHtml(semester.file || '—')}<br>
+        Semester ID: ${escapeHtml(semester.id)}
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-top:18px">
+      <label class="form-label">Semester Name *</label>
+      <input
+        class="form-input"
+        id="editSemesterName"
+        value="${escapeHtml(semester.name || '')}"
+      >
+    </div>
+
+    <div class="multiadd-note" style="margin-bottom:14px">
+      Adjust the date range for each participating class.
+      Leave both fields blank when that class is not included.
+      Ranges cannot overlap another Active or Draft semester
+      for the same class.
+    </div>
+
+    ${semesterClassBoundsFieldsHTML(
+      'M0',
+      'Pre-Matriculation',
+      'editSemester',
+      m0.startDate,
+      m0.endDate
+    )}
+
+    ${semesterClassBoundsFieldsHTML(
+      'M1',
+      'M1',
+      'editSemester',
+      m1.startDate,
+      m1.endDate
+    )}
+
+    ${semesterClassBoundsFieldsHTML(
+      'M2',
+      'M2',
+      'editSemester',
+      m2.startDate,
+      m2.endDate
+    )}
+
+    <button
+      class="btn-full"
+      onclick="saveSemesterEdits('${escapeHtml(semester.id)}')"
+      style="background:#137a46;color:white"
+    >
+      Save Semester Changes
+    </button>
+
+    <button
+      class="btn-full btn-cancel"
+      onclick="renderAdvancedSettings()"
+    >
+      Cancel
+    </button>
+  `;
+}
+
+async function saveSemesterEdits(id){
+  if(!requireSemesterAdmin()) return;
+
+  const existingSemester = semesterById(id);
+
+  if(!existingSemester){
+    showToast('Semester not found.');
+    return;
+  }
+
+  const name = document
+    .getElementById('editSemesterName')
+    ?.value
+    .trim();
+
+  if(!name){
+    showToast('Semester name is required.');
+    return;
+  }
+
+  let classBounds;
+
+  try{
+    classBounds = collectSemesterClassBounds(
+      'editSemester'
+    );
+  }catch(err){
+    showToast(err.message);
+    return;
+  }
+
+  const overlapProblems =
+    semesterBoundsOverlapProblems(classBounds, id);
+
+  if(overlapProblems.length){
+    showToast(
+      semesterOverlapErrorMessage(overlapProblems[0])
+    );
+    return;
+  }
+
+  try{
+    const semesterEvents =
+      await fetchRawSemesterEvents(existingSemester);
+
+    const displacedEvents = semesterEvents.filter(event =>
+      !eventFitsProposedSemesterBounds(
+        event,
+        classBounds
+      )
+    );
+
+    if(displacedEvents.length){
+      const first = displacedEvents[0];
+
+      alert(
+        `Semester changes were not saved.\n\n` +
+        `${displacedEvents.length} existing event` +
+        `${displacedEvents.length === 1 ? '' : 's'} ` +
+        `would fall outside the revised boundaries.\n\n` +
+        `First affected event:\n` +
+        `${first.date} — ${first.mCal} — ${first.title}`
+      );
+
+      return;
+    }
+
+    await loadCalendarManifest();
+
+    CALENDAR_MANIFEST.semesters =
+      allSemesters().map(semester => {
+        if(semester.id !== id) return semester;
+
+        const {
+          boundaryMode,
+          startDate,
+          endDate,
+          startMonth,
+          endMonth,
+          year,
+          ...withoutLegacyBounds
+        } = semester;
+
+        return {
+          ...withoutLegacyBounds,
+          name,
+          classBounds,
+          updatedAt: new Date().toISOString()
+        };
+      });
+
+    await saveCalendarManifestToGitHub(
+      `Update semester: ${name}`
+    );
+
+    showToast('Semester changes saved.');
+
+    await loadCalendarManifest();
+    renderAdvancedSettings();
+    await loadEvents();
+  }catch(err){
+    console.error(err);
+
+    alert(
+      'Failed to update semester: ' + err.message
+    );
+
+    showToast('Failed to update semester.');
+  }
+}
+
+function requireSemesterAdmin(){
+  if(!isFacultyMode){
+    showToast('Enter Edit mode first.');
+    return false;
+  }
+
+  if(!CFG.token){
+    showToast('Add your GitHub token in settings before changing semesters.');
+    return false;
+  }
+
+  return true;
+}
+
+function slugifySemesterName(name){
+  return String(name || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'') || 'semester';
+}
+
+function uniqueSemesterId(baseId){
+  const existing = new Set(allSemesters().map(s => s.id));
+  let id = baseId;
+  let n = 2;
+
+  while(existing.has(id)){
+    id = `${baseId}-${n}`;
+    n++;
+  }
+
+  return id;
+}
+
+async function githubFileExists(filePath){
   const r = await fetch(
-    `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}?ref=main&t=${Date.now()}`,
+    `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${filePath}?ref=main&t=${Date.now()}`,
     { headers: ghHeaders() }
   );
 
-  if(!r.ok){
-    throw new Error('Could not verify saved events.json through GitHub API.');
+  return r.ok;
+}
+
+async function saveCalendarManifestToGitHub(message){
+  if(!CALENDAR_MANIFEST){
+    throw new Error('No manifest loaded.');
   }
 
-  const d = await r.json();
-  const text = decodeURIComponent(escape(atob(d.content.replace(/\n/g, ''))));
-  return JSON.parse(text);
+  await saveTextFileToGitHub(
+    MANIFEST_FILE,
+    JSON.stringify(CALENDAR_MANIFEST, null, 2),
+    message || 'Update calendar manifest'
+  );
+}
+
+async function createDraftSemesterFromSettings(){
+  if(!requireSemesterAdmin()) return;
+
+    const name = document
+    .getElementById('newSemesterName')
+    .value
+    .trim();
+
+  if(!name){
+    showToast('Semester name is required.');
+    return;
+  }
+
+  let classBounds;
+
+  try{
+    classBounds = collectSemesterClassBounds(
+      'newSemester'
+    );
+  }catch(err){
+    showToast(err.message);
+    return;
+  }
+
+  const overlapProblems =
+    semesterBoundsOverlapProblems(classBounds);
+
+  if(overlapProblems.length){
+    showToast(
+      semesterOverlapErrorMessage(overlapProblems[0])
+    );
+    return;
+  }
+
+  try{
+    await loadCalendarManifest();
+
+    const id = uniqueSemesterId(slugifySemesterName(name));
+    const file = `events_${id}.json`;
+
+    if(await githubFileExists(file)){
+      throw new Error(
+        `${file} already exists. Choose a different semester name.`
+      );
+    }
+
+    const semester = {
+      id,
+      name,
+      status: SEMESTER_STATUS.DRAFT,
+      file,
+      classBounds
+    };
+
+    await saveTextFileToGitHub(
+      file,
+      '[]',
+      `Create draft semester file: ${name}`
+    );
+
+    CALENDAR_MANIFEST.semesters = allSemesters().concat(semester);
+
+    await saveCalendarManifestToGitHub(
+      `Add draft semester: ${name}`
+    );
+
+    CURRENT_SEMESTER_VIEW_ID = '';
+    localStorage.removeItem(
+      'enmed_semester_view_id'
+    );
+
+    pendingChanges = [];
+    editingId = null;
+
+    closeAdvancedSettings();
+
+    showToast(
+      'Draft semester created with class-specific boundaries.'
+    );
+
+    loadEvents();
+  }catch(err){
+    console.error(err);
+    alert('Failed to create draft semester: ' + err.message);
+    showToast('Failed to create draft semester.');
+  }
+}
+
+async function publishDraftSemester(id){
+  if(!requireSemesterAdmin()) return;
+
+  const draft = semesterById(id);
+
+    if(!draft || draft.status !== SEMESTER_STATUS.DRAFT){
+      showToast('Only draft semesters can be activated.');
+      return;
+    }
+
+    const overlapProblems =
+      semesterBoundsOverlapProblems(
+        draft.classBounds || {},
+        draft.id
+      );
+
+    if(overlapProblems.length){
+      alert(
+        `This semester cannot be activated.\n\n` +
+        semesterOverlapErrorMessage(
+          overlapProblems[0]
+        ) +
+        `\n\nEdit the semester dates and try again.`
+      );
+
+      return;
+    }
+
+    const ok = confirm(
+    `Activate "${draft.name || draft.id}"?\n\nThis will make the draft visible to students and include it in calendar sync feeds. Existing active semesters will remain active.`
+  );
+
+  if(!ok) return;
+
+  try{
+    await loadCalendarManifest();
+
+    CALENDAR_MANIFEST.semesters = allSemesters().map(s => {
+      if(s.id === id){
+        return {
+          ...s,
+          status: SEMESTER_STATUS.ACTIVE,
+          activatedAt: new Date().toISOString()
+        };
+      }
+
+      return s;
+    });
+
+    await saveCalendarManifestToGitHub(`Activate semester: ${draft.name || draft.id}`);
+
+      CURRENT_SEMESTER_VIEW_ID = '';
+      localStorage.removeItem(
+        'enmed_semester_view_id'
+      );
+
+      closeAdvancedSettings();
+    showToast('Semester activated. Regenerating ICS feeds...');
+
+    await loadEvents();
+
+    const icsResult =
+      await regenerateAllICSFeeds();
+
+    if(icsResult.ok){
+      showToast(
+        'Semester activated and ICS feeds regenerated.'
+      );
+    }else{
+      showToast(
+        '⚠️ Semester was activated, but ICS regeneration failed. ' +
+        'Use Regenerate ICS Feeds after resolving the error.'
+      );
+    }
+
+  }catch(err){
+    console.error(err);
+    alert('Failed to activate semester: ' + err.message);
+    showToast('Failed to activate semester.');
+  }
+}
+
+async function archiveSemester(id){
+  if(!requireSemesterAdmin()) return;
+
+  const semester = semesterById(id);
+
+  if(!semester || semester.status !== SEMESTER_STATUS.ACTIVE){
+    showToast('Only active semesters can be archived.');
+    return;
+  }
+
+  const ok = confirm(
+    `Archive "${semester.name || semester.id}"?\n\nArchived semesters become read-only and are removed from the normal student calendar and sync feeds.`
+  );
+
+  if(!ok) return;
+
+  try{
+    await loadCalendarManifest();
+
+    CALENDAR_MANIFEST.semesters = allSemesters().map(s => {
+      if(s.id === id){
+        return {
+          ...s,
+          status: SEMESTER_STATUS.ARCHIVED,
+          archivedAt: new Date().toISOString()
+        };
+      }
+
+      return s;
+    });
+
+    await saveCalendarManifestToGitHub(`Archive semester: ${semester.name || semester.id}`);
+
+    CURRENT_SEMESTER_VIEW_ID = '';
+    localStorage.removeItem(
+      'enmed_semester_view_id'
+    );
+
+    closeAdvancedSettings();
+    showToast('Semester archived. Regenerating ICS feeds...');
+
+    await loadEvents();
+    await regenerateAllICSFeeds();
+
+    showToast('Semester archived and ICS feeds regenerated.');
+  }catch(err){
+    console.error(err);
+    alert('Failed to archive semester: ' + err.message);
+    showToast('Failed to archive semester.');
+  }
+}
+
+async function restoreArchivedSemester(id){
+  if(!requireSemesterAdmin()) return;
+
+  const semester = semesterById(id);
+
+  if(
+    !semester ||
+    semester.status !== SEMESTER_STATUS.ARCHIVED
+  ){
+    showToast(
+      'Only archived semesters can be restored.'
+    );
+
+    return;
+  }
+
+  const ok = confirm(
+    `Restore "${semester.name || semester.id}" to Draft?\n\n` +
+    `It will become editable again, but it will not be visible ` +
+    `to students or included in calendar sync feeds until activated.`
+  );
+
+  if(!ok) return;
+
+  try{
+    await loadCalendarManifest();
+
+    CALENDAR_MANIFEST.semesters =
+      allSemesters().map(item => {
+        if(item.id !== id) return item;
+
+        const {
+          archivedAt,
+          ...withoutArchivedAt
+        } = item;
+
+        return {
+          ...withoutArchivedAt,
+          status: SEMESTER_STATUS.DRAFT,
+          restoredAt: new Date().toISOString()
+        };
+      });
+
+    await saveCalendarManifestToGitHub(
+      `Restore semester to draft: ` +
+      `${semester.name || semester.id}`
+    );
+
+    CURRENT_SEMESTER_VIEW_ID = id;
+
+    localStorage.setItem(
+      'enmed_semester_view_id',
+      id
+    );
+
+    closeAdvancedSettings();
+
+    showToast(
+      'Semester restored to Draft.'
+    );
+
+    await loadEvents();
+  }catch(err){
+    console.error(err);
+
+    alert(
+      'Failed to restore semester: ' +
+      err.message
+    );
+
+    showToast(
+      'Failed to restore semester.'
+    );
+  }
+}
+
+async function deleteSemester(id){
+  if(!requireSemesterAdmin()) return;
+
+  const semester = semesterById(id);
+
+  if(!semester){
+    showToast('Semester not found.');
+    return;
+  }
+
+    if(!semesterIsDraft(semester)){
+      alert(
+        'Only Draft semesters can be deleted.\n\n' +
+        'Active semesters must be archived. Archived semester ' +
+        'JSON files are retained as permanent read-only records.'
+      );
+
+      return;
+    }
+
+  try{
+    const semesterEvents =
+      await fetchRawSemesterEvents(semester);
+
+    const eventCount = semesterEvents.length;
+
+    const firstConfirmation = confirm(
+      `Delete Draft "${semester.name || semester.id}"?\n\n` +
+      `This removes the accidental Draft from the manifest and ` +
+      `deletes its JSON file:\n${semester.file}\n\n` +
+      `Events currently stored in Draft: ${eventCount}`
+    );
+
+    if(!firstConfirmation) return;
+
+    if(eventCount > 0){
+      const typedName = prompt(
+        `This semester contains ${eventCount} event` +
+        `${eventCount === 1 ? '' : 's'}.\n\n` +
+        `Type the semester name exactly to confirm permanent deletion:\n` +
+        `${semester.name || semester.id}`
+      );
+
+      if(
+        typedName !==
+        (semester.name || semester.id)
+      ){
+        showToast(
+          'Semester deletion cancelled.'
+        );
+
+        return;
+      }
+    }
+
+    await loadCalendarManifest();
+
+    /*
+      Remove the manifest entry first in memory, but save it only
+      after the event file has been successfully deleted.
+    */
+    const revisedSemesters =
+      allSemesters().filter(item =>
+        item.id !== id
+      );
+
+    await deleteFileFromGitHub(
+      semester.file,
+      `Delete semester file: ` +
+      `${semester.name || semester.id}`
+    );
+
+    CALENDAR_MANIFEST.semesters =
+      revisedSemesters;
+
+    await saveCalendarManifestToGitHub(
+      `Remove semester: ` +
+      `${semester.name || semester.id}`
+    );
+
+    if(CURRENT_SEMESTER_VIEW_ID === id){
+      CURRENT_SEMESTER_VIEW_ID = '';
+
+      localStorage.setItem(
+        'enmed_semester_view_id',
+        ''
+      );
+    }
+
+    pendingChanges = [];
+    editingId = null;
+
+    closeAdvancedSettings();
+
+    showToast('Draft semester deleted.');
+
+    await loadEvents();
+  }catch(err){
+    console.error(err);
+
+    alert(
+      'Failed to delete semester: ' +
+      err.message
+    );
+
+    showToast(
+      'Failed to delete semester.'
+    );
+  }
+}
+
+function warnIfOutsideActiveSemester(eventCandidate){
+  const automaticDestination =
+    automaticSemesterForEvent(
+      eventCandidate
+    );
+
+  /*
+    Class events require one class-specific semester match.
+    Program-Wide events require one deterministic JSON owner.
+  */
+  if(automaticDestination){
+    semesterWarningEvent = null;
+    return false;
+  }
+
+  semesterWarningEvent =
+    cloneEventForPending(
+      eventCandidate
+    );
+
+  openSemesterBoundsWarning(
+    semesterWarningEvent
+  );
+
+  return true;
+}
+
+async function fetchEventsFile(filePath, semester){
+  if(CFG.token){
+    const r = await fetch(
+      `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${filePath}?ref=main&t=${Date.now()}`,
+      { headers: ghHeaders() }
+    );
+
+    if(!r.ok){
+      throw new Error(`Could not fetch ${filePath} through GitHub API.`);
+    }
+
+    const d = await r.json();
+    const text = decodeURIComponent(escape(atob(d.content.replace(/\n/g, ''))));
+    return tagEventsWithSource(JSON.parse(text), semester, filePath);
+  }
+
+  const rawUrl = `https://raw.githubusercontent.com/${CFG.user}/${CFG.repo}/main/${filePath}?t=${Date.now()}`;
+  const r = await fetch(rawUrl, { cache: 'no-store' });
+
+  if(!r.ok){
+    throw new Error(`GitHub returned ${r.status} for ${filePath}.`);
+  }
+
+  return tagEventsWithSource(await r.json(), semester, filePath);
+}
+
+async function fetchEventsForSemesters(semesters){
+  const chunks = await Promise.all(
+    semesters.map(s => fetchEventsFile(s.file, s))
+  );
+
+  return chunks.flat();
+}
+
+async function fetchLatestEventsFromGitHub(){
+  return fetchEventsForSemesters(writableSemesters());
+}
+
+async function fetchEventsFromGitHubAPI(){
+  return fetchLatestEventsFromGitHub();
 }
 
 async function saveTextFileToGitHub(filePath, textContent, commitMessage){
@@ -1813,52 +3863,245 @@ async function saveTextFileToGitHub(filePath, textContent, commitMessage){
   return r.json();
 }
 
-async function saveEventsToGitHub(){
-  if(!CFG.token){
-    throw new Error('No GitHub token — click ⚙ in the top right and add your token.');
+async function deleteFileFromGitHub(
+  filePath,
+  commitMessage
+){
+  const meta = await fetch(
+    `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${filePath}?ref=main&t=${Date.now()}`,
+    {
+      headers: ghHeaders()
+    }
+  );
+
+  if(meta.status === 404){
+    return {
+      alreadyMissing: true
+    };
   }
 
-  const cleanEvents = EVENTS.map(cleanEventForSave);
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(cleanEvents, null, 2))));
+  if(!meta.ok){
+    const text = await meta.text();
 
-  async function attemptSave(){
-    ghFileSha = await fetchLatestGitHubSha();
-
-    const body = {
-      message: 'Update calendar events',
-      content,
-      sha: ghFileSha,
-      branch: 'main'
-    };
-
-    return fetch(
-      `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${DATA_FILE}`,
-      {
-        method: 'PUT',
-        headers: {...ghHeaders(), 'Content-Type': 'application/json'},
-        body: JSON.stringify(body)
-      }
+    throw new Error(
+      `Could not read ${filePath} before deletion: ` +
+      text.substring(0,150)
     );
   }
 
-  let r = await attemptSave();
+  const fileData = await meta.json();
 
-  if(r.status === 409){
-  throw new Error('Another save happened at the same time. Reloading latest events prevented an overwrite. Please click Save again.');
-}
+  const response = await fetch(
+    `https://api.github.com/repos/${CFG.user}/${CFG.repo}/contents/${filePath}`,
+    {
+      method: 'DELETE',
+      headers: {
+        ...ghHeaders(),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message:
+          commitMessage ||
+          `Delete ${filePath}`,
+        sha: fileData.sha,
+        branch: 'main'
+      })
+    }
+  );
 
-  if(!r.ok){
-    const t = await r.text();
-    throw new Error(`GitHub save failed (${r.status}): ${t.substring(0,150)}`);
+  if(!response.ok){
+    const text = await response.text();
+
+    throw new Error(
+      `GitHub delete failed for ${filePath}: ` +
+      text.substring(0,150)
+    );
   }
 
-  const d = await r.json();
-  ghFileSha = d.content.sha;
-  EVENTS = cleanEvents;
-  await saveTextFileToGitHub(ICS_FILE, buildICS(), 'Update full calendar ICS feed');
-  await saveTextFileToGitHub(ICS_FILE_M0, buildICS({ mCal: 'M0' }), 'Update M0 calendar ICS feed');
-  await saveTextFileToGitHub(ICS_FILE_M1, buildICS({ mCal: 'M1' }), 'Update M1 calendar ICS feed');
-  await saveTextFileToGitHub(ICS_FILE_M2, buildICS({ mCal: 'M2' }), 'Update M2 calendar ICS feed');
+  return response.json();
+}
+
+async function saveEventsToGitHub(
+  affectedFiles = null
+){
+  if(!CFG.token){
+    throw new Error(
+      'No GitHub token — click ⚙ in the top right and add your token.'
+    );
+  }
+
+  if(singleSemesterViewIsActive()){
+    throw new Error(
+      'Archived semesters are read-only.'
+    );
+  }
+
+  const targets =
+    writableSemesters();
+
+  if(!targets.length){
+    throw new Error(
+      'No active or draft semesters are available for saving.'
+    );
+  }
+
+  /*
+    When affectedFiles is supplied, only those semester JSON
+    files are committed. The null fallback preserves compatibility
+    with any older caller that intentionally requires a full save.
+  */
+  const requestedFiles =
+    affectedFiles === null
+      ? null
+      : new Set(
+          Array.from(affectedFiles)
+            .filter(Boolean)
+        );
+
+  if(
+    requestedFiles &&
+    !requestedFiles.size
+  ){
+    throw new Error(
+      'No semester JSON files were identified for this save.'
+    );
+  }
+
+  const semestersToSave =
+    requestedFiles
+      ? targets.filter(semester =>
+          requestedFiles.has(
+            semester.file
+          )
+        )
+      : targets;
+
+  if(!semestersToSave.length){
+    throw new Error(
+      'The affected semester JSON files are not active or draft storage files.'
+    );
+  }
+
+  if(
+    requestedFiles &&
+    semestersToSave.length !==
+      requestedFiles.size
+  ){
+    const knownFiles =
+      new Set(
+        semestersToSave.map(
+          semester => semester.file
+        )
+      );
+
+    const unknownFile =
+      Array.from(requestedFiles)
+        .find(file =>
+          !knownFiles.has(file)
+        );
+
+    throw new Error(
+      `Cannot save unknown or non-writable semester file: ` +
+      `${unknownFile || 'Unknown file'}`
+    );
+  }
+
+  /*
+    Validate only the storage files being rewritten.
+
+    An unrelated malformed record in another semester should not
+    block a valid Spring-only edit. Any record currently stored in
+    or routed into an affected file must still have a valid target.
+  */
+  const affectedFileSet =
+    new Set(
+      semestersToSave.map(
+        semester => semester.file
+      )
+    );
+
+  const affectedEvents =
+    EVENTS.filter(event => {
+      const sourceFile =
+        storedFileForEvent(
+          event,
+          targets
+        );
+
+      const targetFile =
+        eventTargetSemester(
+          event,
+          targets
+        )?.file || '';
+
+      return (
+        affectedFileSet.has(sourceFile) ||
+        affectedFileSet.has(targetFile)
+      );
+    });
+
+  const unrouted =
+    affectedEvents.filter(event =>
+      !eventTargetSemester(
+        event,
+        targets
+      )
+    );
+
+  if(unrouted.length){
+    throw new Error(
+      `Some affected events do not fall inside a valid ` +
+      `semester boundary. First unrouted event: ` +
+      `${unrouted[0].date} — ` +
+      `${unrouted[0].mCal || 'Unknown class'} — ` +
+      `${unrouted[0].title}`
+    );
+  }
+
+  const savedFiles = [];
+
+  for(const semester of semestersToSave){
+    const eventsForFile =
+      EVENTS
+        .filter(event =>
+          eventTargetSemester(
+            event,
+            targets
+          )?.file === semester.file
+        )
+        .map(cleanEventForSave);
+
+    await saveTextFileToGitHub(
+      semester.file,
+      JSON.stringify(
+        eventsForFile,
+        null,
+        2
+      ),
+      `Update calendar events: ` +
+      `${semester.name || semester.id}`
+    );
+
+    savedFiles.push(
+      semester.file
+    );
+  }
+
+  /*
+    Reload every writable semester after the affected commits so
+    the in-memory combined calendar reflects the confirmed GitHub
+    state before ICS generation begins.
+  */
+  EVENTS =
+    await fetchLatestEventsFromGitHub();
+
+  const icsResult =
+    await regenerateAllICSFeeds();
+
+  return {
+    savedFiles,
+    icsResult
+  };
 }
 
 // ── INIT ──────────────────────────────────────────────────────
@@ -1881,8 +4124,6 @@ function setStatus(state,msg){
 }
 
 // ── WEEKS / NAV ───────────────────────────────────────────────
-const WEEK_ONE_MONDAY = '05/25/2026';
-
 function parseMDY(dateStr){
   const [mo,dy,yr] = dateStr.split('/').map(Number);
   return new Date(yr, mo - 1, dy);
@@ -1892,8 +4133,94 @@ function formatMDY(dateObj){
   return `${String(dateObj.getMonth()+1).padStart(2,'0')}/${String(dateObj.getDate()).padStart(2,'0')}/${dateObj.getFullYear()}`;
 }
 
+function mondayOfWeek(dateObj){
+  const d = new Date(dateObj);
+  const day = d.getDay();
+  d.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+  d.setHours(0,0,0,0);
+  return d;
+}
+
+function fridayOfWeek(dateObj){
+  const d = mondayOfWeek(dateObj);
+  d.setDate(d.getDate() + 4);
+  return d;
+}
+
+function eventDates(){
+  return EVENTS
+    .map(e => e.date ? parseMDY(e.date) : null)
+    .filter(d => d instanceof Date && !Number.isNaN(d.getTime()))
+    .sort((a,b) => a - b);
+}
+
+function navigationMCals(){
+  if(selectedMCals.has('All')){
+    return [...PROGRAM_WIDE_TARGETS];
+  }
+
+  return [...selectedMCals].filter(mCal =>
+    PROGRAM_WIDE_TARGETS.includes(mCal)
+  );
+}
+
+function visibleSemesterBounds(){
+  const selectedClasses = navigationMCals();
+
+  const bounds = visibleSemesters()
+    .flatMap(semester =>
+      selectedClasses.map(mCal =>
+        semesterClassBounds(semester, mCal)
+      )
+    )
+    .filter(boundary =>
+      boundary?.start &&
+      boundary?.end
+    );
+
+  if(!bounds.length) return null;
+
+  const start = new Date(
+    Math.min(...bounds.map(boundary => boundary.start.getTime()))
+  );
+
+  const end = new Date(
+    Math.max(...bounds.map(boundary => boundary.end.getTime()))
+  );
+
+  return {
+    start,
+    end,
+    label: `${start.toLocaleDateString('en-US',{
+      month:'short',
+      day:'numeric',
+      year:'numeric'
+    })} – ${end.toLocaleDateString('en-US',{
+      month:'short',
+      day:'numeric',
+      year:'numeric'
+    })}`
+  };
+}
+
+function getCalendarStartMonday(){
+  const bounds = visibleSemesterBounds();
+  if(bounds) return mondayOfWeek(bounds.start);
+
+  const dates = eventDates();
+  return dates.length ? mondayOfWeek(dates[0]) : mondayOfWeek(homeDate());
+}
+
+function getCalendarEndFriday(){
+  const bounds = visibleSemesterBounds();
+  if(bounds) return fridayOfWeek(bounds.end);
+
+  const dates = eventDates();
+  return dates.length ? fridayOfWeek(dates[dates.length - 1]) : fridayOfWeek(homeDate());
+}
+
 function datesForWeekNum(weekNum){
-  const start = parseMDY(WEEK_ONE_MONDAY);
+  const start = getCalendarStartMonday();
   start.setDate(start.getDate() + ((weekNum - 1) * 7));
 
   return Array.from({length:5}, (_, i) => {
@@ -1904,43 +4231,82 @@ function datesForWeekNum(weekNum){
 }
 
 function weekNumFromDate(dateStr){
-  const d = parseMDY(dateStr);
-  const start = parseMDY(WEEK_ONE_MONDAY);
-
-  const day = d.getDay();
-  d.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+  const d = mondayOfWeek(parseMDY(dateStr));
+  const start = getCalendarStartMonday();
 
   const diffDays = Math.round((d - start) / (1000 * 60 * 60 * 24));
   return Math.floor(diffDays / 7) + 1;
 }
 
 function buildWeeks(){
-  let highestWeekNumber = 32;
+  const start = getCalendarStartMonday();
+  const end = getCalendarEndFriday();
+  const allWeeks = [];
 
-  EVENTS.forEach(e=>{
-    const derivedWeekNum = e.date ? weekNumFromDate(e.date) : Number(e.weekNum);
+  let cursor = new Date(start);
+  let weekNum = 1;
 
-    if(Number.isFinite(derivedWeekNum) && derivedWeekNum > highestWeekNumber){
-      highestWeekNumber = derivedWeekNum;
-    }
-  });
+  while(cursor <= end){
+    const weekStart = new Date(cursor);
 
-  const allWeeksInYear = [];
+    const weekDates = Array.from({length:5}, (_, i) => {
+      const d = new Date(weekStart);
+      d.setDate(weekStart.getDate() + i);
+      return formatMDY(d);
+    });
 
-  for(let i = 1; i <= highestWeekNumber; i++){
-    const weekDates = datesForWeekNum(i);
-
-    allWeeksInYear.push({
-      num: i,
-      name: 'Week ' + i,
-      block: 'Block ' + i,
+    allWeeks.push({
+      num: weekNum,
+      name: 'Week ' + weekNum,
+      block: 'Block ' + weekNum,
       dates: weekDates,
       startDate: weekDates[0],
       endDate: weekDates[4]
     });
+
+    cursor.setDate(cursor.getDate() + 7);
+    weekNum++;
   }
 
-  return allWeeksInYear;
+  return allWeeks;
+}
+
+function calendarMonths(){
+  const months = [];
+  const seen = new Set();
+
+  WEEKS.forEach(w => {
+    (w.dates || []).forEach(ds => {
+      const d = parseMDY(ds);
+      const key = `${d.getFullYear()}-${d.getMonth()}`;
+
+      if(!seen.has(key)){
+        seen.add(key);
+        months.push({
+          monthIndex: d.getMonth(),
+          year: d.getFullYear(),
+          label: d.toLocaleDateString('en-US', { month: 'short' })
+        });
+      }
+    });
+  });
+
+  return months;
+}
+
+function drawerHasMultipleYears(){
+  const years = new Set();
+
+  WEEKS.forEach(w => {
+    (w.dates || []).forEach(ds => {
+      const d = parseMDY(ds);
+      if(d instanceof Date && !Number.isNaN(d.getTime())){
+        years.add(d.getFullYear());
+      }
+    });
+  });
+
+  return years.size > 1;
 }
 
 function buildWeekDrawer(){
@@ -1955,37 +4321,42 @@ function buildWeekDrawer(){
   drawer.style.display = '';
 
   if(currentView === 'month'){
-    const yr = parseMDY(WEEK_ONE_MONDAY).getFullYear();
-    const monthNames = ['May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const months = calendarMonths();
 
-    drawer.innerHTML = monthNames.map((name, offset)=>{
-      const monthIndex = offset + 4; // May = 4, December = 11
-      const active = currentMonth === monthIndex && currentMonthYear === yr;
+    drawer.innerHTML = months.map(m => {
+      const active = currentMonth === m.monthIndex && currentMonthYear === m.year;
+      const showYear = drawerHasMultipleYears();
+      const label = showYear ? `${m.label} ${m.year}` : m.label;
 
-      return `<button class="wk-btn${active ? ' active' : ''}" style="${active ? 'background:var(--accent);border-color:var(--accent)' : ''}" onclick="jumpToMonth(${monthIndex},${yr})">${name}</button>`;
+      return `<button class="wk-btn${active ? ' active' : ''}" style="${active ? 'background:var(--accent);border-color:var(--accent)' : ''}" onclick="jumpToMonth(${m.monthIndex},${m.year})">${label}</button>`;
     }).join('');
 
     return;
   }
 
-  const allBtn=currentView==='list'?`<button class="wk-btn${currentWeekIdx===-1?' active':''}" style="${currentWeekIdx===-1?'background:var(--accent);border-color:var(--accent)':''}" onclick="jumpToWeek(-1)">All Weeks</button>`:'';
-  drawer.innerHTML=allBtn+WEEKS.map((w,i)=>{
-  const col=BLOCK_COLOR[w.block]||'#7a829a';
-  const start = new Date(w.startDate);
-  const end = new Date(w.endDate);
-  const startMonth = start.toLocaleString('en-US', { month: 'short' });
-  const endMonth = end.toLocaleString('en-US', { month: 'short' });
-  const startDay = start.getDate();
-  const endDay = end.getDate();
+  drawer.innerHTML = WEEKS.map((w,i)=>{
+    const col = BLOCK_COLOR[w.block] || '#7a829a';
+    const start = parseMDY(w.startDate);
+    const end = parseMDY(w.endDate);
+    const startMonth = start.toLocaleString('en-US', { month: 'short' });
+    const endMonth = end.toLocaleString('en-US', { month: 'short' });
+    const startDay = start.getDate();
+    const endDay = end.getDate();
+
   const lbl =
     startMonth === endMonth
     ? `${startMonth} ${startDay}-${endDay}`
     : `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
-  return `<button class="wk-btn${i===currentWeekIdx?' active':''}" style="${i===currentWeekIdx?'background:'+col+';border-color:'+col:''}" onclick="jumpToWeek(${i})">${lbl}</button>`;
-  }).join('');
-}
+
+      return `<button class="wk-btn${i===currentWeekIdx?' active':''}" style="${i===currentWeekIdx?'background:'+col+';border-color:'+col:''}" onclick="jumpToWeek(${i})">${lbl}</button>`;
+    }).join('');
+  }
 
 function jumpToMonth(monthIndex, year){
+  if(currentMonth !== monthIndex || currentMonthYear !== year){
+    monthChangedWhileInMonth = true;
+  }
+
   currentMonth = monthIndex;
   currentMonthYear = year;
   currentWeekIdx = monthToWeek(currentMonth,currentMonthYear);
@@ -2066,10 +4437,21 @@ function setView(v,btn){
   const primary=document.getElementById('primaryActions');
   if(primary)primary.style.display='';
 
-  if(prev==='month'&&!isMonth){
-    currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);
-  } else if(prev!=='month'&&isMonth){
+  // Week/List → Month:
+  // show the month belonging to the week the user was viewing.
+  if(prev !== 'month' && isMonth){
+    weekIdxBeforeMonth = currentWeekIdx;
+    monthChangedWhileInMonth = false;
     weekToMonth(currentWeekIdx);
+  }
+
+  // Month → Week/List:
+  // if the month did not change, return to the same week;
+  // if the month changed, jump to the first week of that month.
+  if(prev === 'month' && !isMonth){
+    currentWeekIdx = monthChangedWhileInMonth
+      ? monthToWeek(currentMonth,currentMonthYear)
+      : weekIdxBeforeMonth;
   }
 
   buildWeekDrawer();
@@ -2092,8 +4474,32 @@ function updateFpViewBtns(v){
 }
 
 // ── TIME ──────────────────────────────────────────────────────
-function fmtTime(t){const[h,m]=t.split(':').map(Number);return`${h>12?h-12:h===0?12:h}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`;}
-  //<skross>
+function fmtTime(t){
+  if(!t) return '';
+  const[h,m]=String(t).split(':').map(Number);
+  if(!Number.isFinite(h) || !Number.isFinite(m)) return '';
+  return`${h>12?h-12:h===0?12:h}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`;
+}
+
+function isAllDayEvent(e){
+  return e && (e.allDay === true || e.allDay === 'true' || e.allDay === 'Yes');
+}
+
+function eventTimeLabel(e){
+  return isAllDayEvent(e) ? 'All day' : `${fmtTime(e.start)} – ${fmtTime(e.end)}`;
+}
+
+function truthyYes(value){
+  const v = String(value || '').trim().toLowerCase();
+  return ['yes','y','true','1','all day','all-day'].includes(v);
+}
+
+function toggleAllDayTimeFields(prefix){
+  const box = document.getElementById(`${prefix}_allDay`);
+  const wrap = document.getElementById(`${prefix}_timeWrap`);
+  if(wrap) wrap.style.display = box && box.checked ? 'none' : '';
+}
+
 function timeToMinutes(t){
   if(!t) return 0;
   t = String(t).trim();
@@ -2169,7 +4575,9 @@ function render(){
   // ── Month view ──────────────────────────────────────────────
   if(currentView==='month'){
     const filtEvs=filteredEvents();
-    document.getElementById('toolbarSub').textContent=`${filtEvs.length} event${filtEvs.length!==1?'s':''} shown · ${selectedYears.has('All')?'All Years':[...selectedYears].sort().join(', ')}`;
+    const bounds = visibleSemesterBounds();
+    document.getElementById('toolbarSub').textContent =
+      `${filtEvs.length} event${filtEvs.length!==1?'s':''} shown${bounds ? ` · ${bounds.label}` : ''}`;
     const wn=document.querySelector('.week-nav');if(wn)wn.style.display='none';
     renderChangeLog();renderMonth();return;
   }
@@ -2209,8 +4617,8 @@ function render(){
   document.getElementById('weekLabel').textContent=`Week ${w.num}`;
 
   // Date range from actual events
-  const weekEvs=EVENTS.filter(e=>weekNumFromDate(e.date)===w.num).sort((a,b)=>a.date.localeCompare(b.date));
   const dates=getWeekDates();
+  const weekEvs=EVENTS.filter(e=>dates.includes(e.date)).sort((a,b)=>a.date.localeCompare(b.date));
 
   if(dates[0]){
     const d1 = parseMDY(dates[0]);
@@ -2222,7 +4630,9 @@ function render(){
       d2.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 }
   
-  document.getElementById('toolbarSub').textContent=`${EVENTS.length} events · ${weekEvs.length} this week`;
+  const bounds = visibleSemesterBounds();
+  document.getElementById('toolbarSub').textContent =
+    `${EVENTS.length} events · ${weekEvs.length} this week${bounds ? ` · ${bounds.label}` : ''}`;
 
   renderChangeLog();
   if(currentView==='week')renderWeek(dates);
@@ -2248,7 +4658,6 @@ function isExamCheckIn(e){
 
 function isExamLike(e){
   const t = eventSearchText(e);
-  if(isExamCheckIn(e)) return false;
   if(/exam\s*review|review\s*exam|exam\s*prep|practice\s*exam|exam\s*remediation/.test(t)) return false;
   return /\bexam\b|\bosce\b|\bcbse\b/.test(t);
 }
@@ -2440,13 +4849,19 @@ function renderWeek(dates){
   if(currentWeekIdx<0)currentWeekIdx=0;
   const w=WEEKS[currentWeekIdx];
   if(!w||!dates||!dates.length){document.getElementById('calView').innerHTML='<div class="empty-state"><div class="big">📭</div><p>No week data available.</p></div>';return;}
-  const evs=filteredEvents().filter(e=>weekNumFromDate(e.date)===w.num);
+  const evs=filteredEvents().filter(e=>dates.includes(e.date));
+const allDayByDate = {};
+const timedEvs = evs.filter(e => !isAllDayEvent(e));
+
+dates.forEach(ds => {
+  allDayByDate[ds] = evs.filter(e => e.date === ds && isAllDayEvent(e));
+});
 const laidOutByDate = {};
 const attachedCheckInsByDate = {};
 
 dates.forEach(ds => {
   laidOutByDate[ds] = layoutOverlappingEvents(
-  evs
+  timedEvs
     .filter(e => e.date === ds)
     .map(e => ({...e}))
 );
@@ -2472,7 +4887,29 @@ dates.forEach(ds => {
     html+=`<div class="ch-cell${ds===todayStr?' today':''}"><div class="ch-day">${day}</div><div class="ch-num">${dy?+dy:''}</div></div>`;
   });
   html+='</div>';
-  const visibleHours = getWeekHourRange(evs);
+  html += `<div class="all-day-row"><div class="all-day-label">All day</div>`;
+dates.forEach(ds=>{
+  html += `<div class="all-day-cell">`;
+  (allDayByDate[ds] || []).forEach(e=>{
+    const col = mCalColor(e);
+    const textCol = mCalTextColor(e);
+    const catCol = CAT_COLOR[normalizeCategory(e.category)] || col;
+    const ej = JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+    const blockLabel = blockDisplay(e.block) ? `${blockDisplay(e.block)} · ` : '';
+
+    html += `<div class="event all-day-event ${evClass(e)}" id="bev_${e._id}" style="border-left:none;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${col}18 5px);color:${textCol}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+      <div class="ev-tag" style="color:${catCol}">${blockLabel}${e.category}</div>
+      <div class="ev-title">${displayTitle(e)}</div>
+      ${canEditActiveSemester()?`<div class="ev-controls">
+        <button class="ev-ctrl-btn ev-edit-btn" onclick="openEditForm(event,${ej})">✎</button>
+        <button class="ev-ctrl-btn ev-del-btn" onclick="confirmDelete(event,'${e._id}')">✕</button>
+      </div>`:''}
+    </div>`;
+  });
+  html += `</div>`;
+});
+html += `</div>`;
+  const visibleHours = getWeekHourRange(timedEvs);
 
   visibleHours.forEach(hour=>{
     const hk = hourKey(hour);
@@ -2493,7 +4930,7 @@ dates.forEach(ds => {
        !attachedCheckInsByDate[ds].has(eventLayoutKey(e));
     });
       html+=`<div class="cal-cell" onclick="handleCellClick(event,'${ds}','${hk}')">`;
-      if(isFacultyMode)html+=`<div class="add-slot-btn" onclick="openAddForm('${ds}','${hk}');event.stopPropagation()">+</div>`;
+      if(canEditActiveSemester())html+=`<div class="add-slot-btn" onclick="openAddForm('${ds}','${hk}');event.stopPropagation()">+</div>`;
       cellEvs.forEach(e=>{
         const startMin = e.startMin;
         const endMin = e.endMin;
@@ -2524,8 +4961,8 @@ const blockLabel = blockDisplay(e.block) ? `${blockDisplay(e.block)} · ` : '';
           ${checkInRibbonHtml}
           <div class="ev-tag" style="color:${catCol}">${blockLabel}${e.category}</div>
           <div class="ev-title">${displayTitle(e)}</div>
-          <div class="ev-time">${fmtTime(e.start)} – ${fmtTime(e.end)}</div>
-          ${isFacultyMode?`<div class="ev-controls">
+          <div class="ev-time">${eventTimeLabel(e)}</div>
+          ${canEditActiveSemester()?`<div class="ev-controls">
             <button class="ev-ctrl-btn ev-edit-btn" onclick="openEditForm(event,${ej})">✎</button>
             <button class="ev-ctrl-btn ev-del-btn" onclick="confirmDelete(event,'${e._id}')">✕</button>
           </div>`:''}
@@ -2833,15 +5270,25 @@ function listVisibleEvents(){
 }
 
 function getListScopeRange(){
-  if(listFilters.scope === 'month'){
+  if(listFilters.scope === 'thisMonth'){
     return {
       start: new Date(currentMonthYear,currentMonth,1),
       end: new Date(currentMonthYear,currentMonth + 1,0)
     };
   }
 
-  if(listFilters.scope === 'week'){
+  if(listFilters.scope === 'thisWeek'){
     const w = currentWeekIdx >= 0 ? WEEKS[currentWeekIdx] : null;
+    if(!w) return {start:null,end:null};
+
+    return {
+      start: parseMDY(w.startDate),
+      end: parseMDY(w.endDate)
+    };
+  }
+
+  if(listFilters.scope === 'nextWeek'){
+    const w = currentWeekIdx + 1 < WEEKS.length ? WEEKS[currentWeekIdx + 1] : null;
     if(!w) return {start:null,end:null};
 
     return {
@@ -2954,6 +5401,27 @@ function listEventMatchesMulti(field,eventValue){
   const selected = selectedListValues(field);
   if(!selected.length) return true;
 
+    if(field === 'mcal'){
+    const eventKey =
+      listFilterValue(
+        'mcal',
+        eventValue
+      );
+
+    if(eventKey === 'program wide'){
+      return selected.some(value =>
+        PROGRAM_WIDE_TARGETS
+          .map(target =>
+            normalizeListKey(target)
+          )
+          .includes(value) ||
+        value === 'program wide'
+      );
+    }
+
+    return selected.includes(eventKey);
+  }
+
 if(field === 'course'){
   return selected.some(selectedKey =>
     blockTokens(eventValue).some(block =>
@@ -3002,12 +5470,87 @@ function filteredListEvents(){
   return listScopedEvents().filter(listEventMatchesFilters);
 }
 
+function safeExportText(value){
+  return String(value || '').replace(/\s+/g,' ').trim();
+}
+
+function exportFilteredListToExcel(){
+  const evs = filteredListEvents().sort((a,b) =>
+    parseMDY(a.date) - parseMDY(b.date) ||
+    (isAllDayEvent(a) ? -1 : timeToMinutes(a.start)) - (isAllDayEvent(b) ? -1 : timeToMinutes(b.start))
+  );
+
+  if(!evs.length){
+    showToast('No filtered events to export.');
+    return;
+  }
+
+  const rows = evs.map(e => ({
+    Date: e.date || '',
+    Day: e.date ? parseMDY(e.date).toLocaleDateString('en-US',{weekday:'long'}) : '',
+    Start: isAllDayEvent(e) ? 'All day' : (e.start || ''),
+    End: isAllDayEvent(e) ? 'All day' : (e.end || ''),
+    Title: safeExportText(displayTitle(e)),
+    Category: safeExportText(listDisplayLabel('category',e.category)),
+    Calendar: safeExportText(e.mCal),
+    Cohort: safeExportText(e.calYear),
+    Course_Block: safeExportText(blockDisplay(e.block)),
+    Group: safeExportText(groupDisplay(e.group)),
+    Mandatory: e.mand === 'Yes' ? 'Yes' : 'No',
+    Presenter: safeExportText(e.presenter),
+    Location: safeExportText(e.location),
+    Additional_Information: safeExportText(e.info || e.desc)
+  }));
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(wb, ws, 'Filtered Schedule');
+
+  ws['!cols'] = [
+    {wch:12}, {wch:12}, {wch:10}, {wch:10}, {wch:36},
+    {wch:18}, {wch:16}, {wch:10}, {wch:24}, {wch:18},
+    {wch:12}, {wch:24}, {wch:22}, {wch:50}
+  ];
+
+  const stamp = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, `EnMed_Filtered_Schedule_${stamp}.xlsx`);
+
+  showToast(`Exported ${evs.length} event${evs.length === 1 ? '' : 's'}.`);
+}
+
 function setListFilter(field,value){
   listFilters[field] = value;
 
   if(field === 'scope' && value !== 'custom'){
     listFilters.start = '';
     listFilters.end = '';
+  }
+
+  render();
+}
+
+function setListCustomDate(field,value){
+  listFilters[field] = value;
+}
+
+function applyListCustomRange(){
+  const start = parseListDate(listFilters.start);
+  const end = parseListDate(listFilters.end);
+
+  if(listFilters.start && !start){
+    showToast('Start date is invalid.');
+    return;
+  }
+
+  if(listFilters.end && !end){
+    showToast('End date is invalid.');
+    return;
+  }
+
+  if(start && end && start > end){
+    showToast('Start date must be before end date.');
+    return;
   }
 
   render();
@@ -3277,21 +5820,29 @@ function renderListFinder(resultCount,scopeCount){
       </div>
 
       <div class="list-custom-range" style="${customStyle}">
-        <div class="list-filter-control">
-          <label>Start Date</label>
-          <input type="date" value="${escapeHtml(listFilters.start)}" onchange="setListFilter('start',this.value)">
-        </div>
-
-        <div class="list-filter-control">
-          <label>End Date</label>
-          <input type="date" value="${escapeHtml(listFilters.end)}" onchange="setListFilter('end',this.value)">
-        </div>
+      <div class="list-filter-control">
+        <label>Start Date</label>
+        <input type="date" value="${escapeHtml(listFilters.start)}" oninput="setListCustomDate('start',this.value)">
       </div>
+
+      <div class="list-filter-control">
+        <label>End Date</label>
+        <input type="date" value="${escapeHtml(listFilters.end)}" oninput="setListCustomDate('end',this.value)">
+      </div>
+
+      <div class="list-filter-control">
+        <label>&nbsp;</label>
+        <button type="button" class="list-search-btn" onclick="applyListCustomRange()">Apply Range</button>
+      </div>
+    </div>
 
       <div class="list-finder-footer">
         <strong>${resultCount} event${resultCount === 1 ? '' : 's'} shown</strong>
         <span>${scopeCount} event${scopeCount === 1 ? '' : 's'} in selected scope</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="list-reset-btn" type="button" onclick="exportFilteredListToExcel()">Export Excel</button>
         <button class="list-reset-btn" type="button" onclick="resetListFilters()">Reset Filters</button>
+      </div>
       </div>
     </div>
   `;
@@ -3343,12 +5894,12 @@ function renderList(){
       const blockLabel = courseLabel ? `${courseLabel} · ` : '';
 
       html+=`<div class="event list-event ${ec}" id="bev_${e._id}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 5px,${col}18 5px)" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:${textCol};white-space:nowrap;min-width:90px">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:${textCol};white-space:nowrap;min-width:90px">${isAllDayEvent(e) ? 'All day' : `${fmtTime(e.start)}<br>${fmtTime(e.end)}`}</div>
         <div style="flex:1">
           <div class="ev-tag" style="color:${catColL}">${escapeHtml(blockLabel)}${escapeHtml(listDisplayLabel('category',e.category))}</div>
           <div style="font-size:13px;font-weight:500;color:${col}">${escapeHtml(displayTitle(e))}</div>
         </div>
-        ${isFacultyMode?`<div style="display:flex;gap:5px;flex-shrink:0">
+        ${canEditActiveSemester()?`<div style="display:flex;gap:5px;flex-shrink:0">
           <button class="ev-ctrl-btn ev-edit-btn" style="width:28px;height:28px" onclick="openEditForm(event,${ej})">✎</button>
           <button class="ev-ctrl-btn ev-del-btn" style="width:28px;height:28px" onclick="confirmDelete(event,'${e._id}')">✕</button>
         </div>`:''}
@@ -3362,8 +5913,8 @@ function renderList(){
 }
 
 // ── INTERACTIONS ──────────────────────────────────────────────
-function handleEventClick(ev,e){ev.stopPropagation();if(isFacultyMode)return;openModal(e);}
-function handleCellClick(ev,date,hour){if(!isFacultyMode)return;if(ev.target.closest('.event'))return;openAddForm(date,hour);}
+function handleEventClick(ev,e){ev.stopPropagation();if(canEditActiveSemester())return;openModal(e);}
+function handleCellClick(ev,date,hour){if(!canEditActiveSemester())return;if(ev.target.closest('.event'))return;openAddForm(date,hour);}
 let _modalEvent=null;
 function openModal(e){
   _modalEvent=e;
@@ -3375,7 +5926,7 @@ function openModal(e){
   const blockText = blockDisplay(e.block);
   document.getElementById('modalCat').textContent=`${e.mCal||'M1'}${blockText ? ' · ' + blockText : ''} · ${e.category}`;
   document.getElementById('modalCat').style.color=col;
-  document.getElementById('modalDate').textContent=`${fmtDate(e.date)}, ${fmtTime(e.start)} – ${fmtTime(e.end)}`;
+  document.getElementById('modalDate').textContent=`${fmtDate(e.date)}, ${eventTimeLabel(e)}`;
   
   
 const mand=e.mand||'No';
@@ -3416,31 +5967,149 @@ metaLine.style.display=metaLine.childNodes.length?'flex':'none';
 document.getElementById('modalInfoBox').style.display=info?'block':'none';
 if(document.getElementById('modalInfo'))document.getElementById('modalInfo').textContent=info;
 
-  document.getElementById('modalEditBtn').style.display=isFacultyMode?'':'none';
-  document.getElementById('modalDeleteBtn').style.display=isFacultyMode?'':'none';
+  document.getElementById('modalEditBtn').style.display=canEditActiveSemester()?'':'none';
+  document.getElementById('modalDeleteBtn').style.display=canEditActiveSemester()?'':'none';
   document.getElementById('modalOverlay').classList.add('open');
 }
 
 // ── FACULTY AUTH ──────────────────────────────────────────────
 function requestFacultyMode(){document.getElementById('pinInput').value='';document.getElementById('pinErr').textContent='';document.getElementById('loginOverlay').classList.add('open');setTimeout(()=>document.getElementById('pinInput').focus(),100);}
-function checkPin(){const val=document.getElementById('pinInput').value.trim();if(val===(CFG.pin||'3255')){document.getElementById('loginOverlay').classList.remove('open');setMode('faculty');}else{document.getElementById('pinErr').textContent='Incorrect PIN.';document.getElementById('pinInput').value='';}}
-function setMode(mode){
-  isFacultyMode=mode==='faculty';
-  const regenBtn = document.getElementById('regenICSBtn');
-  if (regenBtn) regenBtn.style.display = isFacultyMode ? '' : 'none';
-  document.querySelectorAll('.mode-btn').forEach(b=>{b.classList.remove('active','faculty-active');});
-  if(!isFacultyMode)document.querySelectorAll('.mode-btn')[0].classList.add('active');
-  else document.querySelectorAll('.mode-btn')[1].classList.add('faculty-active');
-  document.getElementById('facultyPanel').classList.toggle('open',isFacultyMode);
-  document.getElementById('sidebarFilters').style.display=isFacultyMode?'':'none';
-  document.getElementById('facultyBadge').style.display=isFacultyMode?'':'none';
-  document.getElementById('addEventBtn').style.display=isFacultyMode?'':'none';
-  document.getElementById('layout').classList.toggle('faculty-mode',isFacultyMode);
-  if(!isFacultyMode)closeForm();
+async function checkPin(){
+  const val =
+    document
+      .getElementById('pinInput')
+      .value
+      .trim();
+
+  if(val === (CFG.pin || '3255')){
+    document
+      .getElementById('loginOverlay')
+      .classList
+      .remove('open');
+
+    await setMode('faculty');
+    return;
+  }
+
+  document
+    .getElementById('pinErr')
+    .textContent = 'Incorrect PIN.';
+
+  document
+    .getElementById('pinInput')
+    .value = '';
+}
+
+async function setMode(mode){
+  const enteringFacultyMode =
+    mode === 'faculty';
+
+  /*
+    Do not reload when the requested mode is already active.
+    This prevents unnecessary GitHub fetches from repeated clicks.
+  */
+  if(isFacultyMode === enteringFacultyMode){
+    return;
+  }
+
+  isFacultyMode = enteringFacultyMode;
+
+  const regenBtn =
+    document.getElementById('regenICSBtn');
+
+  if(regenBtn){
+    regenBtn.style.display =
+      canRegenerateICS() ? '' : 'none';
+  }
+
+  document
+    .querySelectorAll('.mode-btn')
+    .forEach(button => {
+      button.classList.remove(
+        'active',
+        'faculty-active'
+      );
+    });
+
+  if(!isFacultyMode){
+    document
+      .querySelectorAll('.mode-btn')[0]
+      ?.classList
+      .add('active');
+  }else{
+    document
+      .querySelectorAll('.mode-btn')[1]
+      ?.classList
+      .add('faculty-active');
+  }
+
+  document
+    .getElementById('facultyPanel')
+    ?.classList
+    .toggle('open', isFacultyMode);
+
+  const sidebar =
+    document.getElementById('sidebarFilters');
+
+  if(sidebar){
+    sidebar.style.display =
+      isFacultyMode ? '' : 'none';
+  }
+
+  const facultyBadge =
+    document.getElementById('facultyBadge');
+
+  if(facultyBadge){
+    facultyBadge.style.display =
+      isFacultyMode ? '' : 'none';
+  }
+
+  const addEventBtn =
+    document.getElementById('addEventBtn');
+
+  if(addEventBtn){
+    addEventBtn.style.display =
+      canEditActiveSemester() ? '' : 'none';
+  }
+
+  document
+    .getElementById('layout')
+    ?.classList
+    .toggle('faculty-mode', isFacultyMode);
+
+  if(!isFacultyMode){
+    closeForm();
+  }
+
+  /*
+    The visible semester set changes with mode:
+
+    View mode:
+      Active semesters only.
+
+    Edit mode:
+      Active and Draft semesters.
+
+    Reloading here ensures EVENTS is rebuilt from the correct
+    JSON files instead of rerendering stale in-memory events.
+  */
+  try{
+    await loadEvents();
+  }catch(err){
+    console.error(
+      'Failed to reload events after mode change:',
+      err
+    );
+
+    showToast(
+      'Could not reload the calendar for this mode.'
+    );
+  }
+
   populateYearDropdown();
   updateMCalUI();
-  updateYearUI();  // show/hide tabs based on visibility
-  render();
+  updateYearUI();
+  renderSemesterSelector();
 }
 
 // ── FORM ──────────────────────────────────────────────────────
@@ -3450,9 +6119,54 @@ function escForm(v){
   return String(v ?? '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+function eventStorageSemesterDisplay(e){
+  if(!e){
+    return {
+      name: 'Not yet assigned',
+      file: ''
+    };
+  }
+
+  const semester = e._semesterId
+    ? semesterById(e._semesterId)
+    : null;
+
+  if(semester){
+    return {
+      name: semester.name || semester.id,
+      file: e._sourceFile || semester.file || ''
+    };
+  }
+
+  /*
+    Fallback for an event that has a source filename but whose
+    semester ID is unavailable.
+  */
+  const semesterByFile = allSemesters().find(
+    candidate =>
+      candidate.file &&
+      candidate.file === e._sourceFile
+  );
+
+  if(semesterByFile){
+    return {
+      name: semesterByFile.name || semesterByFile.id,
+      file: e._sourceFile || semesterByFile.file || ''
+    };
+  }
+
+  return {
+    name: 'Unknown semester',
+    file: e._sourceFile || ''
+  };
+}
+
 function formHTML(e,isEdit){
   const defBlock=e?e.block:'';
   const defCat=e?e.category:'Session';
+
+  const storageSemester =
+    eventStorageSemesterDisplay(e);
 
   const hourTimes=['06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
   const timeOptions=hourTimes.map(t=>`<option value="${t}">${fmtTime(t)}</option>`).join('');
@@ -3498,11 +6212,38 @@ function formHTML(e,isEdit){
 
   <div class="form-group"><label class="form-label">Date * (MM/DD/YYYY)</label><input class="form-input" id="ff_date" placeholder="MM/DD/YYYY" value="${escForm(e?e.date:(prefillDate||''))}"></div>
 
+  ${isEdit ? `
+    <div class="form-group">
+      <label class="form-label">Semester</label>
+
+      <div
+        class="form-input"
+        style="background:var(--surface3);cursor:default"
+      >
+        ${escForm(storageSemester.name)}
+      </div>
+
+      <div class="multiadd-note">
+        Stored in ${escForm(
+          storageSemester.file || 'an unidentified JSON file'
+        )}
+      </div>
+    </div>
+  ` : ''}
+
   <div style="font-size:11px;color:var(--muted2);line-height:1.5;margin:-4px 0 8px">
     Enter times in military time. Use the dropdown for hour-only times, or type a custom time like <code>08:30</code> or <code>12:45:00</code>.
   </div>
 
-  <div class="form-row">
+  <div class="form-group">
+    <label class="form-label" style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0">
+      <input type="checkbox" id="ff_allDay" ${e && isAllDayEvent(e) ? 'checked' : ''} onchange="toggleAllDayTimeFields('ff')">
+      All-day event
+    </label>
+    <div class="multiadd-note">Exports to Google Calendar as an informational all-day bar.</div>
+  </div>
+
+  <div class="form-row" id="ff_timeWrap" style="${e && isAllDayEvent(e) ? 'display:none' : ''}">
     <div class="form-group"><label class="form-label">Start</label><input class="form-input" id="ff_start" list="timeList" value="${escForm(e?e.start:(prefillHour||'08:00'))}" placeholder="08:30"></div>
     <div class="form-group"><label class="form-label">End</label><input class="form-input" id="ff_end" list="timeList" value="${escForm(e?e.end:'09:00')}" placeholder="09:30"></div>
   </div>
@@ -3546,8 +6287,42 @@ function updateBlockPreview(){
   renderBlockTokens('ff_block','ff_blockTokens');
 }
 
-function openAddForm(date,hour){if(!isFacultyMode)return;loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);updateBlockPreview();injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
-function openEditForm(ev,e){if(ev)ev.stopPropagation();loadCatalog();editingId=e._id;document.getElementById('fpSub').textContent='Editing: '+e.title.substring(0,30);document.getElementById('fpForm').innerHTML=formHTML(e,true);updateBlockPreview();injectCatalog();document.getElementById('facultyPanel').scrollTop=0;}
+function openAddForm(date,hour){if(!canEditActiveSemester()){showToast('🔒 Archived views are read-only.');return;}loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);setTimeout(()=>{updateCatPreview();updateBlockPreview();renderGroupMultiPicker('ff_group','All Students');},0);}
+
+function openEditForm(ev,e){
+  if(ev) ev.stopPropagation();
+
+  if(!eventCanBeEdited(e)){
+    openModal(e);
+
+    const sourceSemester = e?._semesterId
+      ? semesterById(e._semesterId)
+      : null;
+
+    showToast(
+      semesterIsArchived(sourceSemester)
+        ? '🔒 Archived semesters are read-only.'
+        : '⚠️ This event has no editable source semester.'
+    );
+
+    return;
+  }
+
+  loadCatalog();
+  editingId = e._id;
+
+  document.getElementById('fpSub').textContent =
+    'Editing: ' + e.title.substring(0,30);
+
+  document.getElementById('fpForm').innerHTML =
+    formHTML(e,true);
+
+  setTimeout(()=>{
+    updateCatPreview();
+    updateBlockPreview();
+    renderCatalogSection();
+  },0);
+}
 function closeForm(){editingId=null;document.getElementById('fpForm').innerHTML='<div style="text-align:center;padding:30px 0;color:var(--muted)"><div style="font-size:28px;margin-bottom:10px">👆</div><div style="font-size:12px;line-height:1.6">Click an event to edit,<br>or a time slot to add,<br>or press <strong style="color:var(--gold)">+ Add Event</strong>.</div></div>';document.getElementById('fpSub').textContent='Click an event to edit · Click a slot to add';}
 
 
@@ -3585,14 +6360,36 @@ function toggleMCal(mc){
       if(selectedMCals.size===0) selectedMCals=new Set(['All']);
     } else {
       selectedMCals.add(mc);
-      const allOptions=new Set(['M0','M1','M2','Student Affairs']);
+      const allOptions=new Set(['M0','M1','M2']);
       if([...allOptions].every(v=>selectedMCals.has(v))) selectedMCals=new Set(['All']);
     }
   }
+  const anchorDate =
+    WEEKS[currentWeekIdx]?.startDate ||
+    formatMDY(homeDate());
+
   updateMCalUI();
   updateTitle();
+
+  WEEKS = buildWeeks();
+
+  if(WEEKS.length){
+    const requestedIndex = weekNumFromDate(anchorDate) - 1;
+
+    currentWeekIdx = Math.max(
+      0,
+      Math.min(WEEKS.length - 1, requestedIndex)
+    );
+
+    weekToMonth(currentWeekIdx);
+  } else {
+    currentWeekIdx = 0;
+  }
+
+  buildWeekDrawer();
   render();
 }
+
 function updateMCalUI(){
   document.querySelectorAll('.yr-check-label[data-mc]').forEach(el=>{
     const mc=el.dataset.mc;
@@ -3629,10 +6426,7 @@ function populateYearDropdown(){
   });
 }
 function setYearSidebar(yr){
-  if(yr === 'Student Affairs' || yr === 'SA'){
-    selectedYears = new Set(['All']);
-    selectedMCals = new Set(['Student Affairs']);
-  } else if(yr === 'All'){
+  if(yr === 'All'){
     selectedYears = new Set(['All']);
     selectedMCals = new Set(['All']);
   } else {
@@ -3680,7 +6474,7 @@ function updateTitle(){
   // If MCal filter is specific
   if(!selectedMCals.has('All')&&selectedMCals.size===1){
     const mc=[...selectedMCals][0];
-    const labels={'M0':'M0 Pre-Matriculation','M1':'M1','M2':'M2','Student Affairs':'Student Affairs'};
+    const labels={'M0':'M0 Pre-Matriculation','M1':'M1','M2':'M2'};
     t.textContent=(labels[mc]||mc)+' Calendar';return;
   }
   if(!selectedMCals.has('All')&&selectedMCals.size>1){
@@ -3690,7 +6484,7 @@ function updateTitle(){
     const yrs=[...selectedYears].sort();
     t.textContent=(yrs.length===1?yrs[0]:yrs.join(' / '))+' Calendar';return;
   }
-  t.textContent='[In-Progress] Calendar';
+  t.textContent='[Testing] Calendar';
 }
 
 // ── TODAY BUTTON ──────────────────────────────────────────────
@@ -3721,7 +6515,7 @@ function handleSearch(q){
     const col=CAT_COLOR[normalizeCategory(e.category)]||'#4a5168';
     return`<div class="sr-item" onclick="jumpToEvent(${JSON.stringify(e).replace(/"/g,'&quot;')})">
       <div class="sr-title" style="border-left:3px solid ${col};padding-left:6px">${e.title.replace(/</g,'&lt;')}</div>
-      <div class="sr-meta">📅 ${e.date} · ${fmtTime(e.start)}–${fmtTime(e.end)}${e.location?' · 📍'+e.location:''} · <span style="color:${col}">${e.category}</span></div>
+      <div class="sr-meta">📅 ${e.date} · ${eventTimeLabel(e)}${e.location?' · 📍'+e.location:''} · <span style="color:${col}">${e.category}</span></div>
     </div>`;
   }).join('');
   res.classList.add('open');
@@ -3778,7 +6572,6 @@ function mCalColor(e){
   if(isProgramWideEvent(e))return'#E56B6F';
   if(m==='M0')return'#E65100';
   if(m==='M2')return'#2E7D32';
-  if(m==='Student Affairs')return'#6A1B9A';
   return'#1565C0';
 }
 
@@ -3804,7 +6597,6 @@ function filteredEvents(){
 
     // M-cal header filter.
     // Program-Wide events should show with All, M0, M1, or M2.
-    // They should NOT show when someone filters only Student Affairs.
     const mcOk=
       selectedMCals.has('All') ||
       selectedMCals.has(evMCal) ||
@@ -3860,16 +6652,16 @@ function renderMonth(){
         const catC = CAT_COLOR[normalizeCategory(e.category)] || col;
         const ej=JSON.stringify(e).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
         const monthBlockLabel = e.block ? `${e.block}<br>` : '';
-        return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),${isFacultyMode ? `openEditForm(event,${ej})` : `handleEventClick(event,${ej})`})">
+return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),${canEditActiveSemester() ? `openEditForm(event,${ej})` : `handleEventClick(event,${ej})`})">
           ${monthBlockLabel}${displayTitle(e)}
-          ${isFacultyMode?`<div class="month-event-controls">
+          ${canEditActiveSemester()?`<div class="month-event-controls">
             <button class="month-event-ctrl" title="Edit session" onclick="openEditForm(event,${ej})">✎</button>
             <button class="month-event-ctrl" title="Delete session" onclick="confirmDelete(event,'${e._id}')">✕</button>
           </div>`:''}
         </div>`;
       }).join('')}
       ${more>0?`<div class="mg-more" onclick="openMonthMore(event,'${ds}')">+${more} more</div>`:''}
-      ${isFacultyMode?`<button class="mg-add-btn" onclick="openAddForm('${ds}','08:00');event.stopPropagation()">+</button>`:''}
+      ${canEditActiveSemester()?`<button class="mg-add-btn" onclick="openAddForm('${ds}','08:00');event.stopPropagation()">+</button>`:''}
     </div>`;
   }
   // trailing blanks
@@ -3916,13 +6708,13 @@ function openMonthMore(ev,dateStr){
       const blockLabel=e.block ? `${escForm(e.block)} · ` : '';
 
       return `
-        <div class="month-popout-event" onclick="event.stopPropagation();closeMonthMore();${isFacultyMode ? `openEditForm(event,${ej})` : `handleEventClick(event,${ej})`}">
-          <div class="month-popout-time">${fmtTime(e.start)}<br>${fmtTime(e.end)}</div>
+        <div class="month-popout-event" onclick="event.stopPropagation();closeMonthMore();${canEditActiveSemester() ? `openEditForm(event,${ej})` : `handleEventClick(event,${ej})`}">
+          <div class="month-popout-time">${isAllDayEvent(e) ? 'All day' : `${fmtTime(e.start)}<br>${fmtTime(e.end)}`}</div>
           <div class="month-popout-main">
             <div class="month-popout-cat" style="color:${catCol}">${blockLabel}${escForm(e.category||'Session')}</div>
             <div class="month-popout-name">${escForm(displayTitle(e))}</div>
           </div>
-          ${isFacultyMode?`<div style="display:flex;gap:4px;flex-shrink:0">
+          ${canEditActiveSemester()?`<div style="display:flex;gap:4px;flex-shrink:0">
             <button class="month-event-ctrl" title="Edit session" onclick="event.stopPropagation();closeMonthMore();openEditForm(event,${ej})">✎</button>
             <button class="month-event-ctrl" title="Delete session" onclick="event.stopPropagation();closeMonthMore();confirmDelete(event,'${e._id}')">✕</button>
           </div>`:''}
@@ -4021,20 +6813,43 @@ function homeDate(){
 
 function goToHomeDate(){
   const d = homeDate();
-
-  currentMonth = d.getMonth();
-  currentMonthYear = d.getFullYear();
-
   const homeDateStr = formatMDY(d);
-  const homeWeekNum = weekNumFromDate(homeDateStr);
-  const idx = WEEKS.findIndex(w => w.num === homeWeekNum);
 
-  currentWeekIdx = idx >= 0 ? idx : monthToWeek(currentMonth, currentMonthYear);
+  const idx = WEEKS.findIndex((w, i) => weekDatesAt(i).includes(homeDateStr));
+
+  if(idx >= 0){
+    currentWeekIdx = idx;
+    currentMonth = d.getMonth();
+    currentMonthYear = d.getFullYear();
+  } else if(WEEKS.length){
+    currentWeekIdx = 0;
+    weekToMonth(0);
+  } else {
+    currentWeekIdx = 0;
+    currentMonth = d.getMonth();
+    currentMonthYear = d.getFullYear();
+  }
 
   buildWeekDrawer();
 }
-function prevMonth(){currentMonth--;if(currentMonth<0){currentMonth=11;currentMonthYear--;}currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);buildWeekDrawer();render();}
-function nextMonth(){currentMonth++;if(currentMonth>11){currentMonth=0;currentMonthYear++;}currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);buildWeekDrawer();render();}
+
+function prevMonth(){
+  monthChangedWhileInMonth = true;
+  currentMonth--;
+  if(currentMonth<0){currentMonth=11;currentMonthYear--;}
+  currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);
+  buildWeekDrawer();
+  render();
+}
+
+function nextMonth(){
+  monthChangedWhileInMonth = true;
+  currentMonth++;
+  if(currentMonth>11){currentMonth=0;currentMonthYear++;}
+  currentWeekIdx=monthToWeek(currentMonth,currentMonthYear);
+  buildWeekDrawer();
+  render();
+}
 
 // ── CATALOG HELPERS ───────────────────────────────────────────
 
@@ -4048,8 +6863,7 @@ function injectCatalog(){
 function getCatalogSources(yearFilter){
   const SHEET_YEAR={'POM 1':'Year 1','Pre-Matriculation':'Year 1','Semester 1':'Year 1',
     'POM 2':'Year 2','Semester 2':'Year 2',
-    'POM 3':'Year 3','Shortened POM 3':'Year 3','Semester 3':'Year 3','TTC':'Year 3',
-    'MSGR':'Student Affairs'};
+    'POM 3':'Year 3','Shortened POM 3':'Year 3','Semester 3':'Year 3','TTC':'Year 3',};
   return Object.keys(SESSION_CATALOG).filter(s=>!yearFilter||yearFilter==='All'||SHEET_YEAR[s]===yearFilter);
 }
 function buildCatalogUI(yearFilter){
@@ -4104,7 +6918,7 @@ let bulkSelectMode=false;
 let selectedIds=new Set();
 
 function enterBulkSelect(){
-  if(!isFacultyMode){showToast('Enter Edit mode first.');return;}
+  if(!canEditActiveSemester()){showToast('🔒 Archived views are read-only.');return;}
   bulkSelectMode=true; selectedIds=new Set();
   document.getElementById('bulkBar').classList.add('on');
   updateBulkBar(); render();
@@ -4186,7 +7000,7 @@ function bulkDeleteSelected(){
 let multiAddGenerated = [];
 
 function openMultiAdd(){
-  if(!isFacultyMode){showToast('⚠️ Enter Edit mode first.');return;}
+  if(!canEditActiveSemester()){showToast('🔒 Archived views are read-only.');return;}
 
   multiAddGenerated = [];
 
@@ -4284,6 +7098,7 @@ function collectMultiAddBase(){
     block: cleanBlockString(document.getElementById('ma_block').value),
     presenter: document.getElementById('ma_presenter').value.trim(),
     info: document.getElementById('ma_info').value.trim(),
+    allDay: document.getElementById('ma_allDay')?.checked || false,
     start: document.getElementById('ma_start').value.trim(),
     end: document.getElementById('ma_end').value.trim(),
     startDate: document.getElementById('ma_startdate').value.trim(),
@@ -4301,6 +7116,7 @@ function makeMultiAddEvent(base, dateStr, start, end, source){
     date: dateStr,
     start,
     end,
+    allDay: base.allDay,
     category: base.mCal === PROGRAM_WIDE_MCAL ? 'Events' : base.category,
     block: base.block,
     weekNum,
@@ -4322,8 +7138,8 @@ function previewMultiAdd(){
   const base = collectMultiAddBase();
 
   if(!base.title){showToast('⚠️ Session Name is required.');return;}
-  if(!base.start || !base.end){showToast('⚠️ Pattern start and end times are required.');return;}
-  if(timeToMinutes(base.start) >= timeToMinutes(base.end)){showToast('⚠️ Pattern end time must be after start time.');return;}
+  if(!base.allDay && (!base.start || !base.end)){showToast('⚠️ Pattern start and end times are required.');return;}
+  if(!base.allDay && timeToMinutes(base.start) >= timeToMinutes(base.end)){showToast('⚠️ Pattern end time must be after start time.');return;}
 
   const hasPattern = base.startDate || base.endDate || base.days.length;
   const hasCustom = base.customRows.length > 0;
@@ -4362,12 +7178,17 @@ function previewMultiAdd(){
     for(let d = new Date(startDate); d <= endDate; d = addDays(d, 1)){
       if(!base.days.includes(d.getDay())) continue;
 
-      generated.push(makeMultiAddEvent(base, formatMDY(d), base.start, base.end, 'Pattern'));
+      generated.push(makeMultiAddEvent(base, formatMDY(d), base.allDay ? '' : base.start, base.allDay ? '' : base.end, 'Pattern'));
     }
   }
 
   for(const row of base.customRows){
-    if(!row.date || !row.start || !row.end){
+    if(base.allDay){
+      if(!row.date){
+        showToast('⚠️ Each all-day custom row must have a date — or be fully blank.');
+        return;
+      }
+    }else if(!row.date || !row.start || !row.end){
       showToast('⚠️ Each custom row must have date, start, and end — or be fully blank.');
       return;
     }
@@ -4377,13 +7198,13 @@ function previewMultiAdd(){
       return;
     }
 
-    if(timeToMinutes(row.start) >= timeToMinutes(row.end)){
+    if(!base.allDay && timeToMinutes(row.start) >= timeToMinutes(row.end)){
       showToast(`⚠️ Custom row ${row.date} has an end time before its start time.`);
       return;
     }
 
-    generated.push(makeMultiAddEvent(base, row.date, row.start, row.end, 'Custom'));
-  }
+    generated.push(makeMultiAddEvent(base, row.date, base.allDay ? '' : row.start, base.allDay ? '' : row.end, 'Custom'));
+    }
 
   const seen = new Set();
   multiAddGenerated = generated.filter(ev => {
@@ -4397,6 +7218,20 @@ function previewMultiAdd(){
     showToast('⚠️ No events were generated.');
     return;
   }
+
+const outOfSemester =
+  multiAddGenerated.filter(event =>
+    !automaticSemesterForEvent(event)
+  );
+
+if(outOfSemester.length){
+  openSemesterBoundsWarning(
+    outOfSemester[0]
+  );
+
+  multiAddGenerated = [];
+  return;
+}
 
   const duplicateWarnings = multiAddGenerated.filter(newEv =>
     EVENTS.some(existing =>
@@ -4446,21 +7281,67 @@ function backToMultiAddForm(){
 
 function commitMultiAdd(){
   if(!multiAddGenerated.length){
-    showToast('⚠️ Preview events first.');
+    showToast(
+      '⚠️ Preview events first.'
+    );
     return;
   }
 
-  multiAddGenerated.forEach(ev => {
-    const {_source, ...cleanEv} = ev;
-    cleanEv._id = generateUniqueId(pendingEventPool().concat(multiAddGenerated));
-    stageChange('added', cleanEv, null);
-  });
+  try{
+    multiAddGenerated.forEach(ev => {
+      const {
+        _source,
+        ...cleanEv
+      } = ev;
 
-  const count = multiAddGenerated.length;
+      const destination =
+        automaticSemesterForEvent(
+          cleanEv
+        );
 
-  showToast(`✦ ${count} multi-add event${count!==1?'s':''} added to pending changes.`);
-  closeMultiAdd();
-  openPendingReview();
+      if(!destination){
+        throw new Error(
+          `No semester storage exists for ` +
+          `"${cleanEv.title}" on ${cleanEv.date}.`
+        );
+      }
+
+      cleanEv._semesterId =
+        destination.id;
+
+      cleanEv._sourceFile =
+        destination.file;
+
+      cleanEv._id =
+        generateUniqueId(
+          pendingEventPool().concat(
+            multiAddGenerated
+          )
+        );
+
+      stageChange(
+        'added',
+        cleanEv,
+        null
+      );
+    });
+
+    const count =
+      multiAddGenerated.length;
+
+    showToast(
+      `✦ ${count} multi-add event` +
+      `${count !== 1 ? 's' : ''} ` +
+      `added to pending changes.`
+    );
+
+    closeMultiAdd();
+    openPendingReview();
+  }catch(err){
+    showToast(
+      '❌ ' + err.message
+    );
+  }
 }
 
 // ── BULK UPLOAD ───────────────────────────────────────────────
@@ -4486,7 +7367,7 @@ function emptyBulkState(){
 }
 
 function openBulkUpload(){
-  if(!isFacultyMode){showToast('⚠️ Enter Edit mode first.');return;}
+  if(!canEditActiveSemester()){showToast('🔒 Archived views are read-only.');return;}
 
   bulkWorkbook = null;
   bulkSelectedSheets = [];
@@ -4654,7 +7535,7 @@ function parseBulkSheetRows(sheetName, rows){
   if(!headerInfo){
     bulkState.skippedTabs.push({
       sheetName,
-      reason: 'Could not find a header row containing [MAND]. Required headers are: [MAND], Session Name, Class, Date, Start Time, End Time.'
+      reason: 'Could not find a header row containing [MAND]. Required headers are: [MAND], Session Name, Class, Date. Start Time and End Time are required only for timed events.'
     });
     return;
   }
@@ -4666,7 +7547,7 @@ function parseBulkSheetRows(sheetName, rows){
   if(missingHeaders.length){
     bulkState.skippedTabs.push({
       sheetName,
-      reason: `Missing required header(s): ${missingHeaders.join(', ')}. Required headers are: [MAND], Session Name, Class, Date, Start Time, End Time.`
+      reason: `Missing required header(s): ${missingHeaders.join(', ')}. Required headers are: [MAND], Session Name, Class, Date. Start Time and End Time are required only for timed events.`
     });
     return;
   }
@@ -4755,8 +7636,6 @@ function requiredBulkFields(){
     {key:'title',label:'Session Name'},
     {key:'mCal',label:'Class'},
     {key:'date',label:'Date'},
-    {key:'start',label:'Start Time'},
-    {key:'end',label:'End Time'}
   ];
 }
 
@@ -4784,6 +7663,7 @@ function bulkHeaderKey(value){
   if(h.includes('week number')) return 'weekNum';
   if(h.includes('presenter')) return 'presenter';
   if(h.includes('additional') || h.includes('information') || h.includes('info') || h.includes('note')) return 'info';
+  if(h.includes('all day') || h.includes('all-day') || h === 'allday') return 'allDay';
   if(h === 'id') return 'spreadsheetId';
 
   return '';
@@ -4797,6 +7677,7 @@ function buildBulkEventFromRow(sheetName,rowNum,row,colIdx){
     date: normalizeBulkDate(get('date')),
     start: normalizeBulkTime(get('start')),
     end: normalizeBulkTime(get('end')),
+    allDay: truthyYes(get('allDay')),
     category: cellString(get('category')),
     block: cellString(get('block')),
     weekNum: '',
@@ -4818,6 +7699,11 @@ function buildBulkEventFromRow(sheetName,rowNum,row,colIdx){
     _status: '',
     _ignored: false
   };
+
+    if(event.allDay){
+    event.start = '';
+    event.end = '';
+  }
 
   return event;
 }
@@ -4844,8 +7730,8 @@ function missingRequiredBulkValues(event){
   if(!event.title) missing.push('Missing Session Name');
   if(!event.mCal) missing.push('Missing Class');
   if(!event.date) missing.push('Missing Date');
-  if(!event.start) missing.push('Missing Start Time');
-  if(!event.end) missing.push('Missing End Time');
+  if(!event.allDay && !event.start) missing.push('Missing Start Time');
+  if(!event.allDay && !event.end) missing.push('Missing End Time');
 
   return missing;
 }
@@ -4857,23 +7743,25 @@ function invalidBulkValues(event){
     issues.push('[MAND] must be Yes or No');
   }
 
-  if(event.mCal && !['M0','M1','M2','Student Affairs','Program-Wide'].includes(event.mCal)){
-    issues.push(`Class must be M0, M1, M2, Student Affairs, or Program-Wide`);
+  if(event.mCal && !['M0','M1','M2','Program-Wide'].includes(event.mCal)){
+    issues.push(`Class must be M0, M1, M2, or Program-Wide`);
   }
 
   if(event.date && !/^\d{2}\/\d{2}\/\d{4}$/.test(event.date)){
     issues.push('Date must be MM/DD/YYYY');
   }
 
+  if(!event.allDay){
     const startIssue = bulkTimeIssue(event.start,'Start Time');
     if(startIssue) issues.push(startIssue);
 
     const endIssue = bulkTimeIssue(event.end,'End Time');
     if(endIssue) issues.push(endIssue);
 
-  if(event.start && event.end && /^\d{2}:\d{2}$/.test(event.start) && /^\d{2}:\d{2}$/.test(event.end)){
-    if(timeToMinutes(event.start) >= timeToMinutes(event.end)){
-      issues.push('Start Time must be before End Time');
+    if(event.start && event.end && /^\d{2}:\d{2}$/.test(event.start) && /^\d{2}:\d{2}$/.test(event.end)){
+      if(timeToMinutes(event.start) >= timeToMinutes(event.end)){
+        issues.push('Start Time must be before End Time');
+      }
     }
   }
 
@@ -4893,6 +7781,7 @@ function findBulkDuplicate(uploaded, existingEvents){
 }
 
 function findBulkConflict(uploaded, comparisonEvents){
+  if(isAllDayEvent(uploaded)) return null;
   const uploadedStart = timeToMinutes(uploaded.start);
   const uploadedEnd = timeToMinutes(uploaded.end);
   const uploadedGroup = normalizeBulkGroup(uploaded.group);
@@ -4900,6 +7789,7 @@ function findBulkConflict(uploaded, comparisonEvents){
   if(!Number.isFinite(uploadedStart) || !Number.isFinite(uploadedEnd)) return null;
 
   return comparisonEvents.find(existing => {
+    if(isAllDayEvent(existing)) return false;
     if(!existing || existing === uploaded) return false;
     if(normCompare(existing.mCal) !== normCompare(uploaded.mCal)) return false;
     if(normCompare(existing.date) !== normCompare(uploaded.date)) return false;
@@ -5080,7 +7970,7 @@ function renderBulkRoundOneSummary(){
 }
 
 function renderBulkParsedTable(summaryHtml, displayRows = bulkState.allRows){
-  const cols=['Actions','Status','Tab','Row','MAND','Session Name','Group','Location','Class','Date','Start','End','Category','Block','Issues'];
+  const cols=['Actions','Status','Tab','Row','MAND','Session Name','Group','Location','Class','Date','All Day','Start','End','Category','Block','Issues'];
   let tbl=`${summaryHtml}<table><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
 
   displayRows.forEach((r)=>{
@@ -5111,6 +8001,7 @@ function renderBulkParsedTable(summaryHtml, displayRows = bulkState.allRows){
       <td>${escBulk(r.location)}</td>
       <td>${escBulk(r.mCal)}</td>
       <td>${escBulk(r.date)}</td>
+      <td>${isAllDayEvent(r) ? 'Yes' : ''}</td>
       <td>${escBulk(r.start)}</td>
       <td>${escBulk(r.end)}</td>
       <td>${escBulk(r.category)}</td>
@@ -5168,6 +8059,7 @@ function openBulkRowEditor(i){
       ${bulkRowEditInput(i,'title','Session Name',row.title)}
       ${bulkRowEditInput(i,'mCal','Class',row.mCal)}
       ${bulkRowEditInput(i,'date','Date',row.date)}
+      ${bulkRowEditInput(i,'allDay','All Day',isAllDayEvent(row) ? 'Yes' : '')}
       ${bulkRowEditInput(i,'start','Start Time',row.start)}
       ${bulkRowEditInput(i,'end','End Time',row.end)}
       ${bulkRowEditInput(i,'category','Category',row.category)}
@@ -5229,8 +8121,16 @@ function saveBulkRowEdit(i){
 
   row.mand = normalizeBulkMand(row.mand);
   row.date = normalizeBulkDate(row.date);
-  row.start = normalizeBulkTime(row.start);
-  row.end = normalizeBulkTime(row.end);
+  row.allDay = truthyYes(row.allDay);
+
+  if(row.allDay){
+    row.start = '';
+    row.end = '';
+  }else{
+    row.start = normalizeBulkTime(row.start);
+    row.end = normalizeBulkTime(row.end);
+  }
+  
 
   if(!row._ignored){
     reclassifyBulkEditedRow(row);
@@ -5517,7 +8417,7 @@ function renderBulkUploadGate(){
       </p>
 
       <div class="bulk-note">
-        Eligible sessions will be written to events.json in one GitHub save. ICS feeds will regenerate after the save completes.
+        Eligible sessions will be assigned automatically to the appropriate semester JSON. ICS feeds will regenerate after the save completes.
       </div>
 
       <div class="bulk-note" style="margin-top:10px;color:#8a4a00">
@@ -5562,12 +8462,62 @@ async function commitBulkUpload(){
 
     const pendingEvents = uploadableRows.map(row => cleanBulkRowForSave(row));
 
-    pendingEvents.forEach(ev=>{
-      ev._id = generateUniqueId(EVENTS.concat(pendingEvents));
-      EVENTS.push(ev);
+    const outOfSemester =
+      pendingEvents.filter(event =>
+        !automaticSemesterForEvent(event)
+      );
+
+    if(outOfSemester.length){
+      showToast(
+        activeSemesterWarningMessage(
+          outOfSemester[0].date,
+          outOfSemester[0].mCal
+        )
+      );
+
+      if(btn){
+        btn.textContent = 'Confirm Upload';
+        btn.disabled = false;
+      }
+
+      return;
+    }
+    const affectedFiles =
+      new Set();
+
+    pendingEvents.forEach(event => {
+      const destination =
+        automaticSemesterForEvent(event);
+
+      if(!destination){
+        throw new Error(
+          `No semester storage exists for ` +
+          `"${event.title}" on ${event.date}.`
+        );
+      }
+
+      event._semesterId =
+        destination.id;
+
+      event._sourceFile =
+        destination.file;
+
+      affectedFiles.add(
+        destination.file
+      );
+
+      event._id =
+        generateUniqueId(
+          EVENTS.concat(pendingEvents)
+        );
+
+      EVENTS.push(event);
     });
 
-    await saveEventsToGitHub();
+    const saveResult =
+      await saveEventsToGitHub(
+        affectedFiles
+      );
 
     addLog('added',{
       title:`${pendingEvents.length} events (bulk upload)`,
@@ -5577,7 +8527,18 @@ async function commitBulkUpload(){
       category:'Bulk Upload'
     });
 
-    showToast(`✅ ${pendingEvents.length} sessions uploaded — live for everyone!`);
+    if(saveResult.icsResult?.ok){
+      showToast(
+        `✅ ${pendingEvents.length} sessions uploaded — ` +
+        `live for everyone!`
+      );
+    }else{
+      showToast(
+        `⚠️ ${pendingEvents.length} sessions were saved, ` +
+        `but ICS regeneration failed. Use Regenerate ICS Feeds ` +
+        `after resolving the error.`
+      );
+    }
 
     bulkWorkbook = null;
     bulkSelectedSheets = [];
@@ -5668,7 +8629,34 @@ function pendingChangeClass(type){
 }
 
 function cloneEventForPending(e){
-  return cleanEventForSave({...e});
+  if(!e) return {};
+
+  const {
+    startMin,
+    endMin,
+    _leftPct,
+    _widthPct,
+    _layoutIndex,
+    _layoutCols,
+    _attachedCheckIn,
+    ...pendingClone
+  } = e;
+
+  return {...pendingClone};
+}
+
+function preservePendingEventSource(event, original){
+  if(!event || !original) return event;
+
+  if(!event._semesterId && original._semesterId){
+    event._semesterId = original._semesterId;
+  }
+
+  if(!event._sourceFile && original._sourceFile){
+    event._sourceFile = original._sourceFile;
+  }
+
+  return event;
 }
 
 function pendingEventPool(){
@@ -5681,7 +8669,14 @@ function pendingEventPool(){
 }
 
 function stageChange(type,event,original=null){
-  const ev = cloneEventForPending(event);
+  const originalClone = original
+    ? cloneEventForPending(original)
+    : null;
+
+  const ev = preservePendingEventSource(
+    cloneEventForPending(event),
+    originalClone
+  );
 
   if(!ev._id){
     ev._id = generateUniqueId(pendingEventPool());
@@ -5693,7 +8688,7 @@ function stageChange(type,event,original=null){
   const baseChange = {
     type,
     event: ev,
-    original: original ? cloneEventForPending(original) : null,
+    original: originalClone,
     _ignored: false,
     ts: new Date().toLocaleTimeString()
   };
@@ -5875,6 +8870,10 @@ function renderPendingReview(){
 }
 
 async function submitPendingChanges(){
+  if(!canEditActiveSemester()){
+    showToast('🔒 Archived views are read-only.');
+    return;
+  }
   const activeChanges = pendingChanges.filter(c => !c._ignored);
 
   if(!activeChanges.length){
@@ -5887,14 +8886,108 @@ async function submitPendingChanges(){
   btn.disabled = true;
 
   try{
-    EVENTS = await fetchLatestEventsFromGitHub();
+    EVENTS =
+      await fetchLatestEventsFromGitHub();
+
+    const targets =
+      writableSemesters();
+
+    const affectedFiles =
+      new Set();
 
     activeChanges.forEach(change => {
-      const ev = cloneEventForPending(change.event);
+      let ev =
+        cloneEventForPending(
+          change.event
+        );
+
+      const dateChanged =
+        change.type === 'edited' &&
+        !!change.original &&
+        ev.date !== change.original.date;
+
+      const classChanged =
+        change.type === 'edited' &&
+        !!change.original &&
+        ev.mCal !== change.original.mCal;
+      /*
+        New events and Date/Class edits must route from their
+        current values.
+
+        Ordinary edits and deletions retain the physical source
+        recorded on the original event.
+      */
+      if(
+        change.type === 'added' ||
+        dateChanged ||
+        classChanged
+      ){
+        const destination =
+          automaticSemesterForEvent(ev);
+
+        if(!destination){
+          const matches =
+            isProgramWideEvent(ev)
+              ? []
+              : matchingSemestersForEvent(
+                  ev,
+                  targets
+                );
+
+          throw new Error(
+            matches.length > 1
+              ? (
+                  `Cannot save "${ev.title}" on ${ev.date}. ` +
+                  `${ev.mCal || 'Unknown class'} matches more ` +
+                  `than one semester. Correct the overlapping ` +
+                  `semester boundaries first.`
+                )
+              : (
+                  `Cannot save "${ev.title}" on ${ev.date}. ` +
+                  `No semester storage exists for ` +
+                  `${ev.mCal || 'Unknown class'} on this date.`
+                )
+          );
+        }
+
+        ev._semesterId =
+          destination.id;
+
+        ev._sourceFile =
+          destination.file;
+      }else{
+        ev =
+          preservePendingEventSource(
+            ev,
+            change.original
+          );
+      }
 
       if(change.type === 'added'){
-        if(EVENTS.some(e => e._id === ev._id)){
-          ev._id = generateUniqueId(EVENTS);
+        const destinationFile =
+          storedFileForEvent(
+            ev,
+            targets
+          );
+
+        if(!destinationFile){
+          throw new Error(
+            `Could not determine the destination JSON for ` +
+            `"${ev.title}".`
+          );
+        }
+
+        affectedFiles.add(
+          destinationFile
+        );
+
+        if(
+          EVENTS.some(event =>
+            event._id === ev._id
+          )
+        ){
+          ev._id =
+            generateUniqueId(EVENTS);
         }
 
         EVENTS.push(ev);
@@ -5902,25 +8995,105 @@ async function submitPendingChanges(){
       }
 
       if(change.type === 'edited'){
-        const i = EVENTS.findIndex(e => e._id === ev._id);
+        const sourceFile =
+          storedFileForEvent(
+            change.original,
+            targets
+          );
+
+        const destinationFile =
+          storedFileForEvent(
+            ev,
+            targets
+          );
+
+        if(!sourceFile){
+          throw new Error(
+            `Could not determine the original JSON for ` +
+            `"${ev.title}".`
+          );
+        }
+
+        if(!destinationFile){
+          throw new Error(
+            `Could not determine the destination JSON for ` +
+            `"${ev.title}".`
+          );
+        }
+
+        affectedFiles.add(
+          sourceFile
+        );
+
+        affectedFiles.add(
+          destinationFile
+        );
+
+        const i =
+          EVENTS.findIndex(event =>
+            event._id === ev._id
+          );
 
         if(i < 0){
-          throw new Error(`Original event not found for "${ev.title}". Refresh and try again.`);
+          throw new Error(
+            `Original event not found for "${ev.title}". ` +
+            `Refresh and try again.`
+          );
         }
 
         EVENTS[i] = ev;
         addLog('edited', ev);
       }
+            if(change.type === 'deleted'){
+        const sourceFile =
+          storedFileForEvent(
+            change.original || ev,
+            targets
+          );
 
-      if(change.type === 'deleted'){
-        EVENTS = EVENTS.filter(e => e._id !== ev._id);
-        addLog('deleted', ev);
+        if(!sourceFile){
+          throw new Error(
+            `Could not determine the source JSON for ` +
+            `"${ev.title}".`
+          );
+        }
+
+        affectedFiles.add(
+          sourceFile
+        );
+
+        const eventExists =
+          EVENTS.some(event =>
+            event._id === ev._id
+          );
+
+        if(!eventExists){
+          throw new Error(
+            `Original event not found for "${ev.title}". ` +
+            `It may already have been deleted. Refresh before retrying.`
+          );
+        }
+
+        EVENTS =
+          EVENTS.filter(event =>
+            event._id !== ev._id
+          );
+
+        addLog(
+          'deleted',
+          ev
+        );
       }
     });
 
-    await saveEventsToGitHub();
+    const saveResult =
+      await saveEventsToGitHub(
+        affectedFiles
+      );
 
-    const confirmedEvents = await fetchEventsFromGitHubAPI();
+    const confirmedEvents =
+      await fetchEventsFromGitHubAPI();
+
     EVENTS = confirmedEvents;
 
     pendingChanges = [];
@@ -5931,7 +9104,16 @@ async function submitPendingChanges(){
     updateTabCounts();
     render();
 
-    showToast('✅ Pending changes submitted to GitHub.');
+    if(saveResult.icsResult?.ok){
+      showToast(
+        '✅ Pending changes submitted to GitHub.'
+      );
+    }else{
+      showToast(
+        '⚠️ Events were saved, but ICS regeneration failed. ' +
+        'Use Regenerate ICS Feeds after resolving the error.'
+      );
+    }
   }catch(err){
     showToast('❌ '+err.message);
   }
@@ -5942,25 +9124,60 @@ async function submitPendingChanges(){
 
 
 async function saveForm(){
+  if(!canEditActiveSemester()){
+    showToast('🔒 Archived views are read-only.');
+    return;
+  }
   const title=document.getElementById('ff_title').value.trim();
   const date=document.getElementById('ff_date').value.trim();
-  const start=document.getElementById('ff_start').value.trim();
-  const end=document.getElementById('ff_end').value.trim();
+  const allDay=document.getElementById('ff_allDay')?.checked || false;
+  const start=allDay ? '' : document.getElementById('ff_start').value.trim();
+  const end=allDay ? '' : document.getElementById('ff_end').value.trim();
   const cat=document.getElementById('ff_cat').value.trim();
   const block=cleanBlockString(document.getElementById('ff_block').value);
 
   const weekNum = weekNumFromDate(date);
 
   if(!title||!date){showToast('⚠️ Title and Date are required.');return;}
-  if(!start||!end){showToast('⚠️ Start and end times are required.');return;}
-  if(timeToMinutes(start)>=timeToMinutes(end)){showToast('⚠️ End time must be after start time.');return;}
+  if(!allDay && (!start||!end)){showToast('⚠️ Start and end times are required.');return;}
+  if(!allDay && timeToMinutes(start)>=timeToMinutes(end)){showToast('⚠️ End time must be after start time.');return;}
 
-  const isEditing=!!editingId;
-  const existing=editingId ? (
-    pendingChanges.find(c => c.event && c.event._id === editingId)?.event ||
-    EVENTS.find(e=>e._id===editingId) ||
-    {}
-  ) : {};
+  const isEditing =
+    !!editingId;
+
+  const existingPendingChange =
+    editingId
+      ? pendingChanges.find(change =>
+          change.event?._id === editingId
+        )
+      : null;
+
+  const existing =
+    editingId
+      ? (
+          existingPendingChange?.event ||
+          EVENTS.find(event =>
+            event._id === editingId
+          ) ||
+          {}
+        )
+      : {};
+
+  /*
+    Keep the original loaded event separate from the current
+    pending version. This records which JSON the event came from
+    before any Date/Class edits were made.
+  */
+  const originalEvent =
+    editingId
+      ? (
+          existingPendingChange?.original ||
+          EVENTS.find(event =>
+            event._id === editingId
+          ) ||
+          existing
+        )
+      : null;
 
   const calYear=document.getElementById('ff_calyear').value;
   const mCal=document.getElementById('ff_mcal').value;
@@ -5970,16 +9187,23 @@ async function saveForm(){
   const info=document.getElementById('ff_info').value.trim();
   const presenter=document.getElementById('ff_presenter').value.trim();
 
-  const ev={
+  let ev={
     ...existing,
     title,
     date,
     start,
     end,
-    category: mCal === PROGRAM_WIDE_MCAL ? 'Events' : cat,
+    allDay,
+    category:
+      mCal === PROGRAM_WIDE_MCAL
+        ? 'Events'
+        : cat,
     block,
     weekNum,
-    week:weekNum ? weekNameFor(weekNum) : '',
+    week:
+      weekNum
+        ? weekNameFor(weekNum)
+        : '',
     desc:title,
     calYear,
     mCal,
@@ -5988,14 +9212,30 @@ async function saveForm(){
     location,
     info,
     presenter,
-    _id: editingId || existing._id || null
+    _id:
+      editingId ||
+      existing._id ||
+      null
   };
+
+  ev = routeEditedEventByDateAndClass(
+    ev,
+    originalEvent
+  );
+
+  if(warnIfOutsideActiveSemester(ev)){
+    return;
+  }
 
   if(!ev._id){
     ev._id = generateUniqueId(pendingEventPool());
   }
 
-  stageChange(isEditing ? 'edited' : 'added', ev, existing);
+    stageChange(
+    isEditing ? 'edited' : 'added',
+    ev,
+    originalEvent
+  );
 
   showToast(isEditing ? '✎ Edit added to pending changes.' : '✦ Event added to pending changes.');
   closeForm();
@@ -6006,6 +9246,10 @@ function modalEdit(){if(!_modalEvent)return;document.getElementById('modalOverla
 function modalDelete(){if(!_modalEvent)return;document.getElementById('modalOverlay').classList.remove('open');confirmDelete(null,_modalEvent._id);}
 function confirmDelete(ev,id){
   if(ev)ev.stopPropagation();
+  if(!canEditActiveSemester()){
+    showToast('🔒 Archived views are read-only.');
+    return;
+  }
   pendingDeleteId=id;
   const e=EVENTS.find(e=>e._id===id);
   document.getElementById('confirmMsg').textContent=`Delete "${(e?e.title:'this event').substring(0,50)}"?`;
@@ -6087,6 +9331,17 @@ function buildICS(options = {}){
     return `${yr}${pad(mo)}${pad(dy)}T${pad(hr)}${pad(mn)}00`;
   }
 
+  function toIcsDate(dateStr){
+  const [mo, dy, yr] = dateStr.split('/').map(Number);
+  return `${yr}${pad(mo)}${pad(dy)}`;
+}
+
+function nextIcsDate(dateStr){
+  const d = parseMDY(dateStr);
+  d.setDate(d.getDate() + 1);
+  return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+}
+
   function esc(s){
     return String(s || '')
       .replace(/\\/g, '\\\\')
@@ -6100,7 +9355,6 @@ function buildICS(options = {}){
 if (mCalFilter === 'M0') calName = 'EnMed M0 Calendar';
 if (mCalFilter === 'M1') calName = 'EnMed M1 Calendar';
 if (mCalFilter === 'M2') calName = 'EnMed M2 Calendar';
-if (mCalFilter === 'Student Affairs') calName = 'EnMed Student Affairs Calendar';
 
 const lines = [
   'BEGIN:VCALENDAR',
@@ -6112,7 +9366,10 @@ const lines = [
   'X-WR-TIMEZONE:America/Chicago'
 ];
 
-  EVENTS.forEach(e => {
+const emittedEventIds =
+  new Set();
+
+(options.sourceEvents || EVENTS).forEach(e => {
   if (
     mCalFilter &&
     !(
@@ -6121,35 +9378,69 @@ const lines = [
       (isProgramWideEvent(e) && PROGRAM_WIDE_TARGETS.includes(mCalFilter))
     )
   ) return;
-  if (!e.date || !e.start || !e.end || !e.title) return;
 
-  const startMin = timeToMinutes(e.start);
-  const endMin = timeToMinutes(e.end);
+  const eventIdentity =
+    e._id ||
+    [
+      e.date,
+      e.start,
+      e.end,
+      e.title,
+      e.mCal
+    ].join('|');
 
-  if (!Number.isFinite(startMin) || !Number.isFinite(endMin)) return;
-  if (endMin <= startMin) return;
+  if(emittedEventIds.has(eventIdentity)){
+    return;
+  }
 
-  // Optional: do not export check-in-only events
-  if (isExamCheckIn && isExamCheckIn(e)) return;
+  emittedEventIds.add(eventIdentity);
 
-    lines.push(
-      'BEGIN:VEVENT',
-      `UID:${e._id}@enmed-calendar`,
-      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
-      `DTSTART;TZID=America/Chicago:${toIcsDt(e.date, e.start)}`,
-      `DTEND;TZID=America/Chicago:${toIcsDt(e.date, e.end)}`,
-      `SUMMARY:${esc(`${e.mand === 'Yes' ? '[MAND] ' : ''}${e.title}${blockDisplay(e.block) ? ' - ' + blockDisplay(e.block) : ''}`)}`,
-      `DESCRIPTION:${esc([
-         e.mand ? `Mandatory: ${e.mand}` : '',
-         e.group ? `Group: ${e.group}` : '',
-         e.presenter ? `Presenter: ${e.presenter}` : '',
-         e.info || e.notes || e.desc || ''
-        ].filter(Boolean).join('\n'))}`,
-      `LOCATION:${esc(e.location || '')}`,
-      `CATEGORIES:${esc(e.category || '')}`,
-      'STATUS:CONFIRMED',
-      'END:VEVENT'
-    );
+  if (!e.date || !e.title) return;
+  if (!isAllDayEvent(e) && (!e.start || !e.end)) return;
+
+  if(!isAllDayEvent(e)){
+    const startMin = timeToMinutes(e.start);
+    const endMin = timeToMinutes(e.end);
+
+    if (!Number.isFinite(startMin) || !Number.isFinite(endMin)) return;
+    if (endMin <= startMin) return;
+  }
+
+    const eventLines = [
+  'BEGIN:VEVENT',
+  `UID:${e._id}@enmed-calendar`,
+  `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`
+];
+
+if(isAllDayEvent(e)){
+  eventLines.push(
+    `DTSTART;VALUE=DATE:${toIcsDate(e.date)}`,
+    `DTEND;VALUE=DATE:${nextIcsDate(e.date)}`,
+    'TRANSP:TRANSPARENT'
+  );
+}else{
+  eventLines.push(
+    `DTSTART;TZID=America/Chicago:${toIcsDt(e.date, e.start)}`,
+    `DTEND;TZID=America/Chicago:${toIcsDt(e.date, e.end)}`
+  );
+}
+
+eventLines.push(
+  `SUMMARY:${esc(`${e.mand === 'Yes' ? '[MAND] ' : ''}${e.title}${blockDisplay(e.block) ? ' - ' + blockDisplay(e.block) : ''}`)}`,
+  `DESCRIPTION:${esc([
+     e.mand ? `Mandatory: ${e.mand}` : '',
+     isAllDayEvent(e) ? 'All day: Yes' : '',
+     e.group ? `Group: ${e.group}` : '',
+     e.presenter ? `Presenter: ${e.presenter}` : '',
+     e.info || e.notes || e.desc || ''
+    ].filter(Boolean).join('\n'))}`,
+  `LOCATION:${esc(e.location || '')}`,
+  `CATEGORIES:${esc(e.category || '')}`,
+  'STATUS:CONFIRMED',
+  'END:VEVENT'
+);
+
+lines.push(...eventLines);
   });
 
   lines.push('END:VCALENDAR');
@@ -6157,29 +9448,117 @@ const lines = [
 }
 
 async function regenerateAllICSFeeds(){
-  try {
-    showToast('Regenerating all calendar feeds...');
+  if(!CFG.token){
+    const error =
+      new Error(
+        'Add your GitHub token before regenerating feeds.'
+      );
 
-    await loadEvents();
+    showToast(
+      '⚠️ ' + error.message
+    );
+
+    return {
+      ok: false,
+      error
+    };
+  }
+
+  try{
+    showToast(
+      'Regenerating active calendar feeds...'
+    );
+
+    await loadCalendarManifest();
+
+    /*
+      ICS always uses every Active semester. Draft semesters remain
+      editable but do not enter student subscriptions.
+    */
+    const activeEvents =
+      await fetchEventsForSemesters(
+        activeSemesters()
+      );
 
     const feeds = [
-      [ICS_FILE, buildICS(), 'Regenerate full calendar ICS'],
-      [ICS_FILE_M0, buildICS({ mCal: 'M0' }), 'Regenerate M0 calendar ICS'],
-      [ICS_FILE_M1, buildICS({ mCal: 'M1' }), 'Regenerate M1 calendar ICS'],
-      [ICS_FILE_M2, buildICS({ mCal: 'M2' }), 'Regenerate M2 calendar ICS'],
-      [ICS_FILE_SA, buildICS({ mCal: 'Student Affairs' }), 'Regenerate Student Affairs calendar ICS']
+      [
+        ICS_FILE,
+        buildICS({
+          sourceEvents: activeEvents
+        }),
+        'Regenerate full calendar ICS'
+      ],
+      [
+        ICS_FILE_M0,
+        buildICS({
+          mCal: 'M0',
+          sourceEvents: activeEvents
+        }),
+        'Regenerate M0 calendar ICS'
+      ],
+      [
+        ICS_FILE_M1,
+        buildICS({
+          mCal: 'M1',
+          sourceEvents: activeEvents
+        }),
+        'Regenerate M1 calendar ICS'
+      ],
+      [
+        ICS_FILE_M2,
+        buildICS({
+          mCal: 'M2',
+          sourceEvents: activeEvents
+        }),
+        'Regenerate M2 calendar ICS'
+      ]
     ];
 
-    for (const [file, content, message] of feeds) {
-      console.log('Saving ICS feed:', file);
-      await saveTextFileToGitHub(file, content, message);
+    const savedFeeds = [];
+
+    for(
+      const [
+        file,
+        content,
+        message
+      ] of feeds
+    ){
+      console.log(
+        'Saving ICS feed:',
+        file
+      );
+
+      await saveTextFileToGitHub(
+        file,
+        content,
+        message
+      );
+
+      savedFeeds.push(file);
     }
 
-    showToast('All ICS feeds regenerated');
-  } catch (err) {
+    showToast(
+      'Active calendar feeds regenerated'
+    );
+
+    return {
+      ok: true,
+      savedFeeds
+    };
+  }catch(err){
     console.error(err);
-    alert('Failed to regenerate ICS feeds: ' + err.message);
-    showToast('Failed to regenerate ICS feeds');
+
+    alert(
+      'The ICS feeds could not be fully regenerated.\n\n' +
+      err.message +
+      '\n\nCalendar JSON data was not rolled back. Use ' +
+      '“Regenerate ICS Feeds” after resolving the GitHub error.'
+    );
+
+    return {
+      ok: false,
+      error: err
+    };
   }
 }
 
@@ -6193,7 +9572,7 @@ function openSyncLinksModal(){
     ['Full Calendar', 'calendar.ics'],
     ['M0 Calendar', 'calendar-m0.ics'],
     ['M1 Calendar', 'calendar-m1.ics'],
-    ['M2 Calendar', 'calendar-m2.ics']
+    ['M2 Calendar', 'calendar-m2.ics'],
   ];
 
   document.getElementById('syncLinksList').innerHTML =
@@ -6274,6 +9653,8 @@ document.addEventListener('keydown',ev=>{
     document.getElementById('modalOverlay').classList.remove('open');
     document.getElementById('confirmOverlay').classList.remove('open');
     document.getElementById('syncLinksModal').classList.remove('open');
+    document.getElementById('semesterWarningOverlay')?.classList.remove('open');
+    semesterWarningEvent = null;
     closeForm();
   }
 });
@@ -6287,6 +9668,136 @@ document.getElementById('configOverlay').style.display='none';
 initApp();
 </script>
 
+<div
+  class="modal-overlay"
+  id="semesterWarningOverlay"
+  onclick="if(event.target.id==='semesterWarningOverlay')closeSemesterBoundsWarning()"
+>
+  <div class="modal" style="max-width:560px">
+    <div class="modal-header">
+      <div
+        class="modal-bar"
+        style="background:#f7a14f"
+      ></div>
+
+      <div style="flex:1">
+        <div
+          class="modal-title"
+          id="semesterWarningTitle"
+        >
+          No Semester Storage for This Date
+        </div>
+
+        <div
+          id="semesterWarningSummary"
+          style="font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5"
+        >
+          Correct the event or create/edit the semester storage dates.
+        </div>
+      </div>
+
+      <button
+        class="modal-close"
+        onclick="closeSemesterBoundsWarning()"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div
+        style="font-size:13px;color:var(--text);line-height:1.6"
+      >
+        Events must fall inside exactly one semester boundary
+        for their class. The calendar cannot save this event
+        until its date and class have one valid storage match.
+      </div>
+
+      <div class="modal-info-box">
+        <div class="modal-info-title">
+          Event Date
+        </div>
+
+        <div
+          class="modal-info-text"
+          id="semesterWarningDate"
+        ></div>
+      </div>
+
+      <div class="modal-info-box">
+        <div class="modal-info-title">
+          Routing Result
+        </div>
+
+        <div class="modal-info-text">
+          <strong
+            id="semesterWarningSemester"
+          ></strong>
+
+          <br>
+
+          <span
+            id="semesterWarningBounds"
+          ></span>
+        </div>
+      </div>
+
+      <div
+        style="font-size:12px;color:#8a4a00;line-height:1.6;margin-top:14px"
+      >
+        Return to the event to correct a typo or change its class.
+        Open the Semester Editor only when this date genuinely
+        belongs to a storage period that has not yet been created
+        or configured.
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div
+        style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"
+      >
+        <button
+          onclick="returnToSemesterWarningEventForm()"
+          style="flex:1;min-width:180px;padding:8px;border-radius:7px;border:1px solid var(--accent);background:white;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer"
+        >
+          Return to Event
+        </button>
+
+        <button
+          onclick="openSemesterEditorFromWarning()"
+          style="flex:1;min-width:180px;padding:8px;border-radius:7px;border:none;background:var(--accent);color:white;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer"
+        >
+          Create or Edit Semester
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="advancedSettingsOverlay" onclick="if(event.target.id==='advancedSettingsOverlay')closeAdvancedSettings()">
+  <div class="modal" style="max-width:720px;max-height:85vh;display:flex;flex-direction:column">
+    <div class="modal-header">
+      <div class="modal-bar" style="background:var(--accent)"></div>
+      <div style="flex:1">
+        <div class="modal-title">Semester Editor</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">
+          Manage draft, published, and archived semesters.
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeAdvancedSettings()">×</button>
+    </div>
+
+    <div class="modal-body" id="advancedSettingsBody" style="overflow-y:auto">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="modal-footer">
+      <button onclick="closeAdvancedSettings()" style="width:100%;padding:8px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
 
 <div class="modal-overlay" id="syncLinksModal">
   <div class="modal">
