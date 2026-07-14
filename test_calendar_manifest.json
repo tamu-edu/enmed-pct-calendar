@@ -34,10 +34,11 @@
       "file": "test_events_fall-2027.json",
       "classBounds": {
         "M1": {
-          "startDate": "11/11/2027",
+          "startDate": "08/11/2027",
           "endDate": "01/01/2028"
         }
-      }
+      },
+      "updatedAt": "2026-07-14T17:19:04.285Z"
     }
   ]
 }
