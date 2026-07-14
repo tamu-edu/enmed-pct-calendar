@@ -12160,7 +12160,7 @@
     "_id": "dbe95424-2af1-4d21-81c9-ad40c5a272c2"
   },
   {
-    "title": "[Assigned Students Only] SDLs",
+    "title": "SDLs",
     "date": "08/10/2026",
     "start": "16:00",
     "end": "017:00",
@@ -12168,7 +12168,7 @@
     "block": "",
     "weekNum": 12,
     "week": "Week 12",
-    "desc": "[Assigned Students Only] SDLs",
+    "desc": "SDLs",
     "calYear": "2029",
     "mCal": "M1",
     "mand": "Yes",
