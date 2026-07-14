@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "title": "test",
+    "date": "09/08/2027",
+    "start": "07:00",
+    "end": "09:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "",
+    "weekNum": 72,
+    "week": "Week 72",
+    "desc": "test",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "560c89d4-9b38-4bd5-97a8-6f9668c0acf3"
+  }
+]
