@@ -26,6 +26,18 @@
           "endDate": "06/01/2027"
         }
       }
+    },
+    {
+      "id": "fall-2027",
+      "name": "Fall 2027",
+      "status": "draft",
+      "file": "test_events_fall-2027.json",
+      "classBounds": {
+        "M1": {
+          "startDate": "08/01/2027",
+          "endDate": "12/31/2027"
+        }
+      }
     }
   ]
 }
