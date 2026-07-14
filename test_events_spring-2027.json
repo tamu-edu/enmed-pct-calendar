@@ -1,10 +1,10 @@
 [
   {
     "title": "Test",
-    "date": "12/31/2026",
-    "start": "07:00",
-    "end": "09:00",
-    "allDay": false,
+    "date": "01/01/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
     "category": "Session",
     "block": "",
     "weekNum": 36,
