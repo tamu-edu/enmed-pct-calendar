@@ -18,5 +18,25 @@
     "info": "",
     "presenter": "",
     "_id": "94ea30b9-48fa-4427-8790-179fd2f50136"
+  },
+  {
+    "title": "bad test",
+    "date": "09/23/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "",
+    "weekNum": 74,
+    "week": "Week 74",
+    "desc": "bad test",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "9252d262-e043-4546-8fe1-a405ba15fe9b"
   }
 ]
