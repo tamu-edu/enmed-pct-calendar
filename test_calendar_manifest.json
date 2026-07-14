@@ -10,6 +10,22 @@
       "startMonth": 5,
       "endMonth": 12,
       "year": 2026
+    },
+    {
+      "id": "spring-2027",
+      "name": "Spring 2027",
+      "status": "draft",
+      "file": "test_events_spring-2027.json",
+      "classBounds": {
+        "M1": {
+          "startDate": "01/01/2027",
+          "endDate": "06/01/2027"
+        },
+        "M2": {
+          "startDate": "01/01/2027",
+          "endDate": "06/01/2027"
+        }
+      }
     }
   ]
 }
