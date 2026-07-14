@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "title": "Test",
+    "date": "01/01/2027",
+    "start": "07:00",
+    "end": "09:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "",
+    "weekNum": 36,
+    "week": "Week 36",
+    "desc": "Test",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "f0538360-1ff3-4c21-b921-8ef72c2e7a1b"
+  }
+]
