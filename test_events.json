@@ -11252,5 +11252,25 @@
     "info": "",
     "presenter": "",
     "_id": "4ae66721-0fe3-4708-9c99-0a858c9c8ea7"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "10/30/2026",
+    "start": "07:00",
+    "end": "07:30",
+    "allDay": false,
+    "category": "BLACKOUT",
+    "block": "Endo/Repro",
+    "weekNum": 27,
+    "week": "Week 27",
+    "desc": "Blackout Day",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "dede3eda-8c76-4870-acd3-05f6f34704ac"
   }
 ]
