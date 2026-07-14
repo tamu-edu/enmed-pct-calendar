@@ -11332,5 +11332,25 @@
     "info": "",
     "presenter": "",
     "_id": "e358996e-b20d-48bd-929e-799a7b7d79bc"
+  },
+  {
+    "title": "Holiday Time",
+    "date": "12/31/2026",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Events",
+    "block": "",
+    "weekNum": 36,
+    "week": "Week 36",
+    "desc": "Holiday Time",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "b7e1d1e0-8e66-4a2e-af97-b874ed3718bf"
   }
 ]
