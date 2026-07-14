@@ -18,25 +18,5 @@
     "info": "",
     "presenter": "",
     "_id": "ef367679-df97-4690-ab3f-e0b745454621"
-  },
-  {
-    "title": "Holiday Time",
-    "date": "01/01/2027",
-    "start": "",
-    "end": "",
-    "allDay": true,
-    "category": "Events",
-    "block": "",
-    "weekNum": 36,
-    "week": "Week 36",
-    "desc": "Holiday Time",
-    "calYear": "2029",
-    "mCal": "M1",
-    "mand": "No",
-    "group": "All Students",
-    "location": "",
-    "info": "",
-    "presenter": "",
-    "_id": "b7e1d1e0-8e66-4a2e-af97-b874ed3718bf"
   }
 ]
