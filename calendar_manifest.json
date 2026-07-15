@@ -15,7 +15,7 @@
       "id": "spring-2027",
       "name": "Spring 2027",
       "status": "active",
-      "file": "events_spring-2027.json",
+      "file": "test_events_spring-2027.json",
       "classBounds": {
         "M1": {
           "startDate": "01/01/2027",
