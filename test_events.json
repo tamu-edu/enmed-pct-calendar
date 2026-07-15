@@ -5686,11 +5686,14 @@
     "date": "12/08/2026",
     "start": "13:00",
     "end": "15:00",
-    "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 20,
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 33,
     "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas"
+    "info": "Additional info, please see Canvas",
+    "allDay": false,
+    "week": "Week 33",
+    "desc": "PoM 3 Final OSCE Remediation and/or Makeup (Projected)"
   },
   {
     "_id": "11051226_93",
