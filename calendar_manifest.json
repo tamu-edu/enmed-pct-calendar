@@ -17,10 +17,6 @@
       "status": "active",
       "file": "events_spring-2027-2.json",
       "classBounds": {
-        "M0": {
-          "startDate": "01/01/2027",
-          "endDate": "06/01/2027"
-        },
         "M1": {
           "startDate": "01/01/2027",
           "endDate": "06/01/2027"
@@ -31,7 +27,7 @@
         }
       },
       "activatedAt": "2026-07-15T16:12:32.593Z",
-      "updatedAt": "2026-07-15T20:01:28.658Z"
+      "updatedAt": "2026-07-15T20:03:21.610Z"
     }
   ]
 }
