@@ -10119,10 +10119,10 @@
     "date": "08/26/2026",
     "start": "12:50",
     "end": "13:00",
-    "category": "EXAM CHECK-IN",
+    "category": "exam check-in",
     "block": "POM 3",
-    "weekNum": 14,
-    "week": "Week 14",
+    "weekNum": 18,
+    "week": "Week 18",
     "desc": "Complete H&POSCE CHECK-IN 12:50 PM-1:00 PM",
     "calYear": "2029",
     "mCal": "M2",
@@ -10131,7 +10131,8 @@
     "location": "SIM 404, EnMed Tower",
     "info": "",
     "presenter": "",
-    "_id": "1779288610352"
+    "_id": "1779288610352",
+    "allDay": false
   },
   {
     "title": "Breaking Bad News (BBN) OSCE CHECK-IN 9:50 AM-10:00 AM",
