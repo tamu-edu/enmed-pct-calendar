@@ -11992,25 +11992,6 @@
     "_id": "d8e39990-271d-4a44-a0f0-3d62e0552048"
   },
   {
-    "title": "Complete H&P OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
-    "date": "10/07/2026",
-    "start": "12:50",
-    "end": "13:00",
-    "category": "exam check-in",
-    "block": "POM 3",
-    "weekNum": 20,
-    "week": "Week 20",
-    "desc": "Complete H&P OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
-    "calYear": "2029",
-    "mCal": "M2",
-    "mand": "Yes",
-    "group": "Assigned Students Only",
-    "location": "SIM 404, EnMed Tower",
-    "info": "",
-    "presenter": "",
-    "_id": "b8587443-7592-450d-9c4e-466aca877502"
-  },
-  {
     "title": "FHP OSCE Retake",
     "date": "11/10/2026",
     "start": "13:00",
