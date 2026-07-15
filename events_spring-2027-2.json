@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "title": "1st Day of Spring Classes",
+    "date": "01/04/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Events",
+    "block": "",
+    "weekNum": 37,
+    "week": "Week 37",
+    "desc": "1st Day of Spring Classes",
+    "calYear": "2029",
+    "mCal": "Program-Wide",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "0a8cd951-2036-4e79-a198-d0470017a749"
+  }
+]
