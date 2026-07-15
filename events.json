@@ -4956,11 +4956,12 @@
     "end": "17:00",
     "category": "Session",
     "block": "POM 3",
-    "weekNum": 21,
-    "presenter": "Dr. Caplan",
+    "weekNum": 25,
+    "presenter": "Dr. Caplan, Dr. George",
     "info": "Please see Canvas for student group assignments and additional information.",
-    "week": "Week 21",
-    "desc": "Preceptor Case Presentations"
+    "week": "Week 25",
+    "desc": "Preceptor Case Presentations",
+    "allDay": false
   },
   {
     "_id": "11051226_58",
