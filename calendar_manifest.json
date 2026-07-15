@@ -14,7 +14,7 @@
     {
       "id": "spring-2027",
       "name": "Spring 2027",
-      "status": "active",
+      "status": "archived",
       "file": "test_events_spring-2027.json",
       "classBounds": {
         "M1": {
@@ -26,7 +26,8 @@
           "endDate": "06/01/2027"
         }
       },
-      "activatedAt": "2026-07-14T20:16:25.854Z"
+      "activatedAt": "2026-07-14T20:16:25.854Z",
+      "archivedAt": "2026-07-15T16:11:01.618Z"
     }
   ]
 }
