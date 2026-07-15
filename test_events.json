@@ -5706,11 +5706,14 @@
     "date": "12/08/2026",
     "start": "13:00",
     "end": "15:00",
-    "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 20,
-    "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas"
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 33,
+    "presenter": "Dr. Caplan, Dr. George",
+    "info": "Additional info, please see Canvas",
+    "allDay": false,
+    "week": "Week 33",
+    "desc": "FHP OSCE Remediation Tentative**"
   },
   {
     "title": "Asynchronous Modules 1-12 Open",
