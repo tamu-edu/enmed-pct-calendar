@@ -11371,5 +11371,25 @@
     "info": "",
     "presenter": "",
     "_id": "ef367679-df97-4690-ab3f-e0b745454621"
+  },
+  {
+    "title": "PoM 3 Final OSCE",
+    "date": "11/23/2026",
+    "start": "07:50",
+    "end": "08:00",
+    "allDay": false,
+    "category": "exam check-in",
+    "block": "",
+    "weekNum": 31,
+    "week": "Week 31",
+    "desc": "PoM 3 Final OSCE",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "4th Flr SIM Ctr Rm 404, EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "_id": "f914a3b0-4978-436f-852a-ecebc91c7991"
   }
 ]
