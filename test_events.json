@@ -5580,7 +5580,7 @@
     "_id": "11051226_87",
     "mand": "Yes",
     "title": "Hospital Simulation",
-    "group": "Group C&D",
+    "group": "Group C, Group D",
     "location": "3rd Flr SIM Ctr Rm 305, EnMed Twr",
     "calYear": "2029",
     "mCal": "M2",
@@ -5588,12 +5588,13 @@
     "start": "13:00",
     "end": "17:00",
     "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 26,
-    "presenter": "Dr. Caplan",
+    "block": "POM 3",
+    "weekNum": 30,
+    "presenter": "Dr. Caplan, Dr. George",
     "info": "Please see Canvas for student group assignments and additional information.",
-    "week": "Week 26",
-    "desc": "Hospital Simulation"
+    "week": "Week 30",
+    "desc": "Hospital Simulation",
+    "allDay": false
   },
   {
     "_id": "11051226_88",
