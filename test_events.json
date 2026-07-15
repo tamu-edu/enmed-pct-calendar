@@ -11401,5 +11401,25 @@
     "info": "",
     "presenter": "",
     "_id": "f914a3b0-4978-436f-852a-ecebc91c7991"
+  },
+  {
+    "title": "PoM 3 HEAL Orientation",
+    "date": "07/28/2026",
+    "start": "10:00",
+    "end": "12:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM 3",
+    "weekNum": 14,
+    "week": "Week 14",
+    "desc": "PoM 3 HEAL Orientation",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "Room 216 A/B, Discovery Tower",
+    "info": "",
+    "presenter": "Dr. Smith",
+    "_id": "833b0302-5f7f-4902-adf9-dde49ca950e0"
   }
 ]
