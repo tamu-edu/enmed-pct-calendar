@@ -5646,13 +5646,14 @@
     "date": "11/23/2026",
     "start": "08:00",
     "end": "17:00",
-    "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 27,
-    "presenter": "Dr. Caplan",
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 31,
+    "presenter": "Dr. Caplan, Dr. George",
     "info": "Please see Canvas for student group assignments and additional information.",
-    "week": "Week 27",
-    "desc": "PoM 3 Final OSCE"
+    "week": "Week 31",
+    "desc": "PoM 3 Final OSCE",
+    "allDay": false
   },
   {
     "_id": "11051226_91",
