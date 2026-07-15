@@ -4831,27 +4831,6 @@
     "allDay": false
   },
   {
-    "_id": "11051226_50",
-    "mand": "Yes",
-    "title": "CHP OSCE (Make Up)",
-    "group": "Assigned Students Only",
-    "location": "4th Flr SIM Ctr Rm 404, Discovery Tower",
-    "cohortYear": "2029",
-    "class": "M2",
-    "date": "09/30/2026",
-    "start": "13:00",
-    "end": "17:00",
-    "category": "Session",
-    "block": "POM 3",
-    "weekNum": 19,
-    "presenter": "Dr. Caplan",
-    "info": "Please see Canvas for student group assignments and additional information.",
-    "calYear": "2029",
-    "mCal": "M2",
-    "week": "Week 19",
-    "desc": "CHP OSCE (Make Up)"
-  },
-  {
     "_id": "11051226_51",
     "mand": "Yes",
     "title": "Blackout Day",
