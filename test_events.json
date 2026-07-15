@@ -11422,5 +11422,25 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Smith",
     "_id": "833b0302-5f7f-4902-adf9-dde49ca950e0"
+  },
+  {
+    "title": "CHP OSCE Retake",
+    "date": "09/09/2026",
+    "start": "13:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 20,
+    "week": "Week 20",
+    "desc": "CHP OSCE Retake",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "4th Flr SIM Ctr Rm 404, EnMed Twr",
+    "info": "",
+    "presenter": "Dr. Caplan, Dr. George",
+    "_id": "35de5e9a-b712-475b-923f-3368f6fab4f5"
   }
 ]
