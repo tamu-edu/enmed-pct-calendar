@@ -5352,7 +5352,7 @@
     "_id": "11051226_75",
     "mand": "Yes",
     "title": "Preceptor Case Presentations",
-    "group": "Group C&D",
+    "group": "Group C, Group D",
     "location": "2nd Flr Rm 216 A/B, EnMed Twr",
     "calYear": "2029",
     "mCal": "M2",
@@ -5360,12 +5360,13 @@
     "start": "13:00",
     "end": "17:00",
     "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 24,
-    "presenter": "Dr. Caplan",
+    "block": "POM 3",
+    "weekNum": 28,
+    "presenter": "Dr. Caplan, Dr. George",
     "info": "Please see Canvas for student group assignments and additional information.",
-    "week": "Week 24",
-    "desc": "Preceptor Case Presentations"
+    "week": "Week 28",
+    "desc": "Preceptor Case Presentations",
+    "allDay": false
   },
   {
     "_id": "11051226_76",
