@@ -338,5 +338,25 @@
     "info": "",
     "presenter": "",
     "_id": "ed825c4f-a668-4a25-bec3-69e46955daf8"
+  },
+  {
+    "title": "Memorial Day (Closed)",
+    "date": "05/31/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Events",
+    "block": "",
+    "weekNum": 58,
+    "week": "Week 58",
+    "desc": "Memorial Day (Closed)",
+    "calYear": "2029",
+    "mCal": "Program-Wide",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "293a61c4-efe4-4712-966b-fee1722f1afe"
   }
 ]
