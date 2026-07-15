@@ -318,5 +318,25 @@
     "info": "",
     "presenter": "",
     "_id": "3a2b131f-c129-435c-bc05-2c78f3894ae6"
+  },
+  {
+    "title": "May Intersession begins",
+    "date": "05/03/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "",
+    "weekNum": 54,
+    "week": "Week 54",
+    "desc": "May Intersession begins",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "ed825c4f-a668-4a25-bec3-69e46955daf8"
   }
 ]
