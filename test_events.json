@@ -9873,8 +9873,8 @@
     "end": "12:00",
     "category": "Session",
     "block": "POM 3",
-    "weekNum": 10,
-    "week": "Week 10",
+    "weekNum": 14,
+    "week": "Week 14",
     "desc": "PoM 3 Orientation",
     "calYear": "2029",
     "mCal": "M2",
@@ -9882,8 +9882,9 @@
     "group": "All Students",
     "location": "Room 216 A/B, Discovery Tower",
     "info": "Please see Canvas for student group assignments and additional information.",
-    "presenter": "Dr. Caplan",
-    "_id": "1778765004163"
+    "presenter": "Dr. Caplan, Dr. George",
+    "_id": "1778765004163",
+    "allDay": false
   },
   {
     "title": "Active Learning",
