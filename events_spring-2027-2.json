@@ -258,5 +258,25 @@
     "info": "",
     "presenter": "",
     "_id": "e27290f2-2808-4778-983f-b7431714931b"
+  },
+  {
+    "title": "Memorial Day",
+    "date": "05/24/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Events",
+    "block": "",
+    "weekNum": 57,
+    "week": "Week 57",
+    "desc": "Memorial Day",
+    "calYear": "2029",
+    "mCal": "Program-Wide",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "6e4c9a92-daf2-49be-a59e-69edabc840a0"
   }
 ]
