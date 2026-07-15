@@ -278,5 +278,25 @@
     "info": "",
     "presenter": "",
     "_id": "6e4c9a92-daf2-49be-a59e-69edabc840a0"
+  },
+  {
+    "title": "Last Day of Classes M2",
+    "date": "07/02/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "",
+    "weekNum": 62,
+    "week": "Week 62",
+    "desc": "Last Day of Classes M2",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "30b983f0-4c07-4f74-9c7c-7418092c4cde"
   }
 ]
