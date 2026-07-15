@@ -11956,17 +11956,18 @@
     "end": "17:00",
     "category": "exam",
     "block": "POM 3",
-    "weekNum": 16,
-    "week": "Week 16",
+    "weekNum": 20,
+    "week": "Week 20",
     "desc": "Complete H&P OSCE Retake",
     "calYear": "2029",
-    "mCal": "M1",
+    "mCal": "M2",
     "mand": "Yes",
     "group": "Assigned Students Only",
     "location": "SIM 404, EnMed Tower",
     "info": "",
     "presenter": "Dr. Caplan, Dr. George",
-    "_id": "11f790b4-96fd-43d9-a461-05fbdb9395ab"
+    "_id": "11f790b4-96fd-43d9-a461-05fbdb9395ab",
+    "allDay": false
   },
   {
     "title": "Complete H&P OSCE Retake (CHECK-IN 12:50PM- 1:00PM)",
