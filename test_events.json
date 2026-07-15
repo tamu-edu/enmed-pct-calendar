@@ -11442,5 +11442,25 @@
     "info": "",
     "presenter": "Dr. Caplan, Dr. George",
     "_id": "35de5e9a-b712-475b-923f-3368f6fab4f5"
+  },
+  {
+    "title": "CHP OSCE Retake",
+    "date": "10/07/2026",
+    "start": "13:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 24,
+    "week": "Week 24",
+    "desc": "CHP OSCE Retake",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "4th Flr SIM Ctr Rm 404, EnMed Twr",
+    "info": "",
+    "presenter": "Dr. Caplan, Dr. George",
+    "_id": "7302cedd-ad2c-4873-a8be-3deb186bc0a7"
   }
 ]
