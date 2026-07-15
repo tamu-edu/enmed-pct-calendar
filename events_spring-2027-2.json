@@ -298,5 +298,25 @@
     "info": "",
     "presenter": "",
     "_id": "30b983f0-4c07-4f74-9c7c-7418092c4cde"
+  },
+  {
+    "title": "Spring Courses End",
+    "date": "04/30/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Events",
+    "block": "",
+    "weekNum": 53,
+    "week": "Week 53",
+    "desc": "Spring Courses End",
+    "calYear": "2029",
+    "mCal": "Program-Wide",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "3a2b131f-c129-435c-bc05-2c78f3894ae6"
   }
 ]
