@@ -5,7 +5,7 @@
       "id": "summer-fall-2026",
       "name": "Summer/Fall 2026",
       "status": "active",
-      "file": "test_events.json",
+      "file": "events.json",
       "boundaryMode": "months",
       "startMonth": 5,
       "endMonth": 12,
@@ -15,7 +15,7 @@
       "id": "spring-2027",
       "name": "Spring 2027",
       "status": "active",
-      "file": "test_events_spring-2027.json",
+      "file": "events_spring-2027.json",
       "classBounds": {
         "M1": {
           "startDate": "01/01/2027",
