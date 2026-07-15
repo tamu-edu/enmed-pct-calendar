@@ -5130,12 +5130,13 @@
     "start": "13:00",
     "end": "17:00",
     "category": "exam",
-    "block": "PoM 3",
-    "weekNum": 22,
-    "presenter": "Dr. Caplan",
+    "block": "POM 3",
+    "weekNum": 26,
+    "presenter": "Dr. Caplan, Dr. George",
     "info": "Please see Canvas for student group assignments and additional information.",
-    "week": "Week 22",
-    "desc": "Focused H&P OSCE (FHP OSCEs) {Blackout Day}"
+    "week": "Week 26",
+    "desc": "Focused H&P OSCE (FHP OSCEs) {Blackout Day}",
+    "allDay": false
   },
   {
     "_id": "11051226_64",
