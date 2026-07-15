@@ -5645,10 +5645,13 @@
     "start": "11:00",
     "end": "12:00",
     "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 19,
-    "presenter": "Dr. Caplan",
-    "info": "Additional info, please see Canvas"
+    "block": "POM 3",
+    "weekNum": 32,
+    "presenter": "Dr. Caplan, Dr. George",
+    "info": "Additional info, please see Canvas",
+    "allDay": false,
+    "week": "Week 32",
+    "desc": "Course Debrief"
   },
   {
     "_id": "11051226_92",
