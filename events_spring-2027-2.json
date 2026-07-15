@@ -358,5 +358,25 @@
     "info": "",
     "presenter": "",
     "_id": "293a61c4-efe4-4712-966b-fee1722f1afe"
+  },
+  {
+    "title": "GCIEM SUMMIT- BLACK OUT DAY",
+    "date": "04/30/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Events",
+    "block": "",
+    "weekNum": 53,
+    "week": "Week 53",
+    "desc": "GCIEM SUMMIT- BLACK OUT DAY",
+    "calYear": "2029",
+    "mCal": "Program-Wide",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "Dr. Lance Black",
+    "_id": "6d3357f2-9a2e-433c-87b1-43383d99c645"
   }
 ]
