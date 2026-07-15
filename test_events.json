@@ -5391,7 +5391,7 @@
     "_id": "11051226_77",
     "mand": "Yes",
     "title": "Focused H&P Workshop",
-    "group": "Group C&D",
+    "group": "Group C, Group D",
     "location": "3rd Flr SIM Ctr Rm 305, EnMed Twr",
     "calYear": "2029",
     "mCal": "M2",
@@ -5399,12 +5399,13 @@
     "start": "13:00",
     "end": "17:00",
     "category": "Session",
-    "block": "PoM 3",
-    "weekNum": 24,
-    "presenter": "Dr. Caplan",
+    "block": "POM 3",
+    "weekNum": 28,
+    "presenter": "Dr. Caplan, Dr. George",
     "info": "Please see Canvas for student group assignments and additional information.",
-    "week": "Week 24",
-    "desc": "Focused H&P Workshop"
+    "week": "Week 28",
+    "desc": "Focused H&P Workshop",
+    "allDay": false
   },
   {
     "_id": "11051226_78",
