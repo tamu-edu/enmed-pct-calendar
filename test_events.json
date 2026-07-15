@@ -11462,5 +11462,25 @@
     "info": "",
     "presenter": "Dr. Caplan, Dr. George",
     "_id": "7302cedd-ad2c-4873-a8be-3deb186bc0a7"
+  },
+  {
+    "title": "FHP OSCE Retake",
+    "date": "11/10/2026",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "exam",
+    "block": "POM 3",
+    "weekNum": 29,
+    "week": "Week 29",
+    "desc": "FHP OSCE Retake",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "4th Flr SIM Ctr Rm 404, EnMed Twr",
+    "info": "",
+    "presenter": "Dr. Caplan, Dr. George",
+    "_id": "154747dc-27e9-4223-89fb-ebe7be86452e"
   }
 ]
