@@ -5686,11 +5686,12 @@
     "end": "17:00",
     "category": "exam",
     "block": "POM 3",
-    "weekNum": 29,
-    "presenter": "Dr. Caplan",
+    "weekNum": 33,
+    "presenter": "Dr. Caplan, Dr. George",
     "info": "Additional info, please see Canvas",
-    "week": "Week 29",
-    "desc": "FHP OSCE Retake Tentative**"
+    "week": "Week 33",
+    "desc": "FHP OSCE Retake Tentative**",
+    "allDay": false
   },
   {
     "title": "Asynchronous Modules 1-12 Open",
