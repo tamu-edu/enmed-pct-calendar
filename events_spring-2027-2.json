@@ -738,5 +738,25 @@
     "info": "",
     "presenter": "",
     "_id": "a2571104-7111-496a-9938-4f06742f567d"
+  },
+  {
+    "title": "Start of Step 1 Study Block",
+    "date": "01/04/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "",
+    "weekNum": 37,
+    "week": "Week 37",
+    "desc": "Start of Step 1 Study Block",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "ad331ffb-1413-480d-952e-c9de569bce73"
   }
 ]
