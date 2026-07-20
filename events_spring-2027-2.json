@@ -818,5 +818,25 @@
     "info": "",
     "presenter": "",
     "_id": "9fdd978e-a1c9-4888-afdb-e9fb02ab742f"
+  },
+  {
+    "title": "Last day of Pre-Clerkship",
+    "date": "04/02/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "",
+    "block": "",
+    "weekNum": 49,
+    "week": "Week 49",
+    "desc": "Last day of Pre-Clerkship",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "a34be2de-fe02-4c2e-a1e3-6c0de362fba5"
   }
 ]
