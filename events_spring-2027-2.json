@@ -618,5 +618,25 @@
     "_id": "dc1765f4-1b76-4e1f-bca9-21dfc578e6aa",
     "info": "",
     "presenter": ""
+  },
+  {
+    "title": "Semester 1 Remediation Exams",
+    "date": "01/04/2027",
+    "start": "08:00",
+    "end": "12:00",
+    "allDay": false,
+    "category": "EXAM",
+    "block": "MGA, FOM I, FOM II, POM I",
+    "weekNum": 37,
+    "week": "Week 37",
+    "desc": "Semester 1 Remediation Exams",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Assigned Students Only",
+    "location": "Room 409",
+    "info": "",
+    "presenter": "",
+    "_id": "65f80d95-4c22-4f6f-9219-f2924384d1cb"
   }
 ]
