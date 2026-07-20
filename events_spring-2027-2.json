@@ -758,5 +758,25 @@
     "info": "",
     "presenter": "",
     "_id": "ad331ffb-1413-480d-952e-c9de569bce73"
+  },
+  {
+    "title": "End of Step 1 Study Block",
+    "date": "02/19/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "",
+    "block": "",
+    "weekNum": 43,
+    "week": "Week 43",
+    "desc": "End of Step 1 Study Block",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "a5ef5f4b-2dc3-40f3-8fd2-368384fa1870"
   }
 ]
