@@ -456,7 +456,13 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
     box-shadow:0 -10px 35px rgba(0,0,0,.28);
     overflow:hidden;
     flex-direction:column;
-    transform:translateY(calc(100% - 52px));
+
+    /*
+      The panel is now completely hidden when minimized.
+      A separate launcher button replaces the exposed panel strip.
+    */
+    transform:translateY(100%);
+
     transition:
       transform .22s ease,
       height .22s ease;
@@ -478,7 +484,94 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 
   .faculty-panel.mobile-minimized{
     height:55vh;
-    transform:translateY(calc(100% - 52px));
+    transform:translateY(100%);
+    pointer-events:none;
+  }
+
+    .mobile-editor-launcher{
+    display:none;
+    position:fixed;
+    left:12px;
+    right:12px;
+    bottom:12px;
+    z-index:474;
+    min-height:52px;
+    padding:10px 14px;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--border-dk);
+    border-radius:12px;
+    background:var(--surface);
+    color:var(--text);
+    box-shadow:0 6px 22px rgba(0,0,0,.24);
+    font-family:'DM Sans',sans-serif;
+    cursor:pointer;
+    touch-action:manipulation;
+  }
+
+  .mobile-editor-launcher.visible{
+    display:flex;
+  }
+
+  .mobile-editor-launcher-icon{
+    width:34px;
+    height:34px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9px;
+    background:var(--accent);
+    color:white;
+    font-size:16px;
+  }
+
+  .mobile-editor-launcher-main{
+    min-width:0;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+  }
+
+  .mobile-editor-launcher-title{
+    font-size:13px;
+    font-weight:700;
+    color:var(--text);
+  }
+
+  .mobile-editor-launcher-sub{
+    font-size:10px;
+    color:var(--muted2);
+  }
+
+  .mobile-editor-launcher-pending{
+    display:none;
+    flex-shrink:0;
+    padding:4px 8px;
+    border-radius:999px;
+    background:rgba(80,0,0,.09);
+    color:var(--maroon);
+    font-size:10px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+
+  .mobile-editor-launcher-pending.visible{
+    display:inline-flex;
+  }
+
+  .mobile-editor-launcher-arrow{
+    flex-shrink:0;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1;
+  }
+
+  .mobile-editor-launcher:active{
+    background:var(--surface2);
+    transform:translateY(1px);
   }
 
   .faculty-panel .fp-header{
@@ -562,7 +655,8 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 
 @media(min-width:769px){
   .mobile-sheet-handle,
-  .mobile-sheet-controls{
+  .mobile-sheet-controls,
+  .mobile-editor-launcher{
     display:none;
   }
 }
@@ -1463,12 +1557,6 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
   <!-- FACULTY PANEL -->
   <div class="faculty-panel" id="facultyPanel">
-    <button
-      type="button"
-      class="mobile-sheet-handle"
-      aria-label="Open or minimize event editor"
-      onclick="toggleMobileFacultySheet()"
-    ></button>
     <div class="fp-header">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
         <div class="fp-title">Event Editor</div>
@@ -1535,6 +1623,32 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 </div>
   </div>
 </div>
+<button
+  type="button"
+  class="mobile-editor-launcher"
+  id="mobileEditorLauncher"
+  onclick="openMobileFacultySheet()"
+  aria-label="Open edit panel"
+>
+  <span class="mobile-editor-launcher-icon">✎</span>
+
+  <span class="mobile-editor-launcher-main">
+    <span class="mobile-editor-launcher-title">
+      Open Edit Panel
+    </span>
+
+    <span class="mobile-editor-launcher-sub">
+      Add, edit, or submit calendar changes
+    </span>
+  </span>
+
+  <span
+    class="mobile-editor-launcher-pending"
+    id="mobileEditorLauncherPending"
+  ></span>
+
+  <span class="mobile-editor-launcher-arrow">⌃</span>
+</button>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target.id==='modalOverlay')this.classList.remove('open')">
@@ -6204,6 +6318,33 @@ if(document.getElementById('modalInfo'))document.getElementById('modalInfo').tex
 }
 
 // ── MOBILE FACULTY SHEET ─────────────────────────────────────
+function updateMobileEditorLauncher(){
+  const launcher =
+    document.getElementById(
+      'mobileEditorLauncher'
+    );
+
+  const panel =
+    document.getElementById(
+      'facultyPanel'
+    );
+
+  if(!launcher){
+    return;
+  }
+
+  const shouldShow =
+    isFacultyMode &&
+    mobileFacultySheetIsActive() &&
+    panel?.classList.contains(
+      'mobile-minimized'
+    );
+
+  launcher.classList.toggle(
+    'visible',
+    !!shouldShow
+  );
+}
 function mobileFacultySheetIsActive(){
   return window.matchMedia('(max-width: 768px)').matches;
 }
@@ -6213,6 +6354,7 @@ function setMobileFacultySheetState(state){
     document.getElementById('facultyPanel');
 
   if(!panel || !mobileFacultySheetIsActive()){
+    updateMobileEditorLauncher();
     return;
   }
 
@@ -6224,15 +6366,15 @@ function setMobileFacultySheetState(state){
 
   if(state === 'full'){
     panel.classList.add('mobile-full');
-    return;
-  }
-
-  if(state === 'half'){
+  }else if(state === 'half'){
     panel.classList.add('mobile-half');
-    return;
+  }else{
+    panel.classList.add(
+      'mobile-minimized'
+    );
   }
 
-  panel.classList.add('mobile-minimized');
+  updateMobileEditorLauncher();
 }
 
 function openMobileFacultySheet(){
@@ -6288,6 +6430,7 @@ function resetMobileFacultySheet(){
     document.getElementById('facultyPanel');
 
   if(!panel){
+    updateMobileEditorLauncher();
     return;
   }
 
@@ -6301,11 +6444,17 @@ function resetMobileFacultySheet(){
     isFacultyMode &&
     mobileFacultySheetIsActive()
   ){
-    panel.classList.add('mobile-minimized');
+    panel.classList.add(
+      'mobile-minimized'
+    );
   }
+
+  updateMobileEditorLauncher();
 }
+
 window.addEventListener('resize', ()=>{
   resetMobileFacultySheet();
+  updateMobileEditorLauncher();
 });
 
 // ── FACULTY AUTH ──────────────────────────────────────────────
@@ -9696,9 +9845,34 @@ function renderChangeLog(){
   const countEl = document.getElementById('changeCount');
   const logEl = document.getElementById('changeLog');
   const reviewBtn = document.getElementById('reviewPendingBtn');
+    const launcherPending =
+    document.getElementById(
+      'mobileEditorLauncherPending'
+    );
 
-  if(countEl) countEl.textContent = pendingChanges.length ? `(${pendingChanges.length})` : '';
-  if(reviewBtn) reviewBtn.disabled = !pendingChanges.length;
+  if(countEl){
+    countEl.textContent =
+      pendingChanges.length
+        ? `(${pendingChanges.length})`
+        : '';
+  }
+
+  if(reviewBtn){
+    reviewBtn.disabled =
+      !pendingChanges.length;
+  }
+
+  if(launcherPending){
+    launcherPending.textContent =
+      pendingChanges.length
+        ? `${pendingChanges.length} Pending`
+        : '';
+
+    launcherPending.classList.toggle(
+      'visible',
+      pendingChanges.length > 0
+    );
+  }
 
   if(!pendingChanges.length){
     logEl.innerHTML='<div style="font-size:11px;color:var(--muted2);padding:8px 0">No pending changes.</div>';
