@@ -404,7 +404,168 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .confirm-btns button{padding:9px 22px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border)}
 #confirmYes{background:#f05c6e;color:white;border-color:#f05c6e}
 #confirmNo{background:var(--surface2);color:var(--muted)}
-@media(max-width:768px){.sidebar{display:none}.main{padding:16px}.cal-wrap{min-width:0}.cal-header,.cal-row{grid-template-columns:44px repeat(5,1fr)}.ev-tag,.ev-time{display:none}.ev-title{font-size:10px}.faculty-panel{width:100%}}
+@media(max-width:768px){
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    padding:16px;
+    padding-bottom:72px;
+  }
+
+  .cal-wrap{
+    min-width:0;
+  }
+
+  .cal-header,
+  .cal-row{
+    grid-template-columns:44px repeat(5,1fr);
+  }
+
+  .ev-tag,
+  .ev-time{
+    display:none;
+  }
+
+  .ev-title{
+    font-size:10px;
+  }
+
+  /*
+    Mobile faculty panel becomes a bottom sheet.
+
+    Desktop behavior remains controlled by the original
+    .faculty-panel rules above this media query.
+  */
+  .faculty-panel{
+    display:none;
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    top:auto;
+    width:100%;
+    height:55vh;
+    max-height:calc(100dvh - 70px);
+    z-index:475;
+    border-left:none;
+    border-top:2px solid var(--gray-dk);
+    border-radius:16px 16px 0 0;
+    background:var(--surface);
+    box-shadow:0 -10px 35px rgba(0,0,0,.28);
+    overflow:hidden;
+    flex-direction:column;
+    transform:translateY(calc(100% - 52px));
+    transition:
+      transform .22s ease,
+      height .22s ease;
+  }
+
+  .faculty-panel.open{
+    display:flex;
+  }
+
+  .faculty-panel.mobile-half{
+    height:55vh;
+    transform:translateY(0);
+  }
+
+  .faculty-panel.mobile-full{
+    height:calc(100dvh - 64px);
+    transform:translateY(0);
+  }
+
+  .faculty-panel.mobile-minimized{
+    height:55vh;
+    transform:translateY(calc(100% - 52px));
+  }
+
+  .faculty-panel .fp-header{
+    flex-shrink:0;
+    padding-top:10px;
+  }
+
+  .faculty-panel .fp-body{
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .faculty-panel .fp-footer{
+    flex-shrink:0;
+  }
+
+  .mobile-sheet-handle{
+    display:flex;
+    width:100%;
+    height:24px;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    cursor:pointer;
+    touch-action:manipulation;
+  }
+
+  .mobile-sheet-handle::before{
+    content:'';
+    width:42px;
+    height:4px;
+    border-radius:999px;
+    background:var(--border-dk);
+  }
+
+  .mobile-sheet-controls{
+    display:flex;
+    gap:6px;
+    align-items:center;
+  }
+
+  .mobile-sheet-btn{
+    width:34px;
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:var(--surface2);
+    color:var(--muted);
+    font-family:'DM Sans',sans-serif;
+    font-size:16px;
+    cursor:pointer;
+    touch-action:manipulation;
+  }
+
+  .mobile-sheet-btn:active{
+    background:var(--surface3);
+  }
+
+  /*
+    Hover-only add and event controls must remain usable
+    on touch screens while Edit mode is active.
+  */
+  .faculty-mode .all-day-cell .add-slot-btn,
+  .faculty-mode .cal-cell .add-slot-btn,
+  .faculty-mode .mg-cell .mg-add-btn{
+    display:flex;
+  }
+
+  /*
+    Editing and deletion are handled after tapping the event.
+    Do not permanently cover small mobile events with controls.
+  */
+  .faculty-mode .event .ev-controls,
+  .faculty-mode .mg-event .month-event-controls{
+    display:none;
+  }
+}
+
+@media(min-width:769px){
+  .mobile-sheet-handle,
+  .mobile-sheet-controls{
+    display:none;
+  }
+}
 
 /* TWO-TIER CALENDAR TABS */
 /* Tier 1: M1 / M2 */
@@ -1302,14 +1463,45 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
   <!-- FACULTY PANEL -->
   <div class="faculty-panel" id="facultyPanel">
+    <button
+      type="button"
+      class="mobile-sheet-handle"
+      aria-label="Open or minimize event editor"
+      onclick="toggleMobileFacultySheet()"
+    ></button>
     <div class="fp-header">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
         <div class="fp-title">Event Editor</div>
-        <div style="display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden">
+
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="mobile-sheet-controls">
+            <button
+              type="button"
+              class="mobile-sheet-btn"
+              onclick="minimizeMobileFacultySheet()"
+              aria-label="Minimize editor"
+              title="Minimize editor"
+            >
+              —
+            </button>
+
+            <button
+              type="button"
+              class="mobile-sheet-btn"
+              onclick="toggleMobileFacultySheetSize()"
+              aria-label="Expand editor"
+              title="Expand editor"
+            >
+              ↕
+            </button>
+          </div>
+
+          <div style="display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden">
           <button style="padding:4px 10px;background:transparent;border:none;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .12s" id="fpWeekBtn" onclick="setView('week',document.querySelectorAll('.vt-btn')[0]);updateFpViewBtns('week')">Week</button>
           <button style="padding:4px 10px;background:var(--accent);border:none;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;color:white;transition:all .12s" id="fpListBtn" onclick="setView('list',document.querySelectorAll('.vt-btn')[1]);updateFpViewBtns('list')">List</button>
         </div>
       </div>
+    </div>
       <div class="fp-sub" id="fpSub">Click an event to edit · Click a time slot to add</div>
     </div>
     <div class="fp-body">
@@ -6011,6 +6203,111 @@ if(document.getElementById('modalInfo'))document.getElementById('modalInfo').tex
   document.getElementById('modalOverlay').classList.add('open');
 }
 
+// ── MOBILE FACULTY SHEET ─────────────────────────────────────
+function mobileFacultySheetIsActive(){
+  return window.matchMedia('(max-width: 768px)').matches;
+}
+
+function setMobileFacultySheetState(state){
+  const panel =
+    document.getElementById('facultyPanel');
+
+  if(!panel || !mobileFacultySheetIsActive()){
+    return;
+  }
+
+  panel.classList.remove(
+    'mobile-minimized',
+    'mobile-half',
+    'mobile-full'
+  );
+
+  if(state === 'full'){
+    panel.classList.add('mobile-full');
+    return;
+  }
+
+  if(state === 'half'){
+    panel.classList.add('mobile-half');
+    return;
+  }
+
+  panel.classList.add('mobile-minimized');
+}
+
+function openMobileFacultySheet(){
+  if(!mobileFacultySheetIsActive()){
+    return;
+  }
+
+  setMobileFacultySheetState('half');
+}
+
+function minimizeMobileFacultySheet(){
+  if(!mobileFacultySheetIsActive()){
+    return;
+  }
+
+  setMobileFacultySheetState('minimized');
+}
+
+function toggleMobileFacultySheet(){
+  const panel =
+    document.getElementById('facultyPanel');
+
+  if(!panel || !mobileFacultySheetIsActive()){
+    return;
+  }
+
+  const isMinimized =
+    panel.classList.contains('mobile-minimized');
+
+  setMobileFacultySheetState(
+    isMinimized ? 'half' : 'minimized'
+  );
+}
+
+function toggleMobileFacultySheetSize(){
+  const panel =
+    document.getElementById('facultyPanel');
+
+  if(!panel || !mobileFacultySheetIsActive()){
+    return;
+  }
+
+  const isFull =
+    panel.classList.contains('mobile-full');
+
+  setMobileFacultySheetState(
+    isFull ? 'half' : 'full'
+  );
+}
+
+function resetMobileFacultySheet(){
+  const panel =
+    document.getElementById('facultyPanel');
+
+  if(!panel){
+    return;
+  }
+
+  panel.classList.remove(
+    'mobile-minimized',
+    'mobile-half',
+    'mobile-full'
+  );
+
+  if(
+    isFacultyMode &&
+    mobileFacultySheetIsActive()
+  ){
+    panel.classList.add('mobile-minimized');
+  }
+}
+window.addEventListener('resize', ()=>{
+  resetMobileFacultySheet();
+});
+
 // ── FACULTY AUTH ──────────────────────────────────────────────
 function requestFacultyMode(){document.getElementById('pinInput').value='';document.getElementById('pinErr').textContent='';document.getElementById('loginOverlay').classList.add('open');setTimeout(()=>document.getElementById('pinInput').focus(),100);}
 async function checkPin(){
@@ -6086,6 +6383,8 @@ async function setMode(mode){
     .getElementById('facultyPanel')
     ?.classList
     .toggle('open', isFacultyMode);
+
+  resetMobileFacultySheet();
 
   const sidebar =
     document.getElementById('sidebarFilters');
@@ -6369,6 +6668,8 @@ function openAddForm(date,hour,allDay=false){
       }
     }
   },0);
+
+  openMobileFacultySheet();
 }
 
 function openEditForm(ev,e){
@@ -6404,9 +6705,26 @@ function openEditForm(ev,e){
     updateBlockPreview();
     renderCatalogSection();
   },0);
+  openMobileFacultySheet();
 }
-function closeForm(){editingId=null;document.getElementById('fpForm').innerHTML='<div style="text-align:center;padding:30px 0;color:var(--muted)"><div style="font-size:28px;margin-bottom:10px">👆</div><div style="font-size:12px;line-height:1.6">Click an event to edit,<br>or a time slot to add,<br>or press <strong style="color:var(--gold)">+ Add Event</strong>.</div></div>';document.getElementById('fpSub').textContent='Click an event to edit · Click a slot to add';}
+function closeForm(){
+  editingId = null;
 
+  document.getElementById('fpForm').innerHTML =
+    '<div style="text-align:center;padding:30px 0;color:var(--muted)">' +
+      '<div style="font-size:28px;margin-bottom:10px">👆</div>' +
+      '<div style="font-size:12px;line-height:1.6">' +
+        'Click an event to edit,<br>' +
+        'or a time slot to add,<br>' +
+        'or press <strong style="color:var(--gold)">+ Add Event</strong>.' +
+      '</div>' +
+    '</div>';
+
+  document.getElementById('fpSub').textContent =
+    'Click an event to edit · Click a slot to add';
+
+  minimizeMobileFacultySheet();
+}
 
 // ── YEAR TABS ─────────────────────────────────────────────────
 
@@ -6566,7 +6884,7 @@ function updateTitle(){
     const yrs=[...selectedYears].sort();
     t.textContent=(yrs.length===1?yrs[0]:yrs.join(' / '))+' Calendar';return;
   }
-  t.textContent='Calendar';
+  t.textContent='[Testing] Calendar';
 }
 
 // ── TODAY BUTTON ──────────────────────────────────────────────
