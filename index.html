@@ -139,9 +139,23 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
   min-height:38px;
   padding:5px;
   border-right:1px solid var(--border);
+  position:relative;
+  overflow:visible;
 }
 
 .all-day-cell:last-child{border-right:none}
+.faculty-mode .all-day-cell:hover .add-slot-btn{
+  display:flex;
+}
+
+.all-day-cell .all-day-add-btn{
+  inset:auto 4px 4px auto;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  z-index:30;
+  background:var(--surface);
+}
 
 .all-day-event{
   min-height:auto;
@@ -149,7 +163,10 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
   margin-bottom:4px;
   border-radius:6px;
   font-size:11px;
+  position:relative;
+  z-index:20;
 }
+
 .cal-header{display:grid;grid-template-columns:64px repeat(5,1fr);background:var(--surface2);border-bottom:1px solid var(--border)}
 .ch-cell{padding:10px 8px;text-align:center;border-right:1px solid var(--border)}
 .ch-cell:last-child{border-right:none}
@@ -167,6 +184,14 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .faculty-mode .cal-cell:hover .add-slot-btn{display:flex}
 .add-slot-btn{display:none;position:absolute;inset:3px;border-radius:5px;border:2px dashed var(--gray-dk);background:rgba(247,201,79,.05);color:var(--gray-dk);font-size:18px;cursor:pointer;align-items:center;justify-content:center;z-index:5}
 .add-slot-btn:hover{background:rgba(247,201,79,.12)}
+.cal-cell .timed-add-btn{
+  inset:auto 4px 4px auto;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  z-index:40;
+  background:var(--surface);
+}
   
 /* EVENTS */
 .event{
@@ -4890,7 +4915,15 @@ dates.forEach(ds => {
   html+='</div>';
   html += `<div class="all-day-row"><div class="all-day-label">All day</div>`;
 dates.forEach(ds=>{
-  html += `<div class="all-day-cell">`;
+  html += `<div class="all-day-cell" onclick="handleAllDayCellClick(event,'${ds}')">`;
+
+if(canEditActiveSemester()){
+  html += `<div
+    class="add-slot-btn all-day-add-btn"
+    onclick="event.stopPropagation();openAddForm('${ds}','08:00',true)"
+  >+</div>`;
+}
+
   (allDayByDate[ds] || []).forEach(e=>{
     const col = mCalColor(e);
     const textCol = mCalTextColor(e);
@@ -4931,7 +4964,12 @@ html += `</div>`;
        !attachedCheckInsByDate[ds].has(eventLayoutKey(e));
     });
       html+=`<div class="cal-cell" onclick="handleCellClick(event,'${ds}','${hk}')">`;
-      if(canEditActiveSemester())html+=`<div class="add-slot-btn" onclick="openAddForm('${ds}','${hk}');event.stopPropagation()">+</div>`;
+    if(canEditActiveSemester()){
+      html += `<div
+        class="add-slot-btn timed-add-btn"
+        onclick="event.stopPropagation();openAddForm('${ds}','${hk}')"
+      >+</div>`;
+    }
       cellEvs.forEach(e=>{
         const startMin = e.startMin;
         const endMin = e.endMin;
@@ -6288,7 +6326,50 @@ function updateBlockPreview(){
   renderBlockTokens('ff_block','ff_blockTokens');
 }
 
-function openAddForm(date,hour){if(!canEditActiveSemester()){showToast('🔒 Archived views are read-only.');return;}loadCatalog();editingId=null;prefillDate=date||'';prefillHour=hour||'08:00';document.getElementById('fpSub').textContent='Adding new event';document.getElementById('fpForm').innerHTML=formHTML(null,false);setTimeout(()=>{updateCatPreview();updateBlockPreview();renderGroupMultiPicker('ff_group','All Students');},0);}
+function handleAllDayCellClick(event,date){
+  if(!canEditActiveSemester()) return;
+
+  // Preserve clicks on existing events and their edit/delete controls.
+  if(event.target.closest('.event')){
+    return;
+  }
+
+  openAddForm(date,'08:00',true);
+}
+
+function openAddForm(date,hour,allDay=false){
+  if(!canEditActiveSemester()){
+    showToast('🔒 Archived views are read-only.');
+    return;
+  }
+
+  loadCatalog();
+  editingId = null;
+  prefillDate = date || '';
+  prefillHour = hour || '08:00';
+
+  document.getElementById('fpSub').textContent =
+    allDay ? 'Adding new all-day event' : 'Adding new event';
+
+  document.getElementById('fpForm').innerHTML =
+    formHTML(null,false);
+
+  setTimeout(()=>{
+    updateCatPreview();
+    updateBlockPreview();
+    renderGroupMultiPicker('ff_group','All Students');
+
+    if(allDay){
+      const allDayCheckbox =
+        document.getElementById('ff_allDay');
+
+      if(allDayCheckbox){
+        allDayCheckbox.checked = true;
+        toggleAllDayTimeFields('ff');
+      }
+    }
+  },0);
+}
 
 function openEditForm(ev,e){
   if(ev) ev.stopPropagation();
@@ -6485,7 +6566,7 @@ function updateTitle(){
     const yrs=[...selectedYears].sort();
     t.textContent=(yrs.length===1?yrs[0]:yrs.join(' / '))+' Calendar';return;
   }
-  t.textContent='[Testing] Calendar';
+  t.textContent='Calendar';
 }
 
 // ── TODAY BUTTON ──────────────────────────────────────────────
