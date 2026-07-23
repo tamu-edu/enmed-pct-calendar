@@ -419,8 +419,65 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
   }
 
   .cal-header,
-  .cal-row{
-    grid-template-columns:44px repeat(5,1fr);
+  .cal-row,
+  .all-day-row{
+    grid-template-columns:44px minmax(0,1fr);
+  }
+
+    .mobile-day-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:6px 8px;
+  }
+
+  .mobile-day-title{
+    min-width:0;
+    flex:1;
+    text-align:center;
+  }
+
+  .mobile-day-header .ch-num{
+    width:auto;
+    height:auto;
+    margin-top:2px;
+    font-size:15px;
+    font-weight:600;
+    line-height:1.25;
+  }
+
+  .mobile-day-header.today .ch-num{
+    width:auto;
+    height:auto;
+    margin:2px 0 0;
+    border-radius:6px;
+    padding:3px 8px;
+    display:inline-flex;
+    font-size:14px;
+  }
+
+  .mobile-day-nav{
+    width:36px;
+    height:36px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:50%;
+    background:var(--surface);
+    color:var(--accent);
+    font-family:'DM Sans',sans-serif;
+    font-size:24px;
+    line-height:1;
+    cursor:pointer;
+    touch-action:manipulation;
+  }
+
+  .mobile-day-nav:active{
+    background:var(--surface3);
+    transform:translateY(1px);
   }
 
   .ev-tag,
@@ -2007,6 +2064,8 @@ let pendingDeleteId='', sessionLog=[];
 let pendingChanges = [];
 let semesterWarningEvent = null;
 let ghFileSha=''; // GitHub file SHA needed for updates
+// Mobile week view state
+let mobileDayIndex = 0;
 
 let listFilters = {
   scope: 'all',
@@ -4698,7 +4757,10 @@ function jumpToMonth(monthIndex, year){
 
 function jumpToWeek(i){
   currentWeekIdx = i;
+  mobileDayIndex = 0;
+
   if(i >= 0) weekToMonth(i);
+
   buildWeekDrawer();
   render();
 }
@@ -4706,6 +4768,7 @@ function jumpToWeek(i){
 function prevWeek(){
   if(currentWeekIdx > 0){
     currentWeekIdx--;
+    mobileDayIndex = 0;
     weekToMonth(currentWeekIdx);
     buildWeekDrawer();
     render();
@@ -4715,6 +4778,43 @@ function prevWeek(){
 function nextWeek(){
   if(currentWeekIdx < WEEKS.length - 1){
     currentWeekIdx++;
+    mobileDayIndex = 0;
+    weekToMonth(currentWeekIdx);
+    buildWeekDrawer();
+    render();
+  }
+}
+
+function prevMobileDay(){
+  if(window.innerWidth > 768) return;
+
+  if(mobileDayIndex > 0){
+    mobileDayIndex--;
+    render();
+    return;
+  }
+
+  if(currentWeekIdx > 0){
+    currentWeekIdx--;
+    mobileDayIndex = 4;
+    weekToMonth(currentWeekIdx);
+    buildWeekDrawer();
+    render();
+  }
+}
+
+function nextMobileDay(){
+  if(window.innerWidth > 768) return;
+
+  if(mobileDayIndex < 4){
+    mobileDayIndex++;
+    render();
+    return;
+  }
+
+  if(currentWeekIdx < WEEKS.length - 1){
+    currentWeekIdx++;
+    mobileDayIndex = 0;
     weekToMonth(currentWeekIdx);
     buildWeekDrawer();
     render();
@@ -5178,9 +5278,27 @@ function layoutOverlappingEvents(dayEvents){
 }
 
 function renderWeek(dates){
-  if(currentWeekIdx<0)currentWeekIdx=0;
-  const w=WEEKS[currentWeekIdx];
-  if(!w||!dates||!dates.length){document.getElementById('calView').innerHTML='<div class="empty-state"><div class="big">📭</div><p>No week data available.</p></div>';return;}
+  if(currentWeekIdx<0) currentWeekIdx=0;
+
+  const w = WEEKS[currentWeekIdx];
+
+  if(!w || !dates || !dates.length){
+    document.getElementById('calView').innerHTML =
+      '<div class="empty-state"><div class="big">📭</div><p>No week data available.</p></div>';
+
+    return;
+  }
+
+  const isMobile = window.innerWidth <= 768;
+
+  const safeMobileDayIndex = Math.min(
+    Math.max(mobileDayIndex, 0),
+    dates.length - 1
+  );
+
+  const visibleDates = isMobile
+    ? [dates[safeMobileDayIndex]]
+    : dates;
   const evs=filteredEvents().filter(e=>dates.includes(e.date));
 const allDayByDate = {};
 const timedEvs = evs.filter(e => !isAllDayEvent(e));
@@ -5213,14 +5331,70 @@ dates.forEach(ds => {
 });
   const today=new Date();
   const todayStr=`${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${today.getFullYear()}`;
-  let html=`<div class="cal-wrap"><div class="cal-header"><div class="ch-cell"></div>`;
-  DAYS.forEach((day,i)=>{
-    const ds=dates[i]||'';const[,dy]=(ds||'//').split('/');
-    html+=`<div class="ch-cell${ds===todayStr?' today':''}"><div class="ch-day">${day}</div><div class="ch-num">${dy?+dy:''}</div></div>`;
-  });
-  html+='</div>';
+  let html = `
+    <div class="cal-wrap">
+      <div class="cal-header">
+        <div class="ch-cell"></div>
+  `;
+
+  if(isMobile){
+    const ds = visibleDates[0] || '';
+    const dayIndex = dates.indexOf(ds);
+    const day = DAYS[dayIndex] || '';
+    const dateObj = ds ? parseMDY(ds) : null;
+
+    const mobileDateLabel = dateObj
+      ? dateObj.toLocaleDateString('en-US',{
+          month:'long',
+          day:'numeric'
+        })
+      : '';
+
+    html += `
+      <div class="ch-cell mobile-day-header${ds === todayStr ? ' today' : ''}">
+        <button
+          type="button"
+          class="mobile-day-nav"
+          onclick="prevMobileDay()"
+          aria-label="Previous day"
+          title="Previous day"
+        >
+          ‹
+        </button>
+
+        <div class="mobile-day-title">
+          <div class="ch-day">${day}</div>
+          <div class="ch-num">${mobileDateLabel}</div>
+        </div>
+
+        <button
+          type="button"
+          class="mobile-day-nav"
+          onclick="nextMobileDay()"
+          aria-label="Next day"
+          title="Next day"
+        >
+          ›
+        </button>
+      </div>
+    `;
+  } else {
+    DAYS.forEach((day,i)=>{
+      const ds = dates[i] || '';
+      const [,dy] = (ds || '//').split('/');
+
+      html += `
+        <div class="ch-cell${ds === todayStr ? ' today' : ''}">
+          <div class="ch-day">${day}</div>
+          <div class="ch-num">${dy ? +dy : ''}</div>
+        </div>
+      `;
+    });
+  }
+
+  html += '</div>';
   html += `<div class="all-day-row"><div class="all-day-label">All day</div>`;
-dates.forEach(ds=>{
+visibleDates.forEach(ds=>{
   html += `<div class="all-day-cell" onclick="handleAllDayCellClick(event,'${ds}')">`;
 
 if(canEditActiveSemester()){
@@ -5256,14 +5430,14 @@ html += `</div>`;
     const rowStartMin = timeToMinutes(hk);
     const rowEndMin = rowStartMin + 60;
 
-    const eventCrossesRowLine = dates.some(ds =>
+    const eventCrossesRowLine = visibleDates.some(ds =>
       (laidOutByDate[ds] || []).some(e =>
         e.startMin < rowEndMin && e.endMin > rowEndMin
       )
-  );
+    );
 
   html+=`<div class="cal-row${eventCrossesRowLine ? ' event-crossed-line' : ''}"><div class="cal-time">${hourLabel(hour)}</div>`;
-    dates.forEach(ds=>{
+    visibleDates.forEach(ds=>{
       const cellEvs = (laidOutByDate[ds] || []).filter(e => {
       return e.startMin >= rowStartMin &&
        e.startMin < rowEndMin &&
@@ -7378,6 +7552,12 @@ function goToHomeDate(){
     currentMonth = d.getMonth();
     currentMonthYear = d.getFullYear();
   }
+  const homeWeekDates = getWeekDates();
+  const homeDayIndex = homeWeekDates.indexOf(homeDateStr);
+
+  mobileDayIndex = homeDayIndex >= 0
+    ? homeDayIndex
+    : 0;
 
   buildWeekDrawer();
 }
