@@ -1942,6 +1942,7 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
     <p id="confirmMsg">This will be permanently removed.</p>
     <div class="confirm-btns">
       <button id="confirmNo" onclick="document.getElementById('confirmOverlay').classList.remove('open')">Cancel</button>
+      <button id="confirmExamOnly" style="display:none;background:var(--surface2);color:#f05c6e">Exam Only</button>
       <button id="confirmYes">Delete</button>
     </div>
   </div>
@@ -2233,7 +2234,7 @@ const CAT_COLOR = {
   'blackout':'#111111',
   'events' : '#E56B6F'
 };
-const CATS_LIST=["SDL","Orientation","TBL","CBL","ITDE","EXAM","Workshop","LC Small Groups","BLACKOUT", "Session", "Lab", "Seminar", "Clinic","Review Session", "Office Hours","Events","Announcements"]
+const CATS_LIST=["SDL","Orientation","TBL","CBL","ITDE","EXAM","Exam Check-In","Workshop","LC Small Groups","BLACKOUT", "Session", "Lab", "Seminar", "Clinic","Review Session", "Office Hours","Events","Announcements"]
 const DEFAULT_START_HOUR = 7;
 const DEFAULT_END_HOUR = 19;
 const DAYS=['Mon','Tue','Wed','Thu','Fri'];
@@ -2255,7 +2256,7 @@ let weekIdxBeforeMonth = 0;
 let monthChangedWhileInMonth = false;
 let currentMonth=new Date().getMonth(), currentMonthYear=new Date().getFullYear();
 let isFacultyMode=false, editingId=null, prefillDate='', prefillHour='';
-let pendingDeleteId='', sessionLog=[];
+let pendingDeleteId='', pendingPairedDeleteId='', sessionLog=[];
 let pendingChanges = [];
 let semesterWarningEvent = null;
 let ghFileSha=''; // GitHub file SHA needed for updates
@@ -5638,7 +5639,15 @@ function isExamCheckIn(e){
 
 function isExamLike(e){
   const t = eventSearchText(e);
-  if(/exam\s*review|review\s*exam|exam\s*prep|practice\s*exam|exam\s*remediation/.test(t)) return false;
+
+  if(isExamCheckIn(e)) return false;
+
+  if(
+    /exam\s*review|review\s*exam|exam\s*prep|practice\s*exam|exam\s*remediation/.test(t)
+  ){
+    return false;
+  }
+
   return /\bexam\b|\bosce\b|\bcbse\b/.test(t);
 }
 
@@ -5668,6 +5677,230 @@ function sameExamFamily(a,b){
   return ak === bk || ak.includes(bk) || bk.includes(ak);
 }
 
+function eventPairId(e){
+  return String(e?.examPairId || '').trim();
+}
+
+function eventsExplicitlyPaired(a,b){
+  if(!a || !b) return false;
+
+  const aPairId = eventPairId(a);
+  const bPairId = eventPairId(b);
+
+  if(aPairId && bPairId && aPairId === bPairId){
+    return true;
+  }
+
+  return (
+    !!a._id &&
+    !!b._id &&
+    (
+      a.parentExamId === b._id ||
+      b.parentExamId === a._id
+    )
+  );
+}
+
+function sameExamClassContext(a,b){
+  if(!a || !b) return false;
+
+  if(
+    a.mCal &&
+    b.mCal &&
+    a.mCal !== b.mCal
+  ){
+    return false;
+  }
+
+  if(
+    a.calYear &&
+    b.calYear &&
+    String(a.calYear) !== String(b.calYear)
+  ){
+    return false;
+  }
+
+  return true;
+}
+
+function sharedExamBlockCount(a,b){
+  const aBlocks = new Set(blockTokens(a?.block || ''));
+  const bBlocks = blockTokens(b?.block || '');
+
+  return bBlocks.filter(block => aBlocks.has(block)).length;
+}
+
+function legacyExamPairScore(checkIn,exam){
+  if(
+    !isExamCheckIn(checkIn) ||
+    !isExamLike(exam) ||
+    checkIn.date !== exam.date ||
+    !sameExamClassContext(checkIn, exam)
+  ){
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  const checkEnd = Number.isFinite(checkIn.endMin)
+    ? checkIn.endMin
+    : timeToMinutes(checkIn.end);
+
+  const examStart = Number.isFinite(exam.startMin)
+    ? exam.startMin
+    : timeToMinutes(exam.start);
+
+  if(
+    !Number.isFinite(checkEnd) ||
+    !Number.isFinite(examStart)
+  ){
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  const gap = examStart - checkEnd;
+
+  /*
+    Legacy check-ins should normally end at, or shortly before,
+    the exam starts. A 60-minute ceiling is permissive enough for
+    old data while still preventing broad same-day guesses.
+  */
+  if(gap < 0 || gap > 60){
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  let score = 0;
+
+  score += Math.max(0, 70 - gap);
+
+  if(sameExamFamily(checkIn, exam)){
+    score += 55;
+  }
+
+  const sharedBlocks = sharedExamBlockCount(checkIn, exam);
+
+  if(sharedBlocks){
+    score += 45 + (sharedBlocks * 5);
+  }
+
+  if(checkIn.mCal && exam.mCal && checkIn.mCal === exam.mCal){
+    score += 25;
+  }
+
+  if(
+    checkIn.calYear &&
+    exam.calYear &&
+    String(checkIn.calYear) === String(exam.calYear)
+  ){
+    score += 20;
+  }
+
+  if(
+    checkIn.location &&
+    exam.location &&
+    checkIn.location.trim().toLowerCase() ===
+      exam.location.trim().toLowerCase()
+  ){
+    score += 10;
+  }
+
+  return score;
+}
+
+function examPairCandidateScore(checkIn,exam){
+  if(eventsExplicitlyPaired(checkIn, exam)){
+    return 10000;
+  }
+
+  return legacyExamPairScore(checkIn, exam);
+}
+
+function clearLegacyPairCandidate(checkIn,exam){
+  const score = legacyExamPairScore(checkIn, exam);
+
+  /*
+    Timing plus the same class/cohort is enough when there is one
+    clear candidate. Matching blocks, titles, and locations raise
+    the score further, while equal-score ambiguity remains unpaired.
+  */
+  return score >= 110;
+}
+
+function pairedCheckInForExam(exam,events){
+  if(!isExamLike(exam)) return null;
+
+  const candidates = events
+    .filter(isExamCheckIn)
+    .map(checkIn => ({
+      checkIn,
+      score: examPairCandidateScore(checkIn, exam)
+    }))
+    .filter(candidate =>
+      candidate.score >= 10000 ||
+      clearLegacyPairCandidate(candidate.checkIn, exam)
+    )
+    .sort((a,b) =>
+      b.score - a.score ||
+      (
+        timeToMinutes(exam.start) -
+        timeToMinutes(a.checkIn.end)
+      ) -
+      (
+        timeToMinutes(exam.start) -
+        timeToMinutes(b.checkIn.end)
+      )
+    );
+
+  if(!candidates.length){
+    return null;
+  }
+
+  /*
+    Do not guess between equally plausible legacy records.
+    Explicit relationship IDs always win.
+  */
+  if(
+    candidates[0].score < 10000 &&
+    candidates[1] &&
+    candidates[1].score === candidates[0].score
+  ){
+    return null;
+  }
+
+  return candidates[0].checkIn;
+}
+
+function pairedExamForCheckIn(checkIn,events){
+  if(!isExamCheckIn(checkIn)) return null;
+
+  const candidates = events
+    .filter(isExamLike)
+    .map(exam => ({
+      exam,
+      score: examPairCandidateScore(checkIn, exam)
+    }))
+    .filter(candidate =>
+      candidate.score >= 10000 ||
+      clearLegacyPairCandidate(checkIn, candidate.exam)
+    )
+    .sort((a,b) =>
+      b.score - a.score ||
+      timeToMinutes(a.exam.start) -
+      timeToMinutes(b.exam.start)
+    );
+
+  if(!candidates.length){
+    return null;
+  }
+
+  if(
+    candidates[0].score < 10000 &&
+    candidates[1] &&
+    candidates[1].score === candidates[0].score
+  ){
+    return null;
+  }
+
+  return candidates[0].exam;
+}
+
 function findExamPairs(cluster){
   const pairs = [];
   const used = new Set();
@@ -5677,25 +5910,41 @@ function findExamPairs(cluster){
     .sort((a,b) => a.startMin - b.startMin)
     .forEach(checkIn => {
       const checkKey = eventLayoutKey(checkIn);
+
       if(used.has(checkKey)) return;
 
       const possibleExams = cluster
-        .filter(e => {
-          const examKey = eventLayoutKey(e);
-          const gap = e.startMin - checkIn.endMin;
+        .filter(exam => {
+          const examKey = eventLayoutKey(exam);
 
-          return !used.has(examKey) &&
-            isExamLike(e) &&
-            e.date === checkIn.date &&
-            gap >= 0 &&
-            gap <= 30 &&
-            sameExamFamily(checkIn, e);
+          return (
+            !used.has(examKey) &&
+            isExamLike(exam) &&
+            (
+              eventsExplicitlyPaired(checkIn, exam) ||
+              clearLegacyPairCandidate(checkIn, exam)
+            )
+          );
         })
-        .sort((a,b) => a.startMin - b.startMin);
+        .map(exam => ({
+          exam,
+          score: examPairCandidateScore(checkIn, exam)
+        }))
+        .sort((a,b) =>
+          b.score - a.score ||
+          a.exam.startMin - b.exam.startMin
+        );
 
-      const exam = possibleExams[0];
+      if(
+        possibleExams[0] &&
+        (
+          possibleExams[0].score >= 10000 ||
+          !possibleExams[1] ||
+          possibleExams[0].score > possibleExams[1].score
+        )
+      ){
+        const exam = possibleExams[0].exam;
 
-      if(exam){
         pairs.push({ checkIn, exam });
         used.add(checkKey);
         used.add(eventLayoutKey(exam));
@@ -5704,25 +5953,9 @@ function findExamPairs(cluster){
 
   return pairs;
 }
-function matchingCheckInForExam(exam, dayEvents){
-  if(!isExamLike(exam)) return null;
 
-  return dayEvents
-    .filter(e => {
-      if(!isExamCheckIn(e)) return false;
-
-      const gap = exam.startMin - e.endMin;
-
-      return gap >= 0 &&
-        gap <= 30 &&
-        e.date === exam.date &&
-        sameExamFamily(e, exam);
-    })
-    .sort((a,b) => {
-      const gapA = exam.startMin - a.endMin;
-      const gapB = exam.startMin - b.endMin;
-      return gapA - gapB;
-    })[0] || null;
+function matchingCheckInForExam(exam,dayEvents){
+  return pairedCheckInForExam(exam, dayEvents);
 }
 
 function layoutOverlappingEvents(dayEvents){
@@ -5744,16 +5977,24 @@ function layoutOverlappingEvents(dayEvents){
   let clusterEnd = -1;
 
  events.forEach(e => {
-  const bridgesFromCheckIn = cluster.some(c => {
-    const gap = e.startMin - c.endMin;
-
-    return isExamCheckIn(c) &&
+  const bridgesFromCheckIn = cluster.some(c =>
+    (
+      isExamCheckIn(c) &&
       isExamLike(e) &&
-      e.date === c.date &&
-      gap >= 0 &&
-      gap <= 30 &&
-      sameExamFamily(c, e);
-  });
+      (
+        eventsExplicitlyPaired(c, e) ||
+        clearLegacyPairCandidate(c, e)
+      )
+    ) ||
+    (
+      isExamLike(c) &&
+      isExamCheckIn(e) &&
+      (
+        eventsExplicitlyPaired(e, c) ||
+        clearLegacyPairCandidate(e, c)
+      )
+    )
+  );
 
   if (!cluster.length || e.startMin < clusterEnd || bridgesFromCheckIn) {
     cluster.push(e);
@@ -7366,6 +7607,20 @@ function formHTML(e,isEdit){
   const defBlock=e?e.block:'';
   const defCat=e?e.category:'Session';
 
+  const pairedCheckIn =
+    e && isExamLike(e)
+      ? pairedCheckInForExam(
+          e,
+          workingEventPool()
+        )
+      : null;
+
+  const showExamCheckIn =
+    isExamLike(e || {
+      title: '',
+      category: defCat
+    });
+
   const storageSemester =
     eventStorageSemesterDisplay(e);
 
@@ -7438,7 +7693,7 @@ function formHTML(e,isEdit){
 
   <div class="form-group">
     <label class="form-label" style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0">
-      <input type="checkbox" id="ff_allDay" ${e && isAllDayEvent(e) ? 'checked' : ''} onchange="toggleAllDayTimeFields('ff')">
+      <input type="checkbox" id="ff_allDay" ${e && isAllDayEvent(e) ? 'checked' : ''} onchange="toggleAllDayTimeFields('ff');syncExamCheckInControls()">
       All-day event
     </label>
     <div class="multiadd-note">Exports to Google Calendar as an informational all-day bar.</div>
@@ -7451,9 +7706,66 @@ function formHTML(e,isEdit){
 
   <datalist id="timeList">${timeOptions}</datalist>
 
-  <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="ff_cat" list="categoryList" value="${escForm(defCat)}" oninput="updateCatPreview()" placeholder="e.g. Session, EXAM, BLACKOUT">
+  <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="ff_cat" list="categoryList" value="${escForm(defCat)}" oninput="updateCatPreview();syncExamCheckInControls()" placeholder="e.g. Session, EXAM, BLACKOUT">
     <datalist id="categoryList">${catOptions}</datalist>
     <div class="color-preview"><div class="color-dot" id="catDot" style="background:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}"></div><span style="font-size:11px;color:${CAT_COLOR[normalizeCategory(defCat)] || '#4f8ef7'}" id="catLabel">${escForm(defCat)}</span></div></div>
+
+  <div
+    class="change-item"
+    id="ff_examCheckInSection"
+    style="${showExamCheckIn && !(e && isAllDayEvent(e)) ? '' : 'display:none;'}margin-bottom:14px"
+  >
+    <label
+      class="form-label"
+      style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0"
+    >
+      <input
+        type="checkbox"
+        id="ff_addCheckIn"
+        ${pairedCheckIn ? 'checked' : ''}
+        onchange="syncExamCheckInControls()"
+      >
+      Add or maintain a paired exam check-in
+    </label>
+
+    <div class="multiadd-note" style="margin-bottom:10px">
+      Creates a separate check-in event and permanently pairs it to this exam.
+    </div>
+
+    <div
+      class="form-row"
+      id="ff_checkInTimeWrap"
+      style="${pairedCheckIn ? '' : 'display:none'}"
+    >
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Check-In Start</label>
+        <input
+          class="form-input"
+          id="ff_checkInStart"
+          list="timeList"
+          value="${escForm(
+            pairedCheckIn?.start ||
+            defaultCheckInStart(e?.start || prefillHour || '09:00')
+          )}"
+          placeholder="08:30"
+        >
+      </div>
+
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Check-In End</label>
+        <input
+          class="form-input"
+          id="ff_checkInEnd"
+          list="timeList"
+          value="${escForm(
+            pairedCheckIn?.end ||
+            defaultCheckInEnd(e?.start || prefillHour || '09:00')
+          )}"
+          placeholder="09:00"
+        >
+      </div>
+    </div>
+  </div>
 
   <div class="form-group"><label class="form-label">Block(s)</label><input class="form-input" id="ff_block" list="blockList" value="${escForm(defBlock)}" oninput="updateBlockPreview()" placeholder="Optional; separate blocks with commas">
     <datalist id="blockList">${blockOptions}</datalist>
@@ -7474,7 +7786,105 @@ function formHTML(e,isEdit){
   <button class="btn-full btn-cancel" onclick="closeForm()">Cancel</button>
 </div>`;
 }
-function updateCatPreview(){const v=document.getElementById('ff_cat').value,col=CAT_COLOR[v]||'#4a5168';document.getElementById('catDot').style.background=col;document.getElementById('catLabel').textContent=v;document.getElementById('catLabel').style.color=col;}
+function updateCatPreview(){
+  const input = document.getElementById('ff_cat');
+  const dot = document.getElementById('catDot');
+  const label = document.getElementById('catLabel');
+
+  if(!input || !dot || !label) return;
+
+  const value = input.value;
+  const color =
+    CAT_COLOR[normalizeCategory(value)] ||
+    '#4a5168';
+
+  dot.style.background = color;
+  label.textContent = value;
+  label.style.color = color;
+}
+
+function syncExamCheckInControls(){
+  const section =
+    document.getElementById(
+      'ff_examCheckInSection'
+    );
+
+  const toggle =
+    document.getElementById(
+      'ff_addCheckIn'
+    );
+
+  const timeWrap =
+    document.getElementById(
+      'ff_checkInTimeWrap'
+    );
+
+  const category =
+    document.getElementById(
+      'ff_cat'
+    )?.value || '';
+
+  const allDay =
+    document.getElementById(
+      'ff_allDay'
+    )?.checked || false;
+
+  if(!section || !toggle || !timeWrap){
+    return;
+  }
+
+  const examSelected =
+    isExamLike({
+      category,
+      title:
+        document.getElementById(
+          'ff_title'
+        )?.value || ''
+    });
+
+  section.style.display =
+    examSelected && !allDay
+      ? ''
+      : 'none';
+
+  if(!examSelected || allDay){
+    toggle.checked = false;
+  }
+
+  timeWrap.style.display =
+    toggle.checked &&
+    examSelected &&
+    !allDay
+      ? ''
+      : 'none';
+
+  if(toggle.checked){
+    const examStart =
+      document.getElementById(
+        'ff_start'
+      )?.value || '';
+
+    const checkInStart =
+      document.getElementById(
+        'ff_checkInStart'
+      );
+
+    const checkInEnd =
+      document.getElementById(
+        'ff_checkInEnd'
+      );
+
+    if(checkInStart && !checkInStart.value){
+      checkInStart.value =
+        defaultCheckInStart(examStart);
+    }
+
+    if(checkInEnd && !checkInEnd.value){
+      checkInEnd.value =
+        defaultCheckInEnd(examStart);
+    }
+  }
+}
 function updateBlockPreview(){
   const v = document.getElementById('ff_block').value;
   const tokens = blockTokens(v);
@@ -7520,6 +7930,7 @@ function openAddForm(date,hour,allDay=false){
     updateCatPreview();
     updateBlockPreview();
     renderGroupMultiPicker('ff_group','All Students');
+    syncExamCheckInControls();
 
     if(allDay){
       const allDayCheckbox =
@@ -7537,6 +7948,21 @@ function openAddForm(date,hour,allDay=false){
 
 function openEditForm(ev,e){
   if(ev) ev.stopPropagation();
+
+  if(isExamCheckIn(e)){
+    const pairedExam =
+      pairedExamForCheckIn(
+        e,
+        workingEventPool()
+      );
+
+    if(pairedExam){
+      e = pairedExam;
+      showToast(
+        'Linked check-in opened through its paired exam.'
+      );
+    }
+  }
 
   if(!eventCanBeEdited(e)){
     openModal(e);
@@ -7567,6 +7993,7 @@ function openEditForm(ev,e){
     updateCatPreview();
     updateBlockPreview();
     renderCatalogSection();
+    syncExamCheckInControls();
   },0);
   openMobileFacultySheet();
 }
@@ -10901,6 +11328,75 @@ function pendingEventPool(){
   ];
 }
 
+function workingEventPool(){
+  const byId = new Map(
+    EVENTS
+      .filter(event => event?._id)
+      .map(event => [event._id, event])
+  );
+
+  pendingChanges.forEach(change => {
+    const event = change?.event;
+
+    if(!event?._id || change._ignored){
+      return;
+    }
+
+    if(change.type === 'deleted'){
+      byId.delete(event._id);
+      return;
+    }
+
+    byId.set(event._id, event);
+  });
+
+  return [...byId.values()];
+}
+
+function pairedEventFor(event,pool = workingEventPool()){
+  if(isExamCheckIn(event)){
+    return pairedExamForCheckIn(event, pool);
+  }
+
+  if(isExamLike(event)){
+    return pairedCheckInForExam(event, pool);
+  }
+
+  return null;
+}
+
+function minutesToTime(totalMinutes){
+  const safeMinutes = Math.max(0, Math.min(1439, totalMinutes));
+  const hours = Math.floor(safeMinutes / 60);
+  const minutes = safeMinutes % 60;
+
+  return `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}`;
+}
+
+function defaultCheckInStart(examStart){
+  const examStartMinutes = timeToMinutes(examStart || '');
+
+  return Number.isFinite(examStartMinutes)
+    ? minutesToTime(examStartMinutes - 30)
+    : '08:30';
+}
+
+function defaultCheckInEnd(examStart){
+  return examStart || '09:00';
+}
+
+function examCheckInTitle(examTitle){
+  const cleanTitle = String(examTitle || '').trim();
+
+  if(!cleanTitle){
+    return 'Exam Check-In';
+  }
+
+  return /check[-\s]*in/i.test(cleanTitle)
+    ? cleanTitle
+    : `${cleanTitle} Check-In`;
+}
+
 function stageChange(type,event,original=null){
   const originalClone = original
     ? cloneEventForPending(original)
@@ -11372,19 +11868,73 @@ async function saveForm(){
     showToast('🔒 Archived views are read-only.');
     return;
   }
-  const title=document.getElementById('ff_title').value.trim();
-  const date=document.getElementById('ff_date').value.trim();
-  const allDay=document.getElementById('ff_allDay')?.checked || false;
-  const start=allDay ? '' : document.getElementById('ff_start').value.trim();
-  const end=allDay ? '' : document.getElementById('ff_end').value.trim();
-  const cat=document.getElementById('ff_cat').value.trim();
-  const block=cleanBlockString(document.getElementById('ff_block').value);
 
-  const weekNum = weekNumFromDate(date);
+  const title =
+    document.getElementById(
+      'ff_title'
+    ).value.trim();
 
-  if(!title||!date){showToast('⚠️ Title and Date are required.');return;}
-  if(!allDay && (!start||!end)){showToast('⚠️ Start and end times are required.');return;}
-  if(!allDay && timeToMinutes(start)>=timeToMinutes(end)){showToast('⚠️ End time must be after start time.');return;}
+  const date =
+    document.getElementById(
+      'ff_date'
+    ).value.trim();
+
+  const allDay =
+    document.getElementById(
+      'ff_allDay'
+    )?.checked || false;
+
+  const start = allDay
+    ? ''
+    : document.getElementById(
+        'ff_start'
+      ).value.trim();
+
+  const end = allDay
+    ? ''
+    : document.getElementById(
+        'ff_end'
+      ).value.trim();
+
+  const cat =
+    document.getElementById(
+      'ff_cat'
+    ).value.trim();
+
+  const block =
+    cleanBlockString(
+      document.getElementById(
+        'ff_block'
+      ).value
+    );
+
+  const weekNum =
+    weekNumFromDate(date);
+
+  if(!title || !date){
+    showToast(
+      '⚠️ Title and Date are required.'
+    );
+    return;
+  }
+
+  if(!allDay && (!start || !end)){
+    showToast(
+      '⚠️ Start and end times are required.'
+    );
+    return;
+  }
+
+  if(
+    !allDay &&
+    timeToMinutes(start) >=
+      timeToMinutes(end)
+  ){
+    showToast(
+      '⚠️ End time must be after start time.'
+    );
+    return;
+  }
 
   const isEditing =
     !!editingId;
@@ -11407,11 +11957,6 @@ async function saveForm(){
         )
       : {};
 
-  /*
-    Keep the original loaded event separate from the current
-    pending version. This records which JSON the event came from
-    before any Date/Class edits were made.
-  */
   const originalEvent =
     editingId
       ? (
@@ -11423,15 +11968,75 @@ async function saveForm(){
         )
       : null;
 
-  const calYear=document.getElementById('ff_calyear').value;
-  const mCal=document.getElementById('ff_mcal').value;
-  const mand=document.getElementById('ff_mand').value;
-  const group=cleanGroupString(document.getElementById('ff_group').value) || 'All Students';
-  const location=document.getElementById('ff_location').value.trim();
-  const info=document.getElementById('ff_info').value.trim();
-  const presenter=document.getElementById('ff_presenter').value.trim();
+  const currentPool =
+    workingEventPool();
 
-  let ev={
+  const existingCheckIn =
+    isEditing
+      ? pairedCheckInForExam(
+          existing,
+          currentPool
+        )
+      : null;
+
+  const existingCheckInChange =
+    existingCheckIn?._id
+      ? pendingChanges.find(change =>
+          change.event?._id ===
+            existingCheckIn._id
+        )
+      : null;
+
+  const originalCheckIn =
+    existingCheckIn
+      ? (
+          existingCheckInChange?.original ||
+          EVENTS.find(event =>
+            event._id ===
+              existingCheckIn._id
+          ) ||
+          existingCheckIn
+        )
+      : null;
+
+  const calYear =
+    document.getElementById(
+      'ff_calyear'
+    ).value;
+
+  const mCal =
+    document.getElementById(
+      'ff_mcal'
+    ).value;
+
+  const mand =
+    document.getElementById(
+      'ff_mand'
+    ).value;
+
+  const group =
+    cleanGroupString(
+      document.getElementById(
+        'ff_group'
+      ).value
+    ) || 'All Students';
+
+  const location =
+    document.getElementById(
+      'ff_location'
+    ).value.trim();
+
+  const info =
+    document.getElementById(
+      'ff_info'
+    ).value.trim();
+
+  const presenter =
+    document.getElementById(
+      'ff_presenter'
+    ).value.trim();
+
+  let ev = {
     ...existing,
     title,
     date,
@@ -11462,26 +12067,171 @@ async function saveForm(){
       null
   };
 
-  ev = routeEditedEventByDateAndClass(
-    ev,
-    originalEvent
-  );
+  ev =
+    routeEditedEventByDateAndClass(
+      ev,
+      originalEvent
+    );
 
   if(warnIfOutsideActiveSemester(ev)){
     return;
   }
 
   if(!ev._id){
-    ev._id = generateUniqueId(pendingEventPool());
+    ev._id =
+      generateUniqueId(
+        pendingEventPool()
+      );
   }
 
-    stageChange(
+  const wantsCheckIn =
+    !allDay &&
+    isExamLike(ev) &&
+    (
+      document.getElementById(
+        'ff_addCheckIn'
+      )?.checked || false
+    );
+
+  let pairedCheckIn = null;
+
+  if(wantsCheckIn){
+    const checkInStart =
+      document.getElementById(
+        'ff_checkInStart'
+      )?.value.trim() || '';
+
+    const checkInEnd =
+      document.getElementById(
+        'ff_checkInEnd'
+      )?.value.trim() || '';
+
+    if(!checkInStart || !checkInEnd){
+      showToast(
+        '⚠️ Check-in start and end times are required.'
+      );
+      return;
+    }
+
+    if(
+      timeToMinutes(checkInStart) >=
+        timeToMinutes(checkInEnd)
+    ){
+      showToast(
+        '⚠️ Check-in end must be after check-in start.'
+      );
+      return;
+    }
+
+    if(
+      timeToMinutes(checkInEnd) >
+        timeToMinutes(start)
+    ){
+      showToast(
+        '⚠️ Check-in must end at or before the exam begins.'
+      );
+      return;
+    }
+
+    const pairId =
+      ev.examPairId ||
+      existingCheckIn?.examPairId ||
+      crypto.randomUUID();
+
+    ev.examPairId = pairId;
+
+    pairedCheckIn = {
+      ...(existingCheckIn || {}),
+      title:
+        examCheckInTitle(title),
+      date,
+      start:checkInStart,
+      end:checkInEnd,
+      allDay:false,
+      category:'Exam Check-In',
+      block,
+      weekNum,
+      week:
+        weekNum
+          ? weekNameFor(weekNum)
+          : '',
+      desc:
+        examCheckInTitle(title),
+      calYear,
+      mCal,
+      mand:'No',
+      group,
+      location,
+      info:
+        existingCheckIn?.info || '',
+      presenter:'',
+      examPairId:pairId,
+      parentExamId:ev._id,
+      _id:
+        existingCheckIn?._id ||
+        generateUniqueId([
+          ...pendingEventPool(),
+          ev
+        ])
+    };
+
+    pairedCheckIn =
+      routeEditedEventByDateAndClass(
+        pairedCheckIn,
+        originalCheckIn
+      );
+
+    if(
+      warnIfOutsideActiveSemester(
+        pairedCheckIn
+      )
+    ){
+      return;
+    }
+  }else{
+    delete ev.examPairId;
+  }
+
+  /*
+    Stage only after every member of the proposed pair validates.
+    This prevents an exam from being staged without its check-in.
+  */
+  stageChange(
     isEditing ? 'edited' : 'added',
     ev,
     originalEvent
   );
 
-  showToast(isEditing ? '✎ Edit added to pending changes.' : '✦ Event added to pending changes.');
+  if(pairedCheckIn){
+    stageChange(
+      existingCheckIn
+        ? 'edited'
+        : 'added',
+      pairedCheckIn,
+      originalCheckIn
+    );
+  }else if(existingCheckIn){
+    stageChange(
+      'deleted',
+      existingCheckIn,
+      originalCheckIn || existingCheckIn
+    );
+  }
+
+  showToast(
+    pairedCheckIn
+      ? (
+          isEditing
+            ? '✎ Exam and paired check-in added to pending changes.'
+            : '✦ Exam and paired check-in added to pending changes.'
+        )
+      : (
+          isEditing
+            ? '✎ Edit added to pending changes.'
+            : '✦ Event added to pending changes.'
+        )
+  );
+
   closeForm();
 }
 
@@ -11489,35 +12239,171 @@ async function saveForm(){
 function modalEdit(){if(!_modalEvent)return;document.getElementById('modalOverlay').classList.remove('open');openEditForm(null,_modalEvent);}
 function modalDelete(){if(!_modalEvent)return;document.getElementById('modalOverlay').classList.remove('open');confirmDelete(null,_modalEvent._id);}
 function confirmDelete(ev,id){
-  if(ev)ev.stopPropagation();
+  if(ev) ev.stopPropagation();
+
   if(!canEditActiveSemester()){
-    showToast('🔒 Archived views are read-only.');
+    showToast(
+      '🔒 Archived views are read-only.'
+    );
     return;
   }
-  pendingDeleteId=id;
-  const e=EVENTS.find(e=>e._id===id);
-  document.getElementById('confirmMsg').textContent=`Delete "${(e?e.title:'this event').substring(0,50)}"?`;
-  document.getElementById('confirmYes').onclick=()=>{doDelete();document.getElementById('confirmOverlay').classList.remove('open');};
-  document.getElementById('confirmOverlay').classList.add('open');
+
+  pendingDeleteId = id;
+  pendingPairedDeleteId = '';
+
+  const pool =
+    workingEventPool();
+
+  const eventToDelete =
+    pool.find(event =>
+      event._id === id
+    );
+
+  const pairedEvent =
+    eventToDelete
+      ? pairedEventFor(
+          eventToDelete,
+          pool
+        )
+      : null;
+
+  const msg =
+    document.getElementById(
+      'confirmMsg'
+    );
+
+  const yesBtn =
+    document.getElementById(
+      'confirmYes'
+    );
+
+  const examOnlyBtn =
+    document.getElementById(
+      'confirmExamOnly'
+    );
+
+  if(
+    eventToDelete &&
+    isExamLike(eventToDelete) &&
+    pairedEvent
+  ){
+    pendingPairedDeleteId =
+      pairedEvent._id;
+
+    msg.textContent =
+      `Delete "${eventToDelete.title.substring(0,50)}" ` +
+      `and its paired check-in?`;
+
+    yesBtn.textContent =
+      'Delete Both';
+
+    examOnlyBtn.style.display =
+      '';
+
+    examOnlyBtn.onclick = () => {
+      pendingPairedDeleteId = '';
+      doDelete();
+      document.getElementById(
+        'confirmOverlay'
+      ).classList.remove('open');
+    };
+  }else{
+    msg.textContent =
+      `Delete "${(
+        eventToDelete
+          ? eventToDelete.title
+          : 'this event'
+      ).substring(0,50)}"?`;
+
+    yesBtn.textContent =
+      'Delete';
+
+    examOnlyBtn.style.display =
+      'none';
+  }
+
+  yesBtn.onclick = () => {
+    doDelete();
+    document.getElementById(
+      'confirmOverlay'
+    ).classList.remove('open');
+  };
+
+  document.getElementById(
+    'confirmOverlay'
+  ).classList.add('open');
 }
+
 function doDelete(){
-  const e =
-    pendingChanges.find(c => c.event && c.event._id === pendingDeleteId)?.event ||
-    EVENTS.find(e => e._id === pendingDeleteId);
+  const pool =
+    workingEventPool();
 
-  if(!e) return;
+  const eventToDelete =
+    pool.find(event =>
+      event._id === pendingDeleteId
+    );
 
-  stageChange('deleted', e, e);
+  if(!eventToDelete) return;
 
-  showToast('🗑 Delete added to pending changes.');
+  stageChange(
+    'deleted',
+    eventToDelete,
+    EVENTS.find(event =>
+      event._id === eventToDelete._id
+    ) || eventToDelete
+  );
+
+  if(pendingPairedDeleteId){
+    const pairedEvent =
+      pool.find(event =>
+        event._id ===
+          pendingPairedDeleteId
+      );
+
+    if(pairedEvent){
+      stageChange(
+        'deleted',
+        pairedEvent,
+        EVENTS.find(event =>
+          event._id ===
+            pairedEvent._id
+        ) || pairedEvent
+      );
+    }
+  }
+
+  showToast(
+    pendingPairedDeleteId
+      ? '🗑 Exam and paired check-in added to pending changes.'
+      : '🗑 Delete added to pending changes.'
+  );
+
   closeForm();
 
   pendingDeleteId = '';
+  pendingPairedDeleteId = '';
 
-  const btn = document.getElementById('confirmYes');
-  if(btn){
-    btn.textContent = 'Delete';
-    btn.disabled = false;
+  const yesBtn =
+    document.getElementById(
+      'confirmYes'
+    );
+
+  const examOnlyBtn =
+    document.getElementById(
+      'confirmExamOnly'
+    );
+
+  if(yesBtn){
+    yesBtn.textContent =
+      'Delete';
+
+    yesBtn.disabled =
+      false;
+  }
+
+  if(examOnlyBtn){
+    examOnlyBtn.style.display =
+      'none';
   }
 }
 
