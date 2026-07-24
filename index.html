@@ -80,16 +80,6 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 /* LAYOUT */
 .layout{display:flex;min-height:calc(100vh - 56px)}
 
-/* SIDEBAR */
-.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;display:flex;flex-direction:column}
-.sb-section{margin-bottom:8px}
-.sb-heading{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted2);padding:8px 20px 5px}
-.sb-item{display:flex;align-items:center;gap:10px;padding:8px 20px;font-size:13px;color:var(--muted);cursor:pointer;transition:all .12s;border-left:3px solid transparent}
-.sb-item:hover{color:var(--text);background:var(--surface2)}
-.sb-item.active{color:var(--text);background:rgba(79,142,247,.09);border-left-color:var(--accent)}
-.sb-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.sb-count{margin-left:auto;font-size:10px;color:var(--muted2);font-family:'DM Mono',monospace}
-
 /* MAIN */
 .main{flex:1;padding:24px;overflow-x:auto;min-width:0}
 .toolbar{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px;flex-wrap:wrap}
@@ -100,10 +90,77 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .vt-btn{padding:6px 14px;background:transparent;border:none;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .12s;font-weight:500}
 .vt-btn.active{background:var(--accent);color:white}
 .vt-btn:not(.active):hover{background:var(--surface2);color:var(--text)}
-.week-drawer{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px}
-.wk-btn{padding:4px 11px;border-radius:20px;border:1px solid var(--border);font-size:11px;cursor:pointer;background:transparent;color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;font-weight:500;white-space:nowrap}
-.wk-btn:hover{color:var(--text);border-color:var(--muted2)}
-.wk-btn.active{color:white;border-color:transparent;font-weight:600}
+.week-drawer{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.wk-btn{
+  padding:5px 11px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:
+    color .15s,
+    border-color .15s,
+    background .15s,
+    transform .15s;
+}
+
+.wk-btn:hover{
+  color:var(--text);
+  border-color:var(--muted2);
+  background:var(--surface);
+}
+
+.wk-btn.active{
+  color:white;
+  background:var(--accent);
+  border-color:var(--accent);
+  font-weight:700;
+}
+
+.week-drawer-control{
+  border-style:dashed;
+  color:var(--accent);
+  font-weight:700;
+}
+
+.week-drawer-control:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+  background:rgba(80,0,0,.05);
+}
+
+.week-drawer-toggle{
+  margin-left:4px;
+  border-color:var(--accent);
+  color:var(--accent);
+  font-weight:700;
+}
+
+.week-drawer-toggle.expanded{
+  background:rgba(80,0,0,.07);
+}
+
+.week-drawer-expanded{
+  flex-basis:100%;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  padding-top:8px;
+  margin-top:2px;
+  border-top:1px solid var(--border);
+}
 .filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
 .filter-label{font-size:10px;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:.8px}
 .filter-chip{padding:4px 12px;border-radius:20px;border:1px solid var(--border);font-size:11px;cursor:pointer;background:transparent;color:var(--muted);transition:all .12s;font-family:'DM Sans',sans-serif;font-weight:500}
@@ -405,9 +462,6 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 #confirmYes{background:#f05c6e;color:white;border-color:#f05c6e}
 #confirmNo{background:var(--surface2);color:var(--muted)}
 @media(max-width:768px){
-  .sidebar{
-    display:none;
-  }
 
   .main{
     padding:16px;
@@ -1110,6 +1164,124 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .block-filter-select:focus{border-color:var(--accent)}
 .block-filter-select option{background:var(--surface);color:var(--text)}
 
+/* WEEK / MONTH MULTI-COURSE FILTER */
+.calendar-block-filter{
+  position:relative;
+  min-width:190px;
+  max-width:280px;
+  margin-left:6px;
+}
+
+.calendar-block-filter summary{
+  list-style:none;
+  min-height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:6px 11px;
+  border:2px solid var(--border);
+  border-radius:8px;
+  background:var(--surface2);
+  color:var(--muted);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  user-select:none;
+}
+
+.calendar-block-filter summary::-webkit-details-marker{
+  display:none;
+}
+
+.calendar-block-filter summary::after{
+  content:'⌄';
+  flex-shrink:0;
+  color:var(--muted2);
+  font-size:14px;
+}
+
+.calendar-block-filter[open] summary{
+  border-color:var(--accent);
+  background:var(--surface);
+  color:var(--text);
+}
+
+.calendar-block-filter-summary{
+  min-width:0;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.calendar-block-filter-menu{
+  position:absolute;
+  top:calc(100% + 5px);
+  left:0;
+  z-index:460;
+  width:max-content;
+  min-width:100%;
+  max-width:min(340px,calc(100vw - 32px));
+  max-height:300px;
+  overflow-y:auto;
+  padding:7px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--surface);
+  box-shadow:0 10px 28px rgba(0,0,0,.2);
+}
+
+.calendar-block-filter-clear{
+  width:100%;
+  margin-bottom:5px;
+  padding:7px 8px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  background:var(--surface2);
+  color:var(--muted);
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  text-align:left;
+  cursor:pointer;
+}
+
+.calendar-block-filter-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 8px;
+  border-radius:6px;
+  color:var(--text);
+  font-size:12px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+.calendar-block-filter-option:hover{
+  background:var(--surface2);
+}
+
+.calendar-block-filter-option input{
+  width:15px;
+  height:15px;
+  flex-shrink:0;
+  accent-color:var(--maroon);
+}
+
+@media(max-width:768px){
+  .calendar-block-filter{
+    width:100%;
+    max-width:none;
+    margin-left:0;
+    margin-top:4px;
+  }
+
+  .calendar-block-filter-menu{
+    width:100%;
+  }
+}
 
 /* Session name datalist */
 input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
@@ -1517,28 +1689,6 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
 <!-- LAYOUT -->
 <div class="layout faculty-mode" id="layout" style="display:none">
-  <div class="sidebar" id="sidebarFilters" style="display:none">
-    <div class="sb-section">
-      <div class="sb-heading">By Year</div>
-      <select class="block-filter-select" id="yearFilterSelect" onchange="setYearSidebar(this.value)">
-        <option value="All">— All Years —</option>
-      </select>
-    </div>
-    <div class="sb-section">
-      <div class="sb-heading">By Block / Course</div>
-      <select class="block-filter-select" id="blockFilterSelect" onchange="setBlockFilter(this.value)">
-        <option value="All">— All Blocks —</option>
-      </select>
-    </div>
-    <div class="sb-section">
-      <div class="sb-heading">Event Type</div>
-      <div class="sb-item" onclick="setSidebarCat(this,'Mandatory')"><div class="sb-dot" style="background:var(--cat-mandatory)"></div>Mandatory</div>
-      <div class="sb-item" onclick="setSidebarCat(this,'Faculty Discussion')"><div class="sb-dot" style="background:var(--cat-faculty)"></div>Faculty Discussion</div>
-      <div class="sb-item" onclick="setSidebarCat(this,'TBL')"><div class="sb-dot" style="background:var(--cat-tbl)"></div>TBL</div>
-      <div class="sb-item" onclick="setSidebarCat(this,'CBSE')"><div class="sb-dot" style="background:var(--cat-cbse)"></div>CBSE / Exam</div>
-    </div>
-  </div>
-
   <div class="main">
     <div class="toolbar">
       <div class="toolbar-left">
@@ -1581,6 +1731,35 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <label class="yr-check-label" data-mc="M2" onclick="toggleMCal('M2')">
         <div class="yr-check-box"></div>M2
       </label>
+
+      <details
+  class="calendar-block-filter"
+  id="calendarBlockFilter"
+>
+  <summary>
+    <span
+      class="calendar-block-filter-summary"
+      id="calendarBlockFilterSummary"
+    >
+      All Courses / Blocks
+    </span>
+  </summary>
+
+  <div
+    class="calendar-block-filter-menu"
+    id="calendarBlockFilterMenu"
+  >
+    <button
+      type="button"
+      class="calendar-block-filter-clear"
+      onclick="clearCalendarBlockFilter()"
+    >
+      All Courses / Blocks
+    </button>
+
+    <div id="calendarBlockFilterOptions"></div>
+  </div>
+</details>
 
       <span
         style="margin-left:12px;font-size:10px;color:var(--muted2);line-height:1.4;align-self:center;"
@@ -2061,7 +2240,17 @@ const DAYS=['Mon','Tue','Wed','Thu','Fri'];
 
 // year filter handled by selectedYears Set; class filter handled by selectedMCals Set
 let CFG={}, EVENTS=[], WEEKS=[];
-let currentWeekIdx=0, currentFilter='All', currentBlockFilter='All', currentView='week';
+let currentWeekIdx=0, currentFilter='All', currentView='week';
+let selectedCalendarBlocks = new Set();
+
+/*
+  Week navigation is compact by default.
+
+  When true, the complete academic-year week list is displayed
+  beneath the contextual seven-week strip.
+*/
+let allWeeksExpanded = false;
+
 let weekIdxBeforeMonth = 0;
 let monthChangedWhileInMonth = false;
 let currentMonth=new Date().getMonth(), currentMonthYear=new Date().getFullYear();
@@ -2186,6 +2375,7 @@ async function loadEvents(){
     WEEKS=buildWeeks();
     buildWeekDrawer();
     updateTabCounts();
+    populateBlockDropdown();
     goToHomeDate();
     render();
   }catch(err){
@@ -4706,8 +4896,44 @@ function drawerHasMultipleYears(){
   return years.size > 1;
 }
 
+function weekDrawerLabel(week){
+  const start = parseMDY(week.startDate);
+  const end = parseMDY(week.endDate);
+
+  if(
+    !(start instanceof Date) ||
+    !(end instanceof Date) ||
+    Number.isNaN(start.getTime()) ||
+    Number.isNaN(end.getTime())
+  ){
+    return week.label || week.week || 'Week';
+  }
+
+  const startMonth =
+    start.toLocaleString(
+      'en-US',
+      { month:'short' }
+    );
+
+  const endMonth =
+    end.toLocaleString(
+      'en-US',
+      { month:'short' }
+    );
+
+  const startDay = start.getDate();
+  const endDay = end.getDate();
+
+  return startMonth === endMonth
+    ? `${startMonth} ${startDay}–${endDay}`
+    : `${startMonth} ${startDay} – ${endMonth} ${endDay}`;
+}
+
 function buildWeekDrawer(){
-  const drawer = document.getElementById('weekDrawer');
+  const drawer =
+    document.getElementById('weekDrawer');
+
+  if(!drawer) return;
 
   if(currentView === 'list'){
     drawer.innerHTML = '';
@@ -4717,37 +4943,192 @@ function buildWeekDrawer(){
 
   drawer.style.display = '';
 
+  /*
+    Month navigation remains exactly as it worked before:
+    every available month remains directly visible.
+  */
   if(currentView === 'month'){
     const months = calendarMonths();
+    const showYear = drawerHasMultipleYears();
 
-    drawer.innerHTML = months.map(m => {
-      const active = currentMonth === m.monthIndex && currentMonthYear === m.year;
-      const showYear = drawerHasMultipleYears();
-      const label = showYear ? `${m.label} ${m.year}` : m.label;
+    drawer.innerHTML = months
+      .map(month => {
+        const active =
+          currentMonth === month.monthIndex &&
+          currentMonthYear === month.year;
 
-      return `<button class="wk-btn${active ? ' active' : ''}" style="${active ? 'background:var(--accent);border-color:var(--accent)' : ''}" onclick="jumpToMonth(${m.monthIndex},${m.year})">${label}</button>`;
-    }).join('');
+        const label = showYear
+          ? `${month.label} ${month.year}`
+          : month.label;
+
+        return `
+          <button
+            type="button"
+            class="wk-btn${active ? ' active' : ''}"
+            onclick="jumpToMonth(
+              ${month.monthIndex},
+              ${month.year}
+            )"
+          >
+            ${label}
+          </button>
+        `;
+      })
+      .join('');
 
     return;
   }
 
-  drawer.innerHTML = WEEKS.map((w,i)=>{
-    const col = BLOCK_COLOR[w.block] || '#7a829a';
-    const start = parseMDY(w.startDate);
-    const end = parseMDY(w.endDate);
-    const startMonth = start.toLocaleString('en-US', { month: 'short' });
-    const endMonth = end.toLocaleString('en-US', { month: 'short' });
-    const startDay = start.getDate();
-    const endDay = end.getDate();
-
-  const lbl =
-    startMonth === endMonth
-    ? `${startMonth} ${startDay}-${endDay}`
-    : `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
-
-      return `<button class="wk-btn${i===currentWeekIdx?' active':''}" style="${i===currentWeekIdx?'background:'+col+';border-color:'+col:''}" onclick="jumpToWeek(${i})">${lbl}</button>`;
-    }).join('');
+  if(!WEEKS.length){
+    drawer.innerHTML = '';
+    return;
   }
+
+  /*
+    Keep the selected index inside the available Week range.
+  */
+  currentWeekIdx = Math.max(
+    0,
+    Math.min(
+      currentWeekIdx,
+      WEEKS.length - 1
+    )
+  );
+
+  /*
+    Show up to three weeks before and three weeks after the
+    selected week, for a maximum of seven direct week buttons.
+  */
+  const windowStart = Math.max(
+    0,
+    currentWeekIdx - 3
+  );
+
+  const windowEnd = Math.min(
+    WEEKS.length - 1,
+    currentWeekIdx + 3
+  );
+
+  const compactButtons = [];
+
+  if(windowStart > 0){
+    compactButtons.push(`
+      <button
+        type="button"
+        class="wk-btn week-drawer-control"
+        onclick="jumpToEarlierWeeks()"
+        title="Show the previous group of weeks"
+      >
+        ‹ Earlier
+      </button>
+    `);
+  }
+
+  for(
+    let index = windowStart;
+    index <= windowEnd;
+    index++
+  ){
+    compactButtons.push(
+      weekDrawerButtonHTML(index)
+    );
+  }
+
+  if(windowEnd < WEEKS.length - 1){
+    compactButtons.push(`
+      <button
+        type="button"
+        class="wk-btn week-drawer-control"
+        onclick="jumpToLaterWeeks()"
+        title="Show the next group of weeks"
+      >
+        Later ›
+      </button>
+    `);
+  }
+
+  compactButtons.push(`
+    <button
+      type="button"
+      class="wk-btn week-drawer-toggle${
+        allWeeksExpanded ? ' expanded' : ''
+      }"
+      onclick="toggleAllWeeksDrawer()"
+      aria-expanded="${allWeeksExpanded}"
+    >
+      ${
+        allWeeksExpanded
+          ? 'Hide All Weeks'
+          : 'All Weeks'
+      }
+    </button>
+  `);
+
+  const expandedHTML = allWeeksExpanded
+    ? `
+      <div class="week-drawer-expanded">
+        ${WEEKS
+          .map((week,index) =>
+            weekDrawerButtonHTML(index)
+          )
+          .join('')}
+      </div>
+    `
+    : '';
+
+  drawer.innerHTML =
+    compactButtons.join('') +
+    expandedHTML;
+}
+
+function weekDrawerButtonHTML(index){
+  const week = WEEKS[index];
+
+  if(!week) return '';
+
+  const active =
+    index === currentWeekIdx;
+
+  return `
+    <button
+      type="button"
+      class="wk-btn${active ? ' active' : ''}"
+      onclick="jumpToWeek(${index})"
+      ${
+        active
+          ? 'aria-current="date"'
+          : ''
+      }
+    >
+      ${weekDrawerLabel(week)}
+    </button>
+  `;
+}
+
+function toggleAllWeeksDrawer(){
+  allWeeksExpanded =
+    !allWeeksExpanded;
+
+  buildWeekDrawer();
+}
+
+function jumpToEarlierWeeks(){
+  const destination = Math.max(
+    0,
+    currentWeekIdx - 7
+  );
+
+  jumpToWeek(destination);
+}
+
+function jumpToLaterWeeks(){
+  const destination = Math.min(
+    WEEKS.length - 1,
+    currentWeekIdx + 7
+  );
+
+  jumpToWeek(destination);
+}
 
 function jumpToMonth(monthIndex, year){
   if(currentMonth !== monthIndex || currentMonthYear !== year){
@@ -4762,11 +5143,29 @@ function jumpToMonth(monthIndex, year){
 }
 
 function jumpToWeek(i){
-  currentWeekIdx = i;
+  const requestedIndex =
+    Number(i);
+
+  if(
+    !Number.isInteger(requestedIndex) ||
+    requestedIndex < 0 ||
+    requestedIndex >= WEEKS.length
+  ){
+    return;
+  }
+
+  currentWeekIdx =
+    requestedIndex;
+
   mobileDayIndex = 0;
 
-  if(i >= 0) weekToMonth(i);
+  /*
+    Once a week is chosen, return the drawer to its clean,
+    contextual state.
+  */
+  allWeeksExpanded = false;
 
+  weekToMonth(currentWeekIdx);
   buildWeekDrawer();
   render();
 }
@@ -4775,6 +5174,7 @@ function prevWeek(){
   if(currentWeekIdx > 0){
     currentWeekIdx--;
     mobileDayIndex = 0;
+    allWeeksExpanded = false;
     weekToMonth(currentWeekIdx);
     buildWeekDrawer();
     render();
@@ -4785,6 +5185,7 @@ function nextWeek(){
   if(currentWeekIdx < WEEKS.length - 1){
     currentWeekIdx++;
     mobileDayIndex = 0;
+    allWeeksExpanded = false;
     weekToMonth(currentWeekIdx);
     buildWeekDrawer();
     render();
@@ -4827,39 +5228,107 @@ function nextMobileDay(){
   }
 }
 
+function calendarBlockOptions(){
+  return [
+    'CBSE',
+    'EBM',
+    'Endo/Repro',
+    'FOM I',
+    'FOM II',
+    'GI',
+    'Heme/Onc',
+    'ITDE 611',
+    'ITDE 613',
+    'MGA',
+    'MSK',
+    'POM 3',
+    'POM I',
+    'Pre-Matriculation',
+    'Renal',
+    'Respiratory'
+  ];
+}
+
 function populateBlockDropdown(){
-  const sel=document.getElementById('blockFilterSelect');
-  if(!sel||sel.options.length>1)return;
-  // Group blocks by course family
-  const groups={
-    'POM':[],'ITDE':[],'FOM':[],'MGA':[],'Neuro/ID/CV':[],'Heme/Resp/Renal/GI/Endo/MSK':[],'Other':[]
-  };
-  BLOCKS_LIST.forEach(b=>{
-    if(b.startsWith('POM')||b.startsWith('PoM'))groups['POM'].push(b);
-    else if(b.startsWith('ITDE'))groups['ITDE'].push(b);
-    else if(b.startsWith('FOM'))groups['FOM'].push(b);
-    else if(b.startsWith('MGA'))groups['MGA'].push(b);
-    else if(b.startsWith('Neuro')||b.startsWith('ID ')||b.startsWith('CV '))groups['Neuro/ID/CV'].push(b);
-    else if(b.startsWith('Heme')||b.startsWith('Resp')||b.startsWith('Renal')||b.startsWith('GI ')||b.startsWith('Endo')||b.startsWith('MSK')||b.startsWith('EBM'))groups['Heme/Resp/Renal/GI/Endo/MSK'].push(b);
-    else groups['Other'].push(b);
-  });
-  Object.entries(groups).forEach(([grp,blocks])=>{
-    if(!blocks.length)return;
-    const og=document.createElement('optgroup');
-    og.label=grp;
-    blocks.forEach(b=>{
-      const o=document.createElement('option');
-      o.value=b;o.textContent=b;
-      og.appendChild(o);
-    });
-    sel.appendChild(og);
-  });
+  const options =
+    document.getElementById(
+      'calendarBlockFilterOptions'
+    );
+
+  if(!options) return;
+
+  const blocks = calendarBlockOptions();
+
+  /*
+    Drop selections that no longer correspond to any available
+    course/block after events are reloaded.
+  */
+  const availableKeys = new Set(
+    blocks.map(block =>
+      listFilterValue('course',block)
+    )
+  );
+
+  selectedCalendarBlocks =
+    new Set(
+      [...selectedCalendarBlocks].filter(
+        selectedKey =>
+          availableKeys.has(selectedKey)
+      )
+    );
+
+  options.innerHTML = blocks.length
+    ? blocks.map(block => {
+        const blockKey =
+          listFilterValue(
+            'course',
+            block
+          );
+
+        const checked =
+          selectedCalendarBlocks.has(blockKey);
+
+        return `
+          <label class="calendar-block-filter-option">
+            <input
+              type="checkbox"
+              value="${escapeHtml(blockKey)}"
+              ${checked ? 'checked' : ''}
+              onchange="toggleCalendarBlockFilter(
+                '${escapeHtml(blockKey)}',
+                this.checked
+              )"
+            >
+
+            <span>${escapeHtml(block)}</span>
+          </label>
+        `;
+      }).join('')
+    : `
+      <div
+        style="
+          padding:8px;
+          color:var(--muted2);
+          font-size:11px;
+        "
+      >
+        No courses or blocks found.
+      </div>
+    `;
+
+  updateCalendarBlockFilterSummary();
 }
 function setSidebarCat(el,cat){currentFilter=cat;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));const ch=document.querySelector(`.filter-chip[data-cat="${cat}"]`);if(ch)ch.classList.add('active');render();}
 function setView(v,btn){
   const prev=currentView;
   currentView=v;
 
+  /*
+    Do not carry an expanded Week drawer into another view.
+  */
+  if(v !== 'week'){
+    allWeeksExpanded = false;
+  }
   document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
 
@@ -4896,9 +5365,82 @@ function setView(v,btn){
   render();
 }
 
-function setBlockFilter(block){
-  currentBlockFilter = block || 'All';
+function toggleCalendarBlockFilter(
+  blockKey,
+  checked
+){
+  const normalizedKey =
+    listFilterValue(
+      'course',
+      blockKey
+    );
+
+  if(!normalizedKey) return;
+
+  if(checked){
+    selectedCalendarBlocks.add(
+      normalizedKey
+    );
+  }else{
+    selectedCalendarBlocks.delete(
+      normalizedKey
+    );
+  }
+
+  updateCalendarBlockFilterSummary();
   render();
+}
+
+function clearCalendarBlockFilter(){
+  selectedCalendarBlocks.clear();
+
+  document
+    .querySelectorAll(
+      '#calendarBlockFilterOptions input[type="checkbox"]'
+    )
+    .forEach(input => {
+      input.checked = false;
+    });
+
+  updateCalendarBlockFilterSummary();
+  render();
+}
+
+function updateCalendarBlockFilterSummary(){
+  const summary =
+    document.getElementById(
+      'calendarBlockFilterSummary'
+    );
+
+  if(!summary) return;
+
+  if(!selectedCalendarBlocks.size){
+    summary.textContent =
+      'All Courses';
+
+    return;
+  }
+
+  const labels =
+    calendarBlockOptions()
+      .filter(block =>
+        selectedCalendarBlocks.has(
+          listFilterValue(
+            'course',
+            block
+          )
+        )
+      );
+
+  if(labels.length <= 2){
+    summary.textContent =
+      labels.join(', ');
+
+    return;
+  }
+
+  summary.textContent =
+    `${labels.length} Courses / Blocks`;
 }
 
 function updateFpViewBtns(v){
@@ -6715,14 +7257,6 @@ async function setMode(mode){
 
   resetMobileFacultySheet();
 
-  const sidebar =
-    document.getElementById('sidebarFilters');
-
-  if(sidebar){
-    sidebar.style.display =
-      isFacultyMode ? '' : 'none';
-  }
-
   const facultyBadge =
     document.getElementById('facultyBadge');
 
@@ -7307,8 +7841,14 @@ function mCalColor(e){
 function filteredEvents(){
   return EVENTS.filter(e=>{
     const blockOk =
-      currentBlockFilter === 'All' ||
-      eventHasBlock(e, listFilterValue('course', currentBlockFilter));
+      selectedCalendarBlocks.size === 0 ||
+      [...selectedCalendarBlocks].some(
+        selectedBlockKey =>
+          eventHasBlock(
+            e,
+            selectedBlockKey
+          )
+      );
     const catOk=currentFilter==='All'||e.category===currentFilter;
     const evYear=String(e.calYear||'2029');
     const evMCal=e.mCal||'M1';
@@ -7441,8 +7981,21 @@ function printFilterSummary(){
     );
   }
 
-  if(currentBlockFilter !== 'All'){
-    parts.push(`Course: ${currentBlockFilter}`);
+  if(selectedCalendarBlocks.size){
+    const selectedLabels =
+      calendarBlockOptions()
+        .filter(block =>
+          selectedCalendarBlocks.has(
+            listFilterValue(
+              'course',
+              block
+            )
+          )
+        );
+
+    parts.push(
+      `Course: ${selectedLabels.join(', ')}`
+    );
   }
 
   if(currentFilter !== 'All'){
@@ -10446,7 +10999,18 @@ function togglePendingChange(index){
 }
 
 function removePendingChange(index){
-  togglePendingChange(index);
+  if(index < 0 || index >= pendingChanges.length){
+    showToast('⚠️ Could not find that pending change.');
+    return;
+  }
+
+  pendingChanges.splice(index, 1);
+
+  renderChangeLog();
+  renderPendingReview();
+  render();
+
+  showToast('🗑 Pending change removed.');
 }
 
 function editPendingChange(index){
