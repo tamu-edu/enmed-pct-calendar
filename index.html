@@ -1059,6 +1059,14 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .bulk-pill.warn{background:rgba(247,161,79,.16);color:#8a4a00}
 .bulk-pill.err{background:rgba(240,92,110,.12);color:#b00020}
 .bulk-preview tr.warn td{background:rgba(247,161,79,.08);color:#6b3a00}
+.bulk-pill.replace{background:rgba(21,101,192,.13);color:#1565C0}
+.bulk-preview tr.replace td{background:rgba(21,101,192,.07);color:#123f73}
+.bulk-change-list{display:flex;flex-direction:column;gap:4px;min-width:230px}
+.bulk-change-item{padding:5px 7px;border:1px solid rgba(21,101,192,.18);border-radius:6px;background:rgba(255,255,255,.72);line-height:1.35}
+.bulk-change-field{font-weight:800;color:#1565C0;margin-bottom:2px}
+.bulk-change-values{font-size:10px;color:var(--muted)}
+.bulk-change-old{text-decoration:line-through;opacity:.72}
+.bulk-change-arrow{padding:0 4px;font-weight:800;color:#1565C0}
 .bulk-btn-cancel{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
 .bulk-row-actions{
   display:flex;
@@ -1593,8 +1601,94 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
   flex:1 1 auto;
   min-width:0;
 }
-.ev-sel{outline:2px solid #f05c6e !important;opacity:1 !important}
-.mg-event.ev-sel{outline:2px solid #f05c6e}
+.ev-sel{
+  outline:3px solid #f05c6e !important;
+  outline-offset:1px;
+  opacity:1 !important;
+}
+
+.mg-event.ev-sel{
+  outline:3px solid #f05c6e !important;
+  outline-offset:1px;
+}
+
+.ev-sel-export{
+  outline:3px solid #0F766E !important;
+  outline-offset:1px;
+  box-shadow:0 0 0 2px rgba(15,118,110,.14) !important;
+  opacity:1 !important;
+}
+
+.mg-event.ev-sel-export{
+  outline:3px solid #0F766E !important;
+  outline-offset:1px;
+}
+
+.bulk-bar.export-mode{
+  background:rgba(15,118,110,.08);
+  border-color:rgba(15,118,110,.32);
+}
+
+.bulk-bar.export-mode .bulk-bar-count{
+  color:#0F766E;
+}
+
+.bulk-bar.export-mode .bulk-bar-btn{
+  background:#0F766E;
+}
+
+.bulk-selection-active .ev-controls,
+.bulk-selection-active .month-event-controls{
+  display:none !important;
+}
+
+.bulk-edit-filtered-select{
+  max-width:900px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:0 0 14px;
+  padding:10px 14px;
+  border:1px solid rgba(15,118,110,.32);
+  border-radius:9px;
+  background:rgba(15,118,110,.07);
+}
+
+.bulk-edit-filtered-select-text{
+  min-width:0;
+  flex:1;
+}
+
+.bulk-edit-filtered-select-title{
+  font-size:12px;
+  font-weight:800;
+  color:#0F766E;
+}
+
+.bulk-edit-filtered-select-sub{
+  margin-top:2px;
+  font-size:10px;
+  color:var(--muted);
+}
+
+.bulk-edit-filtered-select-btn{
+  padding:7px 12px;
+  border:1px solid #0F766E;
+  border-radius:7px;
+  background:#0F766E;
+  color:white;
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.bulk-edit-filtered-select-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
 
 .block-token-row{
   display:flex;
@@ -1868,12 +1962,54 @@ input[list].form-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
         Review &amp; Submit Changes
       </button>
     <button class="btn-full" onclick="openMultiAdd()" style="background:var(--maroon);color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">➕ Multi-Add Session</button>
-    <button class="btn-full" onclick="enterBulkSelect()" style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">&#9745; Select &amp; Delete Events</button>
+<button
+  class="btn-full"
+  type="button"
+  onclick="enterBulkSelect()"
+  style="background:rgba(240,92,110,.15);color:#f05c6e;padding:10px;border-radius:8px;border:1px solid rgba(240,92,110,.3);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0"
+>
+  &#9745; Select &amp; Delete Events
+</button>
+
+<button
+  class="btn-full"
+  type="button"
+  onclick="enterBulkEditExportSelect()"
+  style="background:rgba(15,118,110,.12);color:#0F766E;padding:10px;border-radius:8px;border:1px solid rgba(15,118,110,.32);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-top:0"
+>
+  📥 Select for Bulk Edit Export
+</button>
+
 <div class="bulk-bar" id="bulkBar">
-  <div class="bulk-bar-count" id="bulkBarCount">Click events to select</div>
-  <button class="bulk-bar-all" type="button" onclick="bulkToggleAll()">Select All</button>
-  <button class="bulk-bar-btn" id="bulkBarDel" type="button" onclick="bulkDeleteSelected()">Delete Selected</button>
-  <button class="bulk-bar-cancel" type="button" onclick="exitBulkSelect()">Cancel</button>
+  <div class="bulk-bar-count" id="bulkBarCount">
+    Click events to select
+  </div>
+
+  <button
+    class="bulk-bar-all"
+    id="bulkBarAll"
+    type="button"
+    onclick="bulkToggleAll()"
+  >
+    Select All
+  </button>
+
+  <button
+    class="bulk-bar-btn"
+    id="bulkBarAction"
+    type="button"
+    onclick="bulkSelectedAction()"
+  >
+    Delete Selected
+  </button>
+
+  <button
+    class="bulk-bar-cancel"
+    type="button"
+    onclick="exitBulkSelect()"
+  >
+    Cancel
+  </button>
 </div>
 
 <button class="btn-full" onclick="openBulkUpload()" style="background:#1565C0;color:white;padding:10px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:0">📤 Bulk Upload (.xlsx)</button>
@@ -5638,6 +5774,19 @@ function render(){
   else renderList();
 }
 
+function bulkSelectionClass(eventId){
+  if(
+    !bulkSelectMode ||
+    !selectedIds.has(eventId)
+  ){
+    return '';
+  }
+
+  return bulkSelectPurpose === 'export'
+    ? 'ev-sel-export'
+    : 'ev-sel';
+}
+
 function evClass(e){
   return normalizeCategory(e.category);
 }
@@ -6277,7 +6426,7 @@ if(canEditActiveSemester()){
     const ej = JSON.stringify(e).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
     const blockLabel = blockDisplay(e.block) ? `${blockDisplay(e.block)} · ` : '';
 
-    html += `<div class="event all-day-event ${evClass(e)}" id="bev_${e._id}" style="border-left:none;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${col}18 5px);color:${textCol}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+    html += `<div class="event all-day-event ${evClass(e)} ${bulkSelectionClass(e._id)}" id="bev_${e._id}" style="border-left:none;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${col}18 5px);color:${textCol}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
       <div class="ev-tag" style="color:${catCol}">${blockLabel}${e.category}</div>
       <div class="ev-title">${displayTitle(e)}</div>
       ${canEditActiveSemester()?`<div class="ev-controls">
@@ -6345,7 +6494,7 @@ html += `</div>`;
         const catCol = CAT_COLOR[normalizeCategory(e.category)] || mcalCol;
 
 const blockLabel = blockDisplay(e.block) ? `${blockDisplay(e.block)} · ` : '';
-        html+=`<div class="event week-event ${ec}${hasCheckInRibbon ? ' has-checkin-ribbon' : ''}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:${eventLeft};width:${eventWidth};z-index:${eventZ};background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${mcalCol}18 5px);color:${textCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+        html+=`<div class="event week-event ${ec} ${bulkSelectionClass(e._id)}${hasCheckInRibbon ? ' has-checkin-ribbon' : ''}" style="top:${topOffset}px;height:${hp}px;min-height:${hp}px;left:${eventLeft};width:${eventWidth};z-index:${eventZ};background:${mcalCol}18;border-left:none;padding-left:12px;background-image:linear-gradient(to right,${catCol} 0px,${catCol} 5px,${mcalCol}18 5px);color:${textCol}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
           ${checkInRibbonHtml}
           <div class="ev-tag" style="color:${catCol}">${blockLabel}${e.category}</div>
           <div class="ev-title">${displayTitle(e)}</div>
@@ -6907,6 +7056,228 @@ function exportFilteredListToExcel(){
   showToast(`Exported ${evs.length} event${evs.length === 1 ? '' : 's'}.`);
 }
 
+
+function effectiveEventAdditionalInfo(event){
+  const info =
+    String(event?.info ?? '').trim();
+
+  if(info){
+    return info;
+  }
+
+  const desc =
+    String(event?.desc ?? '').trim();
+
+  const title =
+    String(event?.title ?? '').trim();
+
+  /*
+    Older records sometimes copied Session Name into desc.
+    That is not genuine Additional Information and should remain blank
+    in a bulk-edit workbook.
+  */
+  if(
+    desc &&
+    bulkComparableValue('info',desc) !==
+    bulkComparableValue('info',title)
+  ){
+    return desc;
+  }
+
+  return '';
+}
+
+function bulkEditExportRows(events){
+  return events
+    .filter(event => {
+      if(!event?._id) return false;
+
+      const semester =
+        event._semesterId
+          ? semesterById(event._semesterId)
+          : eventTargetSemester(event);
+
+      return !!semester && semesterIsEditable(semester);
+    })
+    .sort((a,b) =>
+      parseMDY(a.date) - parseMDY(b.date) ||
+      (
+        isAllDayEvent(a)
+          ? -1
+          : timeToMinutes(a.start)
+      ) -
+      (
+        isAllDayEvent(b)
+          ? -1
+          : timeToMinutes(b.start)
+      ) ||
+      String(a.title || '').localeCompare(
+        String(b.title || '')
+      )
+    )
+    .map(event => {
+      const semester =
+        event._semesterId
+          ? semesterById(event._semesterId)
+          : eventTargetSemester(event);
+
+      return {
+        ID: event._id || '',
+        Semester: semester?.name || semester?.id || '',
+        '[MAND]': event.mand || 'No',
+        'Session Name': safeExportText(event.title),
+        'Group Assigned': safeExportText(event.group),
+        'Session Location': safeExportText(event.location),
+        'Cohort Year': safeExportText(event.calYear),
+        Class: safeExportText(event.mCal),
+        Date: event.date || '',
+        'All Day': isAllDayEvent(event) ? 'Yes' : '',
+        'Start Time': isAllDayEvent(event) ? '' : (event.start || ''),
+        'End Time': isAllDayEvent(event) ? '' : (event.end || ''),
+        Category: safeExportText(event.category),
+        'Block / Course': safeExportText(event.block),
+        Presenter: safeExportText(event.presenter),
+        'Additional Information': safeExportText(
+          effectiveEventAdditionalInfo(event)
+        )
+      };
+    });
+}
+
+function selectedBulkEditEvents(){
+  return Array.from(selectedIds)
+    .map(id => EVENTS.find(event => event._id === id))
+    .filter(event => {
+      if(!event?._id){
+        return false;
+      }
+
+      const semester =
+        event._semesterId
+          ? semesterById(event._semesterId)
+          : eventTargetSemester(event);
+
+      return !!semester && semesterIsEditable(semester);
+    });
+}
+
+function exportBulkEditWorkbook(){
+  if(!isFacultyMode){
+    showToast('🔒 Enter Edit mode to export bulk-edit data.');
+    return;
+  }
+
+  if(
+    !bulkSelectMode ||
+    bulkSelectPurpose !== 'export'
+  ){
+    showToast('Enter Select for Bulk Edit Export mode first.');
+    return;
+  }
+
+  const selectedEvents =
+    selectedBulkEditEvents();
+
+  if(!selectedEvents.length){
+    showToast('Select at least one event to export.');
+    return;
+  }
+
+  const rows =
+    bulkEditExportRows(selectedEvents);
+
+  if(!rows.length){
+    showToast('No editable selected events are available to export.');
+    return;
+  }
+
+  const ws =
+    XLSX.utils.json_to_sheet(rows);
+
+  const wb =
+    XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    wb,
+    ws,
+    'Bulk Edit'
+  );
+
+  ws['!cols'] = [
+    {wch:38},
+    {wch:24},
+    {wch:10},
+    {wch:38},
+    {wch:22},
+    {wch:24},
+    {wch:12},
+    {wch:16},
+    {wch:12},
+    {wch:10},
+    {wch:12},
+    {wch:12},
+    {wch:20},
+    {wch:26},
+    {wch:26},
+    {wch:55}
+  ];
+
+  const instructions = [
+    {
+      Instruction:
+        'Edit event values on the Bulk Edit tab. Do not change, delete, or reuse IDs.'
+    },
+    {
+      Instruction:
+        'Each ID identifies one existing calendar event.'
+    },
+    {
+      Instruction:
+        'Rows with blank IDs are not bulk edits and will follow the normal new-session upload workflow.'
+    },
+    {
+      Instruction:
+        'Deleting a spreadsheet row will not delete the calendar event.'
+    },
+    {
+      Instruction:
+        'Use MM/DD/YYYY dates. Use Yes for all-day events and leave Start Time and End Time blank.'
+    }
+  ];
+
+  const instructionSheet =
+    XLSX.utils.json_to_sheet(instructions);
+
+  instructionSheet['!cols'] = [
+    {wch:100}
+  ];
+
+  XLSX.utils.book_append_sheet(
+    wb,
+    instructionSheet,
+    'Instructions'
+  );
+
+  const stamp =
+    new Date().toISOString().slice(0,10);
+
+  XLSX.writeFile(
+    wb,
+    `EnMed_Bulk_Edit_${stamp}.xlsx`
+  );
+
+  showToast(
+    `Exported ${rows.length} selected event` +
+    `${rows.length === 1 ? '' : 's'} for bulk editing.`
+  );
+
+  /*
+    Intentionally preserve the selection after export.
+    The coordinator may need to regenerate or adjust the set.
+  */
+  updateBulkBar();
+}
+
 function setListFilter(field,value){
   listFilters[field] = value;
 
@@ -7246,6 +7617,84 @@ function mCalTextColor(e){
   return '#8C3F52';
 }
 
+function renderBulkEditFilteredSelector(events){
+  if(
+    !bulkSelectMode ||
+    bulkSelectPurpose !== 'export'
+  ){
+    return '';
+  }
+
+  const ids =
+    bulkEventIds(events);
+
+  const selectedHere =
+    ids.filter(id =>
+      selectedIds.has(id)
+    ).length;
+
+  const allSelected =
+    allIdsAreSelected(ids);
+
+  const buttonLabel =
+    allSelected
+      ? `Deselect All Filtered (${ids.length})`
+      : `Select All Filtered for Export (${ids.length})`;
+
+  return `
+    <div class="bulk-edit-filtered-select">
+      <div class="bulk-edit-filtered-select-text">
+        <div class="bulk-edit-filtered-select-title">
+          Bulk Edit Export Selection
+        </div>
+
+        <div class="bulk-edit-filtered-select-sub">
+          ${ids.length} filtered event${ids.length === 1 ? '' : 's'} ·
+          ${selectedHere} selected from this filtered list ·
+          ${selectedIds.size} selected total
+        </div>
+      </div>
+
+      <button
+        class="bulk-edit-filtered-select-btn"
+        type="button"
+        onclick="toggleAllFilteredForBulkEditExport()"
+        ${ids.length ? '' : 'disabled'}
+      >
+        ${buttonLabel}
+      </button>
+    </div>
+  `;
+}
+
+function toggleAllFilteredForBulkEditExport(){
+  if(
+    !bulkSelectMode ||
+    bulkSelectPurpose !== 'export'
+  ){
+    return;
+  }
+
+  const events =
+    filteredListEvents();
+
+  const ids =
+    bulkEventIds(events);
+
+  if(allIdsAreSelected(ids)){
+    ids.forEach(id =>
+      selectedIds.delete(id)
+    );
+  }else{
+    ids.forEach(id =>
+      selectedIds.add(id)
+    );
+  }
+
+  updateBulkBar();
+  renderList();
+}
+
 function renderList(){
   const scopedEvents = listScopedEvents();
 
@@ -7255,6 +7704,7 @@ function renderList(){
   );
 
   let html = renderListFinder(evs.length,scopedEvents.length);
+  html += renderBulkEditFilteredSelector(evs);
 
   if(!evs.length){
     document.getElementById('calView').innerHTML =
@@ -7281,13 +7731,13 @@ function renderList(){
       const courseLabel = listDisplayLabel('course',e.block || '');
       const blockLabel = courseLabel ? `${courseLabel} · ` : '';
 
-      html+=`<div class="event list-event ${ec}" id="bev_${e._id}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 5px,${col}18 5px)" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
+      html+=`<div class="event list-event ${ec} ${bulkSelectionClass(e._id)}" id="bev_${e._id}" style="min-height:auto;flex-direction:row;align-items:center;gap:14px;margin-bottom:7px;padding:10px 10px 10px 14px;border-radius:8px;border-left:none;background-image:linear-gradient(to right,${catColL} 0px,${catColL} 5px,${col}18 5px)" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):handleEventClick(event,${ej})">
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:${textCol};white-space:nowrap;min-width:90px">${isAllDayEvent(e) ? 'All day' : `${fmtTime(e.start)}<br>${fmtTime(e.end)}`}</div>
         <div style="flex:1">
           <div class="ev-tag" style="color:${catColL}">${escapeHtml(blockLabel)}${escapeHtml(listDisplayLabel('category',e.category))}</div>
           <div style="font-size:13px;font-weight:500;color:${col}">${escapeHtml(displayTitle(e))}</div>
         </div>
-        ${canEditActiveSemester()?`<div style="display:flex;gap:5px;flex-shrink:0">
+        ${canEditActiveSemester() && !bulkSelectMode ? `<div style="display:flex;gap:5px;flex-shrink:0">
           <button class="ev-ctrl-btn ev-edit-btn" style="width:28px;height:28px" onclick="openEditForm(event,${ej})">✎</button>
           <button class="ev-ctrl-btn ev-del-btn" style="width:28px;height:28px" onclick="confirmDelete(event,'${e._id}')">✕</button>
         </div>`:''}
@@ -8428,7 +8878,7 @@ function renderMonth(){
         const catC = CAT_COLOR[normalizeCategory(e.category)] || col;
         const ej=JSON.stringify(e).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
         const monthBlockLabel = e.block ? `${e.block}<br>` : '';
-return`<div class="mg-event" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),${canEditActiveSemester() ? `openEditForm(event,${ej})` : `handleEventClick(event,${ej})`})">
+return`<div class="mg-event ${bulkSelectionClass(e._id)}" style="border-left:none;padding-left:8px;background-image:linear-gradient(to right,${catC} 0px,${catC} 4px,${col}22 4px);color:${col}" id="bev_${e._id}" onclick="bulkSelectMode?bulkToggleEvent('${e._id}'):(event.stopPropagation(),${canEditActiveSemester() ? `openEditForm(event,${ej})` : `handleEventClick(event,${ej})`})">
           ${monthBlockLabel}${displayTitle(e)}
           ${canEditActiveSemester()?`<div class="month-event-controls">
             <button class="month-event-ctrl" title="Edit session" onclick="openEditForm(event,${ej})">✎</button>
@@ -9653,89 +10103,236 @@ function applyCatalogSession(){
 
 
 
-// ── BULK SELECT & DELETE ──────────────────────────────────────
-let bulkSelectMode=false;
-let selectedIds=new Set();
+// ── BULK EVENT SELECTION ──────────────────────────────────────
+let bulkSelectMode = false;
+let bulkSelectPurpose = '';
+let selectedIds = new Set();
 
-function enterBulkSelect(){
-  if(!canEditActiveSemester()){showToast('🔒 Archived views are read-only.');return;}
-  bulkSelectMode=true; selectedIds=new Set();
-  document.getElementById('bulkBar').classList.add('on');
-  updateBulkBar(); render();
-}
-function exitBulkSelect(){
-  bulkSelectMode=false; selectedIds=new Set();
-  document.getElementById('bulkBar').classList.remove('on');
+function beginBulkSelection(purpose){
+  if(!canEditActiveSemester()){
+    showToast('🔒 Archived views are read-only.');
+    return;
+  }
+
+  bulkSelectMode = true;
+  bulkSelectPurpose = purpose;
+  selectedIds = new Set();
+
+  const bar =
+    document.getElementById('bulkBar');
+
+  if(bar){
+    bar.classList.add('on');
+    bar.classList.toggle(
+      'export-mode',
+      purpose === 'export'
+    );
+  }
+
+  document
+    .getElementById('layout')
+    ?.classList.add('bulk-selection-active');
+
+  updateBulkBar();
   render();
 }
+
+function enterBulkSelect(){
+  beginBulkSelection('delete');
+}
+
+function enterBulkEditExportSelect(){
+  beginBulkSelection('export');
+}
+
+function exitBulkSelect(){
+  bulkSelectMode = false;
+  bulkSelectPurpose = '';
+  selectedIds = new Set();
+
+  const bar =
+    document.getElementById('bulkBar');
+
+  if(bar){
+    bar.classList.remove(
+      'on',
+      'export-mode'
+    );
+  }
+
+  document
+    .getElementById('layout')
+    ?.classList.remove('bulk-selection-active');
+
+  render();
+}
+
+function bulkEventIds(events){
+  return events
+    .map(event => event?._id)
+    .filter(Boolean);
+}
+
+function allIdsAreSelected(ids){
+  return (
+    ids.length > 0 &&
+    ids.every(id => selectedIds.has(id))
+  );
+}
+
 function updateBulkBar(){
-  const n=selectedIds.size;
-  document.getElementById('bulkBarCount').textContent=
-    n===0?'Click events to select':n+' event'+(n!==1?'s':'')+' selected';
-  const allBtn=document.querySelector('.bulk-bar-all');
+  const count =
+    selectedIds.size;
+
+  const countEl =
+    document.getElementById('bulkBarCount');
+
+  const allBtn =
+    document.getElementById('bulkBarAll');
+
+  const actionBtn =
+    document.getElementById('bulkBarAction');
+
+  if(countEl){
+    if(count === 0){
+      countEl.textContent =
+        bulkSelectPurpose === 'export'
+          ? 'Click events to select for bulk edit export'
+          : 'Click events to select for deletion';
+    }else{
+      countEl.textContent =
+        `${count} event${count === 1 ? '' : 's'} selected`;
+    }
+  }
+
+  const eligibleIds =
+    bulkEventIds(filteredEvents());
+
+  const everyEligibleSelected =
+    allIdsAreSelected(eligibleIds);
+
   if(allBtn){
-    const tot=filteredEvents().length;
-    allBtn.textContent=(n>0&&n>=tot)?'Deselect All':'Select All';
+    if(bulkSelectPurpose === 'export'){
+      allBtn.textContent =
+        everyEligibleSelected
+          ? 'Deselect All Exportable'
+          : 'Select All for Export';
+    }else{
+      allBtn.textContent =
+        everyEligibleSelected
+          ? 'Deselect All'
+          : 'Select All';
+    }
+  }
+
+  if(actionBtn){
+    actionBtn.disabled =
+      count === 0;
+
+    if(bulkSelectPurpose === 'export'){
+      actionBtn.textContent =
+        count
+          ? `Export Selected (${count})`
+          : 'Export Selected';
+    }else{
+      actionBtn.textContent =
+        count
+          ? `Delete Selected (${count})`
+          : 'Delete Selected';
+    }
   }
 }
+
 function bulkToggleAll(){
-  const evs=filteredEvents();
-  if(selectedIds.size>0&&selectedIds.size>=evs.length){
-    // Deselect all
-    selectedIds=new Set();
-    document.querySelectorAll('.ev-sel').forEach(el=>el.classList.remove('ev-sel'));
-  } else {
-    // Select all
-    evs.forEach(e=>{
-      selectedIds.add(e._id);
-      const el=document.getElementById('bev_'+e._id);
-      if(el)el.classList.add('ev-sel');
-    });
+  const events =
+    filteredEvents();
+
+  const ids =
+    bulkEventIds(events);
+
+  if(allIdsAreSelected(ids)){
+    ids.forEach(id =>
+      selectedIds.delete(id)
+    );
+  }else{
+    ids.forEach(id =>
+      selectedIds.add(id)
+    );
   }
+
   updateBulkBar();
+  render();
 }
+
 function bulkToggleEvent(id){
-  if(!bulkSelectMode)return;
+  if(!bulkSelectMode){
+    return;
+  }
+
   if(selectedIds.has(id)){
     selectedIds.delete(id);
-    const el=document.getElementById('bev_'+id);
-    if(el)el.classList.remove('ev-sel');
-  } else {
+  }else{
     selectedIds.add(id);
-    const el=document.getElementById('bev_'+id);
-    if(el)el.classList.add('ev-sel');
   }
+
   updateBulkBar();
+  render();
 }
+
+function bulkSelectedAction(){
+  if(bulkSelectPurpose === 'export'){
+    exportBulkEditWorkbook();
+    return;
+  }
+
+  bulkDeleteSelected();
+}
+
 function bulkDeleteSelected(){
   if(!selectedIds.size){
     showToast('Select at least one event.');
     return;
   }
 
-  const ids = Array.from(selectedIds);
-  const eventsToDelete = ids
-    .map(id =>
-      pendingChanges.find(c => c.event && c.event._id === id)?.event ||
-      EVENTS.find(e => e._id === id)
-    )
-    .filter(Boolean);
+  const ids =
+    Array.from(selectedIds);
+
+  const eventsToDelete =
+    ids
+      .map(id =>
+        pendingChanges.find(
+          change =>
+            change.event &&
+            change.event._id === id
+        )?.event ||
+        EVENTS.find(event =>
+          event._id === id
+        )
+      )
+      .filter(Boolean);
 
   if(!eventsToDelete.length){
     showToast('No matching events found.');
     return;
   }
 
-  eventsToDelete.forEach(e => {
-    stageChange('deleted', e, e);
+  eventsToDelete.forEach(event => {
+    stageChange(
+      'deleted',
+      event,
+      event
+    );
   });
 
-  showToast(`🗑 ${eventsToDelete.length} delete${eventsToDelete.length !== 1 ? 's' : ''} added to pending changes.`);
+  showToast(
+    `🗑 ${eventsToDelete.length} delete` +
+    `${eventsToDelete.length === 1 ? '' : 's'} ` +
+    `added to pending changes.`
+  );
 
   exitBulkSelect();
   openPendingReview();
 }
-
 // ── MULTI-ADD ─────────────────────────────────────────────────
 let multiAddGenerated = [];
 
@@ -10085,8 +10682,8 @@ function commitMultiAdd(){
 }
 
 // ── BULK UPLOAD ───────────────────────────────────────────────
-// Round 1: workbook parsing, tab selection, header validation, duplicate/conflict detection.
-// This round intentionally does NOT save anything to GitHub.
+// Workbook parsing, validation, new-session classification, and ID-based replacement staging.
+// Eligible rows are staged into Pending Changes before any GitHub submission.
 
 let bulkWorkbook = null;
 let bulkSelectedSheets = [];
@@ -10100,6 +10697,12 @@ function emptyBulkState(){
     partialRows: [],
     duplicateRows: [],
     conflictRows: [],
+
+    replaceRows: [],
+    unchangedRows: [],
+    unknownIdRows: [],
+    duplicateIdRows: [],
+
     skippedRows: [],
     ignoredRows: [],
     allRows: []
@@ -10262,11 +10865,57 @@ function processBulkSelectedSheets(){
       return;
     }
 
-    const rows = XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-    parseBulkSheetRows(sheetName, rows);
+    const rows =
+      XLSX.utils.sheet_to_json(
+        ws,
+        {
+          header:1,
+          defval:''
+        }
+      );
+
+    parseBulkSheetRows(
+      sheetName,
+      rows
+    );
   });
 
+  classifyParsedBulkEditRows();
   renderBulkRoundOneSummary();
+}
+
+function classifyParsedBulkEditRows(){
+  const duplicateIds =
+    workbookDuplicateIdSet();
+
+  bulkState.allRows.forEach(row => {
+    if(!row._spreadsheetId){
+      return;
+    }
+
+    const missing =
+      missingRequiredBulkValues(row);
+
+    const invalid =
+      invalidBulkValues(row);
+
+    row._issues = [
+      ...missing,
+      ...invalid
+    ];
+
+    if(row._issues.length){
+      row._status = 'partial';
+      return;
+    }
+
+    classifyBulkEditRow(
+      row,
+      duplicateIds
+    );
+  });
+
+  rebuildBulkBucketsFromAllRows();
 }
 
 function parseBulkSheetRows(sheetName, rows){
@@ -10319,9 +10968,16 @@ function parseBulkSheetRows(sheetName, rows){
       continue;
     }
 
-    const missing = missingRequiredBulkValues(parsed);
-    const invalid = invalidBulkValues(parsed);
-    parsed._issues = [...missing, ...invalid];
+    const missing =
+      missingRequiredBulkValues(parsed);
+
+    const invalid =
+      invalidBulkValues(parsed);
+
+    parsed._issues = [
+      ...missing,
+      ...invalid
+    ];
 
     if(parsed._issues.length){
       parsed._status = 'partial';
@@ -10330,7 +10986,23 @@ function parseBulkSheetRows(sheetName, rows){
       continue;
     }
 
-    const duplicateMatch = findBulkDuplicate(parsed, EVENTS);
+    /*
+      ID-bearing rows are existing-event edits.
+      Their final classification occurs after all selected
+      workbook tabs have been parsed, allowing duplicate IDs
+      across tabs to be detected safely.
+    */
+    if(parsed._spreadsheetId){
+      parsed._status = 'pending-id-check';
+      bulkState.allRows.push(parsed);
+      continue;
+    }
+
+    const duplicateMatch =
+      findBulkDuplicate(
+        parsed,
+        EVENTS
+      );
     if(duplicateMatch){
       parsed._status = 'duplicate';
       parsed._duplicateMatch = duplicateMatch;
@@ -10404,7 +11076,14 @@ function bulkHeaderKey(value){
   if(h.includes('presenter')) return 'presenter';
   if(h.includes('additional') || h.includes('information') || h.includes('info') || h.includes('note')) return 'info';
   if(h.includes('all day') || h.includes('all-day') || h === 'allday') return 'allDay';
-  if(h === 'id') return 'spreadsheetId';
+  if(
+  h === 'id' ||
+  h === 'event id' ||
+  h === 'session id' ||
+  h === '_id'
+){
+  return 'spreadsheetId';
+}
 
   return '';
 }
@@ -10428,7 +11107,7 @@ function buildBulkEventFromRow(sheetName,rowNum,row,colIdx){
     mand: normalizeBulkMand(get('mand')),
     group: cellString(get('group')),
     location: cellString(get('location')),
-    _id: '',
+    _id: cellString(get('spreadsheetId')),
     info: cellString(get('info')),
     presenter: cellString(get('presenter')),
 
@@ -10446,6 +11125,221 @@ function buildBulkEventFromRow(sheetName,rowNum,row,colIdx){
   }
 
   return event;
+}
+
+const BULK_EDIT_COMPARE_FIELDS = [
+  'mand',
+  'title',
+  'group',
+  'location',
+  'calYear',
+  'mCal',
+  'date',
+  'allDay',
+  'start',
+  'end',
+  'category',
+  'block',
+  'presenter',
+  'info'
+];
+
+function bulkComparableValue(field,value){
+  if(field === 'allDay'){
+    return value === true || truthyYes(value);
+  }
+
+  if(field === 'date'){
+    return normalizeBulkDate(value);
+  }
+
+  if(field === 'start' || field === 'end'){
+    return normalizeBulkTime(value);
+  }
+
+  if(field === 'mand'){
+    return normalizeBulkMand(value).toLowerCase();
+  }
+
+  if(field === 'block' || field === 'group'){
+    return String(value || '')
+      .split(',')
+      .map(part => part.trim())
+      .filter(Boolean)
+      .join(',')
+      .toLowerCase();
+  }
+
+  return String(value ?? '')
+    .replace(/\r\n/g,'\n')
+    .replace(/[ \t]+/g,' ')
+    .trim()
+    .toLowerCase();
+}
+
+function bulkEditChangedFields(imported,existing){
+  return BULK_EDIT_COMPARE_FIELDS.filter(field => {
+    const existingValue =
+      field === 'info'
+        ? effectiveEventAdditionalInfo(existing)
+        : existing?.[field];
+
+    return (
+      bulkComparableValue(
+        field,
+        imported?.[field]
+      ) !==
+      bulkComparableValue(
+        field,
+        existingValue
+      )
+    );
+  });
+}
+
+const BULK_EDIT_FIELD_LABELS = {
+  mand: '[MAND]',
+  title: 'Session Name',
+  group: 'Group Assigned',
+  location: 'Session Location',
+  calYear: 'Cohort Year',
+  mCal: 'Class',
+  date: 'Date',
+  allDay: 'All Day',
+  start: 'Start Time',
+  end: 'End Time',
+  category: 'Category',
+  block: 'Block / Course',
+  presenter: 'Presenter',
+  info: 'Additional Information'
+};
+
+function bulkEditDisplayValue(field,value){
+  if(field === 'allDay'){
+    return value === true || truthyYes(value) ? 'Yes' : 'No';
+  }
+
+  if((field === 'start' || field === 'end') && value){
+    const normalized = normalizeBulkTime(value);
+    return /^\d{2}:\d{2}$/.test(normalized)
+      ? fmtTime(normalized)
+      : String(value);
+  }
+
+  const clean = String(value ?? '').trim();
+  return clean || '(blank)';
+}
+
+function renderBulkChangedFields(row){
+  if(
+    row._status !== 'replace' ||
+    !row._existingEvent ||
+    !Array.isArray(row._changedFields) ||
+    !row._changedFields.length
+  ){
+    return '';
+  }
+
+  return `
+    <div class="bulk-change-list">
+      ${row._changedFields.map(field => `
+        <div class="bulk-change-item">
+          <div class="bulk-change-field">
+            ${escBulk(BULK_EDIT_FIELD_LABELS[field] || field)}
+          </div>
+          <div class="bulk-change-values">
+            <span class="bulk-change-old">
+              ${escBulk(bulkEditDisplayValue(
+                field,
+                field === 'info'
+                  ? effectiveEventAdditionalInfo(row._existingEvent)
+                  : row._existingEvent[field]
+              ))}
+            </span>
+            <span class="bulk-change-arrow">→</span>
+            <span>
+              ${escBulk(bulkEditDisplayValue(field,row[field]))}
+            </span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function existingBulkEditEvent(id){
+  const cleanId = cellString(id);
+
+  if(!cleanId) return null;
+
+  return EVENTS.find(event =>
+    event?._id === cleanId
+  ) || null;
+}
+
+function workbookDuplicateIdSet(){
+  const counts = new Map();
+
+  bulkState.allRows.forEach(row => {
+    if(row._ignored) return;
+
+    const id = cellString(row._spreadsheetId);
+    if(!id) return;
+
+    counts.set(id,(counts.get(id) || 0) + 1);
+  });
+
+  return new Set(
+    [...counts.entries()]
+      .filter(([,count]) => count > 1)
+      .map(([id]) => id)
+  );
+}
+
+function classifyBulkEditRow(parsed,duplicateIds = new Set()){
+  const spreadsheetId = cellString(parsed._spreadsheetId);
+
+  if(!spreadsheetId){
+    return false;
+  }
+
+  parsed._id = spreadsheetId;
+
+  if(duplicateIds.has(spreadsheetId)){
+    parsed._status = 'duplicate-id';
+    parsed._issues = [
+      `ID appears more than once in this workbook: ${spreadsheetId}`
+    ];
+    parsed._existingEvent = null;
+    parsed._changedFields = [];
+    return true;
+  }
+
+  const existing = existingBulkEditEvent(spreadsheetId);
+
+  if(!existing){
+    parsed._status = 'unknown-id';
+    parsed._issues = [
+      `No existing calendar event has ID ${spreadsheetId}`
+    ];
+    parsed._existingEvent = null;
+    parsed._changedFields = [];
+    return true;
+  }
+
+  parsed._existingEvent = existing;
+  parsed._changedFields = bulkEditChangedFields(parsed,existing);
+
+  if(!parsed._changedFields.length){
+    parsed._status = 'unchanged';
+    parsed._issues = [];
+    parsed._ignored = true;
+    return true;
+  }
+
+  parsed._status = 'replace';
+  parsed._issues = [];
+  return true;
 }
 
 function looksLikeBulkSessionRow(event){
@@ -10660,19 +11554,31 @@ function bulkTimeIssue(value,label){
 function renderBulkRoundOneSummary(){
   rebuildBulkBucketsFromAllRows();
 
-  const totalFlagged = bulkState.partialRows.length + bulkState.duplicateRows.length + bulkState.conflictRows.length;
-  const totalConsidered = bulkState.allRows.length;
+  const totalFlagged =
+    bulkState.partialRows.length +
+    bulkState.duplicateRows.length +
+    bulkState.conflictRows.length +
+    bulkState.unknownIdRows.length +
+    bulkState.duplicateIdRows.length;
+
   const uploadableRows = getBulkUploadableRows();
 
-  document.getElementById('bulkTotal').textContent = totalConsidered;
-  document.getElementById('bulkValid').textContent = bulkState.readyRows.length;
-  document.getElementById('bulkErrors').textContent = totalFlagged + bulkState.skippedTabs.length;
-  document.getElementById('bulkStats').style.display='flex';
+  document.getElementById('bulkTotal').textContent =
+    bulkState.allRows.length;
 
-  const btn=document.getElementById('bulkAddBtn');
-  btn.style.display='';
+  document.getElementById('bulkValid').textContent =
+    uploadableRows.length;
+
+  document.getElementById('bulkErrors').textContent =
+    totalFlagged + bulkState.skippedTabs.length;
+
+  document.getElementById('bulkStats').style.display = 'flex';
+
+  const btn = document.getElementById('bulkAddBtn');
+  btn.style.display = '';
   btn.disabled = uploadableRows.length === 0;
-  btn.textContent = `Upload Eligible Sessions (${uploadableRows.length})`;
+  btn.textContent = `Stage Eligible Changes (${uploadableRows.length})`;
+
   bulkPrimaryMode = 'uploadEligible';
   setBulkCancelText('Cancel Upload');
 
@@ -10684,10 +11590,14 @@ function renderBulkRoundOneSummary(){
     <div class="bulk-summary">
       <div class="bulk-section-title">Bulk upload preview</div>
       <p>
-        <span class="bulk-pill ok">${bulkState.readyRows.length} ready</span>
+        <span class="bulk-pill ok">${bulkState.readyRows.length} new sessions ready</span>
+        <span class="bulk-pill replace">${bulkState.replaceRows.length} replacements</span>
+        <span class="bulk-pill warn">${bulkState.unchangedRows.length} unchanged — skipped</span>
+        <span class="bulk-pill err">${bulkState.unknownIdRows.length} unknown IDs</span>
+        <span class="bulk-pill err">${bulkState.duplicateIdRows.length} duplicate IDs</span>
         <span class="bulk-pill err">${bulkState.partialRows.length} partial — blocked</span>
-        <span class="bulk-pill warn">${bulkState.duplicateRows.length} possible duplicates</span>
-        <span class="bulk-pill warn">${bulkState.conflictRows.length} possible conflicts</span>
+        <span class="bulk-pill warn">${bulkState.duplicateRows.length} possible new-session duplicates</span>
+        <span class="bulk-pill warn">${bulkState.conflictRows.length} possible new-session conflicts</span>
         <span class="bulk-pill warn">${bulkState.ignoredRows.length} ignored</span>
         <span class="bulk-pill err">${bulkState.skippedTabs.length} skipped tabs</span>
       </p>
@@ -10701,7 +11611,10 @@ function renderBulkRoundOneSummary(){
       ${skippedHtml}
 
       <div class="bulk-note">
-        No events have been added. Ready rows are eligible for upload. Duplicate and conflict rows can be included or ignored. Partial rows cannot be uploaded unless repaired.
+        Rows without IDs follow the normal new-session workflow.
+        Matching ID rows are automatically skipped when unchanged or categorized
+        as Replace when one or more fields changed. Eligible rows are staged for
+        final review before anything is submitted to GitHub.
       </div>
     </div>
   `;
@@ -10709,51 +11622,110 @@ function renderBulkRoundOneSummary(){
   renderBulkParsedTable(summaryHtml);
 }
 
-function renderBulkParsedTable(summaryHtml, displayRows = bulkState.allRows){
-  const cols=['Actions','Status','Tab','Row','MAND','Session Name','Group','Location','Class','Date','All Day','Start','End','Category','Block','Issues'];
-  let tbl=`${summaryHtml}<table><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
+function renderBulkParsedTable(summaryHtml,displayRows = bulkState.allRows){
+  const cols = [
+    'Actions','Status','ID','Changes','Tab','Row','MAND',
+    'Session Name','Group','Location','Class','Date','All Day',
+    'Start','End','Category','Block','Issues'
+  ];
 
-  displayRows.forEach((r)=>{
+  let tbl =
+    `${summaryHtml}<table><tr>` +
+    `${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
+
+  displayRows.forEach(r => {
     const i = bulkState.allRows.indexOf(r);
-    const cls = r._ignored ? 'ignored' : (r._status === 'ready' ? 'ok' : (r._status === 'partial' ? 'err' : 'warn'));
-    const issueText = bulkIssueText(r);
-    const toggleIcon = r._ignored ? '↩' : '⦸';
-    const toggleTitle = r._ignored ? 'Include this session in upload' : "Ignore and Don't Upload this session";
-    let statusText = r._ignored ? `${r._status} — ignored` : r._status;
 
-    if(!r._ignored && r._status === 'partial'){
-      statusText = '⚠ partial — will not upload';
+    let cls = 'warn';
+
+    if(r._ignored){
+      cls = 'ignored';
+    }else if(r._status === 'ready'){
+      cls = 'ok';
+    }else if(
+      r._status === 'partial' ||
+      r._status === 'unknown-id' ||
+      r._status === 'duplicate-id'
+    ){
+      cls = 'err';
+    }else if(r._status === 'replace'){
+      cls = 'replace';
     }
 
-    tbl+=`<tr class="${cls}">
-      <td>
-        <div class="bulk-row-actions">
-          <button class="bulk-action-bubble bulk-action-edit" type="button" title="Edit this imported session" onclick="openBulkRowEditor(${i})">✎</button>
-          <button class="bulk-action-bubble ${r._ignored ? 'bulk-action-include' : 'bulk-action-ignore'}" type="button" title="${escBulk(toggleTitle)}" onclick="toggleBulkRowImport(${i})">${toggleIcon}</button>
-        </div>
-      </td>
-      <td>${escBulk(statusText)}</td>
-      <td>${escBulk(r._sheetName)}</td>
-      <td>${escBulk(r._rowNum)}</td>
-      <td>${escBulk(r.mand)}</td>
-      <td>${escBulk(r.title)}</td>
-      <td>${escBulk(r.group)}</td>
-      <td>${escBulk(r.location)}</td>
-      <td>${escBulk(r.mCal)}</td>
-      <td>${escBulk(r.date)}</td>
-      <td>${isAllDayEvent(r) ? 'Yes' : ''}</td>
-      <td>${escBulk(r.start)}</td>
-      <td>${escBulk(r.end)}</td>
-      <td>${escBulk(r.category)}</td>
-      <td>${escBulk(r.block)}</td>
-      <td>${issueText}</td>
-    </tr>`;
+    const issueText = bulkIssueText(r);
+    const changeDetails = renderBulkChangedFields(r);
+
+    let statusText =
+      r._ignored ? `${r._status} — ignored` : r._status;
+
+    if(r._status === 'partial' && !r._ignored){
+      statusText = '⚠ partial — blocked';
+    }
+
+    if(r._status === 'replace' && !r._ignored){
+      statusText =
+        `✎ replace — ${r._changedFields.length} change` +
+        `${r._changedFields.length === 1 ? '' : 's'}`;
+    }
+
+    if(r._status === 'unchanged'){
+      statusText = '✓ unchanged — automatically skipped';
+    }
+
+    if(r._status === 'unknown-id' && !r._ignored){
+      statusText = '✕ unknown ID — blocked';
+    }
+
+    if(r._status === 'duplicate-id' && !r._ignored){
+      statusText = '✕ duplicate ID — blocked';
+    }
+
+    const toggleButton = r._status === 'unchanged'
+      ? ''
+      : `
+        <button
+          class="bulk-action-bubble ${r._ignored ? 'bulk-action-include' : 'bulk-action-ignore'}"
+          type="button"
+          title="${escBulk(r._ignored ? 'Include this session in upload' : "Ignore and Don't Upload this session")}"
+          onclick="toggleBulkRowImport(${i})"
+        >
+          ${r._ignored ? '↩' : '⦸'}
+        </button>
+      `;
+
+    tbl += `
+      <tr class="${cls}">
+        <td>
+          <div class="bulk-row-actions">
+            <button class="bulk-action-bubble bulk-action-edit" type="button" title="Edit this imported session" onclick="openBulkRowEditor(${i})">✎</button>
+            ${toggleButton}
+          </div>
+        </td>
+        <td>${escBulk(statusText)}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:9px">${escBulk(r._spreadsheetId)}</td>
+        <td>${changeDetails}</td>
+        <td>${escBulk(r._sheetName)}</td>
+        <td>${escBulk(r._rowNum)}</td>
+        <td>${escBulk(r.mand)}</td>
+        <td>${escBulk(r.title)}</td>
+        <td>${escBulk(r.group)}</td>
+        <td>${escBulk(r.location)}</td>
+        <td>${escBulk(r.mCal)}</td>
+        <td>${escBulk(r.date)}</td>
+        <td>${isAllDayEvent(r) ? 'Yes' : ''}</td>
+        <td>${escBulk(r.start)}</td>
+        <td>${escBulk(r.end)}</td>
+        <td>${escBulk(r.category)}</td>
+        <td>${escBulk(r.block)}</td>
+        <td>${issueText}</td>
+      </tr>
+    `;
   });
 
-  tbl+='</table>';
+  tbl += '</table>';
 
-  document.getElementById('bulkPreview').innerHTML=tbl;
-  document.getElementById('bulkPreview').style.display='';
+  document.getElementById('bulkPreview').innerHTML = tbl;
+  document.getElementById('bulkPreview').style.display = '';
 }
 
 function toggleBulkRowImport(i){
@@ -10764,12 +11736,18 @@ function toggleBulkRowImport(i){
     return;
   }
 
+  if(row._status === 'unchanged'){
+    showToast('✓ This row exactly matches the calendar and is automatically skipped.');
+    return;
+  }
+
   row._ignored = !row._ignored;
 
   if(!row._ignored){
     reclassifyBulkEditedRow(row);
   }
 
+  classifyParsedBulkEditRows();
   rebuildBulkBucketsFromAllRows();
   renderBulkRoundOneSummary();
 }
@@ -10795,6 +11773,7 @@ function openBulkRowEditor(i){
     <div class="bulk-summary">
       <div class="bulk-section-title">${escBulk(row._sheetName)} row ${escBulk(row._rowNum)}</div>
 
+      ${bulkRowEditInput(i,'_spreadsheetId','ID (leave blank for a new session)',row._spreadsheetId)}
       ${bulkRowEditInput(i,'mand','[MAND]',row.mand)}
       ${bulkRowEditInput(i,'title','Session Name',row.title)}
       ${bulkRowEditInput(i,'mCal','Class',row.mCal)}
@@ -10854,10 +11833,11 @@ function saveBulkRowEdit(i){
     return;
   }
 
-  document.querySelectorAll(`.bulkRowEditInput[data-row="${i}"]`).forEach(input=>{
-    const key=input.dataset.key;
-    row[key]=input.value.trim();
-  });
+  document
+    .querySelectorAll(`.bulkRowEditInput[data-row="${i}"]`)
+    .forEach(input => {
+      row[input.dataset.key] = input.value.trim();
+    });
 
   row.mand = normalizeBulkMand(row.mand);
   row.date = normalizeBulkDate(row.date);
@@ -10870,12 +11850,18 @@ function saveBulkRowEdit(i){
     row.start = normalizeBulkTime(row.start);
     row.end = normalizeBulkTime(row.end);
   }
-  
 
-  if(!row._ignored){
-    reclassifyBulkEditedRow(row);
-  }
+  row._spreadsheetId = cellString(row._spreadsheetId);
+  row._id = row._spreadsheetId;
 
+  /*
+    Editing an automatically skipped unchanged row means the user
+    is intentionally revising it.
+  */
+  row._ignored = false;
+
+  reclassifyBulkEditedRow(row);
+  classifyParsedBulkEditRows();
   rebuildBulkBucketsFromAllRows();
   renderBulkRoundOneSummary();
 }
@@ -11007,16 +11993,28 @@ function skipBulkPartialRow(i){
 function reclassifyBulkEditedRow(row){
   const missing = missingRequiredBulkValues(row);
   const invalid = invalidBulkValues(row);
+
   row._issues = [...missing, ...invalid];
   row._duplicateMatch = null;
   row._conflictMatch = null;
+  row._existingEvent = null;
+  row._changedFields = [];
 
   if(row._issues.length){
     row._status = 'partial';
     return;
   }
 
-  const duplicateMatch = findBulkDuplicate(row, EVENTS);
+  row._spreadsheetId = cellString(row._spreadsheetId || row._id);
+  row._id = row._spreadsheetId;
+
+  if(row._spreadsheetId){
+    classifyBulkEditRow(row,workbookDuplicateIdSet());
+    return;
+  }
+
+  const duplicateMatch = findBulkDuplicate(row,EVENTS);
+
   if(duplicateMatch){
     row._status = 'duplicate';
     row._duplicateMatch = duplicateMatch;
@@ -11026,10 +12024,12 @@ function reclassifyBulkEditedRow(row){
   const comparisonRows = bulkState.allRows.filter(r =>
     r !== row &&
     !r._ignored &&
-    r._status === 'ready'
+    ['ready','duplicate','conflict'].includes(r._status)
   );
 
-  const conflictMatch = findBulkConflict(row, EVENTS.concat(comparisonRows));
+  const conflictMatch =
+    findBulkConflict(row,EVENTS.concat(comparisonRows));
+
   if(conflictMatch){
     row._status = 'conflict';
     row._conflictMatch = conflictMatch;
@@ -11044,36 +12044,79 @@ function rebuildBulkBucketsFromAllRows(){
   bulkState.partialRows = [];
   bulkState.duplicateRows = [];
   bulkState.conflictRows = [];
-  bulkState.skippedRows = [];
-  bulkState.ignoredRows = [];
 
-  bulkState.allRows.forEach(r=>{
-    if(r._ignored){
-      bulkState.ignoredRows.push(r);
+  bulkState.replaceRows = [];
+  bulkState.unchangedRows = [];
+  bulkState.unknownIdRows = [];
+  bulkState.duplicateIdRows = [];
+
+  bulkState.allRows.forEach(row => {
+    if(row._status === 'ready'){
+      bulkState.readyRows.push(row);
       return;
     }
 
-    if(r._status === 'ready') bulkState.readyRows.push(r);
-    else if(r._status === 'partial') bulkState.partialRows.push(r);
-    else if(r._status === 'duplicate') bulkState.duplicateRows.push(r);
-    else if(r._status === 'conflict') bulkState.conflictRows.push(r);
-    else if(r._status === 'skipped') bulkState.skippedRows.push(r);
+    if(row._status === 'partial'){
+      bulkState.partialRows.push(row);
+      return;
+    }
+
+    if(row._status === 'duplicate'){
+      bulkState.duplicateRows.push(row);
+      return;
+    }
+
+    if(row._status === 'conflict'){
+      bulkState.conflictRows.push(row);
+      return;
+    }
+
+    if(row._status === 'replace'){
+      bulkState.replaceRows.push(row);
+      return;
+    }
+
+    if(row._status === 'unchanged'){
+      bulkState.unchangedRows.push(row);
+      return;
+    }
+
+    if(row._status === 'unknown-id'){
+      bulkState.unknownIdRows.push(row);
+      return;
+    }
+
+    if(row._status === 'duplicate-id'){
+      bulkState.duplicateIdRows.push(row);
+    }
   });
 }
 
 function bulkIssueText(r){
-  if(r._status === 'ready') return '✓';
+  if(r._status === 'ready') return '✓ New session';
 
-    if(r._status === 'partial'){
-      return '⚠ ' + escBulk(r._issues.join('; '));
-    }
+  if(r._status === 'replace'){
+    return `Will replace the existing session while preserving ID ${escBulk(r._spreadsheetId)}`;
+  }
+
+  if(r._status === 'unchanged'){
+    return 'Exact match — no calendar change will be staged';
+  }
+
+  if(r._status === 'partial'){
+    return '⚠ ' + escBulk((r._issues || []).join('; '));
+  }
 
   if(r._status === 'duplicate'){
-    return `Possible duplicate of existing event: ${escBulk(r._duplicateMatch.title || '')}`;
+    return `Possible duplicate of existing event: ${escBulk(r._duplicateMatch?.title || '')}`;
   }
 
   if(r._status === 'conflict'){
-    return `Possible overlap with: ${escBulk(r._conflictMatch.title || '')} (${escBulk(r._conflictMatch.start || '')}–${escBulk(r._conflictMatch.end || '')})`;
+    return `Possible overlap with: ${escBulk(r._conflictMatch?.title || '')} (${escBulk(r._conflictMatch?.start || '')}–${escBulk(r._conflictMatch?.end || '')})`;
+  }
+
+  if(r._status === 'unknown-id' || r._status === 'duplicate-id'){
+    return '✕ ' + escBulk((r._issues || []).join('; '));
   }
 
   return '';
@@ -11093,9 +12136,9 @@ function renderBulkMessage(title,bodyHtml){
 }
 
 function getBulkUploadableRows(){
-  return bulkState.allRows.filter(r =>
-    !r._ignored &&
-    ['ready','duplicate','conflict'].includes(r._status)
+  return bulkState.allRows.filter(row =>
+    !row._ignored &&
+    ['ready','duplicate','conflict','replace'].includes(row._status)
   );
 }
 
@@ -11140,43 +12183,45 @@ function renderBulkUploadGate(){
   rebuildBulkBucketsFromAllRows();
 
   const uploadableRows = getBulkUploadableRows();
-  const partialCount = bulkState.partialRows.length;
-  const duplicateCount = bulkState.duplicateRows.length;
-  const conflictCount = bulkState.conflictRows.length;
+  const newRows = uploadableRows.filter(row => row._status !== 'replace');
+  const replaceRows = uploadableRows.filter(row => row._status === 'replace');
 
   const warningHtml = `
     <div class="bulk-summary">
-      <div class="bulk-section-title">Upload Eligible Sessions</div>
+      <div class="bulk-section-title">Stage Eligible Calendar Changes</div>
 
       <p>
-        <span class="bulk-pill ok">${uploadableRows.length} eligible</span>
-        <span class="bulk-pill warn">${partialCount} partial excluded</span>
-        <span class="bulk-pill warn">${duplicateCount} duplicate warnings</span>
-        <span class="bulk-pill warn">${conflictCount} conflict warnings</span>
-        <span class="bulk-pill warn">${bulkState.ignoredRows.length} ignored</span>
+        <span class="bulk-pill ok">${newRows.length} new sessions</span>
+        <span class="bulk-pill replace">${replaceRows.length} replacements</span>
+        <span class="bulk-pill warn">${bulkState.unchangedRows.length} unchanged skipped</span>
+        <span class="bulk-pill warn">${bulkState.partialRows.length} partial excluded</span>
+        <span class="bulk-pill warn">${bulkState.duplicateRows.length} duplicate warnings</span>
+        <span class="bulk-pill warn">${bulkState.conflictRows.length} conflict warnings</span>
       </p>
 
       <div class="bulk-note">
-        Eligible sessions will be assigned automatically to the appropriate semester JSON. ICS feeds will regenerate after the save completes.
-      </div>
-
-      <div class="bulk-note" style="margin-top:10px;color:#8a4a00">
-        Partial rows are not eligible for upload. Duplicate and conflict rows are eligible only if they have not been ignored.
+        Confirming this step does not save directly to GitHub.
+        New sessions and replacements are added to Pending Changes,
+        where they can be reviewed, edited, ignored, or submitted through
+        the standard Review &amp; Submit Changes workflow.
       </div>
 
       <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-        <button class="bulk-btn bulk-btn-primary" id="bulkCommitBtn" type="button" onclick="commitBulkUpload()">Confirm Upload</button>
+        <button class="bulk-btn bulk-btn-primary" id="bulkCommitBtn" type="button" onclick="commitBulkUpload()">
+          Stage ${uploadableRows.length} Change${uploadableRows.length === 1 ? '' : 's'}
+        </button>
         <button class="bulk-btn bulk-btn-cancel" type="button" onclick="renderBulkRoundOneSummary()">Back to Summary</button>
       </div>
     </div>
   `;
 
-  renderBulkParsedTable(warningHtml, uploadableRows);
+  renderBulkParsedTable(warningHtml,uploadableRows);
 
-  const btn=document.getElementById('bulkAddBtn');
-  btn.style.display='';
-  btn.disabled=false;
-  btn.textContent='Back to Summary';
+  const btn = document.getElementById('bulkAddBtn');
+  btn.style.display = '';
+  btn.disabled = false;
+  btn.textContent = 'Back to Summary';
+
   bulkPrimaryMode = 'backToBulkSummary';
   setBulkCancelText('Back to Preview');
 }
@@ -11187,98 +12232,71 @@ async function commitBulkUpload(){
   const uploadableRows = getBulkUploadableRows();
 
   if(!uploadableRows.length){
-    showToast('⚠️ No eligible sessions to upload.');
+    showToast('⚠️ No eligible calendar changes to stage.');
     return;
   }
 
-  const btn = document.getElementById('bulkCommitBtn');
-  if(btn){
-    btn.textContent = 'Saving to GitHub...';
-    btn.disabled = true;
-  }
+  const newRows = uploadableRows.filter(row => row._status !== 'replace');
+  const replaceRows = uploadableRows.filter(row => row._status === 'replace');
 
   try{
-    EVENTS = await fetchLatestEventsFromGitHub();
-
-    const pendingEvents = uploadableRows.map(row => cleanBulkRowForSave(row));
-
-    const outOfSemester =
-      pendingEvents.filter(event =>
-        !automaticSemesterForEvent(event)
-      );
-
-    if(outOfSemester.length){
-      showToast(
-        activeSemesterWarningMessage(
-          outOfSemester[0].date,
-          outOfSemester[0].mCal
-        )
-      );
-
-      if(btn){
-        btn.textContent = 'Confirm Upload';
-        btn.disabled = false;
-      }
-
-      return;
-    }
-    const affectedFiles =
-      new Set();
-
-    pendingEvents.forEach(event => {
-      const destination =
-        automaticSemesterForEvent(event);
+    const preparedNewEvents = newRows.map(row => {
+      const event = cleanBulkRowForSave(row);
+      const destination = automaticSemesterForEvent(event);
 
       if(!destination){
+        throw new Error(activeSemesterWarningMessage(event.date,event.mCal));
+      }
+
+      return {
+        ...event,
+        _semesterId: destination.id,
+        _sourceFile: destination.file
+      };
+    });
+
+    const preparedReplacements = replaceRows.map(row => {
+      const existing = existingBulkEditEvent(row._spreadsheetId);
+
+      if(!existing){
         throw new Error(
-          `No semester storage exists for ` +
-          `"${event.title}" on ${event.date}.`
+          `The event with ID ${row._spreadsheetId} is no longer loaded. Reload the calendar and import the workbook again.`
         );
       }
 
-      event._semesterId =
-        destination.id;
+      const imported = cleanBulkRowForSave(row);
 
-      event._sourceFile =
-        destination.file;
+      let updated = {
+        ...cloneEventForPending(existing),
+        ...imported,
+        _id: existing._id,
+        created: existing.created || imported.created || '',
+        updated: new Date().toISOString()
+      };
 
-      affectedFiles.add(
-        destination.file
-      );
+      updated = routeEditedEventByDateAndClass(updated,existing);
 
-      event._id =
-        generateUniqueId(
-          EVENTS.concat(pendingEvents)
-        );
+      const dateChanged = updated.date !== existing.date;
+      const classChanged = updated.mCal !== existing.mCal;
 
-      EVENTS.push(event);
+      if((dateChanged || classChanged) && !automaticSemesterForEvent(updated)){
+        throw new Error(activeSemesterWarningMessage(updated.date,updated.mCal));
+      }
+
+      return {existing,updated};
     });
 
-    const saveResult =
-      await saveEventsToGitHub(
-        affectedFiles
-      );
-
-    addLog('added',{
-      title:`${pendingEvents.length} events (bulk upload)`,
-      date:pendingEvents[0].date,
-      start:pendingEvents[0].start,
-      end:pendingEvents[0].end,
-      category:'Bulk Upload'
+    preparedNewEvents.forEach(event => {
+      stageChange('added',event,null);
     });
 
-    if(saveResult.icsResult?.ok){
-      showToast(
-        `✅ ${pendingEvents.length} sessions uploaded — ` +
-        `live for everyone!`
-      );
-    }else{
-      showToast(
-        `⚠️ ${pendingEvents.length} sessions were saved, ` +
-        `but ICS regeneration failed. Use Regenerate ICS Feeds ` +
-        `after resolving the error.`
-      );
-    }
+    preparedReplacements.forEach(({existing,updated}) => {
+      stageChange('edited',updated,existing);
+    });
+
+    const stagedCount =
+      preparedNewEvents.length +
+      preparedReplacements.length;
 
     bulkWorkbook = null;
     bulkSelectedSheets = [];
@@ -11287,23 +12305,17 @@ async function commitBulkUpload(){
 
     closeBulkUpload();
 
-    WEEKS = buildWeeks();
-    buildWeekDrawer();
-    updateTabCounts();
-    render();
-    }catch(err){
-    const msg = String(err && err.message ? err.message : err);
-    showToast('❌ '+msg);
+    showToast(
+      `✅ ${stagedCount} bulk change` +
+      `${stagedCount === 1 ? '' : 's'} staged for review.`
+    );
 
-    if(btn){
-      if(msg.includes('Another save happened at the same time')){
-        btn.textContent = 'Confirm Upload';
-        btn.disabled = false;
-      } else {
-        btn.textContent = 'Reload before retrying';
-        btn.disabled = true;
-      }
-    }
+    openPendingReview();
+  }catch(err){
+    showToast('❌ ' + String(err?.message || err));
+
+    const btn = document.getElementById('bulkCommitBtn');
+    if(btn) btn.disabled = false;
   }
 }
 
@@ -11317,11 +12329,25 @@ function cleanBulkRowForSave(row){
     _ignored,
     _duplicateMatch,
     _conflictMatch,
+    _existingEvent,
+    _changedFields,
     ...clean
   } = row;
 
-  clean.weekNum = clean.date ? weekNumFromDate(clean.date) : '';
-  clean.week = clean.weekNum ? `Week ${clean.weekNum}` : '';
+  clean._id = _spreadsheetId || '';
+
+  clean.weekNum =
+    clean.date ? weekNumFromDate(clean.date) : '';
+
+  clean.week =
+    clean.weekNum ? `Week ${clean.weekNum}` : '';
+
+  clean.allDay = clean.allDay === true;
+
+  if(clean.allDay){
+    clean.start = '';
+    clean.end = '';
+  }
 
   return clean;
 }
