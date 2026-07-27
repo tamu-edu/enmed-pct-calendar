@@ -7011,10 +7011,25 @@ function safeExportText(value){
   return String(value || '').replace(/\s+/g,' ').trim();
 }
 
+function bulkExportSessionName(event){
+  return safeExportText(event?.title)
+    .replace(/^(?:\s*\[MAND\]\s*)+/i,'')
+    .trim();
+}
+
 function exportFilteredListToExcel(){
   const evs = filteredListEvents().sort((a,b) =>
     parseMDY(a.date) - parseMDY(b.date) ||
-    (isAllDayEvent(a) ? -1 : timeToMinutes(a.start)) - (isAllDayEvent(b) ? -1 : timeToMinutes(b.start))
+    (
+      isAllDayEvent(a)
+        ? -1
+        : timeToMinutes(a.start)
+    ) -
+    (
+      isAllDayEvent(b)
+        ? -1
+        : timeToMinutes(b.start)
+    )
   );
 
   if(!evs.length){
@@ -7022,38 +7037,94 @@ function exportFilteredListToExcel(){
     return;
   }
 
-  const rows = evs.map(e => ({
-    Date: e.date || '',
-    Day: e.date ? parseMDY(e.date).toLocaleDateString('en-US',{weekday:'long'}) : '',
-    Start: isAllDayEvent(e) ? 'All day' : (e.start || ''),
-    End: isAllDayEvent(e) ? 'All day' : (e.end || ''),
-    Title: safeExportText(displayTitle(e)),
-    Category: safeExportText(listDisplayLabel('category',e.category)),
-    Calendar: safeExportText(e.mCal),
-    Cohort: safeExportText(e.calYear),
-    Course_Block: safeExportText(blockDisplay(e.block)),
-    Group: safeExportText(groupDisplay(e.group)),
-    Mandatory: e.mand === 'Yes' ? 'Yes' : 'No',
-    Presenter: safeExportText(e.presenter),
-    Location: safeExportText(e.location),
-    Additional_Information: safeExportText(e.info || e.desc)
+  /*
+    Viewer export:
+    Uses the calendar's canonical bulk-upload headings, but excludes
+    replacement IDs and backend-only editing context.
+  */
+  const rows = evs.map(event => ({
+    '[MAND]':
+      event.mand === 'Yes' ? 'Yes' : 'No',
+
+    'Session Name':
+      bulkExportSessionName(event),
+
+    'Group Assigned':
+      safeExportText(event.group),
+
+    'Session Location':
+      safeExportText(event.location),
+
+    Class:
+      safeExportText(event.mCal),
+
+    Date:
+      event.date || '',
+
+    'All Day':
+      isAllDayEvent(event) ? 'Yes' : '',
+
+    'Start Time':
+      isAllDayEvent(event) ? '' : (event.start || ''),
+
+    'End Time':
+      isAllDayEvent(event) ? '' : (event.end || ''),
+
+    Category:
+      safeExportText(event.category),
+
+    'Block / Course':
+      safeExportText(event.block),
+
+    Presenter:
+      safeExportText(event.presenter),
+
+    'Additional Information':
+      safeExportText(
+        effectiveEventAdditionalInfo(event)
+      )
   }));
 
-  const ws = XLSX.utils.json_to_sheet(rows);
-  const wb = XLSX.utils.book_new();
+  const ws =
+    XLSX.utils.json_to_sheet(rows);
 
-  XLSX.utils.book_append_sheet(wb, ws, 'Filtered Schedule');
+  const wb =
+    XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    wb,
+    ws,
+    'Sessions'
+  );
 
   ws['!cols'] = [
-    {wch:12}, {wch:12}, {wch:10}, {wch:10}, {wch:36},
-    {wch:18}, {wch:16}, {wch:10}, {wch:24}, {wch:18},
-    {wch:12}, {wch:24}, {wch:22}, {wch:50}
+    {wch:10},
+    {wch:38},
+    {wch:22},
+    {wch:24},
+    {wch:16},
+    {wch:12},
+    {wch:10},
+    {wch:12},
+    {wch:12},
+    {wch:20},
+    {wch:26},
+    {wch:26},
+    {wch:55}
   ];
 
-  const stamp = new Date().toISOString().slice(0,10);
-  XLSX.writeFile(wb, `EnMed_Filtered_Schedule_${stamp}.xlsx`);
+  const stamp =
+    new Date().toISOString().slice(0,10);
 
-  showToast(`Exported ${evs.length} event${evs.length === 1 ? '' : 's'}.`);
+  XLSX.writeFile(
+    wb,
+    `EnMed_Bulk_Export_Viewer_${stamp}.xlsx`
+  );
+
+  showToast(
+    `Exported ${evs.length} event` +
+    `${evs.length === 1 ? '' : 's'}.`
+  );
 }
 
 
@@ -7097,7 +7168,10 @@ function bulkEditExportRows(events){
           ? semesterById(event._semesterId)
           : eventTargetSemester(event);
 
-      return !!semester && semesterIsEditable(semester);
+      return (
+        !!semester &&
+        semesterIsEditable(semester)
+      );
     })
     .sort((a,b) =>
       parseMDY(a.date) - parseMDY(b.date) ||
@@ -7115,33 +7189,51 @@ function bulkEditExportRows(events){
         String(b.title || '')
       )
     )
-    .map(event => {
-      const semester =
-        event._semesterId
-          ? semesterById(event._semesterId)
-          : eventTargetSemester(event);
+    .map(event => ({
+      ID:
+        event._id || '',
 
-      return {
-        ID: event._id || '',
-        Semester: semester?.name || semester?.id || '',
-        '[MAND]': event.mand || 'No',
-        'Session Name': safeExportText(event.title),
-        'Group Assigned': safeExportText(event.group),
-        'Session Location': safeExportText(event.location),
-        'Cohort Year': safeExportText(event.calYear),
-        Class: safeExportText(event.mCal),
-        Date: event.date || '',
-        'All Day': isAllDayEvent(event) ? 'Yes' : '',
-        'Start Time': isAllDayEvent(event) ? '' : (event.start || ''),
-        'End Time': isAllDayEvent(event) ? '' : (event.end || ''),
-        Category: safeExportText(event.category),
-        'Block / Course': safeExportText(event.block),
-        Presenter: safeExportText(event.presenter),
-        'Additional Information': safeExportText(
+      '[MAND]':
+        event.mand === 'Yes' ? 'Yes' : 'No',
+
+      'Session Name':
+        bulkExportSessionName(event),
+
+      'Group Assigned':
+        safeExportText(event.group),
+
+      'Session Location':
+        safeExportText(event.location),
+
+      Class:
+        safeExportText(event.mCal),
+
+      Date:
+        event.date || '',
+
+      'All Day':
+        isAllDayEvent(event) ? 'Yes' : '',
+
+      'Start Time':
+        isAllDayEvent(event) ? '' : (event.start || ''),
+
+      'End Time':
+        isAllDayEvent(event) ? '' : (event.end || ''),
+
+      Category:
+        safeExportText(event.category),
+
+      'Block / Course':
+        safeExportText(event.block),
+
+      Presenter:
+        safeExportText(event.presenter),
+
+      'Additional Information':
+        safeExportText(
           effectiveEventAdditionalInfo(event)
         )
-      };
-    });
+    }));
 }
 
 function selectedBulkEditEvents(){
@@ -7200,32 +7292,30 @@ function exportBulkEditWorkbook(){
   XLSX.utils.book_append_sheet(
     wb,
     ws,
-    'Bulk Edit'
+    'Sessions'
   );
 
-  ws['!cols'] = [
-    {wch:38},
-    {wch:24},
-    {wch:10},
-    {wch:38},
-    {wch:22},
-    {wch:24},
-    {wch:12},
-    {wch:16},
-    {wch:12},
-    {wch:10},
-    {wch:12},
-    {wch:12},
-    {wch:20},
-    {wch:26},
-    {wch:26},
-    {wch:55}
-  ];
+ws['!cols'] = [
+  {wch:38},
+  {wch:10},
+  {wch:38},
+  {wch:22},
+  {wch:24},
+  {wch:16},
+  {wch:12},
+  {wch:10},
+  {wch:12},
+  {wch:12},
+  {wch:20},
+  {wch:26},
+  {wch:26},
+  {wch:55}
+];
 
   const instructions = [
     {
       Instruction:
-        'Edit event values on the Bulk Edit tab. Do not change, delete, or reuse IDs.'
+        'Edit event values on the Sessions tab. Do not change, delete, or reuse IDs.'
     },
     {
       Instruction:
@@ -7263,7 +7353,7 @@ function exportBulkEditWorkbook(){
 
   XLSX.writeFile(
     wb,
-    `EnMed_Bulk_Edit_${stamp}.xlsx`
+    `EnMed_Bulk_Export_Edit_${stamp}.xlsx`
   );
 
   showToast(
@@ -8179,7 +8269,7 @@ function formHTML(e,isEdit){
       <option value="2029" ${(!e||e.calYear==='2029')?'selected':''}>2029</option>
       <option value="2030" ${(e&&e.calYear==='2030')?'selected':''}>2030</option>
       <option value="2031" ${(e&&e.calYear==='2031')?'selected':''}>2031</option>
-      <option value="2032" ${(e&&e.calYear==='2032')?'selected':''}>2032</option>
+      <option value="2032"e&&e.calYear==='2032')?'selected':''}>2032</option>
       <option value="2033" ${(e&&e.calYear==='2033')?'selected':''}>2033</option>
       <option value="2034" ${(e&&e.calYear==='2034')?'selected':''}>2034</option>
       <option value="2035" ${(e&&e.calYear==='2035')?'selected':''}>2035</option>
@@ -10843,12 +10933,17 @@ function bulkPrimaryAction(){
     return;
   }
 
-  if(bulkPrimaryMode === 'uploadEligible'){
-    renderBulkUploadGate();
-    return;
-  }
+if(bulkPrimaryMode === 'uploadEligible'){
+  renderBulkUploadGate();
+  return;
+}
 
-  showToast('No save yet. This pass only previews the upload workflow.');
+if(bulkPrimaryMode === 'commitEligible'){
+  commitBulkUpload();
+  return;
+}
+
+showToast('⚠️ No bulk upload action is currently available.');
 }
 
 function processBulkSelectedSheets(){
@@ -11132,7 +11227,6 @@ const BULK_EDIT_COMPARE_FIELDS = [
   'title',
   'group',
   'location',
-  'calYear',
   'mCal',
   'date',
   'allDay',
@@ -11202,7 +11296,6 @@ const BULK_EDIT_FIELD_LABELS = {
   title: 'Session Name',
   group: 'Group Assigned',
   location: 'Session Location',
-  calYear: 'Cohort Year',
   mCal: 'Class',
   date: 'Date',
   allDay: 'All Day',
@@ -12183,46 +12276,58 @@ function renderBulkUploadGate(){
   rebuildBulkBucketsFromAllRows();
 
   const uploadableRows = getBulkUploadableRows();
-  const newRows = uploadableRows.filter(row => row._status !== 'replace');
-  const replaceRows = uploadableRows.filter(row => row._status === 'replace');
+  const newRows =
+    uploadableRows.filter(row => row._status !== 'replace');
+  const replaceRows =
+    uploadableRows.filter(row => row._status === 'replace');
 
   const warningHtml = `
     <div class="bulk-summary">
-      <div class="bulk-section-title">Stage Eligible Calendar Changes</div>
+      <div class="bulk-section-title">
+        Confirm Eligible Calendar Changes
+      </div>
 
       <p>
-        <span class="bulk-pill ok">${newRows.length} new sessions</span>
-        <span class="bulk-pill replace">${replaceRows.length} replacements</span>
-        <span class="bulk-pill warn">${bulkState.unchangedRows.length} unchanged skipped</span>
-        <span class="bulk-pill warn">${bulkState.partialRows.length} partial excluded</span>
-        <span class="bulk-pill warn">${bulkState.duplicateRows.length} duplicate warnings</span>
-        <span class="bulk-pill warn">${bulkState.conflictRows.length} conflict warnings</span>
+        <span class="bulk-pill ok">
+          ${newRows.length} new sessions
+        </span>
+
+        <span class="bulk-pill replace">
+          ${replaceRows.length} replacements
+        </span>
+
+        <span class="bulk-pill warn">
+          ${bulkState.unchangedRows.length} unchanged skipped
+        </span>
+
+        <span class="bulk-pill warn">
+          ${bulkState.partialRows.length} partial excluded
+        </span>
       </p>
 
       <div class="bulk-note">
-        Confirming this step does not save directly to GitHub.
-        New sessions and replacements are added to Pending Changes,
-        where they can be reviewed, edited, ignored, or submitted through
-        the standard Review &amp; Submit Changes workflow.
-      </div>
-
-      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-        <button class="bulk-btn bulk-btn-primary" id="bulkCommitBtn" type="button" onclick="commitBulkUpload()">
-          Stage ${uploadableRows.length} Change${uploadableRows.length === 1 ? '' : 's'}
-        </button>
-        <button class="bulk-btn bulk-btn-cancel" type="button" onclick="renderBulkRoundOneSummary()">Back to Summary</button>
+        Click the Stage Changes button below to add these new
+        sessions and replacements to Pending Changes. This does
+        not submit anything to GitHub yet.
       </div>
     </div>
   `;
 
-  renderBulkParsedTable(warningHtml,uploadableRows);
+  renderBulkParsedTable(
+    warningHtml,
+    uploadableRows
+  );
 
-  const btn = document.getElementById('bulkAddBtn');
+  const btn =
+    document.getElementById('bulkAddBtn');
+
   btn.style.display = '';
-  btn.disabled = false;
-  btn.textContent = 'Back to Summary';
+  btn.disabled = uploadableRows.length === 0;
+  btn.textContent =
+    `Stage ${uploadableRows.length} Change` +
+    `${uploadableRows.length === 1 ? '' : 's'}`;
 
-  bulkPrimaryMode = 'backToBulkSummary';
+  bulkPrimaryMode = 'commitEligible';
   setBulkCancelText('Back to Preview');
 }
 
@@ -12230,11 +12335,15 @@ async function commitBulkUpload(){
   rebuildBulkBucketsFromAllRows();
 
   const uploadableRows = getBulkUploadableRows();
+  const btn = document.getElementById('bulkAddBtn');
 
   if(!uploadableRows.length){
     showToast('⚠️ No eligible calendar changes to stage.');
     return;
   }
+
+  btn.disabled = true;
+  btn.textContent = 'Staging Changes...';
 
   const newRows = uploadableRows.filter(row => row._status !== 'replace');
   const replaceRows = uploadableRows.filter(row => row._status === 'replace');
@@ -12265,6 +12374,13 @@ async function commitBulkUpload(){
       }
 
       const imported = cleanBulkRowForSave(row);
+
+      /*
+        Cohort Year is obsolete and is no longer included in bulk-edit
+        exports. Preserve any existing legacy value rather than clearing it
+        when an exported row is uploaded as a replacement.
+      */
+      delete imported.calYear;
 
       let updated = {
         ...cloneEventForPending(existing),
@@ -12314,8 +12430,12 @@ async function commitBulkUpload(){
   }catch(err){
     showToast('❌ ' + String(err?.message || err));
 
-    const btn = document.getElementById('bulkCommitBtn');
-    if(btn) btn.disabled = false;
+  if(btn){
+    btn.disabled = false;
+    btn.textContent =
+      `Stage ${uploadableRows.length} Change` +
+      `${uploadableRows.length === 1 ? '' : 's'}`;
+  }
   }
 }
 
