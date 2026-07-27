@@ -804,7 +804,7 @@
     "updated": "2026-07-27T15:46:52.645Z"
   },
   {
-    "title": "[MAND] TBL #1",
+    "title": "TBL #1",
     "date": "09/02/2026",
     "start": "10:00",
     "end": "11:30",
@@ -812,7 +812,7 @@
     "block": "Renal",
     "weekNum": 19,
     "week": "Week 19",
-    "desc": "",
+    "desc": "TBL #1",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
@@ -826,7 +826,7 @@
     "updated": "2026-07-27T15:46:52.646Z"
   },
   {
-    "title": "[MAND] Exam #1 Check-In",
+    "title": "Exam #1 Check-In",
     "date": "09/04/2026",
     "start": "12:45",
     "end": "12:55",
@@ -834,10 +834,10 @@
     "block": "Renal",
     "weekNum": 19,
     "week": "Week 19",
-    "desc": "",
+    "desc": "Exam #1 Check-In",
     "calYear": "2029",
     "mCal": "M2",
-    "mand": "Yes",
+    "mand": "No",
     "group": "All Students",
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "5051226_9",
@@ -845,10 +845,12 @@
     "presenter": "",
     "allDay": false,
     "created": "",
-    "updated": "2026-07-27T15:46:52.649Z"
+    "updated": "2026-07-27T15:46:52.649Z",
+    "examPairId": "8c1d1296-e90b-419d-b96f-83a50998ac18",
+    "parentExamId": "5051226_10"
   },
   {
-    "title": "[MAND] Exam #1",
+    "title": "Exam #1",
     "date": "09/04/2026",
     "start": "13:00",
     "end": "15:30",
@@ -856,7 +858,7 @@
     "block": "Renal",
     "weekNum": 19,
     "week": "Week 19",
-    "desc": "",
+    "desc": "Exam #1",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
@@ -867,7 +869,8 @@
     "presenter": "",
     "allDay": false,
     "created": "",
-    "updated": "2026-07-27T15:46:52.650Z"
+    "updated": "2026-07-27T15:46:52.650Z",
+    "examPairId": "8c1d1296-e90b-419d-b96f-83a50998ac18"
   },
   {
     "title": "Pathology Active Learning",
@@ -914,7 +917,7 @@
     "updated": "2026-07-27T15:46:52.653Z"
   },
   {
-    "title": "[MAND] TBL #2",
+    "title": "TBL #2",
     "date": "09/09/2026",
     "start": "10:00",
     "end": "11:30",
@@ -922,7 +925,7 @@
     "block": "Renal",
     "weekNum": 20,
     "week": "Week 20",
-    "desc": "",
+    "desc": "TBL #2",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
@@ -1024,7 +1027,7 @@
     "updated": "2026-07-27T15:46:52.660Z"
   },
   {
-    "title": "[MAND] Exam #2 Check-In",
+    "title": "Exam #2 Check-In",
     "date": "09/18/2026",
     "start": "07:45",
     "end": "07:55",
@@ -1032,10 +1035,10 @@
     "block": "Renal",
     "weekNum": 21,
     "week": "Week 21",
-    "desc": "",
+    "desc": "Exam #2 Check-In",
     "calYear": "2029",
     "mCal": "M2",
-    "mand": "Yes",
+    "mand": "No",
     "group": "All Students",
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "5051226_19",
@@ -1043,10 +1046,12 @@
     "presenter": "",
     "allDay": false,
     "created": "",
-    "updated": "2026-07-27T15:46:52.666Z"
+    "updated": "2026-07-27T15:46:52.666Z",
+    "examPairId": "8a8249bd-c053-46e4-b71b-4e5be4a9ddb1",
+    "parentExamId": "5051226_20"
   },
   {
-    "title": "[MAND] Exam #2",
+    "title": "Exam #2",
     "date": "09/18/2026",
     "start": "08:00",
     "end": "12:00",
@@ -1054,7 +1059,7 @@
     "block": "Renal",
     "weekNum": 21,
     "week": "Week 21",
-    "desc": "",
+    "desc": "Exam #2",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
@@ -1065,7 +1070,8 @@
     "presenter": "",
     "allDay": false,
     "created": "",
-    "updated": "2026-07-27T15:46:52.668Z"
+    "updated": "2026-07-27T15:46:52.668Z",
+    "examPairId": "8a8249bd-c053-46e4-b71b-4e5be4a9ddb1"
   },
   {
     "title": "Need Exploration; Need Statement Development",
