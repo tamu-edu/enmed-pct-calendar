@@ -983,7 +983,7 @@
     "updated": "2026-07-27T15:46:52.658Z"
   },
   {
-    "title": "[MAND] Blended Engineering Medicine Activity",
+    "title": "Blended Engineering Medicine Activity",
     "date": "09/16/2026",
     "start": "09:30",
     "end": "12:00",
@@ -991,7 +991,7 @@
     "block": "Renal",
     "weekNum": 21,
     "week": "Week 21",
-    "desc": "[MAND] Blended Engineering Medicine Activity",
+    "desc": "Blended Engineering Medicine Activity",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "Yes",
