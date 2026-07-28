@@ -12600,7 +12600,7 @@
     "presenter": "Dr. Patel"
   },
   {
-    "title": "Meeting With Leadership",
+    "title": "EnMed Leadership Connect",
     "date": "12/01/2026",
     "start": "12:00",
     "end": "13:00",
@@ -12609,13 +12609,13 @@
     "block": "",
     "weekNum": 32,
     "week": "Week 32",
-    "desc": "Meeting With Leadership",
+    "desc": "EnMed Leadership Connect",
     "calYear": "2029",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
     "location": "TBD",
-    "info": "Meetings scheduled from **12:00–1:00 p.m.** will typically be held **in person, with lunch provided**. An email notification will be sent in advance when a meeting is scheduled during this time. If a meeting is scheduled, **attendance is mandatory unless otherwise communicated**.\nMeetings scheduled outside of the 12:00–1:00 p.m. timeframe may be held **virtually**. Students will receive advance notification confirming the meeting format and any additional details.",
+    "info": "A recurring opportunity for EnMed students to connect with program leadership for updates, discussion, and engagement. Meetings scheduled from **12:00–1:00 p.m.** will typically be held **in person, with lunch provided**. An email notification will be sent in advance when a meeting is scheduled during this time. If a meeting is scheduled, **attendance is mandatory unless otherwise communicated**.\nMeetings scheduled outside of the 12:00–1:00 p.m. timeframe may be held **virtually**. Students will receive advance notification confirming the meeting format and any additional details.",
     "presenter": "Various Leadership",
     "_id": "caf32317-6477-4167-9ba0-7f2aa6ef361a"
   },
