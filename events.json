@@ -6446,7 +6446,7 @@
   {
     "_id": "1051226_14",
     "mand": "Yes",
-    "title": "HEENT Clinical Application Session",
+    "title": "HEENT Innovation Session Makeup",
     "group": "Group A",
     "location": "2nd Floor Room 212 A/B EnMed Tower",
     "calYear": "2030",
@@ -6455,11 +6455,11 @@
     "start": "13:00",
     "end": "14:30",
     "category": "Workshop",
-    "block": "POM I",
+    "block": "POM I, ITDE 611",
     "weekNum": 17,
     "week": "Week 17",
-    "desc": "HEENT Clinical Application Session",
-    "presenter": "Dr. Yeh, Dr. Monga",
+    "desc": "HEENT Innovation Session Makeup",
+    "presenter": "Dr. Yeh, Dr. Monga, Dr. Omoumi",
     "info": "Additional info, please see Canvas",
     "endDate": "",
     "allDay": false
