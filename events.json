@@ -13115,27 +13115,6 @@
     "endDate": ""
   },
   {
-    "title": "EnMed Student Connect",
-    "date": "10/26/2026",
-    "start": "11:30",
-    "end": "12:30",
-    "allDay": false,
-    "category": "Session",
-    "block": "",
-    "weekNum": 27,
-    "week": "Week 27",
-    "desc": "EnMed Student Connect",
-    "calYear": "2029",
-    "mCal": "M2",
-    "mand": "No",
-    "group": "All Students",
-    "location": "TBD",
-    "info": "",
-    "presenter": "Various Leadership",
-    "_id": "32e86ad0-3be5-4425-8561-d65bce16ec6d",
-    "endDate": ""
-  },
-  {
     "title": "Winter Break",
     "date": "12/24/2026",
     "endDate": "12/31/2026",
