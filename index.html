@@ -178,7 +178,11 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
 .cal-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:640px}
 .all-day-row{
   display:grid;
-  grid-template-columns:64px repeat(5,1fr);
+  grid-template-columns:
+    64px repeat(
+      var(--week-day-count,5),
+      1fr
+    );
   border-bottom:1px solid var(--border);
   background:var(--surface);
 }
@@ -224,13 +228,13 @@ html,body{min-height:100vh;background:var(--bg);color:var(--black);font-family:'
   z-index:20;
 }
 
-.cal-header{display:grid;grid-template-columns:64px repeat(5,1fr);background:var(--surface2);border-bottom:1px solid var(--border)}
+.cal-header{display:grid;grid-template-columns:64px repeat(var(--week-day-count,5),1fr);background:var(--surface2);border-bottom:1px solid var(--border)}
 .ch-cell{padding:10px 8px;text-align:center;border-right:1px solid var(--border)}
 .ch-cell:last-child{border-right:none}
 .ch-day{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
 .ch-num{font-size:20px;font-weight:300;color:var(--text);line-height:1.2;margin-top:2px}
 .ch-cell.today .ch-num{background:var(--accent);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;margin:2px auto 0;font-weight:600;font-size:14px}
-.cal-row{display:grid;grid-template-columns:64px repeat(5,1fr);border-bottom:1px solid var(--border);height:52px;min-height:52px}
+.cal-row{display:grid;grid-template-columns:64px repeat(var(--week-day-count,5),1fr);border-bottom:1px solid var(--border);height:52px;min-height:52px}
 .cal-row:last-child{border-bottom:none}
 .cal-row.event-crossed-line{
   border-bottom-color:rgba(0,0,0,.06);
@@ -5463,7 +5467,18 @@ function prevMobileDay(){
 
   if(currentWeekIdx > 0){
     currentWeekIdx--;
-    mobileDayIndex = 4;
+
+    const previousWeekDates =
+      getWeekDisplayDates(
+        currentWeekIdx
+      );
+
+    mobileDayIndex =
+      Math.max(
+        0,
+        previousWeekDates.length - 1
+      );
+
     weekToMonth(currentWeekIdx);
     buildWeekDrawer();
     render();
@@ -5473,13 +5488,22 @@ function prevMobileDay(){
 function nextMobileDay(){
   if(window.innerWidth > 768) return;
 
-  if(mobileDayIndex < 4){
+  const dates =
+    getWeekDisplayDates();
+
+  if(
+    mobileDayIndex <
+    dates.length - 1
+  ){
     mobileDayIndex++;
     render();
     return;
   }
 
-  if(currentWeekIdx < WEEKS.length - 1){
+  if(
+    currentWeekIdx <
+    WEEKS.length - 1
+  ){
     currentWeekIdx++;
     mobileDayIndex = 0;
     weekToMonth(currentWeekIdx);
@@ -5842,6 +5866,62 @@ function getWeekDates(){
   return datesForWeekNum(w.num);
 }
 
+function getWeekDisplayDates(weekIdx = currentWeekIdx){
+  const baseDates =
+    weekIdx === currentWeekIdx
+      ? getWeekDates()
+      : weekDatesAt(weekIdx).slice(0,5);
+
+  if(
+    baseDates.length < 5 ||
+    !baseDates[4]
+  ){
+    return baseDates;
+  }
+
+  const friday =
+    parseMDY(baseDates[4]);
+
+  const saturday =
+    new Date(friday);
+
+  saturday.setDate(
+    friday.getDate() + 1
+  );
+
+  const sunday =
+    new Date(friday);
+
+  sunday.setDate(
+    friday.getDate() + 2
+  );
+
+  const weekendDates = [
+    formatMDY(saturday),
+    formatMDY(sunday)
+  ];
+
+  const visibleEvents =
+    filteredEvents();
+
+  const hasWeekendEvent =
+    visibleEvents.some(event =>
+      weekendDates.some(dateString =>
+        eventOccursOnDate(
+          event,
+          dateString
+        )
+      )
+    );
+
+  return hasWeekendEvent
+    ? [
+        ...baseDates,
+        ...weekendDates
+      ]
+    : baseDates;
+}
+
 // ── RENDER ────────────────────────────────────────────────────
 function render(){
   if(!WEEKS.length)return;
@@ -5891,14 +5971,18 @@ function render(){
   document.getElementById('weekLabel').textContent=`Week ${w.num}`;
 
   // Date range from actual events
-  const dates=getWeekDates();
+  const dates = getWeekDisplayDates();
   const weekEvs=EVENTS.filter(e=>
     dates.some(dateString => eventOccursOnDate(e,dateString))
   ).sort((a,b)=>a.date.localeCompare(b.date));
 
   if(dates[0]){
     const d1 = parseMDY(dates[0]);
-    const d2 = parseMDY(dates[4] || dates[0]);
+    const d2 =
+      parseMDY(
+        dates[dates.length - 1] ||
+        dates[0]
+      );
 
     document.getElementById('weekDates').textContent =
       d1.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) +
@@ -6448,6 +6532,8 @@ function renderWeek(dates){
     dates.length - 1
   );
 
+  mobileDayIndex = safeMobileDayIndex;
+
   const visibleDates = isMobile
     ? [dates[safeMobileDayIndex]]
     : dates;
@@ -6488,20 +6574,32 @@ dates.forEach(ds => {
   const today=new Date();
   const todayStr=`${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}/${today.getFullYear()}`;
   let html = `
-    <div
-      class="cal-wrap week-calendar-wrap"
-      onpointermove="updateWeekAddHover(event)"
-      onpointerleave="clearWeekAddHover(event.currentTarget)"
-    >
+      <div
+        class="cal-wrap week-calendar-wrap"
+        style="--week-day-count:${dates.length}"
+        onpointermove="updateWeekAddHover(event)"
+        onpointerleave="clearWeekAddHover(event.currentTarget)"
+      >
       <div class="cal-header">
         <div class="ch-cell"></div>
   `;
 
   if(isMobile){
-    const ds = visibleDates[0] || '';
-    const dayIndex = dates.indexOf(ds);
-    const day = DAYS[dayIndex] || '';
-    const dateObj = ds ? parseMDY(ds) : null;
+    const ds =
+      visibleDates[0] || '';
+
+    const dateObj =
+      ds
+        ? parseMDY(ds)
+        : null;
+
+    const day =
+      dateObj
+        ? dateObj.toLocaleDateString(
+            'en-US',
+            { weekday:'short' }
+          )
+        : '';
 
     const mobileDateLabel = dateObj
       ? dateObj.toLocaleDateString('en-US',{
@@ -6538,19 +6636,28 @@ dates.forEach(ds => {
         </button>
       </div>
     `;
-  } else {
-    DAYS.forEach((day,i)=>{
-      const ds = dates[i] || '';
-      const [,dy] = (ds || '//').split('/');
+    } else {
+      visibleDates.forEach(ds => {
+        const dateObj =
+          parseMDY(ds);
 
-      html += `
-        <div class="ch-cell${ds === todayStr ? ' today' : ''}">
-          <div class="ch-day">${day}</div>
-          <div class="ch-num">${dy ? +dy : ''}</div>
-        </div>
-      `;
-    });
-  }
+        const day =
+          dateObj.toLocaleDateString(
+            'en-US',
+            { weekday:'short' }
+          );
+
+        const dayNumber =
+          dateObj.getDate();
+
+        html += `
+          <div class="ch-cell${ds === todayStr ? ' today' : ''}">
+            <div class="ch-day">${day}</div>
+            <div class="ch-num">${dayNumber}</div>
+          </div>
+        `;
+      });
+    }
 
   html += '</div>';
   html += `<div class="all-day-row"><div class="all-day-label">All day</div>`;
@@ -9728,7 +9835,7 @@ function printWeekCalendar(){
   }
 
   const week = WEEKS[currentWeekIdx];
-  const dates = getWeekDates();
+  const dates = getWeekDisplayDates();
 
   if(!dates.length){
     showToast('No week is available to print.');
