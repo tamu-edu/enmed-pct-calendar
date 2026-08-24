@@ -6715,7 +6715,7 @@
     "_id": "1051226_27",
     "mand": "Yes",
     "title": "HEAL Ethics Foundations 5: Privacy & Confidentiality",
-    "group": "Group A",
+    "group": "All Students",
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "calYear": "2030",
     "mCal": "M1",
@@ -6723,13 +6723,14 @@
     "start": "10:00",
     "end": "12:00",
     "category": "Session",
-    "block": "PoM 1",
-    "weekNum": 6,
-    "week": "Week 6",
+    "block": "POM I",
+    "weekNum": 19,
+    "week": "Week 19",
     "desc": "HEAL Ethics Foundations 5: Privacy & Confidentiality",
     "presenter": "TBD",
     "info": "Additional info, please see Canvas",
-    "endDate": ""
+    "endDate": "",
+    "allDay": false
   },
   {
     "_id": "1051226_28",
