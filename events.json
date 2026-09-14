@@ -13879,5 +13879,26 @@
     "presenter": "",
     "_id": "46f8197b-ac6b-4129-82ac-c965c5ce3d0a",
     "examPairId": "8a1b54c2-413b-4a24-bba3-b8b4ec27a253"
+  },
+  {
+    "title": "Head-to-toe Open Lab",
+    "date": "09/17/2026",
+    "endDate": "",
+    "start": "13:30",
+    "end": "15:30",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM I",
+    "weekNum": 21,
+    "week": "Week 21",
+    "desc": "Head-to-toe Open Lab",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Yeh, Dr. Monga",
+    "_id": "f39c358d-39ab-4e2c-a12e-8224b10af7b0"
   }
 ]
