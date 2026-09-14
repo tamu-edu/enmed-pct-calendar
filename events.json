@@ -7402,7 +7402,7 @@
   {
     "_id": "1051226_61",
     "mand": "Yes",
-    "title": "HEAL System Based Practice 3: Patient Safety",
+    "title": "HEAL Cultural Humility/Implicit Bias",
     "group": "All Students",
     "location": "2nd Floor Room 212 A/B EnMed Tower",
     "calYear": "2030",
@@ -7411,13 +7411,14 @@
     "start": "13:00",
     "end": "16:00",
     "category": "Session",
-    "block": "PoM 1",
-    "weekNum": 15,
-    "week": "Week 15",
-    "desc": "HEAL System Based Practice 3: Patient Safety",
+    "block": "POM I",
+    "weekNum": 28,
+    "week": "Week 28",
+    "desc": "HEAL Cultural Humility/Implicit Bias",
     "presenter": "TBD",
     "info": "Additional info, please see Canvas",
-    "endDate": ""
+    "endDate": "",
+    "allDay": false
   },
   {
     "_id": "1051226_62",
