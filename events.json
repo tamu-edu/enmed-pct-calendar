@@ -7221,7 +7221,7 @@
   {
     "_id": "1051226_52",
     "mand": "Yes",
-    "title": "HEAL Structural Competency Foundations 3",
+    "title": "HEAL Overview of QI/Patient Safety",
     "group": "All Students",
     "location": "2nd Floor Room 212 A/B EnMed Tower",
     "calYear": "2030",
@@ -7230,13 +7230,14 @@
     "start": "10:00",
     "end": "12:00",
     "category": "Session",
-    "block": "PoM 1",
-    "weekNum": 13,
-    "week": "Week 13",
-    "desc": "HEAL Structural Competency Foundations 3",
+    "block": "POM I",
+    "weekNum": 26,
+    "week": "Week 26",
+    "desc": "HEAL Overview of QI/Patient Safety",
     "presenter": "TBD",
     "info": "Additional info, please see Canvas",
-    "endDate": ""
+    "endDate": "",
+    "allDay": false
   },
   {
     "_id": "1051226_53",
