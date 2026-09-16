@@ -2311,7 +2311,7 @@
     "block": "CV",
     "weekNum": 54,
     "week": "Week 54",
-    "desc": "",
+    "desc": "Unit 1 Written Exam",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -2319,7 +2319,8 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "e0ede5cf-52fc-488c-bc82-f44d027f68a4",
     "info": "",
-    "presenter": ""
+    "presenter": "",
+    "examPairId": "e086a714-12f8-413b-ba3d-a4a3b6d12e45"
   },
   {
     "title": "Blackout Day",
@@ -2572,5 +2573,28 @@
     "_id": "55f1d110-2f34-49db-9647-eb07e042cacd",
     "info": "",
     "presenter": ""
+  },
+  {
+    "title": "Unit 1 Written Exam Check-In",
+    "date": "05/07/2027",
+    "start": "8:45",
+    "end": "8:55",
+    "allDay": false,
+    "category": "Exam Check-In",
+    "block": "CV",
+    "weekNum": 54,
+    "week": "Week 54",
+    "desc": "Unit 1 Written Exam Check-In",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "examPairId": "e086a714-12f8-413b-ba3d-a4a3b6d12e45",
+    "parentExamId": "e0ede5cf-52fc-488c-bc82-f44d027f68a4",
+    "_id": "9c7c4327-2b69-4c30-a267-6bbe8bc22e7c",
+    "endDate": ""
   }
 ]
