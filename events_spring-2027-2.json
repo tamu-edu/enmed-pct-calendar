@@ -976,7 +976,7 @@
     "block": "ID",
     "weekNum": 45,
     "week": "Week 45",
-    "desc": "",
+    "desc": "Unit 4 Written exam and NBME",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -984,7 +984,8 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "60a497ec-9ed9-490e-9c85-98c80eee987f",
     "info": "",
-    "presenter": "Ganguly and Zieske"
+    "presenter": "Ganguly and Zieske",
+    "examPairId": "fcc90b5a-8553-487c-b272-f4f09b254fa0"
   },
   {
     "title": "TBL #3",
@@ -1876,5 +1877,49 @@
     "info": "",
     "presenter": "",
     "_id": "e792e144-24c7-4113-8029-86114f8f9164"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "03/05/2027",
+    "endDate": "03/05/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "BLACKOUT",
+    "block": "ID",
+    "weekNum": 45,
+    "week": "Week 45",
+    "desc": "Blackout Day",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "5fe65ee0-73a5-4881-b651-a9bba0dc791d"
+  },
+  {
+    "title": "Unit 4 Written exam and NBME Check-In",
+    "date": "03/05/2027",
+    "start": "12:45",
+    "end": "12:55",
+    "allDay": false,
+    "category": "Exam Check-In",
+    "block": "ID",
+    "weekNum": 45,
+    "week": "Week 45",
+    "desc": "Unit 4 Written exam and NBME Check-In",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "examPairId": "fcc90b5a-8553-487c-b272-f4f09b254fa0",
+    "parentExamId": "60a497ec-9ed9-490e-9c85-98c80eee987f",
+    "_id": "9726e815-775c-4e8e-b082-9914b27cc35d",
+    "endDate": ""
   }
 ]
