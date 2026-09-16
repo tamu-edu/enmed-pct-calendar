@@ -1564,7 +1564,7 @@
     "block": "ID",
     "weekNum": 40,
     "week": "Week 40",
-    "desc": "",
+    "desc": "Unit 1 Written Exam",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -1572,7 +1572,8 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "b0c1fa89-ed88-4a78-824b-47f580eb356b",
     "info": "",
-    "presenter": "Ganguly and Zieske"
+    "presenter": "Ganguly and Zieske",
+    "examPairId": "33b359a8-3c69-4896-b156-4e23b59245f4"
   },
   {
     "title": "Active Learning",
@@ -1741,5 +1742,49 @@
     "_id": "419dead8-5158-4722-8ea6-9f35d1fbb949",
     "info": "",
     "presenter": "Ganguly and Zieske"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "01/27/2027",
+    "endDate": "01/27/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "BLACKOUT",
+    "block": "ID",
+    "weekNum": 40,
+    "week": "Week 40",
+    "desc": "Blackout Day",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "193eb616-98ed-4736-8468-de8ee9d3851e"
+  },
+  {
+    "title": "Unit 1 Written Exam Check-In",
+    "date": "01/27/2027",
+    "start": "09:45",
+    "end": "9:55",
+    "allDay": false,
+    "category": "Exam Check-In",
+    "block": "ID",
+    "weekNum": 40,
+    "week": "Week 40",
+    "desc": "Unit 1 Written Exam Check-In",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "examPairId": "33b359a8-3c69-4896-b156-4e23b59245f4",
+    "parentExamId": "b0c1fa89-ed88-4a78-824b-47f580eb356b",
+    "_id": "9b4db773-982d-4e83-a890-e5ded8f69394",
+    "endDate": ""
   }
 ]
