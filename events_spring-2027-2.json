@@ -274,14 +274,14 @@
   },
   {
     "title": "Memorial Day",
-    "date": "05/24/2027",
+    "date": "05/31/2027",
     "start": "",
     "end": "",
     "allDay": true,
     "category": "Events",
     "block": "",
-    "weekNum": 57,
-    "week": "Week 57",
+    "weekNum": 58,
+    "week": "Week 58",
     "desc": "Memorial Day",
     "calYear": "2029",
     "mCal": "Program-Wide",
@@ -291,7 +291,7 @@
     "info": "",
     "presenter": "",
     "_id": "6e4c9a92-daf2-49be-a59e-69edabc840a0",
-    "endDate": "05/24/2027"
+    "endDate": "05/31/2027"
   },
   {
     "title": "Last Day of Classes M2",
@@ -1954,7 +1954,7 @@
     "block": "CV",
     "weekNum": 57,
     "week": "Week 57",
-    "desc": "",
+    "desc": "Unit 2 Written Exam and NBME",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -1962,7 +1962,8 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "22e60ba4-4d18-416d-9a28-27a0ad43d8d1",
     "info": "",
-    "presenter": ""
+    "presenter": "",
+    "examPairId": "8f8b34a9-15b6-4ad9-9adf-a3d221e148cf"
   },
   {
     "title": "CBL #2",
@@ -2595,6 +2596,29 @@
     "examPairId": "e086a714-12f8-413b-ba3d-a4a3b6d12e45",
     "parentExamId": "e0ede5cf-52fc-488c-bc82-f44d027f68a4",
     "_id": "9c7c4327-2b69-4c30-a267-6bbe8bc22e7c",
+    "endDate": ""
+  },
+  {
+    "title": "Unit 2 Written Exam and NBME Check-In",
+    "date": "05/28/2027",
+    "start": "8:45",
+    "end": "8:55",
+    "allDay": false,
+    "category": "Exam Check-In",
+    "block": "CV",
+    "weekNum": 57,
+    "week": "Week 57",
+    "desc": "Unit 2 Written Exam and NBME Check-In",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "examPairId": "8f8b34a9-15b6-4ad9-9adf-a3d221e148cf",
+    "parentExamId": "22e60ba4-4d18-416d-9a28-27a0ad43d8d1",
+    "_id": "1378959c-e95f-4aeb-a06c-f6f143aa0bcc",
     "endDate": ""
   }
 ]
