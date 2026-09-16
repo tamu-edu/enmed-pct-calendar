@@ -966,7 +966,7 @@
     "endDate": "01/04/2027"
   },
   {
-    "title": "Unit 4 Written exam and NBME",
+    "title": "Unit 4 Written Exam and NBME",
     "date": "03/05/2027",
     "endDate": "",
     "start": "13:00",
@@ -976,7 +976,7 @@
     "block": "ID",
     "weekNum": 45,
     "week": "Week 45",
-    "desc": "Unit 4 Written exam and NBME",
+    "desc": "Unit 4 Written Exam and NBME",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -1900,7 +1900,7 @@
     "_id": "5fe65ee0-73a5-4881-b651-a9bba0dc791d"
   },
   {
-    "title": "Unit 4 Written exam and NBME Check-In",
+    "title": "Unit 4 Written Exam and NBME Check-In",
     "date": "03/05/2027",
     "start": "12:45",
     "end": "12:55",
@@ -1909,7 +1909,7 @@
     "block": "ID",
     "weekNum": 45,
     "week": "Week 45",
-    "desc": "Unit 4 Written exam and NBME Check-In",
+    "desc": "Unit 4 Written Exam and NBME Check-In",
     "calYear": "",
     "mCal": "M1",
     "mand": "No",
