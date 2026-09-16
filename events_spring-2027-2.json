@@ -1228,7 +1228,7 @@
     "block": "ID",
     "weekNum": 43,
     "week": "Week 43",
-    "desc": "",
+    "desc": "Unit 3 Written Exam",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -1236,7 +1236,8 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "3032001d-171b-4394-8b53-9e330df2e6bb",
     "info": "",
-    "presenter": "Ganguly and Zieske"
+    "presenter": "Ganguly and Zieske",
+    "examPairId": "b7e8bcc6-9be4-4b5f-b26e-a0c296943d02"
   },
   {
     "title": "TBL #2",
@@ -1831,5 +1832,49 @@
     "parentExamId": "67c8c8ae-3423-4356-8e18-e49db6933a4d",
     "_id": "9b61b6df-6145-4e6e-aad0-2f879173dc9b",
     "endDate": ""
+  },
+  {
+    "title": "Unit 3 Written Exam Check-In",
+    "date": "02/19/2027",
+    "start": "12:45",
+    "end": "12:55",
+    "allDay": false,
+    "category": "Exam Check-In",
+    "block": "ID",
+    "weekNum": 43,
+    "week": "Week 43",
+    "desc": "Unit 3 Written Exam Check-In",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "examPairId": "b7e8bcc6-9be4-4b5f-b26e-a0c296943d02",
+    "parentExamId": "3032001d-171b-4394-8b53-9e330df2e6bb",
+    "_id": "7143e30b-38f0-4113-aae5-23b5b570e353",
+    "endDate": ""
+  },
+  {
+    "title": "Blackout Day",
+    "date": "02/19/2027",
+    "endDate": "02/19/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "BLACKOUT",
+    "block": "ID",
+    "weekNum": 43,
+    "week": "Week 43",
+    "desc": "Blackout Day",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "e792e144-24c7-4113-8029-86114f8f9164"
   }
 ]
