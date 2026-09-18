@@ -2968,7 +2968,7 @@
     "block": "Neuro",
     "weekNum": 49,
     "week": "Week 49",
-    "desc": "",
+    "desc": "Unit 2 Written Exam and Practical",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -2976,7 +2976,8 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "2266883c-0038-4159-83bf-144545f45b35",
     "info": "",
-    "presenter": "Paolini and Billnitzer"
+    "presenter": "Paolini and Billnitzer",
+    "examPairId": "a891fb7c-c4a5-4424-beb5-360a51058617"
   },
   {
     "title": "Blackout Day",
@@ -3588,6 +3589,29 @@
     "examPairId": "4e801f40-97cf-4b99-beed-563549d88bdc",
     "parentExamId": "625fea92-dde4-45eb-915a-9b8053b098d7",
     "_id": "a4bcc8a4-98f4-4be1-bffc-4e93425c36ba",
+    "endDate": ""
+  },
+  {
+    "title": "Unit 2 Written Exam and Practical Check-In",
+    "date": "04/02/2027",
+    "start": "08:45",
+    "end": "08:55",
+    "allDay": false,
+    "category": "Exam Check-In",
+    "block": "Neuro",
+    "weekNum": 49,
+    "week": "Week 49",
+    "desc": "Unit 2 Written Exam and Practical Check-In",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "examPairId": "a891fb7c-c4a5-4424-beb5-360a51058617",
+    "parentExamId": "2266883c-0038-4159-83bf-144545f45b35",
+    "_id": "5d50fe2f-9872-4f19-8890-8a98f3c293f0",
     "endDate": ""
   }
 ]
