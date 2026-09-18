@@ -2653,7 +2653,7 @@
     "block": "Neuro",
     "weekNum": 51,
     "week": "Week 51",
-    "desc": "",
+    "desc": "Unit 3 Written Exam and Practical, NBME",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -2661,7 +2661,8 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "5dcb8617-f10e-4d4b-9ae3-f270c0db3b3a",
     "info": "",
-    "presenter": "Paolini and Billnitzer"
+    "presenter": "Paolini and Billnitzer",
+    "examPairId": "1d2b8d8b-11c2-4701-8abe-36de52619776"
   },
   {
     "title": "TBL",
@@ -3612,6 +3613,29 @@
     "examPairId": "a891fb7c-c4a5-4424-beb5-360a51058617",
     "parentExamId": "2266883c-0038-4159-83bf-144545f45b35",
     "_id": "5d50fe2f-9872-4f19-8890-8a98f3c293f0",
+    "endDate": ""
+  },
+  {
+    "title": "Unit 3 Written Exam and Practical, NBME Check-In",
+    "date": "04/16/2027",
+    "start": "08:45",
+    "end": "08:55",
+    "allDay": false,
+    "category": "Exam Check-In",
+    "block": "Neuro",
+    "weekNum": 51,
+    "week": "Week 51",
+    "desc": "Unit 3 Written Exam and Practical, NBME Check-In",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "examPairId": "1d2b8d8b-11c2-4701-8abe-36de52619776",
+    "parentExamId": "5dcb8617-f10e-4d4b-9ae3-f270c0db3b3a",
+    "_id": "16757b93-623b-4097-bce2-486192000381",
     "endDate": ""
   }
 ]
