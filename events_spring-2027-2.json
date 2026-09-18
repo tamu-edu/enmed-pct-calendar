@@ -3367,7 +3367,7 @@
     "block": "Neuro",
     "weekNum": 38,
     "week": "Week 38",
-    "desc": "",
+    "desc": "Unit 1 Written Exam and NBME",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
@@ -3375,7 +3375,8 @@
     "location": "4th Flr Exam Rm 409 EnMed Twr",
     "_id": "625fea92-dde4-45eb-915a-9b8053b098d7",
     "info": "",
-    "presenter": "Paolini and Billnitzer"
+    "presenter": "Paolini and Billnitzer",
+    "examPairId": "4e801f40-97cf-4b99-beed-563549d88bdc"
   },
   {
     "title": "Blackout Day",
@@ -3565,5 +3566,28 @@
     "_id": "c4c97680-2af9-47da-b17a-35a6cf8c0491",
     "info": "",
     "presenter": "Paolini and Billnitzer"
+  },
+  {
+    "title": "Unit 1 Written Exam and NBME Check-In",
+    "date": "01/15/2027",
+    "start": "08:45",
+    "end": "08:55",
+    "allDay": false,
+    "category": "Exam Check-In",
+    "block": "Neuro",
+    "weekNum": 38,
+    "week": "Week 38",
+    "desc": "Unit 1 Written Exam and NBME Check-In",
+    "calYear": "",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "",
+    "examPairId": "4e801f40-97cf-4b99-beed-563549d88bdc",
+    "parentExamId": "625fea92-dde4-45eb-915a-9b8053b098d7",
+    "_id": "a4bcc8a4-98f4-4be1-bffc-4e93425c36ba",
+    "endDate": ""
   }
 ]
