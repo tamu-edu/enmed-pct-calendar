@@ -11005,7 +11005,7 @@
     "desc": "IPER Symposium Day",
     "calYear": "2029",
     "mCal": "M1",
-    "mand": "No",
+    "mand": "Yes",
     "group": "All Students",
     "location": "",
     "info": "",
