@@ -12098,13 +12098,13 @@
   },
   {
     "title": "Final head-to-toe Open Lab 1",
-    "date": "11/09/2026",
-    "start": "13:00",
-    "end": "15:00",
+    "date": "11/10/2026",
+    "start": "16:00",
+    "end": "17:00",
     "category": "Open Lab",
     "block": "POM I",
-    "weekNum": 25,
-    "week": "Week 25",
+    "weekNum": 29,
+    "week": "Week 29",
     "desc": "Final head-to-toe Open Lab 1",
     "calYear": "2030",
     "mCal": "M1",
@@ -12114,7 +12114,8 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "4a2c6268-0caa-467e-b12a-a5c1026f6dbf",
-    "endDate": ""
+    "endDate": "",
+    "allDay": false
   },
   {
     "title": "Final head-to toe Open Lab 2",
@@ -13921,26 +13922,5 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "f39c358d-39ab-4e2c-a12e-8224b10af7b0"
-  },
-  {
-    "title": "[MAND] SDLs-",
-    "date": "10/05/2026",
-    "endDate": "",
-    "start": "17:00",
-    "end": "18:00",
-    "allDay": false,
-    "category": "Session",
-    "block": "",
-    "weekNum": 24,
-    "week": "Week 24",
-    "desc": "[MAND] SDLs-",
-    "calYear": "2029",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "Assigned Students Only",
-    "location": "",
-    "info": "Self-Directed Learning Presentations (M1 & M2 Students)\nZoom link:\nhttps://tamu.zoom.us/j/99243575357?pwd=KUrSRI7m4w2L2xUQ3OxHF9MsO41a4f.1",
-    "presenter": "",
-    "_id": "8c019c4e-84d8-4913-8665-2b4e06c3f41c"
   }
 ]
