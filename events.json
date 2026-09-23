@@ -10994,25 +10994,25 @@
     "endDate": "10/19/2026"
   },
   {
-    "title": "IPER Symposium Day-BLACKOUT",
+    "title": "IPER Symposium Day",
     "date": "11/11/2026",
-    "start": "",
-    "end": "",
+    "start": "09:00",
+    "end": "13:00",
     "category": "Announcement",
     "block": "IPER Symposium Day",
     "weekNum": 29,
     "week": "Week 29",
-    "desc": "IPER Symposium Day-BLACKOUT",
+    "desc": "IPER Symposium Day",
     "calYear": "2029",
     "mCal": "M1",
-    "mand": "Yes",
+    "mand": "No",
     "group": "All Students",
-    "location": "TBD",
+    "location": "",
     "info": "",
     "presenter": "",
     "_id": "17792993480873",
-    "allDay": true,
-    "endDate": "11/11/2026"
+    "allDay": false,
+    "endDate": ""
   },
   {
     "title": "Last Day - Fall Semester",
