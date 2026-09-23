@@ -12119,13 +12119,13 @@
   },
   {
     "title": "Final head-to toe Open Lab 2",
-    "date": "11/11/2026",
-    "start": "10:00",
-    "end": "12:00",
+    "date": "11/13/2026",
+    "start": "14:00",
+    "end": "16:00",
     "category": "Open Lab",
     "block": "POM I",
-    "weekNum": 25,
-    "week": "Week 25",
+    "weekNum": 29,
+    "week": "Week 29",
     "desc": "Final head-to toe Open Lab 2",
     "calYear": "2030",
     "mCal": "M1",
@@ -12135,7 +12135,8 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "8b954fe6-3baf-42a5-b42e-d131c4f1325d",
-    "endDate": ""
+    "endDate": "",
+    "allDay": false
   },
   {
     "title": "Blackout Day",
