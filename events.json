@@ -3941,9 +3941,9 @@
     "start": "11:00",
     "end": "12:00",
     "category": "Session",
-    "block": "Endo/ Repro",
-    "weekNum": 3,
-    "week": "Week 3",
+    "block": "Endo/Repro",
+    "weekNum": 28,
+    "week": "Week 28",
     "desc": "Active Learning",
     "calYear": "2029",
     "mCal": "M2",
@@ -3952,8 +3952,9 @@
     "location": "2nd Flr Room 216 A/B, EnMed Twr",
     "_id": "12051226_9",
     "info": "Physiology - Pregnancy and Placental Physiology; Physiology - Menopause",
-    "presenter": "Dr. Priya",
-    "endDate": ""
+    "presenter": "Dr. Zieske",
+    "endDate": "",
+    "allDay": false
   },
   {
     "title": "Active Learning",
@@ -13338,7 +13339,7 @@
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
-    "location": "TBD",
+    "location": "Rm 212",
     "_id": "62a7e3f7-a353-4256-b343-098cd42309f6",
     "info": "",
     "presenter": "TBD"
