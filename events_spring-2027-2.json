@@ -3658,5 +3658,26 @@
     "info": "",
     "presenter": "Dr. Priya",
     "_id": "c51e8d7b-3688-41c8-8273-af0c8dff939d"
+  },
+  {
+    "title": "MSGR Oral Presentation, Grand Rounds Day",
+    "date": "04/23/2027",
+    "endDate": "04/23/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "",
+    "weekNum": 52,
+    "week": "Week 52",
+    "desc": "MSGR Oral Presentation, Grand Rounds Day",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Flr Room 212 A/B, Discovery Tower",
+    "info": "",
+    "presenter": "Dr. Priya",
+    "_id": "5fa87377-753f-4925-bae1-3389c4b6ff30"
   }
 ]
