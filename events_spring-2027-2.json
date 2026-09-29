@@ -3637,5 +3637,26 @@
     "parentExamId": "5dcb8617-f10e-4d4b-9ae3-f270c0db3b3a",
     "_id": "16757b93-623b-4097-bce2-486192000381",
     "endDate": ""
+  },
+  {
+    "title": "MSGR Orientation",
+    "date": "01/20/2027",
+    "endDate": "",
+    "start": "09:30",
+    "end": "12:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "",
+    "weekNum": 39,
+    "week": "Week 39",
+    "desc": "MSGR Orientation",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Flr Rm 216 A/B, Discovery Tower",
+    "info": "",
+    "presenter": "Dr. Priya",
+    "_id": "c51e8d7b-3688-41c8-8273-af0c8dff939d"
   }
 ]
