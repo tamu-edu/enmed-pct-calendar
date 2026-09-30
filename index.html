@@ -5515,21 +5515,29 @@ function nextMobileDay(){
 function calendarBlockOptions(){
   return [
     'CBSE',
+    'CV',
     'EBM',
     'Endo/Repro',
     'FOM I',
     'FOM II',
     'GI',
     'Heme/Onc',
+    'ID',
     'ITDE 611',
+    'ITDE 612',
     'ITDE 613',
+    'ITDE 614',
     'MGA',
+    'MSGR',
     'MSK',
-    'POM 3',
+    'Neuro',
     'POM I',
+    'POM II',
+    'POM 3',
     'Pre-Matriculation',
     'Renal',
-    'Respiratory'
+    'Respiratory',
+    'TTC'
   ];
 }
 
@@ -6937,6 +6945,7 @@ function isCourseBlockLabel(label){
 
   const allowed = new Set([
     'cbse',
+    'cv',
     'ebm',
     'endo',
     'endo repro',
@@ -6945,17 +6954,24 @@ function isCourseBlockLabel(label){
     'fom mga',
     'gi',
     'heme onc',
+    'id',
     'itde 611',
+    'itde 612',
     'itde 613',
+    'itde 614',
     'mga',
     'mga fom i',
+    'msgr',
     'msk',
     'msk ebm',
+    'neuro',
     'pom 3',
     'pom i',
+    'pom ii',
     'pre matriculation',
     'renal',
-    'respiratory'
+    'respiratory',
+    'ttc'
   ]);
 
   return allowed.has(key);
