@@ -3994,5 +3994,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "73ba3b00-8785-42a4-b72b-ba6f5fa72e9d"
+  },
+  {
+    "title": "POM 2 LC Session: Clinical Reasoning - Pelvic, OBGYN common complaints",
+    "date": "02/08/2027",
+    "endDate": "",
+    "start": "16:00",
+    "end": "18:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 42,
+    "week": "Week 42",
+    "desc": "POM 2 LC Session: Clinical Reasoning - Pelvic, OBGYN common complaints",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "c4b03b08-cba6-4f66-8058-7cb2f65b6394"
   }
 ]
