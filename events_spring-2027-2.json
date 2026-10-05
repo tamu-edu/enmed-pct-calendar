@@ -3616,5 +3616,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "ad117754-9667-469d-a29e-7a3d70b05d55"
+  },
+  {
+    "title": "POM 2 PETA Session Recap",
+    "date": "01/04/2027",
+    "endDate": "",
+    "start": "14:00",
+    "end": "18:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "",
+    "weekNum": 37,
+    "week": "Week 37",
+    "desc": "POM 2 PETA Session Recap",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "f66e7a4f-c4b8-4616-aa02-08252578bdcf"
   }
 ]
