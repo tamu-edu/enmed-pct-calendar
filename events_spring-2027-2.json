@@ -3952,5 +3952,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "0afd0da8-a3a4-421e-9b5c-5bc357c75e1d"
+  },
+  {
+    "title": "POM 2 Ethical Considerations in Caring for Pregnant Patients",
+    "date": "02/08/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "14:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 42,
+    "week": "Week 42",
+    "desc": "POM 2 Ethical Considerations in Caring for Pregnant Patients",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "045c1ae1-0c8d-4000-a0be-69bed2663248"
   }
 ]
