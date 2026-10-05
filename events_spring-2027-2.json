@@ -3931,5 +3931,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "f5d51202-7ff9-4bff-9f60-bbc5ada203b0"
+  },
+  {
+    "title": "POM 22 PETA Session: Abdominal pain",
+    "date": "02/02/2027",
+    "endDate": "",
+    "start": "15:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 41,
+    "week": "Week 41",
+    "desc": "POM 22 PETA Session: Abdominal pain",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "0afd0da8-a3a4-421e-9b5c-5bc357c75e1d"
   }
 ]
