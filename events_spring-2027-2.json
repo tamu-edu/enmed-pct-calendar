@@ -3784,5 +3784,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "eee76017-e3c7-4c7a-af7f-f35001f1b3fe"
+  },
+  {
+    "title": "POM 2 PETA Session: Cardio-pulmonary",
+    "date": "01/25/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 40,
+    "week": "Week 40",
+    "desc": "POM 2 PETA Session: Cardio-pulmonary",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "64be6bf7-5374-4606-93c2-c5d3688d6127"
   }
 ]
