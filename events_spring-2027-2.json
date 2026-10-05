@@ -3973,5 +3973,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "045c1ae1-0c8d-4000-a0be-69bed2663248"
+  },
+  {
+    "title": "POM 2 OBGYN Simulation",
+    "date": "02/08/2027",
+    "endDate": "",
+    "start": "14:00",
+    "end": "16:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 42,
+    "week": "Week 42",
+    "desc": "POM 2 OBGYN Simulation",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "73ba3b00-8785-42a4-b72b-ba6f5fa72e9d"
   }
 ]
