@@ -3700,5 +3700,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "e18eec9c-7109-4969-b9fb-e81be07a6045"
+  },
+  {
+    "title": "POM 2 PETA Session: EENT",
+    "date": "01/19/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 39,
+    "week": "Week 39",
+    "desc": "POM 2 PETA Session: EENT",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "08f953bf-5094-48aa-bd4c-2461d1ab382e"
   }
 ]
