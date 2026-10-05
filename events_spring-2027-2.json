@@ -3742,5 +3742,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "746aaac6-7819-4239-bc99-535cc87a12fa"
+  },
+  {
+    "title": "POM 2 LC Session: Clinical Reasoning - EENT Common Complaints",
+    "date": "01/19/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 39,
+    "week": "Week 39",
+    "desc": "POM 2 LC Session: Clinical Reasoning - EENT Common Complaints",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "951a2bae-0653-4f29-81c0-88f07f3eef68"
   }
 ]
