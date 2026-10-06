@@ -4204,5 +4204,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "1d75a395-2f91-45ef-8cb6-bb8472f18c55"
+  },
+  {
+    "title": "POM 2 PETA Session: MSK & PNS Simulation",
+    "date": "03/22/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 48,
+    "week": "Week 48",
+    "desc": "POM 2 PETA Session: MSK & PNS Simulation",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "f7c3ca7a-cc6b-4ee2-98ed-23fa29399737"
   }
 ]
