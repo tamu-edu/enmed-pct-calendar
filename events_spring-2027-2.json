@@ -4246,5 +4246,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "153a6386-f665-40d5-b8a5-7e8b605ca21c"
+  },
+  {
+    "title": "POM 2 LC Session: Clinical Reasoning - MSK & PNS Common problems",
+    "date": "03/22/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 48,
+    "week": "Week 48",
+    "desc": "POM 2 LC Session: Clinical Reasoning - MSK & PNS Common problems",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "110a3679-b91e-4fe8-9687-dd5851bce9d3"
   }
 ]
