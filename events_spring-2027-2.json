@@ -4372,5 +4372,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "59b4f6c3-c44c-478d-976e-6c0c2d35b427"
+  },
+  {
+    "title": "POM 2 Neurology Workshop",
+    "date": "04/05/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 50,
+    "week": "Week 50",
+    "desc": "POM 2 Neurology Workshop",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "7c291be8-9989-4955-825f-3d17a3cffd65"
   }
 ]
