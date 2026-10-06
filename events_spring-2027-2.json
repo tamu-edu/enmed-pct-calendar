@@ -4162,5 +4162,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "2711f54a-5e59-476a-98bf-0b8dac212e55"
+  },
+  {
+    "title": "POM 2 LC Session: Clinical Reasoning - Pediatric Common problems",
+    "date": "03/15/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 47,
+    "week": "Week 47",
+    "desc": "POM 2 LC Session: Clinical Reasoning - Pediatric Common problems",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "4e66ff32-000e-440d-9a61-18067e200c73"
   }
 ]
