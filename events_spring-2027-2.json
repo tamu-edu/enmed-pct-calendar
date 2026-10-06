@@ -4288,5 +4288,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "ec47b882-7dfe-4f33-b7bf-4fa8281ece43"
+  },
+  {
+    "title": "POM 2 PETA Session: Head & CNS Simulation",
+    "date": "03/29/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 49,
+    "week": "Week 49",
+    "desc": "POM 2 PETA Session: Head & CNS Simulation",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "24d8e717-05f9-4e68-8dea-4efd4acdad2c"
   }
 ]
