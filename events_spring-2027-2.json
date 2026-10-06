@@ -4120,5 +4120,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "5cbc105b-9e12-4c7c-9e12-01040926629c"
+  },
+  {
+    "title": "POM 2 PETA Session: Pediatric Simulation",
+    "date": "03/15/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 47,
+    "week": "Week 47",
+    "desc": "POM 2 PETA Session: Pediatric Simulation",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "b2e71cb4-0a7a-48a3-a3e1-58eff42e8bf5"
   }
 ]
