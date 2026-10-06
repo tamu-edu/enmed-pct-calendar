@@ -4456,5 +4456,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "9177af3e-5c19-434a-97aa-3647cfb32263"
+  },
+  {
+    "title": "POM 2 MOCK Family Meeting IPE",
+    "date": "04/20/2027",
+    "endDate": "",
+    "start": "09:00",
+    "end": "12:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 52,
+    "week": "Week 52",
+    "desc": "POM 2 MOCK Family Meeting IPE",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "f39c10ec-cf55-421e-933c-c4839a36ffb4"
   }
 ]
