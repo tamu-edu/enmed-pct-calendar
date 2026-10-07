@@ -4771,5 +4771,26 @@
     "info": "",
     "presenter": "Dr. Godreau",
     "_id": "93bf8f11-f50a-44bb-bde5-6f73f6de0580"
+  },
+  {
+    "title": "POM 2 LC Small Group: Comprehensive H&P + Basic A&P (Health Maintenance)",
+    "date": "01/04/2027",
+    "endDate": "",
+    "start": "14:00",
+    "end": "16:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 37,
+    "week": "Week 37",
+    "desc": "POM 2 LC Small Group: Comprehensive H&P + Basic A&P (Health Maintenance)",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "1fce9f03-85ff-40f2-bc41-62e4e7bfa039"
   }
 ]
