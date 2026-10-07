@@ -4855,5 +4855,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "ceb4c6b9-bc38-4e39-89b4-937f1c6ad4c4"
+  },
+  {
+    "title": "Optional Open Lab to Practice OSCE Retake",
+    "date": "01/15/2027",
+    "endDate": "",
+    "start": "14:00",
+    "end": "16:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 38,
+    "week": "Week 38",
+    "desc": "Optional Open Lab to Practice OSCE Retake",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "97be087a-9977-4ae6-a552-2f66bccf6b89"
   }
 ]
