@@ -4582,5 +4582,26 @@
     "info": "Tentatively, the April 6 session will be moved to April 8 at this time.",
     "presenter": "",
     "_id": "0f15761f-92cc-4b0d-846c-dcf6591ecfe0"
+  },
+  {
+    "title": "TTC Blackout Session",
+    "date": "03/29/2027",
+    "endDate": "",
+    "start": "08:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "TTC",
+    "weekNum": 49,
+    "week": "Week 49",
+    "desc": "TTC Blackout Session",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Floor Room 216 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Godreau",
+    "_id": "20fbdfb6-5df7-4106-84f2-52f0c11d4a6d"
   }
 ]
