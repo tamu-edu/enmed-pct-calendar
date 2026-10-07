@@ -4750,5 +4750,26 @@
     "info": "",
     "presenter": "Dr. Godreau",
     "_id": "1097f95e-48cc-4242-8ffb-2b40caa89701"
+  },
+  {
+    "title": "TTC Blackout Session",
+    "date": "04/01/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "TTC",
+    "weekNum": 49,
+    "week": "Week 49",
+    "desc": "TTC Blackout Session",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Floor Room 216 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Godreau",
+    "_id": "93bf8f11-f50a-44bb-bde5-6f73f6de0580"
   }
 ]
