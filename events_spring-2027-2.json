@@ -4101,7 +4101,7 @@
     "_id": "63588e1a-f833-43c8-bc8b-fe8967a2c9ee"
   },
   {
-    "title": "POM 2 GTA/MUTA Session Group A",
+    "title": "POM 2 GTA/MUTA Session",
     "date": "02/22/2027",
     "endDate": "",
     "start": "08:00",
@@ -4111,7 +4111,7 @@
     "block": "POM II",
     "weekNum": 44,
     "week": "Week 44",
-    "desc": "POM 2 GTA/MUTA Session Group A",
+    "desc": "POM 2 GTA/MUTA Session",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
