@@ -13887,26 +13887,5 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "f39c358d-39ab-4e2c-a12e-8224b10af7b0"
-  },
-  {
-    "title": "Optional Open Lab",
-    "date": "10/09/2026",
-    "endDate": "",
-    "start": "10:00",
-    "end": "12:00",
-    "allDay": false,
-    "category": "Session",
-    "block": "POM II",
-    "weekNum": 24,
-    "week": "Week 24",
-    "desc": "Optional Open Lab",
-    "calYear": "2030",
-    "mCal": "M1",
-    "mand": "No",
-    "group": "All Students",
-    "location": "4th Floor SIM Center 404 EnMed Tower",
-    "info": "",
-    "presenter": "Dr. Mobaraki & Dr. Parikh",
-    "_id": "60e917a4-17f9-41fa-bffe-173a90e6082d"
   }
 ]
