@@ -5275,5 +5275,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "33c7cbf0-6a50-4da5-a399-c17f371f8993"
+  },
+  {
+    "title": "HEAL Lecture",
+    "date": "04/26/2027",
+    "endDate": "",
+    "start": "14:00",
+    "end": "16:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 53,
+    "week": "Week 53",
+    "desc": "HEAL Lecture",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "43c2265c-0e81-426b-b953-87ab0b3ccf1a"
   }
 ]
