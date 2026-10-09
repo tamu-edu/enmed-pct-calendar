@@ -5109,7 +5109,7 @@
     "_id": "a1a13b12-b823-4ba7-8f8e-8119ac7813f0"
   },
   {
-    "title": "Optional Open Lab",
+    "title": "Open Lab",
     "date": "03/22/2027",
     "endDate": "",
     "start": "17:00",
@@ -5119,7 +5119,7 @@
     "block": "POM II",
     "weekNum": 48,
     "week": "Week 48",
-    "desc": "Optional Open Lab",
+    "desc": "Open Lab",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "No",
