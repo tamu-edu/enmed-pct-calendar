@@ -5065,5 +5065,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "9b6fd4bb-9140-409a-aa81-b56cdbd47027"
+  },
+  {
+    "title": "POM 2 GTA/MUTA Session",
+    "date": "02/23/2027",
+    "endDate": "",
+    "start": "08:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 44,
+    "week": "Week 44",
+    "desc": "POM 2 GTA/MUTA Session",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "Group B",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "adc2b741-efe0-4fbd-99df-e9f3374c0553"
   }
 ]
