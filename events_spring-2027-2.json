@@ -5170,5 +5170,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "9c69e559-3547-4015-aecf-f0217f15040e"
+  },
+  {
+    "title": "Optional Open Lab",
+    "date": "04/02/2027",
+    "endDate": "",
+    "start": "10:00",
+    "end": "12:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 49,
+    "week": "Week 49",
+    "desc": "Optional Open Lab",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "ff3bca89-7358-4fc3-8759-0c4b06661658"
   }
 ]
