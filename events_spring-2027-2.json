@@ -5002,5 +5002,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "3a522f64-c071-406f-af5d-5c90a0ea3449"
+  },
+  {
+    "title": "POM 2 Black Out Date - Focused Encounter OSCE 2 - Group A",
+    "date": "02/15/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 43,
+    "week": "Week 43",
+    "desc": "POM 2 Black Out Date - Focused Encounter OSCE 2 - Group A",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "Group A",
+    "location": "4th Floor SIM Center 404 EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "45733a6c-706d-4175-be12-7e6c112465ce"
   }
 ]
