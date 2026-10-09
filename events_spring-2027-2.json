@@ -5359,5 +5359,26 @@
     "info": "",
     "presenter": "Dr. Mobaraki & Dr. Parikh",
     "_id": "4c0d1678-5fe7-4c22-867d-9d8f6317481c"
+  },
+  {
+    "title": "HEAL: Selectives Session #4",
+    "date": "05/24/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "18:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 57,
+    "week": "Week 57",
+    "desc": "HEAL: Selectives Session #4",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Floor Room 212 A/B EnMed Tower",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "7accd655-00b1-4f0f-a822-d134274bb36c"
   }
 ]
