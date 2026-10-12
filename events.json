@@ -13893,5 +13893,26 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Yeh, Dr. Monga",
     "_id": "f39c358d-39ab-4e2c-a12e-8224b10af7b0"
+  },
+  {
+    "title": "Focused H&P Workshop",
+    "date": "10/14/2026",
+    "endDate": "10/14/2026",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "POM 3",
+    "weekNum": 25,
+    "week": "Week 25",
+    "desc": "Focused H&P Workshop",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group B",
+    "location": "3rd Flr SIM Ctr Rm 305, Discovery Tower",
+    "info": "",
+    "presenter": "Dr. Caplan, Dr. George",
+    "_id": "b455553e-5406-4076-a762-acabaebdd76c"
   }
 ]
