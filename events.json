@@ -14081,5 +14081,26 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Caplan, Dr. George",
     "_id": "4fd8cdc3-bd8a-467e-a9f0-67fd7cb1a105"
+  },
+  {
+    "title": "Focused H&P Workshop",
+    "date": "11/04/2026",
+    "endDate": "",
+    "start": "15:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM 3",
+    "weekNum": 28,
+    "week": "Week 28",
+    "desc": "Focused H&P Workshop",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group D",
+    "location": "3rd Flr SIM Ctr Rm 305, Discovery Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Caplan, Dr. George",
+    "_id": "2473d0e9-3626-4e93-a119-55dfc98734a2"
   }
 ]
