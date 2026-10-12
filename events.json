@@ -14102,5 +14102,26 @@
     "info": "Please see Canvas for student group assignments and additional information.",
     "presenter": "Dr. Caplan, Dr. George",
     "_id": "2473d0e9-3626-4e93-a119-55dfc98734a2"
+  },
+  {
+    "title": "Hospital Simulation",
+    "date": "11/17/2026",
+    "endDate": "",
+    "start": "15:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM 3",
+    "weekNum": 30,
+    "week": "Week 30",
+    "desc": "Hospital Simulation",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group C",
+    "location": "3rd Flr SIM Ctr Rm 305, Discovery Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Caplan, Dr. George",
+    "_id": "55f38ef0-d565-4c9b-8c2e-17353baa39d4"
   }
 ]
