@@ -14060,5 +14060,26 @@
     "presenter": "Dr. Meyer, Dr. Omole",
     "_id": "74f0a97c-a63c-46d8-9517-69d745330ea6",
     "examPairId": "d3f21641-0cf7-4420-9fe7-ca5809317ce1"
+  },
+  {
+    "title": "Hospital Simulation",
+    "date": "10/27/2026",
+    "endDate": "",
+    "start": "15:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM 3",
+    "weekNum": 27,
+    "week": "Week 27",
+    "desc": "Hospital Simulation",
+    "calYear": "2029",
+    "mCal": "M2",
+    "mand": "Yes",
+    "group": "Group A",
+    "location": "3rd Flr SIM Ctr Rm 305, Discovery Tower",
+    "info": "Please see Canvas for student group assignments and additional information.",
+    "presenter": "Dr. Caplan, Dr. George",
+    "_id": "4fd8cdc3-bd8a-467e-a9f0-67fd7cb1a105"
   }
 ]
