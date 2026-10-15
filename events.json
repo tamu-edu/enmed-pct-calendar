@@ -426,24 +426,25 @@
     "endDate": "10/22/2026"
   },
   {
-    "title": "ITDE 613 Design Competition",
+    "title": "*Rescheduled: ITDE 613 Design Competition",
     "date": "10/22/2026",
     "start": "13:00",
     "end": "15:00",
     "category": "Session",
     "block": "ITDE 613",
-    "weekNum": "",
-    "week": "",
-    "desc": "",
+    "weekNum": 26,
+    "week": "Week 26",
+    "desc": "*Rescheduled: ITDE 613 Design Competition",
     "calYear": "2029",
     "mCal": "M2",
     "mand": "No",
     "group": "All Students",
     "location": "2nd Flr Rm 216 EnMed Twr",
     "_id": "05212026_21",
-    "info": "",
+    "info": "**This competition has be reconfigured so that students schedule a meeting with Dr. Sears during the week of Nov. 2-6.",
     "presenter": "",
-    "endDate": ""
+    "endDate": "",
+    "allDay": false
   },
   {
     "title": "Blackout Day",
