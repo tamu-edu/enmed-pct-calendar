@@ -6054,10 +6054,10 @@
     "date": "12/01/2026",
     "start": "10:00",
     "end": "11:00",
-    "category": "Orientation",
+    "category": "Session",
     "block": "EBM",
-    "weekNum": 2,
-    "week": "Week 2",
+    "weekNum": 32,
+    "week": "Week 32",
     "desc": "Course Intro + Librarian Session",
     "calYear": "2029",
     "mCal": "M2",
@@ -6067,7 +6067,8 @@
     "_id": "20260512_002",
     "info": "Librarian Session: Introduction to EBM Sources of Evidence",
     "presenter": "",
-    "endDate": ""
+    "endDate": "",
+    "allDay": false
   },
   {
     "title": "Active Learning",
