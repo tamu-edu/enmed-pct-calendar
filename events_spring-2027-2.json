@@ -6223,5 +6223,26 @@
     "parentExamId": "e7738fad-7576-4d97-91fa-f1dad34a89f0",
     "_id": "8f3976ea-6979-4b3d-adbb-b6cd752c6adc",
     "endDate": ""
+  },
+  {
+    "title": "SDLs",
+    "date": "03/01/2027",
+    "endDate": "",
+    "start": "16:00",
+    "end": "17:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "",
+    "weekNum": 45,
+    "week": "Week 45",
+    "desc": "SDLs",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "Assigned Students",
+    "location": "Zoom",
+    "info": "Self-Directed Learning Presentations Zoom link: https://tamu.zoom.us/j/99243575357?pwd=KUrSRI7m4w2L2xUQ3OxHF9MsO41a4f.1",
+    "presenter": "",
+    "_id": "6a81ac7a-f8b0-4fc4-8539-79b8702c2e9a"
   }
 ]
