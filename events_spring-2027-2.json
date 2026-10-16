@@ -6475,5 +6475,26 @@
     "info": "",
     "presenter": "",
     "_id": "7bec68ed-2d92-455e-9f4e-8fa96932d7e5"
+  },
+  {
+    "title": "POM 2 Blackout Day",
+    "date": "04/12/2027",
+    "endDate": "04/12/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "",
+    "weekNum": 51,
+    "week": "Week 51",
+    "desc": "POM 2 Blackout Day",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "aa6e5c02-c1c6-4286-aed8-3276ba239b4e"
   }
 ]
