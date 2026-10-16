@@ -4059,7 +4059,7 @@
     "_id": "fd93682e-7319-4c9d-b67b-9d232a842b00"
   },
   {
-    "title": "POM 2 Black Out Date - Focused Encounter OSCE 2",
+    "title": "Focused Encounter OSCE 2",
     "date": "02/15/2027",
     "endDate": "",
     "start": "08:00",
@@ -4069,7 +4069,7 @@
     "block": "POM II",
     "weekNum": 43,
     "week": "Week 43",
-    "desc": "POM 2 Black Out Date - Focused Encounter OSCE 2",
+    "desc": "Focused Encounter OSCE 2",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
