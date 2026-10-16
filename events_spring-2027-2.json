@@ -6454,5 +6454,26 @@
     "info": "Self-Directed Learning Presentations Zoom link: https://tamu.zoom.us/j/99243575357?pwd=KUrSRI7m4w2L2xUQ3OxHF9MsO41a4f.1",
     "presenter": "",
     "_id": "3a18bbbf-26dc-42b5-be3b-3c7f4df99db9"
+  },
+  {
+    "title": "BLACKOUT DAY",
+    "date": "02/15/2027",
+    "endDate": "02/15/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "",
+    "weekNum": 43,
+    "week": "Week 43",
+    "desc": "BLACKOUT DAY",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "7bec68ed-2d92-455e-9f4e-8fa96932d7e5"
   }
 ]
