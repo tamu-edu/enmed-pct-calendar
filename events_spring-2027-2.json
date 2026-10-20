@@ -6496,5 +6496,26 @@
     "info": "",
     "presenter": "",
     "_id": "aa6e5c02-c1c6-4286-aed8-3276ba239b4e"
+  },
+  {
+    "title": "Blackout Day",
+    "date": "05/25/2027",
+    "endDate": "05/25/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "BLACKOUT",
+    "block": "ITDE 612",
+    "weekNum": 57,
+    "week": "Week 57",
+    "desc": "Blackout Day",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "284cf206-5702-41b6-89d2-b6ab1a8e52d1"
   }
 ]
