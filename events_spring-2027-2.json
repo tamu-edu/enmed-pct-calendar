@@ -6918,7 +6918,7 @@
     "endDate": ""
   },
   {
-    "title": "IIE",
+    "title": "IIE-Orientation",
     "date": "06/07/2027",
     "start": "10:00",
     "end": "15:00",
@@ -6927,7 +6927,7 @@
     "block": "",
     "weekNum": 59,
     "week": "Week 59",
-    "desc": "IIE",
+    "desc": "IIE-Orientation",
     "calYear": "2030",
     "mCal": "M1",
     "mand": "Yes",
