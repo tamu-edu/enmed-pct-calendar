@@ -13291,7 +13291,7 @@
     "presenter": "TBD"
   },
   {
-    "title": "EnMed Student Connect",
+    "title": "[CANCELLED] EnMed Student Connect",
     "date": "10/27/2026",
     "endDate": "",
     "start": "11:00",
@@ -13301,14 +13301,14 @@
     "block": "",
     "weekNum": 27,
     "week": "Week 27",
-    "desc": "EnMed Student Connect",
+    "desc": "[CANCELLED] EnMed Student Connect",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
     "location": "TBD",
     "_id": "69f9fad7-92f3-4e13-8698-c04a56322c36",
-    "info": "",
+    "info": "This event has been cancelled.",
     "presenter": "TBD"
   },
   {
