@@ -1019,14 +1019,14 @@
     "block": "ID",
     "weekNum": 45,
     "week": "Week 45",
-    "desc": "",
+    "desc": "Active Learning",
     "calYear": "",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "5f1e3ed5-1d88-4aa4-bdfd-93e8de98a701",
-    "info": "Pediatrician’s approach to Vaccine and fever",
+    "info": "Pediatrician’s Approach to Vaccine and Fever",
     "presenter": "Gibson"
   },
   {
@@ -1082,14 +1082,14 @@
     "block": "ID",
     "weekNum": 45,
     "week": "Week 45",
-    "desc": "",
+    "desc": "Active Learning",
     "calYear": "",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "a7c0d374-5499-48a5-b9e6-f44535441bde",
-    "info": "Pharmacology 1 Antiviral gents Pharmacology 2 Immunization & vaccines",
+    "info": "Pharmacology 1 Antiviral Agents Pharmacology 2 Immunization & Vaccines",
     "presenter": "Gunaseelan"
   },
   {
@@ -1145,7 +1145,7 @@
     "block": "ID",
     "weekNum": 44,
     "week": "Week 44",
-    "desc": "",
+    "desc": "Active Learning",
     "calYear": "",
     "mCal": "M1",
     "mand": "No",
@@ -1153,7 +1153,7 @@
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "a303cd1d-6ca0-4dbc-882e-73fc19422ed4",
     "info": "Virology 1. Foundations of General Virology Virology 2: Foundational Concepts of Clinical Virology",
-    "presenter": "Ganguly"
+    "presenter": "Zieske"
   },
   {
     "title": "Unit 3 Written Exam",
@@ -1188,15 +1188,15 @@
     "block": "ID",
     "weekNum": 43,
     "week": "Week 43",
-    "desc": "",
+    "desc": "TBL #2",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "8fc2b6b1-d8c1-401e-8a94-3f88844a38b2",
-    "info": "All Unit 3 Handouts for RATs. Clinically relevant clinical case directly tied to Unit 3 content for application activity.",
-    "presenter": "Ganguly, Zieske, Rogers, Engineering Faculty"
+    "info": "All Unit 3 Handouts for RATs. Clinically relevant case directly tied to Unit 3 content for application activity.",
+    "presenter": "Ganguly, Zieske, Rogers, Omoumi"
   },
   {
     "title": "Active Learning",
@@ -1272,14 +1272,14 @@
     "block": "ID",
     "weekNum": 42,
     "week": "Week 42",
-    "desc": "",
+    "desc": "Active Learning",
     "calYear": "",
     "mCal": "M1",
     "mand": "No",
     "group": "All Students",
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "9b0051e7-d310-4790-a607-094d3f3d0be1",
-    "info": "Bacteriology 4: Bacterial Growth, Metabolism & Sporulation Bacteriology 5: Bacterial Genetics & Mechanisms of Gene Transfer",
+    "info": "Bacteriology 4: Bacterial Growth, Metabolism & Sporulation Bacteriology 5: Bacterial Genetics & Mechanisms of Gene Transfer Bacteriology 6: Bacterial Pathogenic Mechanisms",
     "presenter": "Zieske"
   },
   {
@@ -1336,14 +1336,14 @@
     "block": "ID",
     "weekNum": 41,
     "week": "Week 41",
-    "desc": "",
+    "desc": "TBL #1",
     "calYear": "",
     "mCal": "M1",
     "mand": "Yes",
     "group": "All Students",
     "location": "2nd Flr Rm 212 A/B EnMed Twr",
     "_id": "b1d047be-40a9-429e-95ed-cc59abe94bb4",
-    "info": "All Unit 1 & 2 Handouts for RATs. Clinically relevant clinical scenario directly tied to Unit 1-2 content for application activity.",
+    "info": "All Unit 1 & 2 Handouts for RATs. Clinically relevant cases directly tied to Unit 1-2 content for application activity.",
     "presenter": "Parikh, Moczygemba, Zieske, Muhsin"
   },
   {
@@ -6937,5 +6937,26 @@
     "presenter": "Dr. John Wilson & Engineering Faculty",
     "_id": "ab33faf7-0a23-4d95-a386-bea01c43c50d",
     "endDate": ""
+  },
+  {
+    "title": "EnMed Correlation",
+    "date": "02/17/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "14:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "ID",
+    "weekNum": 43,
+    "week": "Week 43",
+    "desc": "EnMed Correlation",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "Yes",
+    "group": "All Students",
+    "location": "2nd Flr Rm 212 A/B EnMed Twr",
+    "info": "Antibiotic Drug Discovery Using Innovative Technologies",
+    "presenter": "Hurdle and Dureja",
+    "_id": "ec6dfce6-5207-4770-9ee7-b2d0d4af5542"
   }
 ]
