@@ -13208,27 +13208,6 @@
     "presenter": "TBD"
   },
   {
-    "title": "EnMed Student Connect",
-    "date": "11/23/2026",
-    "endDate": "",
-    "start": "14:45",
-    "end": "15:45",
-    "allDay": false,
-    "category": "Session",
-    "block": "",
-    "weekNum": 31,
-    "week": "Week 31",
-    "desc": "EnMed Student Connect",
-    "calYear": "",
-    "mCal": "M1",
-    "mand": "Yes",
-    "group": "All Students",
-    "location": "TBD",
-    "_id": "eee95626-52bd-4411-b2d1-b18bb09a7515",
-    "info": "",
-    "presenter": "TBD"
-  },
-  {
     "title": "EnMed Student Connect: IIE/Mentor Mixer",
     "date": "11/02/2026",
     "endDate": "",
