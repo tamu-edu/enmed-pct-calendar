@@ -6916,5 +6916,26 @@
     "info": "Antibiotic Drug Discovery Using Innovative Technologies",
     "presenter": "Hurdle and Dureja",
     "_id": "ec6dfce6-5207-4770-9ee7-b2d0d4af5542"
+  },
+  {
+    "title": "Optional Open Lab to Practice OSCE",
+    "date": "01/29/2027",
+    "endDate": "",
+    "start": "13:00",
+    "end": "15:00",
+    "allDay": false,
+    "category": "Session",
+    "block": "POM II",
+    "weekNum": 40,
+    "week": "Week 40",
+    "desc": "Optional Open Lab to Practice OSCE",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "4th Flr Exam Rm 409 EnMed Twr",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "025a53eb-5403-4d47-8afb-1e9c7f2e24ce"
   }
 ]
