@@ -7252,5 +7252,26 @@
     "info": "",
     "presenter": "Dr. Priya",
     "_id": "7b096f9f-eaf8-4287-8fa6-4dd8a346b19b"
+  },
+  {
+    "title": "*CV Clinic dates are tentative*",
+    "date": "04/29/2027",
+    "endDate": "04/29/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "CV",
+    "weekNum": 53,
+    "week": "Week 53",
+    "desc": "*CV Clinic dates are tentative*",
+    "calYear": "2029",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "",
+    "_id": "5a9b0592-d1b9-4816-a70b-4c96f01d42f5"
   }
 ]
