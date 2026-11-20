@@ -7294,5 +7294,26 @@
     "info": "",
     "presenter": "",
     "_id": "0b083608-4bca-4d9a-be2d-b06a9703f2d3"
+  },
+  {
+    "title": "POM 2 [MAND] Blackout Day",
+    "date": "02/19/2027",
+    "endDate": "02/19/2027",
+    "start": "",
+    "end": "",
+    "allDay": true,
+    "category": "Session",
+    "block": "",
+    "weekNum": 43,
+    "week": "Week 43",
+    "desc": "POM 2 [MAND] Blackout Day",
+    "calYear": "2030",
+    "mCal": "M1",
+    "mand": "No",
+    "group": "All Students",
+    "location": "",
+    "info": "",
+    "presenter": "Dr. Mobaraki & Dr. Parikh",
+    "_id": "78ce02cc-74b5-4db4-b4b7-3d59158064da"
   }
 ]
